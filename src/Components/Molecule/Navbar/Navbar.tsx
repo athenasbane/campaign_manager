@@ -35,6 +35,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         </Grid>
         <Grid item>
           <Button
+            data-testid="menu__button"
             variant="contained"
             color="secondary"
             onClick={onMenuButtonClick}

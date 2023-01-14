@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Molecule - Draw should match snapshot 1`] = `
+<div
+  aria-hidden="true"
+>
+  <div>
+    <div
+      class="PrivateSwipeArea-root css-17j2vre"
+      style="height: 20px;"
+    />
+  </div>
+</div>
+`;

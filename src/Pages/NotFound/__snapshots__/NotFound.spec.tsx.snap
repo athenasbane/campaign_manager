@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page - NotFound should match snapshot 1`] = `
+<div>
+  <h1
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+  >
+    404 Page Not Found
+  </h1>
+</div>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Atom - Link Snapshot - Test should match snapshot 1`] = `
+<div>
+  <a
+    href="/test/route"
+    style="text-decoration: none;"
+  >
+    <h1
+      class="MuiTypography-root MuiTypography-h1 css-o2w69a-MuiTypography-root"
+      data-testid="link_typography"
+    >
+      Testable Link Text
+    </h1>
+  </a>
+</div>
+`;

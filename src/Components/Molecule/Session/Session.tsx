@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ISession } from "Types/Interfaces";
 
-interface ISessionProps {
+export interface ISessionProps {
   session: ISession;
 }
 

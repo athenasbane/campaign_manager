@@ -13,13 +13,13 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
 
-interface IDrawProps {
+export interface IDrawProps {
   open: boolean;
   closeModal: () => void;
   openSingleModal: (modal: EnumModalSlice) => void;
 }
 
-interface IDrawListItem {
+export interface IDrawListItem {
   displayLabel: string;
   routePath: string;
   icon: React.ReactElement;
