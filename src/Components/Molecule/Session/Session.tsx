@@ -4,6 +4,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ISession } from "Types/Interfaces";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import remarkGfm from "remark-gfm";
 
 export interface ISessionProps {
   session: ISession;
@@ -20,7 +22,10 @@ export default function Session({ session }: ISessionProps) {
         <Typography>{`Session ${session.sessionNo} - ${session.shortDescription}`}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>{session.longDescription}</Typography>
+        <ReactMarkdown
+          children={session.longDescription}
+          remarkPlugins={[remarkGfm]}
+        />
       </AccordionDetails>
     </Accordion>
   );
