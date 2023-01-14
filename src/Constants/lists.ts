@@ -31,7 +31,7 @@ export const list: IListType[] = [
         value: "1",
         path: "/list/the_nals_ctv",
       },
-      { displayLabel: "Cirrain Coast", value: "2", path: "/map/cirrain_coast" },
+      { displayLabel: "Cirrane Coast", value: "2", path: "/map/cirrain_coast" },
     ],
   },
   {
