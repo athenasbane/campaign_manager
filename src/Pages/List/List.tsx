@@ -1,4 +1,6 @@
-import { ListItem, Typography, List as MuiList } from "@mui/material";
+import MuiList from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import ListItem from "@mui/material/ListItem";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "hooks/store.hooks";
 import { selectFilteredList } from "Store/slices/lists";

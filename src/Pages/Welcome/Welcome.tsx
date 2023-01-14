@@ -1,4 +1,7 @@
-import { Grid, Typography, List as MuiList, ListItem } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import MuiList from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import { LIFE_STONE_MORNING_STAR_IMG } from "Constants/images";
 
 export default function Welcome() {

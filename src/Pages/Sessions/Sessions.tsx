@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Session from "Components/Molecule/Session/Session";
 import { useAppSelector } from "hooks/store.hooks";
 import { selectSessions } from "Store/slices/sessions";

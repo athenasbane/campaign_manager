@@ -2,7 +2,7 @@ import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useAppSelector } from "hooks/store.hooks";
 import { selectMap } from "Store/slices/map";
 

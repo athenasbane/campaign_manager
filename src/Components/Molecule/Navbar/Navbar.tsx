@@ -1,4 +1,7 @@
-import { Box, Typography, Button, Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import theme from "theme";
 

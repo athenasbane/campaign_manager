@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
@@ -81,7 +80,7 @@ export default function Draw({
 
   return (
     <div>
-      <React.Fragment>
+      <>
         <SwipeableDrawer
           anchor={"bottom"}
           open={open}
@@ -90,7 +89,7 @@ export default function Draw({
         >
           {list}
         </SwipeableDrawer>
-      </React.Fragment>
+      </>
     </div>
   );
 }

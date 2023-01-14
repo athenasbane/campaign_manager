@@ -1,4 +1,5 @@
-import { Container, Grid } from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Navbar from "Components/Molecule/Navbar/Navbar";
 import Draw from "Components/Molecule/Draw/Draw";
 import { ReactNode } from "react";
