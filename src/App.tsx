@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Welcome from "Pages/Welcome/Welcome";
+import Map from "Pages/Map/Map";
+import MainTemplate from "Templates/Main";
+import { useAppDispatch, useAppSelector } from "hooks/store.hooks";
+import { closeAll, EnumModalSlice, openSingleModal } from "Store/slices/modals";
+import List from "Pages/List/List";
+import NotFound from "Pages/NotFound/NotFound";
+import Sessions from "Pages/Sessions/Sessions";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "theme";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
+  const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
+  const dispatch = useAppDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <MainTemplate
+          DrawProps={{
+            open: navOpen,
+            closeModal: () => dispatch(closeAll()),
+            openSingleModal: () =>
+              dispatch(openSingleModal(EnumModalSlice.Menu)),
+          }}
+          NavbarProps={{
+            onMenuButtonClick: () =>
+              dispatch(openSingleModal(EnumModalSlice.Menu)),
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/map/:slug" element={<Map />} />
+            <Route path="/list/:slug" element={<List />} />
+            <Route path="/sessions" element={<Sessions />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MainTemplate>
+      </div>
+    </ThemeProvider>
   );
 }
 
