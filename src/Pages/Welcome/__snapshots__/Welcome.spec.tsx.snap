@@ -50,22 +50,12 @@ exports[`Page - Welcome should match snapshot 1`] = `
         <li
           class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
         >
-          - Add the basic lore of the campaign to the lore link in the menu.
-        </li>
-        <li
-          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
-        >
           - Add further maps that I have so you can reference them.
         </li>
         <li
           class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
         >
           - Download of "Better Crafting" Rule sets developed for this campaign.
-        </li>
-        <li
-          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
-        >
-          - Format the recaps in a more readable way
         </li>
       </ul>
     </div>

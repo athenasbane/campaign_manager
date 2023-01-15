@@ -108,22 +108,12 @@ exports[`renders learn react link 1`] = `
                 <li
                   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
                 >
-                  - Add the basic lore of the campaign to the lore link in the menu.
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
-                >
                   - Add further maps that I have so you can reference them.
                 </li>
                 <li
                   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
                 >
                   - Download of "Better Crafting" Rule sets developed for this campaign.
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
-                >
-                  - Format the recaps in a more readable way
                 </li>
               </ul>
             </div>
