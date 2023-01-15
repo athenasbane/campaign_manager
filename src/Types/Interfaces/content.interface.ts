@@ -1,5 +1,5 @@
 import { EContentType } from "Types/Enum/content.enum";
-
+import { TTypographyVariant } from "Types/Types/link.type";
 export interface ITextBlock {
   contentType: EContentType.TextBlock;
   displayText: string;
@@ -27,4 +27,6 @@ export interface ITable {
 export interface ITitle {
   contentType: EContentType.Title;
   displayLabel: string;
+  variant?: TTypographyVariant;
+  align?: "left" | "center" | "right";
 }

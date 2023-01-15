@@ -16,7 +16,7 @@ export default function Section({
           <Grid item xs={6}>
             <Typography textAlign="justify">{textBlock.displayText}</Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid style={{ width: "100%", float: "left" }} item xs={6}>
             <img alt={image.altText} src={image.imageSrc} />
           </Grid>
         </>

@@ -17,7 +17,12 @@ export default function Content() {
       case EContentType.Title:
         return (
           <Grid item key={content.contentType + index}>
-            <Typography variant="h4">{content.displayLabel}</Typography>
+            <Typography
+              align={content.align || "left"}
+              variant={content.variant || "h4"}
+            >
+              {content.displayLabel}
+            </Typography>
           </Grid>
         );
       case EContentType.TextBlock:
@@ -30,7 +35,11 @@ export default function Content() {
         // [TODO] convert this to a component that regulates the size of the image
         return (
           <Grid item key={content.contentType + index}>
-            <img alt={content.altText} src={content.imageSrc} />
+            <img
+              style={{ maxWidth: "96vw" }}
+              alt={content.altText}
+              src={content.imageSrc}
+            />
           </Grid>
         );
       case EContentType.Section:

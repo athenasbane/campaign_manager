@@ -57,9 +57,7 @@ exports[`Molecule - Session should match snapshot 1`] = `
             <div
               class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-              >
+              <p>
                 This is a longer test
               </p>
             </div>
