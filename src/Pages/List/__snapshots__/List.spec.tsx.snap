@@ -152,5 +152,57 @@ exports[`Page - List should match snapshot 1`] = `
       </a>
     </li>
   </ul>
+  <ul
+    class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+  >
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h2 MuiTypography-alignCenter css-icizyq-MuiTypography-root"
+      >
+        Lore
+      </h2>
+    </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter css-47suzj-MuiTypography-root"
+      >
+        Basic Overview
+      </h3>
+    </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <a
+        href="/content/alignment"
+        style="text-decoration: none;"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          data-testid="link_typography"
+        >
+          Alignment
+        </h5>
+      </a>
+    </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <a
+        href="/content/dead_gods"
+        style="text-decoration: none;"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          data-testid="link_typography"
+        >
+          Dead Gods
+        </h5>
+      </a>
+    </li>
+  </ul>
 </div>
 `;

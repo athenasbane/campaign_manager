@@ -6,9 +6,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MapIcon from "@mui/icons-material/Map";
-import MailIcon from "@mui/icons-material/Mail";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ export default function Draw({
 }: IDrawProps) {
   const navigate = useNavigate();
 
-  const listItems: IDrawListItem[] = [
+  const topListItems: IDrawListItem[] = [
     {
       displayLabel: "Maps",
       routePath: "/list/maps",
@@ -45,6 +44,14 @@ export default function Draw({
     },
   ];
 
+  const bottomListItems: IDrawListItem[] = [
+    {
+      displayLabel: "Lore",
+      routePath: "/list/content",
+      icon: <MenuBookIcon />,
+    },
+  ];
+
   const list = (
     <Box
       sx={{ width: "auto" }}
@@ -53,7 +60,7 @@ export default function Draw({
       onKeyDown={closeModal}
     >
       <List>
-        {listItems.map((item) => (
+        {topListItems.map((item) => (
           <ListItem key={item.displayLabel} disablePadding>
             <ListItemButton onClick={() => navigate(item.routePath)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
@@ -64,13 +71,11 @@ export default function Draw({
       </List>
       <Divider />
       <List>
-        {["Tools & Rules"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+        {bottomListItems.map((item) => (
+          <ListItem key={item.displayLabel} disablePadding>
+            <ListItemButton onClick={() => navigate(item.routePath)}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.displayLabel} />
             </ListItemButton>
           </ListItem>
         ))}

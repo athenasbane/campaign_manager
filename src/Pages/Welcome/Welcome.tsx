@@ -44,16 +44,12 @@ export default function Welcome() {
         <Grid item>
           <MuiList>
             <ListItem>
-              - Add the basic lore of the campaign to the lore link in the menu.
-            </ListItem>
-            <ListItem>
               - Add further maps that I have so you can reference them.
             </ListItem>
             <ListItem>
               - Download of "Better Crafting" Rule sets developed for this
               campaign.
             </ListItem>
-            <ListItem>- Format the recaps in a more readable way</ListItem>
           </MuiList>
         </Grid>
       </Grid>

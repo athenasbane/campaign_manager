@@ -6,6 +6,7 @@ import {
   THE_SOLIDER_SYMBOL_SMALL,
   THE_WATCHER_SYMBOL_SMALL,
   THE_WORKER_SYMBOL_SMALL,
+  VILLIOUS_AND_HREGG_CIRCLE_SMALL,
 } from "./images";
 
 export const alignmentContent: TContent[] = [
@@ -133,5 +134,33 @@ export const alignmentContent: TContent[] = [
     contentType: EContentType.Image,
     imageSrc: THE_WATCHER_SYMBOL_SMALL,
     altText: "The Watcher Symbol",
+  },
+];
+
+export const deadGodsContent: TContent[] = [
+  {
+    contentType: EContentType.Title,
+    displayLabel: "Dead Gods",
+    variant: "h3",
+    align: "center",
+  },
+  {
+    contentType: EContentType.Title,
+    displayLabel: "Villious & Hregg",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "The Arch-Deities of Tertatin (The World) are Villious & Hregg (pronounced Reg). Villious is the a force for balance, maintenance but also adaption to change. They are known to control living animals, plants and trees. Hregg, on the other hand, is the God of change is known to control weather, forrest fires, tides, waves and moons.",
+  },
+  {
+    contentType: EContentType.Image,
+    imageSrc: VILLIOUS_AND_HREGG_CIRCLE_SMALL,
+    altText: "Villious and Hregg Circle of balance",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "According to their followers this is what forms the basis for balance of the elements enough for mortal life to survive on Tertatin. ",
   },
 ];

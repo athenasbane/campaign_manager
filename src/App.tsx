@@ -35,7 +35,7 @@ function App() {
             <Route path="/" element={<Welcome />} />
             <Route path="/map/:slug" element={<Map />} />
             <Route path="/list/:slug" element={<List />} />
-            <Route path="/content" element={<Content />} />
+            <Route path="/content/:slug" element={<Content />} />
             <Route path="/sessions" element={<Sessions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

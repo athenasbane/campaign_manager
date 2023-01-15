@@ -3,6 +3,7 @@ import modalReducer from "./slices/modals";
 import listsReducer from "./slices/lists";
 import sessionsReducer from "./slices/sessions";
 import mapsReducer from "./slices/map";
+import contentReducer from "./slices/content";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     lists: listsReducer,
     sessions: sessionsReducer,
     maps: mapsReducer,
+    content: contentReducer,
   },
 });
 

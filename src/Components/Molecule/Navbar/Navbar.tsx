@@ -2,14 +2,18 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import theme from "theme";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useNavigate } from "react-router-dom";
 
 export interface INavbarProps {
   onMenuButtonClick: () => void;
 }
 
 export default function Navbar({ onMenuButtonClick }: INavbarProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <Box
       sx={{
@@ -19,8 +23,15 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <Grid container justifyContent="space-evenly">
-        <Grid item>
+      <Grid container direction="row" justifyContent="space-evenly">
+        <Grid item xs={2}>
+          {location.pathname !== "/" ? (
+            <Button onClick={() => navigate(-1)}>
+              <ArrowBackIosIcon color="info" />
+            </Button>
+          ) : null}
+        </Grid>
+        <Grid item xs={7}>
           <Link
             style={{
               textDecoration: "none",
@@ -28,19 +39,17 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             }}
             to="/"
           >
-            <Typography variant="h3" align="center" textAlign="center">
-              Tordenhelm
-            </Typography>
+            <Typography variant="h3">Tordenhelm</Typography>
           </Link>
         </Grid>
-        <Grid item>
+        <Grid item xs={3}>
           <Button
             data-testid="menu__button"
             variant="contained"
             color="secondary"
             onClick={onMenuButtonClick}
           >
-            Menu
+            <Typography>Menu</Typography>
           </Button>
         </Grid>
       </Grid>

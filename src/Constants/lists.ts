@@ -47,4 +47,21 @@ export const list: IListType[] = [
       { displayLabel: "The Shambles", value: "2", path: "/map/shambles" },
     ],
   },
+  {
+    param: "content",
+    displayLabel: "Basic Overview",
+    parentDisplayLabel: "Lore",
+    links: [
+      {
+        displayLabel: "Alignment",
+        value: "1",
+        path: "/content/alignment",
+      },
+      {
+        displayLabel: "Dead Gods",
+        value: "2",
+        path: "/content/dead_gods",
+      },
+    ],
+  },
 ];
