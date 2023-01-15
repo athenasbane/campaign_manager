@@ -32,6 +32,17 @@ export const list: IListType[] = [
         path: "/list/the_nals_ctv",
       },
       { displayLabel: "Cirrane Coast", value: "2", path: "/map/cirrain_coast" },
+      { displayLabel: "Mere Lands", value: "3", path: "/map/mere_lands" },
+      {
+        displayLabel: "Hirane Mount Coast",
+        value: "4",
+        path: "/map/hirane_mount_coast",
+      },
+      {
+        displayLabel: "Nirwod",
+        value: "5",
+        path: "/map/nirwod",
+      },
     ],
   },
   {

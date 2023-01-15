@@ -99,6 +99,51 @@ exports[`Page - List should match snapshot 1`] = `
         </h5>
       </a>
     </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <a
+        href="/map/mere_lands"
+        style="text-decoration: none;"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          data-testid="link_typography"
+        >
+          Mere Lands
+        </h5>
+      </a>
+    </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <a
+        href="/map/hirane_mount_coast"
+        style="text-decoration: none;"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          data-testid="link_typography"
+        >
+          Hirane Mount Coast
+        </h5>
+      </a>
+    </li>
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <a
+        href="/map/nirwod"
+        style="text-decoration: none;"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          data-testid="link_typography"
+        >
+          Nirwod
+        </h5>
+      </a>
+    </li>
   </ul>
   <ul
     class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
