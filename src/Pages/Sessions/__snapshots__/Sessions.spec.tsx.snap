@@ -15,12 +15,12 @@ exports[`Page - Sessions should match snapshot 1`] = `
   <h4
     class="MuiTypography-root MuiTypography-h4 MuiTypography-alignLeft css-1m0yndc-MuiTypography-root"
   >
-    Chapter 1
+    Chapter 2
   </h4>
   <h5
     class="MuiTypography-root MuiTypography-h5 css-1657z6w-MuiTypography-root"
   >
-    The Shambles, The Nals
+    Klilcaithness, The Nals
   </h5>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
@@ -39,7 +39,7 @@ exports[`Page - Sessions should match snapshot 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
         >
-          Session 1 - The Journey Begins
+          Session 6 - Killing in the Name of... Krig
         </p>
       </div>
       <div
@@ -81,65 +81,29 @@ exports[`Page - Sessions should match snapshot 1`] = `
                 
 
                 <li>
-                  Joined together
+                  Completed the Nessy Brewery mission and levelled up.
                   
 
                   <ul>
                     
 
                     <li>
-                      Completed the Clearing of Shelmark
-                      
-
-                      <ul>
-                        
-
-                        <li>
-                          The Party found the body of Franzi they were going to give it to Luka but Balfor intuited that it maybe worth something to someone. Gormar's sword seemed attracted to her then when it touched the head with the pomel a helm appeared Gormar put it on and it disappeared.
-                        </li>
-                        
-
-                        <li>
-                          The party still have her armour.
-                        </li>
-                        
-
-                      </ul>
-                      
-
+                      Sold and bought a load of stuff including the brazer
                     </li>
                     
 
                     <li>
-                      The gang stayed in a in the The Half-full Chalice. Karlyle hooked up with Metha but due a poor performance she left before he woke.
+                      Went to the university and learnt a lot on various subjects
                     </li>
                     
 
                     <li>
-                      The gang then met with Rosalina
-                      
+                      Spoke to Heik the feather is ready but you can leave when you want.
+                    </li>
+                    
 
-                      <ul>
-                        
-
-                        <li>
-                          she's told then that the transport to the wastes will be at Southver Flats in the morning.
-                        </li>
-                        
-
-                        <li>
-                          Dick stole 5CP of the Reward money.
-                        </li>
-                        
-
-                        <li>
-                          She mentioned her husband died by goblins recently in Hiranemount.
-                        </li>
-                        
-
-                      </ul>
-                      
-
+                    <li>
+                      Fought in the Fighting Pits of Krig managed to get to the get to the 5th Round and tied with the Fate’s Fortune who you met there.
                     </li>
                     
 
@@ -173,7 +137,7 @@ exports[`Page - Sessions should match snapshot 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
         >
-          Session 2 - Wading in the Wastes
+          Session 5 - Action in the Ashglade
         </p>
       </div>
       <div
@@ -215,21 +179,144 @@ exports[`Page - Sessions should match snapshot 1`] = `
                 
 
                 <li>
-                  travelled into the wastes on board the feather
+                  Killed the remaining vampire spawn at the ashglade and pearson farms.
                   
 
                   <ul>
                     
 
                     <li>
-                      Were attacked by goblins and hobgoblins
+                      Was told that Ulric will release the rest of his Bailey stores to the ness brewery.
+                    </li>
+                    
+
+                    <li>
+                      Went north met with some gobs killed them.
+                    </li>
+                    
+
+                    <li>
+                      Then was tricked by a cowboy dwarf
+                    </li>
+                    
+
+                    <li>
+                      It was lamia that was revealed and attempted to call a Manticore to him.
+                    </li>
+                    
+
+                    <li>
+                      You killed the lamia then the manticore and raided the Lamia’s lair that was a strange scaled up hall.
+                    </li>
+                    
+
+                    <li>
+                      You found an injured real Gizmug in the lair. He told you that it’s “The Collector” that wants the magical beasts. He used a scroll to cross off the Manticore and an elf appeared he “introduced” himself as Elromior he paid you for both the Manticore and the Lamia.
+                    </li>
+                    
+
+                  </ul>
+                  
+
+                </li>
+                
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
+  >
+    <div
+      aria-controls="panel1a-content"
+      aria-expanded="false"
+      class="MuiButtonBase-root MuiAccordionSummary-root MuiAccordionSummary-gutters css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root"
+      id="panel1a-header"
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          Session 4 - Welcome to Klilcaithness
+        </p>
+      </div>
+      <div
+        class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ExpandMoreIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+      style="min-height: 0px;"
+    >
+      <div
+        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+      >
+        <div
+          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+        >
+          <div
+            aria-labelledby="panel1a-header"
+            class="MuiAccordion-region"
+            id="panel1a-content"
+            role="region"
+          >
+            <div
+              class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
+            >
+              <ul>
+                
+
+                <li>
+                  Spoke to Hidii Grunbumn about franzi she gave you a reward for letting her know.
+                  
+
+                  <ul>
+                    
+
+                    <li>
+                      
+
+                      <p>
+                        went aboard the feather still damaged from the dinosaur attack to klilcaithness
+                      </p>
+                      
+
+                    </li>
+                    
+
+                    <li>
+                      
+
+                      <p>
+                        Got to klilcaith bought somethings at the Griffin enchanting services
+                      </p>
                       
 
                       <ul>
                         
 
                         <li>
-                          Both Balfor and karlyle downed but Quick thinking from Dick and Balfor respectively saved their lives.
+                          Was told that they sell less than legal magic items out the back of the shop by someone who speaks thieves cant Druggen
                         </li>
                         
 
@@ -240,87 +327,87 @@ exports[`Page - Sessions should match snapshot 1`] = `
                     
 
                     <li>
-                      Met a Lizardfolk monk that spoke to Dick let him know that Kelzis is likely to the North In Thorpeness where his father ‘The Amassador’ was last.
                       
 
-                      <ul>
-                        
-
-                        <li>
-                          She directed you too the new village to find Samual. There you engaged with the villagers that seemed slightly changed.
-                        </li>
-                        
-
-                      </ul>
+                      <p>
+                        Went to the brewery and was told that they had to increase the price of their ale due to their barley supplier stopping growing barley and the owners of the farm going missing
+                      </p>
                       
 
                     </li>
                     
 
                     <li>
-                      After killing them, or “helping them” for Dick, you engaged with a mutated lizardfolk sharman.
-                    </li>
-                    
-
-                    <li>
-                      in his lair you found
                       
 
-                      <ul>
-                        
-
-                        <li>
-                          an old map that listed the current location as “The Hall of Hirane and Avanker” the formal name for the Inquisition
-                        </li>
-                        
-
-                        <li>
-                          A spell book written in both Dragonic and Abysal that was some sort of instructions for summoning.
-                        </li>
-                        
-
-                        <li>
-                          A section of a personal journal that had two things repeated:
-                          
-
-                          <ul>
-                            
-
-                            <li>
-                              I will be come one with them, them with me, my people will come, all will be one.
-                            </li>
-                            
-
-                            <li>
-                              Pergash bound, the path is laid. The take the stones from the glade.
-                            </li>
-                            
-
-                          </ul>
-                          
-
-                        </li>
-                        
-
-                      </ul>
+                      <p>
+                        Manticore and 5gp per set of ears of gobilins
+                      </p>
                       
 
                     </li>
                     
 
                     <li>
-                      a young boy in a cage called Samuel
                       
 
-                      <ul>
-                        
+                      <p>
+                        They “bought” some horses, a cart and headed off you where attacked by knolls then went to the farm house.
+                      </p>
+                      
 
-                        <li>
-                          A PseudoDragon that Balfour took as a familiar.
-                        </li>
-                        
+                    </li>
+                    
 
-                      </ul>
+                    <li>
+                      
+
+                      <p>
+                        First you saw a boy that's under the influence of quinine working and carrying produce of a strange flowering plant
+                      </p>
+                      
+
+                    </li>
+                    
+
+                    <li>
+                      
+
+                      <p>
+                        then you met a young woman who due to a natural 20 perception check from Karlyle he noticed this young woman wasn't what she seemed.
+                      </p>
+                      
+
+                    </li>
+                    
+
+                    <li>
+                      
+
+                      <p>
+                        You defeated them and found a note.
+                      </p>
+                      
+
+                      <p>
+                        Production is lower than expected make sure you make up the difference.
+                      </p>
+                      
+
+                      <p>
+                        Lamuin
+                      </p>
+                      
+
+                    </li>
+                    
+
+                    <li>
+                      
+
+                      <p>
+                        you also noticed there was 4 glasses of blood.
+                      </p>
                       
 
                     </li>
@@ -339,6 +426,16 @@ exports[`Page - Sessions should match snapshot 1`] = `
       </div>
     </div>
   </div>
+  <h4
+    class="MuiTypography-root MuiTypography-h4 MuiTypography-alignLeft css-1m0yndc-MuiTypography-root"
+  >
+    Chapter 1
+  </h4>
+  <h5
+    class="MuiTypography-root MuiTypography-h5 css-1657z6w-MuiTypography-root"
+  >
+    The Shambles, The Nals
+  </h5>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
   >
@@ -666,16 +763,6 @@ exports[`Page - Sessions should match snapshot 1`] = `
       </div>
     </div>
   </div>
-  <h4
-    class="MuiTypography-root MuiTypography-h4 MuiTypography-alignLeft css-1m0yndc-MuiTypography-root"
-  >
-    Chapter 2
-  </h4>
-  <h5
-    class="MuiTypography-root MuiTypography-h5 css-1657z6w-MuiTypography-root"
-  >
-    Klilcaithness, The Nals
-  </h5>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
   >
@@ -693,7 +780,7 @@ exports[`Page - Sessions should match snapshot 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
         >
-          Session 4 - Welcome to Klilcaithness
+          Session 2 - Wading in the Wastes
         </p>
       </div>
       <div
@@ -735,36 +822,21 @@ exports[`Page - Sessions should match snapshot 1`] = `
                 
 
                 <li>
-                  Spoke to Hidii Grunbumn about franzi she gave you a reward for letting her know.
+                  travelled into the wastes on board the feather
                   
 
                   <ul>
                     
 
                     <li>
-                      
-
-                      <p>
-                        went aboard the feather still damaged from the dinosaur attack to klilcaithness
-                      </p>
-                      
-
-                    </li>
-                    
-
-                    <li>
-                      
-
-                      <p>
-                        Got to klilcaith bought somethings at the Griffin enchanting services
-                      </p>
+                      Were attacked by goblins and hobgoblins
                       
 
                       <ul>
                         
 
                         <li>
-                          Was told that they sell less than legal magic items out the back of the shop by someone who speaks thieves cant Druggen
+                          Both Balfor and karlyle downed but Quick thinking from Dick and Balfor respectively saved their lives.
                         </li>
                         
 
@@ -775,87 +847,87 @@ exports[`Page - Sessions should match snapshot 1`] = `
                     
 
                     <li>
+                      Met a Lizardfolk monk that spoke to Dick let him know that Kelzis is likely to the North In Thorpeness where his father ‘The Amassador’ was last.
                       
 
-                      <p>
-                        Went to the brewery and was told that they had to increase the price of their ale due to their barley supplier stopping growing barley and the owners of the farm going missing
-                      </p>
-                      
+                      <ul>
+                        
 
-                    </li>
-                    
+                        <li>
+                          She directed you too the new village to find Samual. There you engaged with the villagers that seemed slightly changed.
+                        </li>
+                        
 
-                    <li>
-                      
-
-                      <p>
-                        Manticore and 5gp per set of ears of gobilins
-                      </p>
+                      </ul>
                       
 
                     </li>
                     
 
                     <li>
+                      After killing them, or “helping them” for Dick, you engaged with a mutated lizardfolk sharman.
+                    </li>
+                    
+
+                    <li>
+                      in his lair you found
                       
 
-                      <p>
-                        They “bought” some horses, a cart and headed off you where attacked by knolls then went to the farm house.
-                      </p>
+                      <ul>
+                        
+
+                        <li>
+                          an old map that listed the current location as “The Hall of Hirane and Avanker” the formal name for the Inquisition
+                        </li>
+                        
+
+                        <li>
+                          A spell book written in both Dragonic and Abysal that was some sort of instructions for summoning.
+                        </li>
+                        
+
+                        <li>
+                          A section of a personal journal that had two things repeated:
+                          
+
+                          <ul>
+                            
+
+                            <li>
+                              I will be come one with them, them with me, my people will come, all will be one.
+                            </li>
+                            
+
+                            <li>
+                              Pergash bound, the path is laid. The take the stones from the glade.
+                            </li>
+                            
+
+                          </ul>
+                          
+
+                        </li>
+                        
+
+                      </ul>
                       
 
                     </li>
                     
 
                     <li>
+                      a young boy in a cage called Samuel
                       
 
-                      <p>
-                        First you saw a boy that's under the influence of quinine working and carrying produce of a strange flowering plant
-                      </p>
-                      
+                      <ul>
+                        
 
-                    </li>
-                    
+                        <li>
+                          A PseudoDragon that Balfour took as a familiar.
+                        </li>
+                        
 
-                    <li>
-                      
-
-                      <p>
-                        then you met a young woman who due to a natural 20 perception check from Karlyle he noticed this young woman wasn't what she seemed.
-                      </p>
-                      
-
-                    </li>
-                    
-
-                    <li>
-                      
-
-                      <p>
-                        You defeated them and found a note.
-                      </p>
-                      
-
-                      <p>
-                        Production is lower than expected make sure you make up the difference.
-                      </p>
-                      
-
-                      <p>
-                        Lamuin
-                      </p>
-                      
-
-                    </li>
-                    
-
-                    <li>
-                      
-
-                      <p>
-                        you also noticed there was 4 glasses of blood.
-                      </p>
+                      </ul>
                       
 
                     </li>
@@ -891,7 +963,7 @@ exports[`Page - Sessions should match snapshot 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
         >
-          Session 5 - Action in the Ashglade
+          Session 1 - The Journey Begins
         </p>
       </div>
       <div
@@ -933,137 +1005,65 @@ exports[`Page - Sessions should match snapshot 1`] = `
                 
 
                 <li>
-                  Killed the remaining vampire spawn at the ashglade and pearson farms.
+                  Joined together
                   
 
                   <ul>
                     
 
                     <li>
-                      Was told that Ulric will release the rest of his Bailey stores to the ness brewery.
+                      Completed the Clearing of Shelmark
+                      
+
+                      <ul>
+                        
+
+                        <li>
+                          The Party found the body of Franzi they were going to give it to Luka but Balfor intuited that it maybe worth something to someone. Gormar's sword seemed attracted to her then when it touched the head with the pomel a helm appeared Gormar put it on and it disappeared.
+                        </li>
+                        
+
+                        <li>
+                          The party still have her armour.
+                        </li>
+                        
+
+                      </ul>
+                      
+
                     </li>
                     
 
                     <li>
-                      Went north met with some gobs killed them.
+                      The gang stayed in a in the The Half-full Chalice. Karlyle hooked up with Metha but due a poor performance she left before he woke.
                     </li>
                     
 
                     <li>
-                      Then was tricked by a cowboy dwarf
-                    </li>
-                    
+                      The gang then met with Rosalina
+                      
 
-                    <li>
-                      It was lamia that was revealed and attempted to call a Manticore to him.
-                    </li>
-                    
+                      <ul>
+                        
 
-                    <li>
-                      You killed the lamia then the manticore and raided the Lamia’s lair that was a strange scaled up hall.
-                    </li>
-                    
+                        <li>
+                          she's told then that the transport to the wastes will be at Southver Flats in the morning.
+                        </li>
+                        
 
-                    <li>
-                      You found an injured real Gizmug in the lair. He told you that it’s “The Collector” that wants the magical beasts. He used a scroll to cross off the Manticore and an elf appeared he “introduced” himself as Elromior he paid you for both the Manticore and the Lamia.
-                    </li>
-                    
+                        <li>
+                          Dick stole 5CP of the Reward money.
+                        </li>
+                        
 
-                  </ul>
-                  
+                        <li>
+                          She mentioned her husband died by goblins recently in Hiranemount.
+                        </li>
+                        
 
-                </li>
-                
+                      </ul>
+                      
 
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
-  >
-    <div
-      aria-controls="panel1a-content"
-      aria-expanded="false"
-      class="MuiButtonBase-root MuiAccordionSummary-root MuiAccordionSummary-gutters css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root"
-      id="panel1a-header"
-      role="button"
-      tabindex="0"
-    >
-      <div
-        class="MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
-      >
-        <p
-          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-        >
-          Session 6 - Killing in the name of Krig
-        </p>
-      </div>
-      <div
-        class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
-      >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-          data-testid="ExpandMoreIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
-          />
-        </svg>
-      </div>
-    </div>
-    <div
-      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
-      style="min-height: 0px;"
-    >
-      <div
-        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
-      >
-        <div
-          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
-        >
-          <div
-            aria-labelledby="panel1a-header"
-            class="MuiAccordion-region"
-            id="panel1a-content"
-            role="region"
-          >
-            <div
-              class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
-            >
-              <ul>
-                
-
-                <li>
-                  Completed the Nessy Brewery mission and levelled up.
-                  
-
-                  <ul>
-                    
-
-                    <li>
-                      Sold and bought a load of stuff including the brazer
-                    </li>
-                    
-
-                    <li>
-                      Went to the university and learnt a lot on various subjects
-                    </li>
-                    
-
-                    <li>
-                      Spoke to Heik the feather is ready but you can leave when you want.
-                    </li>
-                    
-
-                    <li>
-                      Fought in the Fighting Pits of Krig managed to get to the get to the 5th Round and tied with the Fate’s Fortune who you met there.
                     </li>
                     
 
