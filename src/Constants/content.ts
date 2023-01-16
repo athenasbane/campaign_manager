@@ -3,7 +3,7 @@ import { TContent } from "Types/Types/content.type";
 import {
   THE_HEALER_SYMBOL_SMALL,
   THE_LEADER_SYMBOL_SMALL,
-  THE_SOLIDER_SYMBOL_SMALL,
+  THE_SOLDIER_SYMBOL_SMALL,
   THE_WATCHER_SYMBOL_SMALL,
   THE_WORKER_SYMBOL_SMALL,
   VILLIOUS_AND_HREGG_CIRCLE_SMALL,
@@ -16,7 +16,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.TextBlock,
-    displayText: `Each citizen of Tordenhelm aligns to a number of these casts for example a common farmer may only align to the Worker but a military medic may align to both The Healer and The Solider. Within the more populated or affluent areas of the Imperium the cast system has great influence. It determines the God you worship (or claim to worship) your career progression, earnings (therefore taxation), your rank within your alignment also will determine your access and acceptance within elements of Torden society. The influence of the system isn’t total however. Towns and cities in the less populated areas of Tordenhelm have a looser use of the cast system.`,
+    displayText: `Each citizen of Tordenhelm aligns to a number of these casts for example a common farmer may only align to the Worker but a military medic may align to both The Healer and The Soldier. Within the more populated or affluent areas of the Imperium the cast system has great influence. It determines the God you worship (or claim to worship) your career progression, earnings (therefore taxation), your rank within your alignment also will determine your access and acceptance within elements of Torden society. The influence of the system isn’t total however. Towns and cities in the less populated areas of Tordenhelm have a looser use of the cast system.`,
   },
   {
     contentType: EContentType.Image,
@@ -59,12 +59,12 @@ export const alignmentContent: TContent[] = [
         "Captain, Merchant, Lord, Emperor",
       ],
       [
-        "The Solider",
+        "The Soldier",
         "Squadie",
         "Silver crossed swords",
         "Krig",
         "Arch-General",
-        "Solider, Tactician, War Architect",
+        "Soldier, Tactician, War Architect",
       ],
       [
         "The Watcher",
@@ -110,12 +110,12 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Solider",
+    displayLabel: "The Soldier",
   },
   {
     contentType: EContentType.Image,
-    imageSrc: THE_SOLIDER_SYMBOL_SMALL,
-    altText: "The Solider Symbol",
+    imageSrc: THE_SOLDIER_SYMBOL_SMALL,
+    altText: "The Soldier Symbol",
   },
   {
     contentType: EContentType.Title,
