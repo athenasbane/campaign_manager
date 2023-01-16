@@ -37,6 +37,40 @@ exports[`Page - Welcome should match snapshot 1`] = `
       </div>
     </div>
     <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column css-80wlp8-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1niv9cx-MuiPaper-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column css-80wlp8-MuiGrid-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <h2
+                class="MuiTypography-root MuiTypography-h2 css-icizyq-MuiTypography-root"
+              >
+                Next Session
+              </h2>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <h4
+                class="MuiTypography-root MuiTypography-h4 css-149xwtl-MuiTypography-root"
+              >
+                Thurs 19th January@18:00
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       This site is a work in progress so any suggestions you have for things you would like to see would be greatly appreciated. Here's the work I have planned:
