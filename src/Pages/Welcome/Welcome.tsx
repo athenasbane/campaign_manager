@@ -2,7 +2,10 @@ import ListItem from "@mui/material/ListItem";
 import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { LIFE_STONE_MORNING_STAR_IMG } from "Constants/images";
+import {
+  LIFE_STONE_MORNING_STAR_IMG,
+  THE_LEADER_SYMBOL_SMALL,
+} from "Constants/images";
 
 export default function Welcome() {
   return (
@@ -32,7 +35,7 @@ export default function Welcome() {
                 borderRadius: "15px",
               }}
               alt="lifestone morningstar"
-              src={LIFE_STONE_MORNING_STAR_IMG}
+              src={THE_LEADER_SYMBOL_SMALL}
             />
           </Grid>
         </Grid>
