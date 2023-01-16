@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
 import Table from "Components/Molecule/Table/Table";
 import { EContentType } from "Types/Enum/content.enum";
+import { ITable } from "Types/Interfaces";
 
-const mock = {
+const mock: ITable = {
   contentType: EContentType.Table,
   tableHeader: [
     "Common Name",
