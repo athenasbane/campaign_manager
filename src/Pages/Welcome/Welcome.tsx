@@ -2,10 +2,9 @@ import ListItem from "@mui/material/ListItem";
 import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import {
-  LIFE_STONE_MORNING_STAR_IMG,
-  THE_LEADER_SYMBOL_SMALL,
-} from "Constants/images";
+import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
+import Paper from "@mui/material/Paper/Paper";
+import theme from "theme";
 
 export default function Welcome() {
   return (
@@ -37,6 +36,24 @@ export default function Welcome() {
               alt="lifestone morningstar"
               src={THE_LEADER_SYMBOL_SMALL}
             />
+          </Grid>
+        </Grid>
+        <Grid item container direction="column">
+          <Grid item>
+            <Paper sx={{ backgroundColor: theme.palette.secondary.main }}>
+              <Grid item container direction="column">
+                <Grid item>
+                  <Typography variant="h2" textAlign="center">
+                    Next Session
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h4" textAlign="center">
+                    Thurs 19th January@18:00
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Paper>
           </Grid>
         </Grid>
         <Grid item>
