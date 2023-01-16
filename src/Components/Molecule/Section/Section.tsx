@@ -13,13 +13,12 @@ export default function Section({
     <Grid item container direction="row">
       {swapSections ? (
         <>
-          <Grid item xs={6}>
+          <Grid item>
             <Typography data-testid="section_element" textAlign="justify">
               {textBlock.displayText}
             </Typography>
-          </Grid>
-          <Grid style={{ width: "100%", float: "left" }} item xs={6}>
             <img
+              style={{ width: "50vw" }}
               data-testid="section_element"
               alt={image.altText}
               src={image.imageSrc}
@@ -28,15 +27,13 @@ export default function Section({
         </>
       ) : (
         <>
-          <Grid item xs={6}>
+          <Grid item>
             <img
               data-testid="section_element"
-              style={{ width: "100%", float: "left" }}
+              style={{ width: "40vw", float: "left", marginRight: "5px" }}
               alt={image.altText}
               src={image.imageSrc}
             />
-          </Grid>
-          <Grid item xs={6}>
             <Typography data-testid="section_element" textAlign="justify">
               {textBlock.displayText}
             </Typography>

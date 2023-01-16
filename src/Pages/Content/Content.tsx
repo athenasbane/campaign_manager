@@ -57,7 +57,7 @@ export default function Content() {
         );
       case EContentType.Section:
         return (
-          <Grid item container>
+          <Grid key={element.contentType + index} item container>
             <Section key={element.contentType + index} {...element} />
           </Grid>
         );

@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { alignmentContent, deadGodsContent } from "Constants/content";
+import {
+  alignmentContent,
+  deadGodsContent,
+  pactMortalis,
+} from "Constants/content";
 import { EContentType } from "Types/Enum/content.enum";
 import { ITitle } from "Types/Interfaces";
 import { TContent } from "Types/Types/content.type";
 
 export const contentSlice = createSlice({
   name: "content",
-  initialState: { alignment: alignmentContent, dead_gods: deadGodsContent },
+  initialState: {
+    alignment: alignmentContent,
+    dead_gods: deadGodsContent,
+    pact_mortalis: pactMortalis,
+  },
   reducers: {},
 });
 

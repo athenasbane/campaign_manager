@@ -1,6 +1,7 @@
 import { EContentType } from "Types/Enum/content.enum";
 import { TContent } from "Types/Types/content.type";
 import {
+  PACT_MORTALIS,
   THE_HEALER_SYMBOL_SMALL,
   THE_LEADER_SYMBOL_SMALL,
   THE_SOLDIER_SYMBOL_SMALL,
@@ -162,5 +163,32 @@ export const deadGodsContent: TContent[] = [
     contentType: EContentType.TextBlock,
     displayText:
       "According to their followers this is what forms the basis for balance of the elements enough for mortal life to survive on Tertatin. ",
+  },
+];
+
+export const pactMortalis: TContent[] = [
+  {
+    contentType: EContentType.Title,
+    displayLabel: "Pact Mortalis",
+    variant: "h3",
+    align: "center",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "The Pact Mortalis was one of the primary documents created at the time of the forging. Said to have been witnessed and signed by the imperial pantheon themselves. The pact guaranteed that: ",
+  },
+  {
+    contentType: EContentType.Section,
+    swapSections: false,
+    image: {
+      contentType: EContentType.Image,
+      altText: "Pact Mortalis",
+      imageSrc: PACT_MORTALIS,
+    },
+    textBlock: {
+      contentType: EContentType.TextBlock,
+      displayText: `Work would be given and fairly paid inline with skills and aptitude, regardless of background, title, lands or station. Citizen's will display their rank to protect themselves from slavery. The empero's duty is to create and save guard laws that will provide safety, security and liberty of their subject. The herein entitlement would be granted to Elves, Dwarfs, Halflings, Gnomes, Orcs and Humans. An amendment was made after the annexation of Cirrane to add Dragonborne.`,
+    },
   },
 ];

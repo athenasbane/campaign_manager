@@ -73,6 +73,11 @@ export const list: IListType[] = [
         value: "2",
         path: "/content/dead_gods",
       },
+      {
+        displayLabel: "The Pact Mortalis",
+        value: "3",
+        path: "/content/pact_mortalis",
+      },
     ],
   },
 ];
