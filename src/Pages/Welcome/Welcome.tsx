@@ -1,9 +1,9 @@
 import ListItem from "@mui/material/ListItem";
 import MuiList from "@mui/material/List";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
-import Paper from "@mui/material/Paper/Paper";
 import theme from "theme";
 
 export default function Welcome() {
@@ -64,11 +64,7 @@ export default function Welcome() {
         <Grid item>
           <MuiList>
             <ListItem>
-              - Add further maps that I have so you can reference them.
-            </ListItem>
-            <ListItem>
-              - Download of "Better Crafting" Rule sets developed for this
-              campaign.
+              - History Time line known to all player characters
             </ListItem>
           </MuiList>
         </Grid>

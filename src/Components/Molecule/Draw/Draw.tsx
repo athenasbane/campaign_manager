@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import DownloadIcon from "@mui/icons-material/Download";
 import MapIcon from "@mui/icons-material/Map";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
@@ -49,6 +50,11 @@ export default function Draw({
       displayLabel: "Lore",
       routePath: "/list/content",
       icon: <MenuBookIcon />,
+    },
+    {
+      displayLabel: "Homebrew Documents",
+      routePath: "/documents",
+      icon: <DownloadIcon />,
     },
   ];
 

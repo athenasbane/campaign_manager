@@ -11,6 +11,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import Content from "Pages/Content/Content";
+import Documents from "Pages/Documents/Documents";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -37,6 +38,7 @@ function App() {
             <Route path="/list/:slug" element={<List />} />
             <Route path="/content/:slug" element={<Content />} />
             <Route path="/sessions" element={<Sessions />} />
+            <Route path="/documents" element={<Documents />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainTemplate>

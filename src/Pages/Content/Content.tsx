@@ -1,5 +1,5 @@
-import Typography from "@mui/material/Typography/Typography";
-import Grid from "@mui/material/Grid/Grid";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import Table from "Components/Molecule/Table/Table";
 import { EContentType } from "Types/Enum/content.enum";
 import Section from "Components/Molecule/Section/Section";

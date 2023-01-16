@@ -142,12 +142,7 @@ exports[`renders learn react link 1`] = `
                 <li
                   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
                 >
-                  - Add further maps that I have so you can reference them.
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tptwv2-MuiListItem-root"
-                >
-                  - Download of "Better Crafting" Rule sets developed for this campaign.
+                  - History Time line known to all player characters
                 </li>
               </ul>
             </div>

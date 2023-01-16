@@ -84,12 +84,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
         <li
           class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
         >
-          - Add further maps that I have so you can reference them.
-        </li>
-        <li
-          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
-        >
-          - Download of "Better Crafting" Rule sets developed for this campaign.
+          - History Time line known to all player characters
         </li>
       </ul>
     </div>
