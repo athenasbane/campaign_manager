@@ -1,8 +1,14 @@
 import { EContentType } from "Types/Enum/content.enum";
 import { TTypographyVariant } from "Types/Types/link.type";
+
+export interface ITextBlockLink {
+  indicator: string;
+  path: string;
+}
 export interface ITextBlock {
   contentType: EContentType.TextBlock;
   displayText: string;
+  links?: ITextBlockLink[];
 }
 
 export interface IImage {
