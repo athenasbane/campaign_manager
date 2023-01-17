@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "hooks/store.hooks";
 import { selectContent } from "Store/slices/content";
 import { ITable } from "Types/Interfaces";
+import TextBlock from "Components/Atom/TextBlock/TextBlock";
 
 export default function Content() {
   const { slug } = useParams();
@@ -40,8 +41,8 @@ export default function Content() {
         );
       case EContentType.TextBlock:
         return (
-          <Grid item key={element.contentType + index}>
-            <Typography textAlign="justify">{element.displayText}</Typography>
+          <Grid item textAlign="justify" key={element.contentType + index}>
+            <TextBlock {...element} />
           </Grid>
         );
       case EContentType.Image:

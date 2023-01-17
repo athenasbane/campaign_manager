@@ -7,7 +7,7 @@ exports[`Atom - Link Snapshot - Test should match snapshot 1`] = `
     style="text-decoration: none;"
   >
     <h1
-      class="MuiTypography-root MuiTypography-h1 css-o2w69a-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-h1 css-1to2irz-MuiTypography-root"
       data-testid="link_typography"
     >
       Testable Link Text
