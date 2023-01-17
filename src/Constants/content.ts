@@ -146,6 +146,11 @@ export const deadGodsContent: TContent[] = [
     align: "center",
   },
   {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "The Imperium refers to any God not in the “Imperial Pantheon” as Dead Gods and worship or even of acknowledgement of these gods is considered blasphemy.",
+  },
+  {
     contentType: EContentType.Title,
     displayLabel: "Villious & Hregg",
   },
