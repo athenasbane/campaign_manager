@@ -1,12 +1,12 @@
 export interface linkItem {
-  displayLabel: string;
+  displayText: string;
   value: string;
   path: string;
 }
 
 export interface IListType {
   param: string;
-  displayLabel: string;
+  displayText: string;
   parentDisplayLabel?: string;
   links: linkItem[];
 }
@@ -14,32 +14,32 @@ export interface IListType {
 export const list: IListType[] = [
   {
     param: "maps",
-    displayLabel: "Maps",
+    displayText: "Maps",
     parentDisplayLabel: undefined,
     links: [
-      { displayLabel: "Tordenhelm", value: "1", path: "/map/tordenhelm" },
-      { displayLabel: "The Nals", value: "2", path: "/list/the_nals" },
+      { displayText: "Tordenhelm", value: "1", path: "/map/tordenhelm" },
+      { displayText: "The Nals", value: "2", path: "/list/the_nals" },
     ],
   },
   {
     param: "the_nals",
-    displayLabel: "The Nals",
+    displayText: "The Nals",
     parentDisplayLabel: "Maps",
     links: [
       {
-        displayLabel: "Cities, Towns & Villages",
+        displayText: "Cities, Towns & Villages",
         value: "1",
         path: "/list/the_nals_ctv",
       },
-      { displayLabel: "Cirrane Coast", value: "2", path: "/map/cirrain_coast" },
-      { displayLabel: "Mere Lands", value: "3", path: "/map/mere_lands" },
+      { displayText: "Cirrane Coast", value: "2", path: "/map/cirrain_coast" },
+      { displayText: "Mere Lands", value: "3", path: "/map/mere_lands" },
       {
-        displayLabel: "Hirane Mount Coast",
+        displayText: "Hirane Mount Coast",
         value: "4",
         path: "/map/hirane_mount_coast",
       },
       {
-        displayLabel: "Nirwod",
+        displayText: "Nirwod",
         value: "5",
         path: "/map/nirwod",
       },
@@ -47,39 +47,39 @@ export const list: IListType[] = [
   },
   {
     param: "the_nals_ctv",
-    displayLabel: "Cities, Towns & Villages",
+    displayText: "Cities, Towns & Villages",
     parentDisplayLabel: "Maps",
     links: [
       {
-        displayLabel: "Klilcaithness",
+        displayText: "Klilcaithness",
         value: "1",
         path: "/map/klilcaithness",
       },
-      { displayLabel: "The Shambles", value: "2", path: "/map/shambles" },
+      { displayText: "The Shambles", value: "2", path: "/map/shambles" },
     ],
   },
   {
     param: "content",
-    displayLabel: "Basic Overview",
+    displayText: "Basic Overview",
     parentDisplayLabel: "Lore",
     links: [
       {
-        displayLabel: "The Imperium",
+        displayText: "The Imperium",
         value: "0",
         path: "/content/the_imperium",
       },
       {
-        displayLabel: "Alignment",
+        displayText: "Alignment",
         value: "1",
         path: "/content/alignment",
       },
       {
-        displayLabel: "Dead Gods",
+        displayText: "Dead Gods",
         value: "2",
         path: "/content/dead_gods",
       },
       {
-        displayLabel: "The Pact Mortalis",
+        displayText: "The Pact Mortalis",
         value: "3",
         path: "/content/pact_mortalis",
       },

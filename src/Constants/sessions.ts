@@ -1,23 +1,23 @@
-import { SessionType } from "Types/Enum/sessions.enum";
+import { ESessionType } from "Types/Enum/sessions.enum";
 import { TSession } from "Types/Types/session.type";
 
 export const sessions: TSession[] = [
   {
-    type: SessionType.StoryIncrement,
+    type: ESessionType.StoryIncrement,
     increment: "act",
-    displayLabel: "Act I",
+    displayText: "Act I",
   },
   {
-    type: SessionType.StoryIncrement,
+    type: ESessionType.StoryIncrement,
     increment: "chapter",
-    displayLabel: "Chapter 2",
+    displayText: "Chapter 2",
   },
   {
-    type: SessionType.Location,
-    displayLabel: "Klilcaithness, The Nals",
+    type: ESessionType.Location,
+    displayText: "Klilcaithness, The Nals",
   },
   {
-    type: SessionType.Session,
+    type: ESessionType.Session,
     sessionNo: 6,
     location: "Klilcaithness",
     inGameEndTime: "15:00",
@@ -30,7 +30,7 @@ export const sessions: TSession[] = [
     `,
   },
   {
-    type: SessionType.Session,
+    type: ESessionType.Session,
     sessionNo: 5,
     location: "Klilcaithness",
     inGameEndTime: "N/A",
@@ -44,7 +44,7 @@ export const sessions: TSession[] = [
     - You found an injured real Gizmug in the lair. He told you that it’s “The Collector” that wants the magical beasts. He used a scroll to cross off the Manticore and an elf appeared he “introduced” himself as Elromior he paid you for both the Manticore and the Lamia.`,
   },
   {
-    type: SessionType.Session,
+    type: ESessionType.Session,
     sessionNo: 4,
     location: "Klilcaithness",
     inGameEndTime: "21:00",
@@ -67,17 +67,17 @@ export const sessions: TSession[] = [
     - you also noticed there was 4 glasses of blood.`,
   },
   {
-    type: SessionType.StoryIncrement,
+    type: ESessionType.StoryIncrement,
     increment: "chapter",
-    displayLabel: "Chapter 1",
+    displayText: "Chapter 1",
   },
   {
-    type: SessionType.Location,
-    displayLabel: "The Shambles, The Nals",
+    type: ESessionType.Location,
+    displayText: "The Shambles, The Nals",
   },
   {
     sessionNo: 3,
-    type: SessionType.Session,
+    type: ESessionType.Session,
     location: "The Shambles, The Nals",
     inGameEndTime: "N/A",
     shortDescription: "Inker Investigation",
@@ -129,7 +129,7 @@ export const sessions: TSession[] = [
   },
   {
     sessionNo: 2,
-    type: SessionType.Session,
+    type: ESessionType.Session,
     location: "The Shambles, The Nals",
     inGameEndTime: "N/A",
     shortDescription: "Wading in the Wastes",
@@ -150,7 +150,7 @@ export const sessions: TSession[] = [
   },
   {
     sessionNo: 1,
-    type: SessionType.Session,
+    type: ESessionType.Session,
     location: "The Shambles, The Nals",
     inGameEndTime: "N/A",
     shortDescription: "The Journey Begins",

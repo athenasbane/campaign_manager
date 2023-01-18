@@ -24,7 +24,7 @@ export default function List() {
         </ListItem>
         <ListItem>
           <Typography align="center" variant="h3">
-            {list.displayLabel}
+            {list.displayText}
           </Typography>
         </ListItem>
         {list.links.map((link) => {
@@ -32,8 +32,8 @@ export default function List() {
             <ListItem key={link.value}>
               <Link
                 typographyVariant="h5"
-                linkDisplayLabel={link.displayLabel}
-                route={link.path}
+                linkDisplayLabel={link.displayText}
+                path={link.path}
               />
             </ListItem>
           );

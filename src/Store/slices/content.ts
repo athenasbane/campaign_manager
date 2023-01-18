@@ -29,12 +29,12 @@ export const selectContent = (
     return [
       {
         contentType: EContentType.Title,
-        displayLabel: "404",
+        displayText: "404",
         variant: "h2",
       },
       {
         contentType: EContentType.Title,
-        displayLabel: "Page Not Found",
+        displayText: "Page Not Found",
       },
     ] satisfies ITitle[];
   }

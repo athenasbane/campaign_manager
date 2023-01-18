@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 import Session, { ISessionProps } from "Components/Molecule/Session/Session";
-import { SessionType } from "Types/Enum/sessions.enum";
+import { ESessionType } from "Types/Enum/sessions.enum";
 
 const genericProps: ISessionProps = {
   session: {
-    type: SessionType.Session,
+    type: ESessionType.Session,
     sessionNo: 1,
     location: "test, The Test",
     inGameEndTime: "21:00",

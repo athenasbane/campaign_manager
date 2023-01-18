@@ -3,7 +3,7 @@ import Session from "Components/Molecule/Session/Session";
 import { useAppSelector } from "hooks/store.hooks";
 import { selectSessions } from "Store/slices/sessions";
 import theme from "theme";
-import { SessionType } from "Types/Enum/sessions.enum";
+import { ESessionType } from "Types/Enum/sessions.enum";
 
 export default function Sessions() {
   const sessionsData = useAppSelector((state) =>
@@ -12,25 +12,25 @@ export default function Sessions() {
 
   const sessions = sessionsData.map((session) => {
     switch (session.type) {
-      case SessionType.Session:
+      case ESessionType.Session:
         return <Session key={session.shortDescription} session={session} />;
-      case SessionType.StoryIncrement:
+      case ESessionType.StoryIncrement:
         return (
           <Typography
-            key={session.displayLabel}
+            key={session.displayText}
             align={session.increment === "act" ? "center" : "left"}
             variant={session.increment === "act" ? "h3" : "h4"}
             color={theme.palette.secondary.light}
             sx={{ mt: 4 }}
           >
-            {session.displayLabel}
+            {session.displayText}
           </Typography>
         );
 
-      case SessionType.Location:
+      case ESessionType.Location:
         return (
-          <Typography key={session.displayLabel} sx={{ mt: 2 }} variant="h5">
-            {session.displayLabel}
+          <Typography key={session.displayText} sx={{ mt: 2 }} variant="h5">
+            {session.displayText}
           </Typography>
         );
 

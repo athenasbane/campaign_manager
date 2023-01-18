@@ -27,7 +27,7 @@ export interface ITable {
 
 export interface ITitle {
   contentType: EContentType.Title;
-  displayLabel: string;
+  displayText: string;
   variant?: TTypographyVariant;
   align?: "left" | "center" | "right";
 }

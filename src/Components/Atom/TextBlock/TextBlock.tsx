@@ -16,7 +16,7 @@ export default function TextBlock({ displayText }: ITextBlockProps) {
             key={el.displayText + i}
             typographyVariant="body1"
             color={theme.palette.primary.light}
-            route={el.path}
+            path={el.path}
             linkDisplayLabel={el.displayText}
             display="inline-block"
           />

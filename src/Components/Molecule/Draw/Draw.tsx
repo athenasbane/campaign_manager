@@ -20,8 +20,8 @@ export interface IDrawProps {
 }
 
 export interface IDrawListItem {
-  displayLabel: string;
-  routePath: string;
+  displayText: string;
+  path: string;
   icon: React.ReactElement;
 }
 
@@ -34,26 +34,26 @@ export default function Draw({
 
   const topListItems: IDrawListItem[] = [
     {
-      displayLabel: "Maps",
-      routePath: "/list/maps",
+      displayText: "Maps",
+      path: "/list/maps",
       icon: <MapIcon />,
     },
     {
-      displayLabel: "Session Recap",
-      routePath: "/sessions",
+      displayText: "Session Recap",
+      path: "/sessions",
       icon: <VisibilityIcon />,
     },
   ];
 
   const bottomListItems: IDrawListItem[] = [
     {
-      displayLabel: "Lore",
-      routePath: "/list/content",
+      displayText: "Lore",
+      path: "/list/content",
       icon: <MenuBookIcon />,
     },
     {
-      displayLabel: "Homebrew Documents",
-      routePath: "/documents",
+      displayText: "Homebrew Documents",
+      path: "/documents",
       icon: <DownloadIcon />,
     },
   ];
@@ -67,10 +67,10 @@ export default function Draw({
     >
       <List>
         {topListItems.map((item) => (
-          <ListItem key={item.displayLabel} disablePadding>
-            <ListItemButton onClick={() => navigate(item.routePath)}>
+          <ListItem key={item.displayText} disablePadding>
+            <ListItemButton onClick={() => navigate(item.path)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.displayLabel} />
+              <ListItemText primary={item.displayText} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -78,10 +78,10 @@ export default function Draw({
       <Divider />
       <List>
         {bottomListItems.map((item) => (
-          <ListItem key={item.displayLabel} disablePadding>
-            <ListItemButton onClick={() => navigate(item.routePath)}>
+          <ListItem key={item.displayText} disablePadding>
+            <ListItemButton onClick={() => navigate(item.path)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.displayLabel} />
+              <ListItemText primary={item.displayText} />
             </ListItemButton>
           </ListItem>
         ))}

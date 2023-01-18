@@ -11,7 +11,7 @@ export default function Map() {
   return (
     <>
       <Typography align="center" variant="h3">
-        {map.displayLabel}
+        {map.displayText}
       </Typography>
       <Container sx={{ ml: 1 }}>
         <img style={{ width: "90vw" }} src={map.imageSrc} alt="map" />

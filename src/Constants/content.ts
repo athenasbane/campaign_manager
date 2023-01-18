@@ -13,7 +13,7 @@ import {
 export const alignmentContent: TContent[] = [
   {
     contentType: EContentType.Title,
-    displayLabel: "Overview",
+    displayText: "Overview",
   },
   {
     contentType: EContentType.TextBlock,
@@ -87,13 +87,13 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "Symbols",
+    displayText: "Symbols",
     variant: "h3",
     align: "center",
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Leader",
+    displayText: "The Leader",
   },
   {
     contentType: EContentType.Image,
@@ -102,7 +102,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Worker",
+    displayText: "The Worker",
   },
   {
     contentType: EContentType.Image,
@@ -111,7 +111,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Soldier",
+    displayText: "The Soldier",
   },
   {
     contentType: EContentType.Image,
@@ -120,7 +120,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Healer",
+    displayText: "The Healer",
   },
   {
     contentType: EContentType.Image,
@@ -129,7 +129,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "The Watcher",
+    displayText: "The Watcher",
   },
   {
     contentType: EContentType.Image,
@@ -141,7 +141,7 @@ export const alignmentContent: TContent[] = [
 export const deadGodsContent: TContent[] = [
   {
     contentType: EContentType.Title,
-    displayLabel: "Dead Gods",
+    displayText: "Dead Gods",
     variant: "h3",
     align: "center",
   },
@@ -152,7 +152,7 @@ export const deadGodsContent: TContent[] = [
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "Villious & Hregg",
+    displayText: "Villious & Hregg",
   },
   {
     contentType: EContentType.TextBlock,
@@ -174,7 +174,7 @@ export const deadGodsContent: TContent[] = [
 export const pactMortalis: TContent[] = [
   {
     contentType: EContentType.Title,
-    displayLabel: "Pact Mortalis",
+    displayText: "Pact Mortalis",
     variant: "h3",
     align: "center",
   },
@@ -201,13 +201,13 @@ export const pactMortalis: TContent[] = [
 export const theImperium: TContent[] = [
   {
     contentType: EContentType.Title,
-    displayLabel: "The Imperium",
+    displayText: "The Imperium",
     variant: "h3",
     align: "center",
   },
   {
     contentType: EContentType.Title,
-    displayLabel: "In the Beginning...",
+    displayText: "In the Beginning...",
     variant: "h4",
   },
   {
