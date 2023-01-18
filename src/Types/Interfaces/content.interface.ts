@@ -1,5 +1,6 @@
 import { EContentType } from "Types/Enum/content.enum";
 import { TTypographyVariant } from "Types/Types/link.type";
+
 export interface ITextBlock {
   contentType: EContentType.TextBlock;
   displayText: string;

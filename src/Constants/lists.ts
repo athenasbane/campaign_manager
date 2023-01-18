@@ -64,6 +64,11 @@ export const list: IListType[] = [
     parentDisplayLabel: "Lore",
     links: [
       {
+        displayLabel: "The Imperium",
+        value: "0",
+        path: "/content/the_imperium",
+      },
+      {
         displayLabel: "Alignment",
         value: "1",
         path: "/content/alignment",

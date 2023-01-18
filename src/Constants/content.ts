@@ -17,7 +17,7 @@ export const alignmentContent: TContent[] = [
   },
   {
     contentType: EContentType.TextBlock,
-    displayText: `Each citizen of Tordenhelm aligns to a number of these casts for example a common farmer may only align to the Worker but a military medic may align to both The Healer and The Soldier. Within the more populated or affluent areas of the Imperium the cast system has great influence. It determines the God you worship (or claim to worship) your career progression, earnings (therefore taxation), your rank within your alignment also will determine your access and acceptance within elements of Torden society. The influence of the system isn’t total however. Towns and cities in the less populated areas of Tordenhelm have a looser use of the cast system.`,
+    displayText: `Each citizen of [link](Tordenhelm){/map/tordenhelm}[/link] aligns to a number of these casts for example a common farmer may only align to the Worker but a military medic may align to both The Healer and The Soldier. Within the more populated or affluent areas of the Imperium the cast system has great influence. It determines the God you worship (or claim to worship) your career progression, earnings (therefore taxation), your rank within your alignment also will determine your access and acceptance within elements of Torden society. The influence of the system isn’t total however. Towns and cities in the less populated areas of [link](Tordenhelm){/map/tordenhelm}[/link] have a looser use of the cast system.`,
   },
   {
     contentType: EContentType.Image,
@@ -195,5 +195,39 @@ export const pactMortalis: TContent[] = [
       contentType: EContentType.TextBlock,
       displayText: `Work would be given and fairly paid inline with skills and aptitude, regardless of background, title, lands or station. Citizen's will display their rank to protect themselves from slavery. The empero's duty is to create and save guard laws that will provide safety, security and liberty of their subject. The herein entitlement would be granted to Elves, Dwarfs, Halflings, Gnomes, Orcs and Humans. An amendment was made after the annexation of Cirrane to add Dragonborne.`,
     },
+  },
+];
+
+export const theImperium: TContent[] = [
+  {
+    contentType: EContentType.Title,
+    displayLabel: "The Imperium",
+    variant: "h3",
+    align: "center",
+  },
+  {
+    contentType: EContentType.Title,
+    displayLabel: "In the Beginning...",
+    variant: "h4",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "Over a thousand years ago the this dimension was unrecognisable to what it is now. Demons and Devils used the panes forests of this world to wage their evil war against each other. Giant titans of elemental power roamed the lands and seas destroying all the crossed without a second though. Dragons acted like carrion birds, claiming the spoils of the carnage. ",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "Mortals where play things at during this time. The lucky were forced into ranks to be fodder in some battle between Demon Princes or Devils. Other’s were slaves in mining pits or souls were bargained for between Arch-Devils. Survival was all that they thought about… ",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "At sometime during this period a small band of mortals were brought together. Hirane, heart of the Tordenhelm, lit a fire in the hearts of a few. Krig, master of war, heard her words and raged against his shackles. Arbeider, master of the craft, broke their shackles and forged what they needed to free those others in chains. Avanker, the ever watchful and wise, taught the others of arcane secrets and watched over to protect them. It was Zuicleth however that lead them to their victory. Mortals rose up against Demons, Devils and Deities. They slew dragons and draugr a like. Upon their success, Zuicleth passed down her decree on how mortals should live. This formed the basis of [link](The Pact Mortalis){/content/pact_mortalis}[/link] and the [link](Imperial Alignments){/content/alignment}[/link]. ",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "Due to the five then accepted accession to deities vowing to protect the interests of mortals forever more. The template that Zuicleth put forward formed the societal structure we see in Tordenhelm to this day.",
   },
 ];
