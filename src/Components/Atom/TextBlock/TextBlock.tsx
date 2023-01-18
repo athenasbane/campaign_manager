@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { textProcessor } from "helpers/text_processor/text_processor";
 import theme from "theme";
 import { ETextBlockType } from "Types/Enum/text_block.enum";
 import { ITextBlock } from "Types/Interfaces";
-import Link from "../Link/Link";
+import Link from "Components/Atom/Link/Link";
 
 export interface ITextBlockProps extends ITextBlock {}
 

@@ -3,6 +3,7 @@ import {
   alignmentContent,
   deadGodsContent,
   pactMortalis,
+  theImperium,
 } from "Constants/content";
 import { EContentType } from "Types/Enum/content.enum";
 import { ITitle } from "Types/Interfaces";
@@ -14,6 +15,7 @@ export const contentSlice = createSlice({
     alignment: alignmentContent,
     dead_gods: deadGodsContent,
     pact_mortalis: pactMortalis,
+    the_imperium: theImperium,
   },
   reducers: {},
 });

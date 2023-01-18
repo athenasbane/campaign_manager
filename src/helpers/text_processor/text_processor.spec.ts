@@ -2,25 +2,25 @@ import { textProcessor } from "helpers/text_processor/text_processor";
 import { EContentType } from "Types/Enum/content.enum";
 import { ITextBlock } from "Types/Interfaces";
 
-const mockTextBlockOne: ITextBlock = {
+export const mockTextBlockOne: ITextBlock = {
   contentType: EContentType.TextBlock,
   displayText:
     "This is a sample text that has a [link](link text){path}[/link] this will output again [link](link text 2){path 2}[/link]",
 };
 
-const mockTextBlockTwo: ITextBlock = {
+export const mockTextBlockTwo: ITextBlock = {
   contentType: EContentType.TextBlock,
   displayText:
     "This is a sample text that has a [link](link text){path} this will output again [link](link text 2){path 2}[/link]",
 };
 
-const mockTextBlockThree: ITextBlock = {
+export const mockTextBlockThree: ITextBlock = {
   contentType: EContentType.TextBlock,
   displayText:
     "This is a sample text that has a [link](link text){path}[/link] this will output again [link](link text 2)path 2}[/link]",
 };
 
-const expectedOne = [
+export const expectedOne = [
   {
     textType: "text",
     displayText: "This is a sample text that has a ",
@@ -45,7 +45,7 @@ const expectedOne = [
   },
 ];
 
-const expectedTwo = [
+export const expectedTwo = [
   {
     textType: "text",
     displayText:
@@ -53,7 +53,7 @@ const expectedTwo = [
   },
 ];
 
-const expectedThree = [
+export const expectedThree = [
   {
     textType: "text",
     displayText: "This is a sample text that has a ",
