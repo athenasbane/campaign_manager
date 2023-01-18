@@ -19,14 +19,14 @@ export default function Documents() {
         <MuiList>
           {documentsData.map((doc) => {
             return (
-              <ListItem key={doc.displayLabel}>
+              <ListItem key={doc.displayText}>
                 <a
                   style={{ textDecoration: "none", color: "white" }}
                   href={doc.documentSrc}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Typography variant="h3">{doc.displayLabel}</Typography>
+                  <Typography variant="h3">{doc.displayText}</Typography>
                 </a>
               </ListItem>
             );

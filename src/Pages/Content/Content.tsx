@@ -35,7 +35,7 @@ export default function Content() {
               align={element.align || "left"}
               variant={element.variant || "h4"}
             >
-              {element.displayLabel}
+              {element.displayText}
             </Typography>
           </Grid>
         );
@@ -46,7 +46,6 @@ export default function Content() {
           </Grid>
         );
       case EContentType.Image:
-        // [TODO] convert this to a component that regulates the size of the image
         return (
           <Grid item key={element.contentType + index}>
             <img

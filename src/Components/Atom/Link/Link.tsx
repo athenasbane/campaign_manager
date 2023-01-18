@@ -5,7 +5,7 @@ import theme from "theme";
 
 export interface ILinkProps {
   typographyVariant: TTypographyVariant;
-  route: string;
+  path: string;
   linkDisplayLabel: string;
   typographyComponentProps?: TypographyProps;
   display?: string;
@@ -14,14 +14,14 @@ export interface ILinkProps {
 
 export default function Link({
   typographyVariant,
-  route,
+  path,
   linkDisplayLabel,
   typographyComponentProps = {},
   display,
   color = theme.palette.contrastText,
 }: ILinkProps) {
   return (
-    <RouterLink style={{ textDecoration: "none", color: "inherit" }} to={route}>
+    <RouterLink style={{ textDecoration: "none", color: "inherit" }} to={path}>
       <Typography
         data-testid="link_typography"
         color={color}

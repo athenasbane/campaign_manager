@@ -1,5 +1,5 @@
 export interface IMap {
-  displayLabel: string;
+  displayText: string;
   imageSrc: string;
   imageRoute: string;
 }

@@ -8,9 +8,9 @@ export const mapsSlice = createSlice({
   reducers: {},
 });
 
-export const selectMap = (state: IMap[], route?: string) => {
-  if (route) {
-    return state.filter((map) => map.imageRoute === route)[0];
+export const selectMap = (state: IMap[], path?: string) => {
+  if (path) {
+    return state.filter((map) => map.imageRoute === path)[0];
   }
   return state[0];
 };

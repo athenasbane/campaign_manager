@@ -1,7 +1,7 @@
-import { SessionType } from "../Enum/sessions.enum";
+import { ESessionType } from "Types/Enum/sessions.enum";
 
 export interface ISession {
-  type: SessionType.Session;
+  type: ESessionType.Session;
   sessionNo: number;
   location: string;
   inGameEndTime: string;
@@ -10,12 +10,12 @@ export interface ISession {
 }
 
 export interface ISessionLocation {
-  type: SessionType.Location;
-  displayLabel: string;
+  type: ESessionType.Location;
+  displayText: string;
 }
 
 export interface ISessionStoryIncrement {
-  type: SessionType.StoryIncrement;
+  type: ESessionType.StoryIncrement;
   increment: "chapter" | "act";
-  displayLabel: string;
+  displayText: string;
 }

@@ -11,37 +11,37 @@ import {
 
 export const maps: IMap[] = [
   {
-    displayLabel: "Klilcaithness",
+    displayText: "Klilcaithness",
     imageSrc: KLILCAITHNESS_MAP,
     imageRoute: "klilcaithness",
   },
   {
-    displayLabel: "Tordenhelm",
+    displayText: "Tordenhelm",
     imageRoute: "tordenhelm",
     imageSrc: TORDENHELM_MAP,
   },
   {
-    displayLabel: "The Shambles",
+    displayText: "The Shambles",
     imageRoute: "shambles",
     imageSrc: THE_SHAMBLES_MAP,
   },
   {
-    displayLabel: "Cirrane Coast",
+    displayText: "Cirrane Coast",
     imageRoute: "cirrain_coast",
     imageSrc: CIRANE_COAST_MAP,
   },
   {
-    displayLabel: "Mere Lands",
+    displayText: "Mere Lands",
     imageRoute: "mere_lands",
     imageSrc: MERE_LANDS,
   },
   {
-    displayLabel: "Hirane Mount Coast",
+    displayText: "Hirane Mount Coast",
     imageRoute: "hirane_mount_coast",
     imageSrc: HIRANE_MOUNT_MAP,
   },
   {
-    displayLabel: "Nirwod",
+    displayText: "Nirwod",
     imageSrc: NIRWOD_MAP,
     imageRoute: "nirwod",
   },

@@ -24,7 +24,7 @@ export const selectFilteredList = (
 
   if (queryLinks) {
     const [type] = filteredTypes;
-    type.links = type.links.filter((el) => el.displayLabel !== queryLinks);
+    type.links = type.links.filter((el) => el.displayText !== queryLinks);
   }
 
   return filteredTypes;

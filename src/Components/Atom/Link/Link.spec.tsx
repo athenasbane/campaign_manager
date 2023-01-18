@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const genericProps: ILinkProps = {
   typographyVariant: "h1",
-  route: "/test/route",
+  path: "/test/route",
   linkDisplayLabel: "Testable Link Text",
 };
 
