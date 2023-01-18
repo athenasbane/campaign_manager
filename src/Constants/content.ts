@@ -1,6 +1,8 @@
 import { EContentType } from "Types/Enum/content.enum";
 import { TContent } from "Types/Types/content.type";
 import {
+  CASTANEITH,
+  HILDAUGR,
   PACT_MORTALIS,
   THE_HEALER_SYMBOL_SMALL,
   THE_LEADER_SYMBOL_SMALL,
@@ -8,7 +10,7 @@ import {
   THE_WATCHER_SYMBOL_SMALL,
   THE_WORKER_SYMBOL_SMALL,
   VILLIOUS_AND_HREGG_CIRCLE_SMALL,
-} from "./images";
+} from "Constants/images";
 
 export const alignmentContent: TContent[] = [
   {
@@ -229,5 +231,54 @@ export const theImperium: TContent[] = [
     contentType: EContentType.TextBlock,
     displayText:
       "Due to the five then accepted accession to deities vowing to protect the interests of mortals forever more. The template that Zuicleth put forward formed the societal structure we see in Tordenhelm to this day.",
+  },
+];
+
+export const demons: TContent[] = [
+  {
+    contentType: EContentType.Title,
+    displayText: "Demons",
+    variant: "h3",
+    align: "center",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "Demons are from the Abyss, a chaotic realm of evil incarnate.",
+  },
+  {
+    contentType: EContentType.Title,
+    displayText: "Castaneith",
+    variant: "h4",
+  },
+  {
+    contentType: EContentType.Image,
+    altText: "castaneith",
+    imageSrc: CASTANEITH,
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "The lord of secrets is a demon lord that is a bit set apart from the others. Castaneith feeds on souls but doesn’t generally use them to build legions of Mane armies like his fellow lords. He keeps moving and uses his knowledge of the True Names of other powerful demons to extort and curry favour from them.",
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "He also has found a way of pass motes of himself into the materium he then temps mortals to do his bidding for him.",
+  },
+  {
+    contentType: EContentType.Title,
+    displayText: "Hildraugr",
+    variant: "h4",
+  },
+  {
+    contentType: EContentType.Image,
+    altText: "hildraugr",
+    imageSrc: HILDAUGR,
+  },
+  {
+    contentType: EContentType.TextBlock,
+    displayText:
+      "Hildraugr is the Demon Prince of Undeath, also known as the Blood Lord. While he takes pleasure in the sufferings of the living, he far prefers the company and service of Undead. His desire is to see all life quenched and the multiverse transformed into a vast necropolis populated solely by Undead creatures under his command.",
   },
 ];

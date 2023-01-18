@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   alignmentContent,
   deadGodsContent,
+  demons,
   pactMortalis,
   theImperium,
 } from "Constants/content";
@@ -16,6 +17,7 @@ export const contentSlice = createSlice({
     dead_gods: deadGodsContent,
     pact_mortalis: pactMortalis,
     the_imperium: theImperium,
+    demons,
   },
   reducers: {},
 });
