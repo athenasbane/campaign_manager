@@ -39,6 +39,177 @@ exports[`Page - Sessions should match snapshot 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
         >
+          Session 7 - Shin... who now?
+        </p>
+      </div>
+      <div
+        class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ExpandMoreIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+      style="min-height: 0px;"
+    >
+      <div
+        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+      >
+        <div
+          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+        >
+          <div
+            aria-labelledby="panel1a-header"
+            class="MuiAccordion-region"
+            id="panel1a-content"
+            role="region"
+          >
+            <div
+              class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
+            >
+              <ul>
+                
+
+                <li>
+                  Left the Fighting pits and headed back to the Hunters Lodge.
+                  
+
+                  <ul>
+                    
+
+                    <li>
+                      Balfor had a drink with Cassius and learnt:
+                      
+
+                      <ul>
+                        
+
+                        <li>
+                          Cassius was once the care taker of the fields of heroes. A changling barial ground in the Nirwod.
+                        </li>
+                        
+
+                        <li>
+                          His people were used as spies by the imperium of all kinds, Merchant lords looking for insider knowledge of their rivals activities. Jealous artisans looking to know the secrets to their competitions new process.
+                        </li>
+                        
+
+                        <li>
+                          I say used as there was very little choice involved. We are not protected by the Pact Mortalis… Therefore we are outlaws by the very definition. You could strike me down where I stand the guard would probably charge you with making a mess.
+                        </li>
+                        
+
+                        <li>
+                          When one of our own died I was responsible for their burial.
+                        </li>
+                        
+
+                        <li>
+                          A few years ago the however a not a body but a pair dressed in black and with silver masks came to our lands.
+                        </li>
+                        
+
+                        <li>
+                          Maybe the inquisition thought we worshiped our ansestors who knows they never said but they raised the place to the ground and made me watch
+                        </li>
+                        
+
+                        <li>
+                          They branded me so my changes would never be convincing again.
+                        </li>
+                        
+
+                        <li>
+                          Then the real fun began. The put me in a chamber and I was bathed in burning light.
+                        </li>
+                        
+
+                        <li>
+                          a year this went on for.
+                        </li>
+                        
+
+                        <li>
+                          in a fit of anger, spite and fear prayed to Hirane thinking is this what you want to see a creature burn in your name?
+                        </li>
+                        
+
+                        <li>
+                          I didn’t hear an answer but the next time that machine was turned on the light didn’t burn it healed. The Inquisitors in charge of my tourture started to look for me even though I was right in front of them.
+                        </li>
+                        
+
+                        <li>
+                          Since then their “eyes” have passed right over me. I took the holy symbol of Hirane to this day,
+                        </li>
+                        
+
+                        <li>
+                          Interesting isn’t it. That me anointed by the heart of the pantheon can’t be seen by them… why is it that their professed god would hide me so?
+                        </li>
+                        
+
+                      </ul>
+                      
+
+                    </li>
+                    
+
+                    <li>
+                      Found out the thieves of the bakeries were a group of Kenku that called themselves “The Snagpies” that were just staving. Gormar paid them 10 gold each to just go away.
+                    </li>
+                    
+
+                    <li>
+                      Karlyle slept with Wendy the barmaid who was mysteriously then found dead by poison the next morning. The group suspected Dick at first but then followed the part of Karlyles cloak she had using a spell to Hacker’s Herbalism. They fought and killed her and found out she was a member of the Shin Duku. A mysterious assassins guild.
+                    </li>
+                    
+
+                    <li>
+                      Balfor was sent a magical bird by his master Ofridi that told him to meet him by a tree. Ofridi appeared out of the tree then gave Balfor a sending stone and told him to continue on his current path.
+                    </li>
+                    
+
+                  </ul>
+                  
+
+                </li>
+                
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
+  >
+    <div
+      aria-controls="panel1a-content"
+      aria-expanded="false"
+      class="MuiButtonBase-root MuiAccordionSummary-root MuiAccordionSummary-gutters css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root"
+      id="panel1a-header"
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
           Session 6 - Killing in the Name of... Krig
         </p>
       </div>
