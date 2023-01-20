@@ -18,6 +18,31 @@ export const sessions: TSession[] = [
   },
   {
     type: ESessionType.Session,
+    sessionNo: 7,
+    location: "Klilcaithness",
+    inGameEndTime: "N/A",
+    shortDescription: "Shin... who now?",
+    longDescription: `- Left the Fighting pits and headed back to the Hunters Lodge.
+    - Balfor had a drink with Cassius and learnt:
+        - Cassius was once the care taker of the fields of heroes. A changling barial ground in the Nirwod.
+        - His people were used as spies by the imperium of all kinds, Merchant lords looking for insider knowledge of their rivals activities. Jealous artisans looking to know the secrets to their competitions new process.
+        - I say used as there was very little choice involved. We are not protected by the Pact Mortalis… Therefore we are outlaws by the very definition. You could strike me down where I stand the guard would probably charge you with making a mess.
+        - When one of our own died I was responsible for their burial.
+        - A few years ago the however a not a body but a pair dressed in black and with silver masks came to our lands.
+        - Maybe the inquisition thought we worshiped our ansestors who knows they never said but they raised the place to the ground and made me watch
+        - They branded me so my changes would never be convincing again.
+        - Then the real fun began. The put me in a chamber and I was bathed in burning light.
+        - a year this went on for.
+        - in a fit of anger, spite and fear prayed to Hirane thinking is this what you want to see a creature burn in your name?
+        - I didn’t hear an answer but the next time that machine was turned on the light didn’t burn it healed. The Inquisitors in charge of my tourture started to look for me even though I was right in front of them.
+        - Since then their “eyes” have passed right over me. I took the holy symbol of Hirane to this day,
+        - Interesting isn’t it. That me anointed by the heart of the pantheon can’t be seen by them… why is it that their professed god would hide me so?
+    - Found out the thieves of the bakeries were a group of Kenku that called themselves “The Snagpies” that were just staving. Gormar paid them 10 gold each to just go away.
+    - Karlyle slept with Wendy the barmaid who was mysteriously then found dead by poison the next morning. The group suspected Dick at first but then followed the part of Karlyles cloak she had using a spell to Hacker’s Herbalism. They fought and killed her and found out she was a member of the Shin Duku. A mysterious assassins guild.
+    - Balfor was sent a magical bird by his master Ofridi that told him to meet him by a tree. Ofridi appeared out of the tree then gave Balfor a sending stone and told him to continue on his current path.`,
+  },
+  {
+    type: ESessionType.Session,
     sessionNo: 6,
     location: "Klilcaithness",
     inGameEndTime: "15:00",
