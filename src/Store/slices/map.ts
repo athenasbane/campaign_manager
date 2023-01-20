@@ -1,18 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { maps } from "Constants/map";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IMap } from "Types/Interfaces";
 
-export const mapsSlice = createSlice({
-  name: "maps",
-  initialState: [...maps],
-  reducers: {},
+export const mapApi = createApi({
+  reducerPath: "mapApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_URL }),
+  endpoints: (builder) => ({
+    getMapBySlug: builder.query<IMap, string>({
+      query: (slug) => `map/${slug}`,
+    }),
+  }),
 });
 
-export const selectMap = (state: IMap[], path?: string) => {
-  if (path) {
-    return state.filter((map) => map.imageRoute === path)[0];
-  }
-  return state[0];
-};
-
-export default mapsSlice.reducer;
+export const { useGetMapBySlugQuery } = mapApi;

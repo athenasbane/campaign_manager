@@ -2,17 +2,19 @@ import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./slices/modals";
 import listsReducer from "./slices/lists";
 import sessionsReducer from "./slices/sessions";
-import mapsReducer from "./slices/map";
-import contentReducer from "./slices/content";
+import { mapApi } from "./slices/map";
+import { contentApi } from "./slices/content";
 
 const store = configureStore({
   reducer: {
     modals: modalReducer,
     lists: listsReducer,
     sessions: sessionsReducer,
-    maps: mapsReducer,
-    content: contentReducer,
+    [contentApi.reducerPath]: contentApi.reducer,
+    [mapApi.reducerPath]: mapApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(contentApi.middleware, mapApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
