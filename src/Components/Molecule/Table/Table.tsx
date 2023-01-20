@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ITable } from "Types/Interfaces";
 import { useEffect } from "react";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import theme from "theme";
 
 export interface ITableProps extends ITable {}

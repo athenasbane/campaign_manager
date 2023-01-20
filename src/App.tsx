@@ -7,7 +7,7 @@ import { closeAll, EnumModalSlice, openSingleModal } from "Store/slices/modals";
 import List from "Pages/List/List";
 import NotFound from "Pages/NotFound/NotFound";
 import Sessions from "Pages/Sessions/Sessions";
-import { ThemeProvider } from "@mui/material/styles";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import Content from "Pages/Content/Content";
