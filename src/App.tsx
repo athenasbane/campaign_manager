@@ -16,6 +16,7 @@ import Documents from "Pages/Documents/Documents";
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
   const dispatch = useAppDispatch();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

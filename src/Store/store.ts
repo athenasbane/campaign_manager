@@ -3,7 +3,7 @@ import modalReducer from "./slices/modals";
 import listsReducer from "./slices/lists";
 import sessionsReducer from "./slices/sessions";
 import mapsReducer from "./slices/map";
-import contentReducer from "./slices/content";
+import contentReducer, { contentApi } from "./slices/content";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +12,10 @@ const store = configureStore({
     sessions: sessionsReducer,
     maps: mapsReducer,
     content: contentReducer,
+    [contentApi.reducerPath]: contentApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(contentApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
