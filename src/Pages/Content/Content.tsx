@@ -3,15 +3,23 @@ import Grid from "@mui/material/Grid";
 import Table from "Components/Molecule/Table/Table";
 import { EContentType } from "Types/Enum/content.enum";
 import Section from "Components/Molecule/Section/Section";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetContentBySlugQuery } from "Store/slices/content";
 import { ITable } from "Types/Interfaces";
 import TextBlock from "Components/Atom/TextBlock/TextBlock";
 import Skeleton from "@mui/material/Skeleton";
+import { useEffect } from "react";
 
 export default function Content() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { data, error, isLoading } = useGetContentBySlugQuery(slug as string);
+
+  useEffect(() => {
+    if (error) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
 
   const body =
     data && !isLoading ? (
