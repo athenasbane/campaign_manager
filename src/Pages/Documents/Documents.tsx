@@ -2,7 +2,6 @@ import Typography from "@mui/material/Typography";
 import MuiList from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
-import { documentsData } from "Constants/documents";
 
 export default function Documents() {
   return (
@@ -17,20 +16,20 @@ export default function Documents() {
       </Grid>
       <Grid item>
         <MuiList>
-          {documentsData.map((doc) => {
-            return (
-              <ListItem key={doc.displayText}>
-                <a
-                  style={{ textDecoration: "none", color: "white" }}
-                  href={doc.documentSrc}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Typography variant="h3">{doc.displayText}</Typography>
-                </a>
-              </ListItem>
-            );
-          })}
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "white" }}
+              href={
+                process.env.REACT_APP_BACKEND_URL + "/public/better_crafting"
+              }
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Typography variant="h3">
+                Better Crafting Document (V1)
+              </Typography>
+            </a>
+          </ListItem>
         </MuiList>
       </Grid>
     </Grid>
