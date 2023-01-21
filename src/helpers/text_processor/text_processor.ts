@@ -8,7 +8,9 @@ export const textProcessor = (text: string): TTextBlock[] => {
   if (openingLink && closingLink && openingLink === closingLink) {
     return text.split(/\[link\]|\[\/link\]/g).map((item, i) => {
       if (i % 2 === 1) {
-        const matches = item.match(/(?<=\()(.*?)(?=\))|(?<=\{)(.*?)(?=\})/g);
+        const matches = item
+          .match(/(?:\()(.*?)(?=\))|(?:\{)(.*?)(?=\})/g)
+          ?.map((match) => match.replace(/[({}]/, ""));
         if (!matches || !matches[0] || !matches[1]) {
           console.warn(MALFORMED_LINK_TAG);
           return {
