@@ -20,7 +20,7 @@ export default function Documents() {
             <a
               style={{ textDecoration: "none", color: "white" }}
               href={
-                process.env.REACT_APP_BACKEND_URL + "/public/better_crafting"
+                process.env.REACT_APP_BACKEND_URL + "public/better_crafting"
               }
               rel="noopener noreferrer"
               target="_blank"
