@@ -56,6 +56,7 @@ export const list: IListType[] = [
         path: "/map/klilcaithness",
       },
       { displayText: "The Shambles", value: "2", path: "/map/shambles" },
+      { displayText: "Thorpeness", value: "3", path: "/map/thorpeness" },
     ],
   },
   {
