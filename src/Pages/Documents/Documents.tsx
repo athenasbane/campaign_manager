@@ -30,6 +30,20 @@ export default function Documents() {
               </Typography>
             </a>
           </ListItem>
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "white" }}
+              href={
+                process.env.REACT_APP_BACKEND_URL + "public/augmentine_class"
+              }
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Typography variant="h3">
+                Augmentine Class Guide (V0.1)
+              </Typography>
+            </a>
+          </ListItem>
         </MuiList>
       </Grid>
     </Grid>
