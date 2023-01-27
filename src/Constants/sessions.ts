@@ -10,6 +10,32 @@ export const sessions: TSession[] = [
   {
     type: ESessionType.StoryIncrement,
     increment: "chapter",
+    displayText: "Chapter 3",
+  },
+  {
+    type: ESessionType.Location,
+    displayText: "Thorpeness, The Nals",
+  },
+  {
+    type: ESessionType.Session,
+    sessionNo: 8,
+    location: "Thorpeness",
+    inGameEndTime: "15:00",
+    shortDescription: "Tired Stone, Cobble Stone, Turned to Stone",
+    longDescription: `
+- Travelled on the feather towards Thorpeness.
+- Saw an imperial cruiser had been attacked by lizardfolk that seemed to be “changed”. It was noted by Dick that this seems to the result of the ritual you found in the wastes.
+- You entered Thorpeness and took up rooms in The Tired Stone.
+- You entered into the fighting pits competition that will be in a days time.
+- Karlyle spoke to Xaphina Kriceli Receli Satina at the onyx ale works she said she was having issues with claiming payment from a Colonel Cornwallis and asking if you could help Without bringing the Onyx into it.
+- The Sargent told you that their beast master was missing so it you would be facing other combatants. The beast master went missing to the farms in the north east.
+- You went shopping and bought some stuff.
+- While trying to sleep Balfor noticed that there was the sound of footsteps above you. After using the detect magic spell you noticed that the pitched ceiling was an illusion. You went into the hall and a hooded figure was exiting a secret door. Balfor stealthily followed the figure until it entered a inn in the market/temple district.
+- The party went to the farm and engaged with 12 Cockatrice. Thanks to some good thinking on the part of Dick he managed to incapacitate a number of them using drugged meat. However, three of the four adventures were petrified by the birds before Dick retreated to get the guard who entered and recovered the Beast master leaving the Bastards of Birbick in the abandoned farm. Dick waited and eventually the rest of the party unpetrified, finding themselves in… compromising positions.`,
+  },
+  {
+    type: ESessionType.StoryIncrement,
+    increment: "chapter",
     displayText: "Chapter 2",
   },
   {

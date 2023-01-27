@@ -49,7 +49,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    Thurs 26th January@18:00
+                    Thurs 2nd February@18:00
                   </Typography>
                 </Grid>
               </Grid>

@@ -15,6 +15,126 @@ exports[`Page - Sessions should match snapshot 1`] = `
   <h4
     class="MuiTypography-root MuiTypography-h4 MuiTypography-alignLeft css-1m0yndc-MuiTypography-root"
   >
+    Chapter 3
+  </h4>
+  <h5
+    class="MuiTypography-root MuiTypography-h5 css-1657z6w-MuiTypography-root"
+  >
+    Thorpeness, The Nals
+  </h5>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-h4osnm-MuiPaper-root-MuiAccordion-root"
+  >
+    <div
+      aria-controls="panel1a-content"
+      aria-expanded="false"
+      class="MuiButtonBase-root MuiAccordionSummary-root MuiAccordionSummary-gutters css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root"
+      id="panel1a-header"
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          Session 8 - Tired Stone, Cobble Stone, Turned to Stone
+        </p>
+      </div>
+      <div
+        class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ExpandMoreIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+      style="min-height: 0px;"
+    >
+      <div
+        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+      >
+        <div
+          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+        >
+          <div
+            aria-labelledby="panel1a-header"
+            class="MuiAccordion-region"
+            id="panel1a-content"
+            role="region"
+          >
+            <div
+              class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
+            >
+              <ul>
+                
+
+                <li>
+                  Travelled on the feather towards Thorpeness.
+                </li>
+                
+
+                <li>
+                  Saw an imperial cruiser had been attacked by lizardfolk that seemed to be “changed”. It was noted by Dick that this seems to the result of the ritual you found in the wastes.
+                </li>
+                
+
+                <li>
+                  You entered Thorpeness and took up rooms in The Tired Stone.
+                </li>
+                
+
+                <li>
+                  You entered into the fighting pits competition that will be in a days time.
+                </li>
+                
+
+                <li>
+                  Karlyle spoke to Xaphina Kriceli Receli Satina at the onyx ale works she said she was having issues with claiming payment from a Colonel Cornwallis and asking if you could help Without bringing the Onyx into it.
+                </li>
+                
+
+                <li>
+                  The Sargent told you that their beast master was missing so it you would be facing other combatants. The beast master went missing to the farms in the north east.
+                </li>
+                
+
+                <li>
+                  You went shopping and bought some stuff.
+                </li>
+                
+
+                <li>
+                  While trying to sleep Balfor noticed that there was the sound of footsteps above you. After using the detect magic spell you noticed that the pitched ceiling was an illusion. You went into the hall and a hooded figure was exiting a secret door. Balfor stealthily followed the figure until it entered a inn in the market/temple district.
+                </li>
+                
+
+                <li>
+                  The party went to the farm and engaged with 12 Cockatrice. Thanks to some good thinking on the part of Dick he managed to incapacitate a number of them using drugged meat. However, three of the four adventures were petrified by the birds before Dick retreated to get the guard who entered and recovered the Beast master leaving the Bastards of Birbick in the abandoned farm. Dick waited and eventually the rest of the party unpetrified, finding themselves in… compromising positions.
+                </li>
+                
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4
+    class="MuiTypography-root MuiTypography-h4 MuiTypography-alignLeft css-1m0yndc-MuiTypography-root"
+  >
     Chapter 2
   </h4>
   <h5
