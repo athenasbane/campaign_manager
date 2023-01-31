@@ -1,33 +1,38 @@
 import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "hooks/store.hooks";
-import { selectFilteredList } from "Store/slices/lists";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetListBySlugQuery } from "Store/slices/lists";
 import Link from "Components/Atom/Link/Link";
+import { useEffect } from "react";
 
 export default function List() {
   const { slug } = useParams();
-  const lists = useAppSelector((state) =>
-    selectFilteredList(state.lists, slug)
-  );
+  const { data, error, isLoading } = useGetListBySlugQuery(slug as string);
+  const navigate = useNavigate();
 
-  const list = lists.map((list) => {
-    return (
-      <MuiList key={list.param}>
+  useEffect(() => {
+    if (error) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
+
+  const body =
+    data && !isLoading ? (
+      <MuiList key={data.param}>
         <ListItem>
-          {list.parentDisplayLabel ? (
+          {data.parentDisplayLabel ? (
             <Typography align="center" variant="h2">
-              {list.parentDisplayLabel}
+              {data.parentDisplayLabel}
             </Typography>
           ) : null}
         </ListItem>
         <ListItem>
           <Typography align="center" variant="h3">
-            {list.displayText}
+            {data.displayText}
           </Typography>
         </ListItem>
-        {list.links.map((link) => {
+        {data.links.map((link) => {
           return (
             <ListItem key={link.value}>
               <Link
@@ -39,8 +44,9 @@ export default function List() {
           );
         })}
       </MuiList>
+    ) : (
+      <></>
     );
-  });
 
-  return <>{list}</>;
+  return <>{body}</>;
 }

@@ -1,33 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IListType, list } from "Constants/lists";
+import { IListType } from "Constants/lists";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const listSlice = createSlice({
-  name: "lists",
-  initialState: [...list],
-  reducers: {},
+export const listApi = createApi({
+  reducerPath: "listApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_URL }),
+  endpoints: (builder) => ({
+    getListBySlug: builder.query<IListType, string>({
+      query: (slug) => `list/${slug}`,
+    }),
+  }),
 });
-/**
- * [TODO] move query to a single object that checks that queryType exists
- * change wording as "Types" as it's confusing
- */
-export const selectFilteredList = (
-  state: IListType[],
-  queryType?: string,
-  queryLinks?: string
-) => {
-  let filteredTypes = state;
-  if (queryType) {
-    filteredTypes = state.filter((el) => {
-      return el.param === queryType;
-    });
-  }
 
-  if (queryLinks) {
-    const [type] = filteredTypes;
-    type.links = type.links.filter((el) => el.displayText !== queryLinks);
-  }
-
-  return filteredTypes;
-};
-
-export default listSlice.reducer;
+export const { useGetListBySlugQuery } = listApi;

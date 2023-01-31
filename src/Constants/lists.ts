@@ -89,6 +89,11 @@ export const list: IListType[] = [
         value: "4",
         path: "/content/demons",
       },
+      {
+        displayText: "The Nals",
+        value: "5",
+        path: "/content/the_nals_lore",
+      },
     ],
   },
 ];

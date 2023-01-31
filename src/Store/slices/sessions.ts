@@ -1,13 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { sessions } from "../../Constants/sessions";
 import { TSession } from "../../Types/Types/session.type";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const sessionsSlice = createSlice({
-  name: "sessions",
-  initialState: [...sessions],
-  reducers: {},
+export const sessionsApi = createApi({
+  reducerPath: "sessionApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_URL }),
+  endpoints: (builder) => ({
+    getSession: builder.query<TSession[], undefined>({
+      query: () => `sessions`,
+    }),
+  }),
 });
 
-export const selectSessions = (state: TSession[]) => state;
-
-export default sessionsSlice.reducer;
+export const { useGetSessionQuery } = sessionsApi;
