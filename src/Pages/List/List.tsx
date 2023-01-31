@@ -2,7 +2,7 @@ import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetListBySlugQuery } from "Store/slices/lists";
+import { useGetListBySlugQuery } from "Store/slices/backend";
 import Link from "Components/Atom/Link/Link";
 import { useEffect } from "react";
 

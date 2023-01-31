@@ -4,7 +4,7 @@ import Table from "Components/Molecule/Table/Table";
 import { EContentType } from "Types/Enum/content.enum";
 import Section from "Components/Molecule/Section/Section";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetContentBySlugQuery } from "Store/slices/content";
+import { useGetContentBySlugQuery } from "Store/slices/backend";
 import { ITable } from "Types/Interfaces";
 import TextBlock from "Components/Atom/TextBlock/TextBlock";
 import Skeleton from "@mui/material/Skeleton";

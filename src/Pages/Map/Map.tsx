@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { useGetMapBySlugQuery } from "Store/slices/map";
+import { useGetMapBySlugQuery } from "Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
 

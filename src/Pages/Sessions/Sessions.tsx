@@ -1,12 +1,21 @@
 import Typography from "@mui/material/Typography";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Session from "Components/Molecule/Session/Session";
-import { useGetSessionQuery } from "Store/slices/sessions";
+import { useGetSessionQuery } from "Store/slices/backend";
 import theme from "theme";
 import { ESessionType } from "Types/Enum/sessions.enum";
 import { TSession } from "Types/Types/session.type";
 
 export default function Sessions() {
   const { data, error, isLoading } = useGetSessionQuery(undefined);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
 
   const sessions =
     data && !error && !isLoading ? (
