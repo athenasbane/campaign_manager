@@ -10,25 +10,28 @@ import styles from "./Welcome.module.css";
 
 export default function Welcome() {
   const [title, setTitle] = useState("Tordenhelm");
+  const [activeEffects, setActiveEffects] = useState(false);
   useEffect(() => {
-    let time = Math.random() * 100000;
+    const isANatOne = Math.random() * 100 < 5;
+    setActiveEffects(isANatOne);
+    let time = Math.random() * 50000;
     const interval = setInterval(() => {
       time = Math.random() * 100000;
       setTitle((prev) =>
-        prev !== "Tordenhelm" ? "Tordenhelm" : "Lamuien's House"
+        prev !== "Tordenhelm" ? "Tordenhelm" : "Lamuin's House"
       );
     }, time);
 
     return () => clearInterval(interval);
-  }, [setTitle]);
+  }, [setTitle, setActiveEffects]);
 
   return (
     <>
-      <div className={styles.drop}></div>
+      <div className={activeEffects ? styles.drop : undefined}></div>
       <Grid item container direction="column">
         <Grid item>
           <Typography variant="h4" align="center">
-            Welcome To {title}
+            Welcome To {activeEffects ? "Lamuien's House" : "Tordenhelm"}
           </Typography>
         </Grid>
         <Grid item container direction="row">
@@ -59,7 +62,7 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    {title === "Tordenhelm" ? (
+                    {!activeEffects && title === "Tordenhelm" ? (
                       "Next Session"
                     ) : (
                       <>
@@ -72,7 +75,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    Thurs 2nd February@18:00
+                    Mon 6th February@18:00
                   </Typography>
                 </Grid>
               </Grid>

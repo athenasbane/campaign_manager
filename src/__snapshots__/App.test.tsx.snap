@@ -60,6 +60,7 @@ exports[`renders learn react link 1`] = `
         <div
           class="MuiGrid-root MuiGrid-item css-1m9fzyn-MuiGrid-root"
         >
+          <div />
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column css-80wlp8-MuiGrid-root"
           >
@@ -69,7 +70,8 @@ exports[`renders learn react link 1`] = `
               <h4
                 class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-1hdnf2j-MuiTypography-root"
               >
-                Welcome To Tordenhelm
+                Welcome To 
+                Tordenhelm
               </h4>
             </div>
             <div
@@ -121,7 +123,7 @@ exports[`renders learn react link 1`] = `
                       <h4
                         class="MuiTypography-root MuiTypography-h4 css-1hdnf2j-MuiTypography-root"
                       >
-                        Thurs 2nd February@18:00
+                        Mon 6th February@18:00
                       </h4>
                     </div>
                   </div>
