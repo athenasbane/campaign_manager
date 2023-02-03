@@ -5,17 +5,35 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
 import theme from "theme";
+import { useEffect, useState } from "react";
+import styles from "./Welcome.module.css";
 
 export default function Welcome() {
+  const [title, setTitle] = useState("Tordenhelm");
+  const [activeEffects, setActiveEffects] = useState(false);
+  useEffect(() => {
+    const isANatOne = Math.random() * 100 < 5;
+    setActiveEffects(isANatOne);
+    let time = Math.random() * 50000;
+    const interval = setInterval(() => {
+      time = Math.random() * 100000;
+      setTitle((prev) =>
+        prev !== "Tordenhelm" ? "Tordenhelm" : "Lamuin's House"
+      );
+    }, time);
+
+    return () => clearInterval(interval);
+  }, [setTitle, setActiveEffects]);
+
   return (
     <>
+      <div className={activeEffects ? styles.drop : undefined}></div>
       <Grid item container direction="column">
         <Grid item>
           <Typography variant="h4" align="center">
-            Welcome To Tordenhelm
+            Welcome To {activeEffects ? "Lamuien's House" : "Tordenhelm"}
           </Typography>
         </Grid>
-
         <Grid item container direction="row">
           <Grid item xs={6} lg={6}>
             <Typography textAlign="justify">
@@ -44,12 +62,20 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    Next Session
+                    {!activeEffects && title === "Tordenhelm" ? (
+                      "Next Session"
+                    ) : (
+                      <>
+                        <span className={styles.animatedText}>Haha</span>
+                        <span className={styles.animatedText}>Haha</span>
+                        <span className={styles.animatedText}>Haha</span>
+                      </>
+                    )}
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    Thurs 2nd February@18:00
+                    Mon 6th February@18:00
                   </Typography>
                 </Grid>
               </Grid>
