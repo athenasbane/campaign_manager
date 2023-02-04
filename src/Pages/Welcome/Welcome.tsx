@@ -12,7 +12,7 @@ export default function Welcome() {
   const [title, setTitle] = useState("Tordenhelm");
   const [activeEffects, setActiveEffects] = useState(false);
   useEffect(() => {
-    const isANatOne = Math.random() * 100 < 5;
+    const isANatOne = Math.random() * 100 < 10;
     setActiveEffects(isANatOne);
     let time = Math.random() * 50000;
     const interval = setInterval(() => {
