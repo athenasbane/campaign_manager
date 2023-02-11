@@ -12,7 +12,7 @@ export default function Welcome() {
   const [title, setTitle] = useState("Tordenhelm");
   const [activeEffects, setActiveEffects] = useState(false);
   useEffect(() => {
-    const isANatOne = Math.random() * 100 < 10;
+    const isANatOne = Math.random() * 100 < 20;
     setActiveEffects(isANatOne);
     let time = Math.random() * 50000;
     const interval = setInterval(() => {
@@ -75,7 +75,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    Mon 6th February@18:00
+                    TODAY!
                   </Typography>
                 </Grid>
               </Grid>
