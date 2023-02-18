@@ -2,7 +2,9 @@
 
 exports[`Page - Welcome should match snapshot 1`] = `
 <div>
-  <div />
+  <div
+    class="drop"
+  />
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column css-80wlp8-MuiGrid-root"
   >
@@ -13,7 +15,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
         class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-149xwtl-MuiTypography-root"
       >
         Welcome To 
-        Tordenhelm
+        Lamuien's House
       </h4>
     </div>
     <div
@@ -56,7 +58,21 @@ exports[`Page - Welcome should match snapshot 1`] = `
               <h2
                 class="MuiTypography-root MuiTypography-h2 css-icizyq-MuiTypography-root"
               >
-                Next Session
+                <span
+                  class="animatedText"
+                >
+                  Haha
+                </span>
+                <span
+                  class="animatedText"
+                >
+                  Haha
+                </span>
+                <span
+                  class="animatedText"
+                >
+                  Haha
+                </span>
               </h2>
             </div>
             <div
@@ -71,24 +87,6 @@ exports[`Page - Welcome should match snapshot 1`] = `
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      This site is a work in progress so any suggestions you have for things you would like to see would be greatly appreciated. Here's the work I have planned:
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      <ul
-        class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
-      >
-        <li
-          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
-        >
-          - History Time line known to all player characters
-        </li>
-      </ul>
     </div>
   </div>
 </div>

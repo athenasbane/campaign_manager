@@ -1,19 +1,17 @@
-import ListItem from "@mui/material/ListItem";
-import MuiList from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
 import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
 import theme from "theme";
-import { useEffect, useState } from "react";
+
 import styles from "./Welcome.module.css";
 
 export default function Welcome() {
   const [title, setTitle] = useState("Tordenhelm");
   const [activeEffects, setActiveEffects] = useState(false);
   useEffect(() => {
-    const isANatOne = Math.random() * 100 < 20;
-    setActiveEffects(isANatOne);
+    setActiveEffects(true);
     let time = Math.random() * 50000;
     const interval = setInterval(() => {
       time = Math.random() * 100000;
@@ -81,18 +79,6 @@ export default function Welcome() {
               </Grid>
             </Paper>
           </Grid>
-        </Grid>
-        <Grid item>
-          This site is a work in progress so any suggestions you have for things
-          you would like to see would be greatly appreciated. Here's the work I
-          have planned:
-        </Grid>
-        <Grid item>
-          <MuiList>
-            <ListItem>
-              - History Time line known to all player characters
-            </ListItem>
-          </MuiList>
         </Grid>
       </Grid>
     </>
