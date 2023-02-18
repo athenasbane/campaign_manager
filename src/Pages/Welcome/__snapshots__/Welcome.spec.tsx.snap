@@ -65,7 +65,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
               <h4
                 class="MuiTypography-root MuiTypography-h4 css-149xwtl-MuiTypography-root"
               >
-                TODAY!
+                18:00 on Monday 20th February
               </h4>
             </div>
           </div>
