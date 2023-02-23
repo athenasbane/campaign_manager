@@ -1,35 +1,16 @@
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { useEffect, useState } from "react";
 import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
 import theme from "theme";
 
-import styles from "./Welcome.module.css";
-
 export default function Welcome() {
-  const [title, setTitle] = useState("Tordenhelm");
-  const [activeEffects, setActiveEffects] = useState(false);
-  useEffect(() => {
-    setActiveEffects(true);
-    let time = Math.random() * 50000;
-    const interval = setInterval(() => {
-      time = Math.random() * 100000;
-      setTitle((prev) =>
-        prev !== "Tordenhelm" ? "Tordenhelm" : "Lamuin's House"
-      );
-    }, time);
-
-    return () => clearInterval(interval);
-  }, [setTitle, setActiveEffects]);
-
   return (
     <>
-      <div className={activeEffects ? styles.drop : undefined}></div>
       <Grid item container direction="column">
         <Grid item>
           <Typography variant="h4" align="center">
-            Welcome To {activeEffects ? "Lamuien's House" : "Tordenhelm"}
+            Welcome To Tordenhelm
           </Typography>
         </Grid>
         <Grid item container direction="row">
@@ -60,20 +41,12 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    {!activeEffects && title === "Tordenhelm" ? (
-                      "Next Session"
-                    ) : (
-                      <>
-                        <span className={styles.animatedText}>Haha</span>
-                        <span className={styles.animatedText}>Haha</span>
-                        <span className={styles.animatedText}>Haha</span>
-                      </>
-                    )}
+                    Next Session
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    18:00 on Monday 20th February
+                    18:00 on Monday 27th February
                   </Typography>
                 </Grid>
               </Grid>

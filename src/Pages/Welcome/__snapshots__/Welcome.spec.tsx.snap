@@ -3,9 +3,6 @@
 exports[`Page - Welcome should match snapshot 1`] = `
 <div>
   <div
-    class="drop"
-  />
-  <div
     class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column css-80wlp8-MuiGrid-root"
   >
     <div
@@ -14,8 +11,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
       <h4
         class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-149xwtl-MuiTypography-root"
       >
-        Welcome To 
-        Lamuien's House
+        Welcome To Tordenhelm
       </h4>
     </div>
     <div
@@ -58,21 +54,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
               <h2
                 class="MuiTypography-root MuiTypography-h2 css-icizyq-MuiTypography-root"
               >
-                <span
-                  class="animatedText"
-                >
-                  Haha
-                </span>
-                <span
-                  class="animatedText"
-                >
-                  Haha
-                </span>
-                <span
-                  class="animatedText"
-                >
-                  Haha
-                </span>
+                Next Session
               </h2>
             </div>
             <div
@@ -81,7 +63,7 @@ exports[`Page - Welcome should match snapshot 1`] = `
               <h4
                 class="MuiTypography-root MuiTypography-h4 css-149xwtl-MuiTypography-root"
               >
-                18:00 on Monday 20th February
+                18:00 on Monday 27th February
               </h4>
             </div>
           </div>
