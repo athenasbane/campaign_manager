@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
 import MapIcon from "@mui/icons-material/Map";
+import ExploreIcon from "@mui/icons-material/Explore";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +35,12 @@ export default function Draw({
 
   const topListItems: IDrawListItem[] = [
     {
-      displayText: "Maps",
+      displayText: "World Map",
+      path: "/world_map",
+      icon: <ExploreIcon />,
+    },
+    {
+      displayText: "Other Maps",
       path: "/list/maps",
       icon: <MapIcon />,
     },

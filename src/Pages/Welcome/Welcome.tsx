@@ -46,7 +46,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    18:00 on Monday 27th February
+                    18:00 on Thursday 23rd March
                   </Typography>
                 </Grid>
               </Grid>

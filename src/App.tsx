@@ -12,6 +12,9 @@ import theme from "theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import Content from "Pages/Content/Content";
 import Documents from "Pages/Documents/Documents";
+import { lazy, Suspense } from "react";
+import { Skeleton } from "@mui/material";
+const WorldMap = lazy(() => import("Pages/WorldMap/WorldMap"));
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -33,15 +36,25 @@ function App() {
               dispatch(openSingleModal(EnumModalSlice.Menu)),
           }}
         >
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/map/:slug" element={<Map />} />
-            <Route path="/list/:slug" element={<List />} />
-            <Route path="/content/:slug" element={<Content />} />
-            <Route path="/sessions" element={<Sessions />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense
+            fallback={
+              <Skeleton
+                variant="rectangular"
+                sx={{ width: "100%", height: "100%" }}
+              />
+            }
+          >
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/map/:slug" element={<Map />} />
+              <Route path="/list/:slug" element={<List />} />
+              <Route path="/content/:slug" element={<Content />} />
+              <Route path="/sessions" element={<Sessions />} />
+              <Route path="/documents" element={<Documents />} />
+              <Route path="/world_map" element={<WorldMap />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </MainTemplate>
       </div>
     </ThemeProvider>
