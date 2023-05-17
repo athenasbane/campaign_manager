@@ -13,6 +13,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
+import { BookOutlined } from "@mui/icons-material";
 
 export interface IDrawProps {
   open: boolean;
@@ -56,6 +57,11 @@ export default function Draw({
       displayText: "Lore",
       path: "/list/content",
       icon: <MenuBookIcon />,
+    },
+    {
+      displayText: "Tales from Teratin",
+      path: "/list/tales",
+      icon: <BookOutlined />,
     },
     {
       displayText: "Homebrew Documents",
