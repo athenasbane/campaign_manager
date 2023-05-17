@@ -95,7 +95,7 @@ export default function Tales() {
       </>
     );
   return (
-    <Grid container item direction="column" maxWidth={"96vw"}>
+    <Grid color={"#f2eecb"} container item direction="column" maxWidth={"96vw"}>
       {body}
     </Grid>
   );
