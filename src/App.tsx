@@ -14,6 +14,7 @@ import Content from "Pages/Content/Content";
 import Documents from "Pages/Documents/Documents";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@mui/material";
+import Tales from "Pages/Tales/Tales";
 const WorldMap = lazy(() => import("Pages/WorldMap/WorldMap"));
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
               <Route path="/map/:slug" element={<Map />} />
               <Route path="/list/:slug" element={<List />} />
               <Route path="/content/:slug" element={<Content />} />
+              <Route path="/tales/:slug" element={<Tales />} />
               <Route path="/sessions" element={<Sessions />} />
               <Route path="/documents" element={<Documents />} />
               <Route path="/world_map" element={<WorldMap />} />
