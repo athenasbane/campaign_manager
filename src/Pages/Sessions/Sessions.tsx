@@ -19,14 +19,16 @@ export default function Sessions() {
 
   const sessions =
     data && !error && !isLoading ? (
-      data.map((session: TSession) => {
+      data.map((session: TSession, i) => {
         switch (session.type) {
           case ESessionType.Session:
-            return <Session key={session.shortDescription} session={session} />;
+            return (
+              <Session key={session.shortDescription + i} session={session} />
+            );
           case ESessionType.StoryIncrement:
             return (
               <Typography
-                key={session.displayText}
+                key={session.displayText + i}
                 align={session.increment === "act" ? "center" : "left"}
                 variant={session.increment === "act" ? "h3" : "h4"}
                 color={theme.palette.secondary.light}
@@ -38,7 +40,11 @@ export default function Sessions() {
 
           case ESessionType.Location:
             return (
-              <Typography key={session.displayText} sx={{ mt: 2 }} variant="h5">
+              <Typography
+                key={session.displayText + i}
+                sx={{ mt: 2 }}
+                variant="h5"
+              >
                 {session.displayText}
               </Typography>
             );

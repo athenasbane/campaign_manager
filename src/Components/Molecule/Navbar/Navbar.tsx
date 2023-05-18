@@ -23,15 +23,15 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <Grid container direction="row" justifyContent="space-evenly">
-        <Grid item xs={2}>
+      <Grid container direction="row">
+        <Grid item xs={3} textAlign="center">
           {location.pathname !== "/" ? (
             <Button onClick={() => navigate(-1)}>
               <ArrowBackIosIcon color="info" />
             </Button>
           ) : null}
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <Link
             style={{
               textDecoration: "none",
@@ -39,10 +39,12 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             }}
             to="/"
           >
-            <Typography variant="h3">Tordenhelm</Typography>
+            <Typography variant="h4" textAlign="center">
+              Tordenhelm
+            </Typography>
           </Link>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} textAlign="center">
           <Button
             data-testid="menu__button"
             variant="contained"
