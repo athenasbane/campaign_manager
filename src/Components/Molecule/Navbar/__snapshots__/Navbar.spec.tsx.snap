@@ -6,27 +6,27 @@ exports[`Molecule - Navbar should match the snapshot 1`] = `
     class="MuiBox-root css-1i9rmbe"
   >
     <div
-      class="MuiGrid-root MuiGrid-container css-hwacae-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2 css-1o7apob-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-kgdgla-MuiGrid-root"
       />
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7 css-uqwprf-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
       >
         <a
           href="/"
           style="text-decoration: none; color: white;"
         >
-          <h3
-            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+          <h4
+            class="MuiTypography-root MuiTypography-h4 css-149xwtl-MuiTypography-root"
           >
             Tordenhelm
-          </h3>
+          </h4>
         </a>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-1equabv-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-kgdgla-MuiGrid-root"
       >
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
