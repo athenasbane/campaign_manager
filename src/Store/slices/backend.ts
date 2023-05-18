@@ -20,6 +20,9 @@ export const backendApi = createApi({
     getSession: builder.query<TSession[], undefined>({
       query: () => `sessions`,
     }),
+    getNextSession: builder.query<string | null, undefined>({
+      query: () => "nextsession",
+    }),
   }),
 });
 
@@ -28,4 +31,5 @@ export const {
   useGetListBySlugQuery,
   useGetMapBySlugQuery,
   useGetSessionQuery,
+  useGetNextSessionQuery,
 } = backendApi;

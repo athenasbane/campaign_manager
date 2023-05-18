@@ -3,8 +3,15 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
 import theme from "theme";
+import { useGetNextSessionQuery } from "Store/slices/backend";
 
 export default function Welcome() {
+  const nextSession = useGetNextSessionQuery(undefined);
+  const nextThur = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + ((4 + 7 - d.getDay()) % 7));
+    return d;
+  };
   return (
     <>
       <Grid item container direction="column">
@@ -46,7 +53,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    18:00 on Thursday 23rd March
+                    {nextSession?.data?.toString() ?? nextThur().toDateString()}
                   </Typography>
                 </Grid>
               </Grid>
