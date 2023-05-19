@@ -6,6 +6,7 @@ import { useGetSessionQuery } from "Store/slices/backend";
 import theme from "theme";
 import { ESessionType } from "Types/Enum/sessions.enum";
 import { TSession } from "Types/Types/session.type";
+import { Grid } from "@mui/material";
 
 export default function Sessions() {
   const { data, error, isLoading } = useGetSessionQuery(undefined);
@@ -58,11 +59,11 @@ export default function Sessions() {
     );
 
   return (
-    <>
+    <Grid item container direction="column" justifyContent="center">
       <Typography align="center" variant="h3">
         Session Recap
       </Typography>
       {sessions}
-    </>
+    </Grid>
   );
 }

@@ -13,7 +13,7 @@ export interface ISessionProps {
 
 export default function Session({ session }: ISessionProps) {
   return (
-    <Accordion sx={{ width: "96vw" }}>
+    <Accordion sx={{ maxWidth: "96vw" }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
