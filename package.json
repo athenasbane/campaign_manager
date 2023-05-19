@@ -20,17 +20,18 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "express": "^4.18.2",
+    "heroku-ssl-redirect": "0.1.1",
     "markdown-to-jsx": "^7.1.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.4",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
     "remark-gfm": "^3.0.1",
     "typescript": "^4.9.4",
-    "web-vitals": "^2.1.4",
-    "heroku-ssl-redirect": "0.1.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-hash-link": "^2.4.6"
   }
 }

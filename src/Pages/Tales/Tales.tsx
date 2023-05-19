@@ -5,7 +5,8 @@ import { EContentType } from "Types/Enum/content.enum";
 import Section from "Components/Molecule/Section/Section";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetContentBySlugQuery } from "Store/slices/backend";
-import { ITable } from "Types/Interfaces";
+import { ITable, ITitle } from "Types/Interfaces";
+import { HashLink } from "react-router-hash-link";
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
 
@@ -32,7 +33,11 @@ export default function Tales() {
             );
           case EContentType.Title:
             return (
-              <Grid item key={element.contentType + index}>
+              <Grid
+                id={element.displayText}
+                item
+                key={element.contentType + index}
+              >
                 <Typography
                   align={element.align || "left"}
                   variant={element.variant || "h4"}
@@ -94,8 +99,59 @@ export default function Tales() {
         <Skeleton variant="text" />
       </>
     );
+
+  const tableOfContents =
+    data && !isLoading ? (
+      data
+        .filter((content) => content.contentType === EContentType.Title)
+        .map((title) => (
+          <Grid item key={(title as ITitle).displayText}>
+            <HashLink
+              style={{ textDecoration: "none" }}
+              smooth
+              to={`#${(title as ITitle).displayText}`}
+            >
+              <Typography
+                color="white"
+                sx={{ maxWidth: "96vw", textDecoration: "none" }}
+                textAlign="justify"
+              >
+                {(title as ITitle).displayText}
+              </Typography>
+            </HashLink>
+          </Grid>
+        ))
+    ) : (
+      <>
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="rectangular" height={100} />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+      </>
+    );
+
   return (
     <Grid color={"#f2eecb"} container item direction="column" maxWidth={"96vw"}>
+      <Grid item>
+        <Typography
+          color="white"
+          sx={{ maxWidth: "96vw", textDecoration: "none" }}
+          textAlign="center"
+          variant="h4"
+        >
+          Table of Contents:
+        </Typography>
+      </Grid>
+      <Grid sx={{ marginBottom: 10 }} item container direction="column">
+        {tableOfContents}
+      </Grid>
       {body}
     </Grid>
   );
