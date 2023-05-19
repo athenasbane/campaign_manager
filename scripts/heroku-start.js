@@ -1,8 +1,10 @@
 // Create new file scripts/heroku-start.js
 const express = require("express");
 const path = require("path");
+const sslRedirect = require("heroku-ssl-redirect").default;
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(sslRedirect());
 app.use(express.json());
 // Your static pre-build assets folder
 app.use(express.static(path.join(__dirname, "..", "build")));
