@@ -40,7 +40,7 @@ export default function Documents() {
               target="_blank"
             >
               <Typography variant="h3">
-                Augmentine Class Guide (V0.1)
+                Augmentine Class Guide (V0.5)
               </Typography>
             </a>
           </ListItem>
