@@ -53,7 +53,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    {nextSession?.data?.toString() ?? nextThur().toDateString()}
+                    {nextSession?.toString() ?? nextThur().toDateString()}
                   </Typography>
                 </Grid>
               </Grid>
