@@ -25,13 +25,23 @@ import {
   minusA6,
   B6,
   C6,
+  minusA7,
+  A7,
+  B7,
+  C7,
+  minusA8,
+  A8,
+  B8,
+  minusA9,
+  A9,
+  B9,
 } from "../../Constants/images/index";
 
 export default function WorldMap() {
   return (
     <>
       <Grid container direction="row" columnSpacing={0}>
-        <Grid container item direction="column" spacing={0} xs={2}>
+        <Grid container item direction="column" spacing={0} xs={1}>
           <Grid item>
             <img
               style={{
@@ -85,7 +95,7 @@ export default function WorldMap() {
             />
           </Grid>
         </Grid>
-        <Grid container item direction="column" xs={2}>
+        <Grid container item direction="column" xs={1}>
           <Grid item>
             <img
               style={{
@@ -139,7 +149,7 @@ export default function WorldMap() {
             />
           </Grid>
         </Grid>
-        <Grid container item direction="column" xs={2}>
+        <Grid container item direction="column" xs={1}>
           <Grid item>
             <img
               style={{
@@ -193,7 +203,7 @@ export default function WorldMap() {
             />
           </Grid>
         </Grid>
-        <Grid container item direction="column" xs={2}>
+        <Grid container item direction="column" xs={1}>
           <Grid item>
             <img
               style={{
@@ -247,7 +257,7 @@ export default function WorldMap() {
             />
           </Grid>
         </Grid>
-        <Grid container item direction="column" spacing={0} xs={2}>
+        <Grid container item direction="column" spacing={0} xs={1}>
           <Grid item>
             <img
               style={{
@@ -301,7 +311,7 @@ export default function WorldMap() {
             />
           </Grid>
         </Grid>
-        <Grid container item direction="column" spacing={0} xs={2}>
+        <Grid container item direction="column" spacing={0} xs={1}>
           <Grid item>
             <img
               style={{
@@ -351,6 +361,168 @@ export default function WorldMap() {
               }}
               alt="C4"
               src={C6}
+              loading="lazy"
+            />
+          </Grid>
+        </Grid>
+        <Grid container item direction="column" spacing={0} xs={1}>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={minusA7}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={A7}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={B7}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={C7}
+              loading="lazy"
+            />
+          </Grid>
+        </Grid>
+        <Grid container item direction="column" spacing={0} xs={1}>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={minusA8}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={A8}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={B8}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={C7}
+              loading="lazy"
+            />
+          </Grid>
+        </Grid>
+        <Grid container item direction="column" spacing={0} xs={1}>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={minusA9}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={A9}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={B9}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                overflow: "hidden",
+              }}
+              alt="C4"
+              src={C7}
               loading="lazy"
             />
           </Grid>
