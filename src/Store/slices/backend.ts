@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IListType } from "Constants/lists";
+import { IListType } from "Types/Interfaces/list.interface";
 import { IMap } from "Types/Interfaces";
 import { TContent } from "Types/Types/content.type";
 import { TSession } from "Types/Types/session.type";
