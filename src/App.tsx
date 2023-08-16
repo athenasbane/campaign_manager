@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import History from "Pages/History/History";
 import Welcome from "Pages/Welcome/Welcome";
 import Map from "Pages/Map/Map";
 import MainTemplate from "Templates/Main";
@@ -54,6 +55,7 @@ function App() {
               <Route path="/sessions" element={<Sessions />} />
               <Route path="/documents" element={<Documents />} />
               <Route path="/world_map" element={<WorldMap />} />
+              <Route path="/history" element={<History />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -10,6 +10,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
 import MapIcon from "@mui/icons-material/Map";
 import ExploreIcon from "@mui/icons-material/Explore";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
@@ -62,6 +63,11 @@ export default function Draw({
       displayText: "Tales from Teratin",
       path: "/list/tales",
       icon: <BookOutlined />,
+    },
+    {
+      displayText: "History",
+      path: "/history",
+      icon: <HistoryEduIcon />,
     },
     {
       displayText: "Homebrew Documents",
