@@ -1,6 +1,6 @@
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "../../Components/Organism/TimelineItem/TimelineItem";
-import Item from "@mui/lab/TimelineItem";
+import Item, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import { timeline } from "Constants/timeline";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
@@ -11,13 +11,17 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function History() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
   const items = timeline.map((item, index) => (
     <TimelineItem
       key={item.title}
       {...item}
-      order={index % 2 === 0 ? "row" : "row-reverse"}
+      order={isSmall ? "row" : index % 2 === 0 ? "row" : "row-reverse"}
     />
   ));
   return (
@@ -25,7 +29,19 @@ export default function History() {
       <Typography variant="h1" textAlign="center">
         History
       </Typography>
-      <Timeline position="alternate">
+      <Timeline
+        sx={
+          isSmall
+            ? {
+                [`& .${timelineItemClasses.root}:before`]: {
+                  flex: 0,
+                  padding: 0,
+                },
+              }
+            : null
+        }
+        position={isSmall ? "right" : "alternate"}
+      >
         {items}
         <Item>
           <TimelineSeparator>
