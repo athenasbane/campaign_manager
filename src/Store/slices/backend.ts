@@ -20,7 +20,7 @@ export const backendApi = createApi({
     getSession: builder.query<TSession[], undefined>({
       query: () => `sessions`,
     }),
-    getNextSession: builder.query<string | null, undefined>({
+    getNextSession: builder.query<{ date: string } | null, undefined>({
       query: () => "nextsession",
     }),
   }),
