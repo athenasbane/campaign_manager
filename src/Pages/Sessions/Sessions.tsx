@@ -2,14 +2,14 @@ import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Session from "Components/Molecule/Session/Session";
-import { useGetSessionQuery } from "Store/slices/backend";
+import { useGetSessionsDataQuery } from "Store/slices/backend";
 import theme from "theme";
 import { ESessionType } from "Types/Enum/sessions.enum";
 import { TSession } from "Types/Types/session.type";
 import { Grid } from "@mui/material";
 
 export default function Sessions() {
-  const { data, error, isLoading } = useGetSessionQuery(undefined);
+  const { data, error, isLoading } = useGetSessionsDataQuery(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,9 +19,9 @@ export default function Sessions() {
   }, [error, navigate]);
 
   const sessions =
-    data && !error && !isLoading ? (
-      data.map((session: TSession, i) => {
-        switch (session.type) {
+    !isLoading && data?.length && !error ? (
+      data.map((session: TSession, i: number) => {
+        switch (session.__typename) {
           case ESessionType.Session:
             return (
               <Session key={session.shortDescription + i} session={session} />

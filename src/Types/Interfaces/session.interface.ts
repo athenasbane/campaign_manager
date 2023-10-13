@@ -1,21 +1,22 @@
 import { ESessionType } from "Types/Enum/sessions.enum";
 
 export interface ISession {
-  type: ESessionType.Session;
-  sessionNo: number;
+  __typename: ESessionType.Session;
+  sessionNumber: number;
   location: string;
-  inGameEndTime: string;
   shortDescription: string;
-  longDescription: string;
+  longDescription: {
+    json: string;
+  };
 }
 
 export interface ISessionLocation {
-  type: ESessionType.Location;
+  __typename: ESessionType.Location;
   displayText: string;
 }
 
 export interface ISessionStoryIncrement {
-  type: ESessionType.StoryIncrement;
+  __typename: ESessionType.StoryIncrement;
   increment: "chapter" | "act";
   displayText: string;
 }

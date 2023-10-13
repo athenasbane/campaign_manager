@@ -1,5 +1,5 @@
 export enum ESessionType {
-  Session = "session",
-  Location = "location",
-  StoryIncrement = "story_increment",
+  Session = "Session",
+  Location = "SessionLocation",
+  StoryIncrement = "SessionStoryIncrement",
 }

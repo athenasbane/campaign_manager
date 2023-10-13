@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./slices/modals";
-import { backendApi } from "./slices/backend";
+import { backendApi, contentfulApi } from "./slices/backend";
 
 const store = configureStore({
   reducer: {
     modals: modalReducer,
     [backendApi.reducerPath]: backendApi.reducer,
+    [contentfulApi.reducerPath]: contentfulApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(backendApi.middleware),
+    getDefaultMiddleware().concat(
+      backendApi.middleware,
+      contentfulApi.middleware
+    ),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
