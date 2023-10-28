@@ -2,47 +2,45 @@ import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetListBySlugQuery } from "Store/slices/backend";
+import { useGetListPageQuery } from "Store/slices/backend";
 import Link from "Components/Atom/Link/Link";
 import { useEffect } from "react";
+import { EPage } from "Types/Enum/page.enum";
 
 export default function List() {
   const { slug } = useParams();
-  const { data, error, isLoading } = useGetListBySlugQuery(slug as string);
+  const { data, error, isLoading } = useGetListPageQuery(slug as string);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (error) {
+    if (error || (!isLoading && !data)) {
       navigate("/404");
     }
-  }, [error, navigate]);
+  }, [error, data, isLoading, navigate]);
+
+  const linkObj = {
+    [EPage.List]: "/list/",
+    [EPage.Lore]: "/content/",
+    [EPage.Map]: "/map/",
+  };
 
   const body =
     data && !isLoading ? (
-      <MuiList key={data.param}>
+      <MuiList key={slug}>
         <ListItem>
-          {data.parentDisplayLabel ? (
-            <Typography align="center" variant="h2">
-              {data.parentDisplayLabel}
-            </Typography>
-          ) : null}
-        </ListItem>
-        <ListItem>
-          <Typography align="center" variant="h3">
-            {data.displayText}
+          <Typography align="center" variant="h2">
+            {data.pageTitle}
           </Typography>
         </ListItem>
-        {data.links.map((link) => {
-          return (
-            <ListItem key={link.value}>
-              <Link
-                typographyVariant="h5"
-                linkDisplayLabel={link.displayText}
-                path={link.path}
-              />
-            </ListItem>
-          );
-        })}
+        {data.linksCollection.items.map((link: any) => (
+          <ListItem key={link.sys.id}>
+            <Link
+              typographyVariant="h5"
+              linkDisplayLabel={link.pageTitle}
+              path={linkObj[link["__typename"] as EPage] + link.sys.id}
+            />
+          </ListItem>
+        ))}
       </MuiList>
     ) : (
       <></>

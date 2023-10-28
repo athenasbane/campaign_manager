@@ -4,6 +4,7 @@ import { IMap } from "Types/Interfaces";
 import { TContent } from "Types/Types/content.type";
 import { TSession } from "Types/Types/session.type";
 import { request, gql, ClientError } from "graphql-request";
+import { IDocumentPageFields, IMapPageFields } from "Types/contentful-code-gen";
 
 const graphqlBaseQuery =
   ({
@@ -90,6 +91,177 @@ export const contentfulApi = createApi({
       transformResponse: (response: any) =>
         response.sessionsPage.dataCollection.items.reverse(),
     }),
+    getContentPage: builder.query({
+      query: (id) => ({
+        body: gql`
+          {
+            lorePage(id: "${id}") {
+              pageTitle
+              pageContentCollection(limit: 1) {
+                ... on LorePagePageContentCollection {
+                  items {
+                ... on Content {
+                  sys {
+                    id
+                  }
+                  content {
+                    json
+                    links {
+                      entries {
+                        block {
+                          sys {
+                        id
+                      }
+                        }
+                        inline {
+                          sys {
+                            id
+                          }
+                        }
+                      }
+                      assets {
+                        block {
+                          sys {
+                            id
+                          }
+                          url
+                          title
+                          width
+                          height
+                          description
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      `,
+      }),
+      transformResponse: (response: any) => response.lorePage,
+    }),
+    getListPage: builder.query({
+      query: (id) => ({
+        body: gql`
+        {
+  listPage(id: "${id}") {
+    pageTitle
+    linksCollection {
+      items {
+        ... on LorePage{
+         __typename
+          pageTitle
+        sys {
+          id
+        }
+        }
+        ... on ListPage {
+            __typename
+          pageTitle
+          sys {
+            id
+          }
+          
+        }
+        ... on MapPage {
+          __typename
+          pageTitle
+          sys {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+        `,
+      }),
+      transformResponse: (response: any) => response?.listPage,
+    }),
+    getMapPage: builder.query({
+      query: (id) => ({
+        body: gql`
+         {
+          mapPage(id: "${id}") {
+            pageTitle
+            map {
+              title
+              url
+            }
+          }
+         }
+        `,
+      }),
+      transformResponse: (response: { mapPage: IMapPageFields }) =>
+        response?.mapPage,
+    }),
+    getDocumentPage: builder.query({
+      query: (id) => ({
+        body: gql`
+         {
+          documentPage(id: "${id}") {
+    pageTitle
+    documentsCollection {
+      items {
+        ... on Document {
+          title
+          document {
+            url
+          }
+        }
+      }
+    }
+  }
+         }
+        `,
+      }),
+      transformResponse: (response: { documentPage: IDocumentPageFields }) =>
+        response?.documentPage,
+    }),
+    getFrontPage: builder.query({
+      query: () => ({
+        body: gql`
+          {
+            frontPage(id: "Au0GrSfWTpKE23kMWkYsf") {
+              pageTitle
+              introduction {
+                json
+                links {
+                  entries {
+                    block {
+                      sys {
+                        id
+                      }
+                    }
+                    inline {
+                      sys {
+                        id
+                      }
+                    }
+                  }
+                  assets {
+                    block {
+                      sys {
+                        id
+                      }
+                      url
+                      title
+                      width
+                      height
+                      description
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `,
+      }),
+      transformResponse: (response: { frontPage: any }) => response?.frontPage,
+    }),
   }),
 });
 
@@ -101,4 +273,11 @@ export const {
   useGetNextSessionQuery,
 } = backendApi;
 
-export const { useGetSessionsDataQuery } = contentfulApi;
+export const {
+  useGetSessionsDataQuery,
+  useGetContentPageQuery,
+  useGetListPageQuery,
+  useGetMapPageQuery,
+  useGetDocumentPageQuery,
+  useGetFrontPageQuery,
+} = contentfulApi;

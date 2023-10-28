@@ -2,12 +2,28 @@ import Typography from "@mui/material/Typography";
 import MuiList from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
+import { useGetDocumentPageQuery } from "Store/slices/backend";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Documents() {
-  return (
+  const { data, error, isLoading, isSuccess } = useGetDocumentPageQuery(
+    "65YbxCftv5moFtLY7YnpJd"
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(data, error);
+    if (error || (!isLoading && !data)) {
+      navigate("/404");
+    }
+  }, [error, data, isLoading, navigate]);
+
+  const body = isSuccess ? (
     <Grid container direction="column">
       <Grid item>
-        <Typography variant="h3">Documents</Typography>
+        <Typography variant="h3">{data.pageTitle}</Typography>
       </Grid>
       <Grid item>
         <Typography>
@@ -16,36 +32,23 @@ export default function Documents() {
       </Grid>
       <Grid item>
         <MuiList>
-          <ListItem>
-            <a
-              style={{ textDecoration: "none", color: "white" }}
-              href={
-                process.env.REACT_APP_BACKEND_URL + "public/better_crafting"
-              }
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Typography variant="h3">
-                Better Crafting Document (V1)
-              </Typography>
-            </a>
-          </ListItem>
-          <ListItem>
-            <a
-              style={{ textDecoration: "none", color: "white" }}
-              href={
-                process.env.REACT_APP_BACKEND_URL + "public/augmentine_class"
-              }
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Typography variant="h3">
-                Augmentine Class Guide (V0.5)
-              </Typography>
-            </a>
-          </ListItem>
+          {data.documentsCollection.items.map((document) => (
+            <ListItem>
+              <a
+                style={{ textDecoration: "none", color: "white" }}
+                href={document.document.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Typography variant="h3">{document.title}</Typography>
+              </a>
+            </ListItem>
+          ))}
         </MuiList>
       </Grid>
     </Grid>
+  ) : (
+    <></>
   );
+  return <>{body}</>;
 }
