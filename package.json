@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "16.13.0",
-    "npm": "8.18.0"
+    "node": "18.18.0",
+    "npm": "9.8.1"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.18.0",
@@ -41,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!@codemirror)/'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output src/@types/generated/contentful.d.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +63,11 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-hash-link": "^2.4.6"
+    "@types/react-router-hash-link": "^2.4.6",
+    "contentful": "^10.6.4",
+    "contentful-management": "^11.3.0",
+    "contentful-typescript-codegen": "^3.4.0",
+    "dotenv": "^16.3.1",
+    "prettier": "^3.0.3"
   }
 }

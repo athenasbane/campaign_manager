@@ -43,7 +43,7 @@ export default function Draw({
     },
     {
       displayText: "Other Maps",
-      path: "/list/maps",
+      path: "/list/4bOnoLNoNujSq6sWnG6BEt",
       icon: <MapIcon />,
     },
     {
@@ -56,12 +56,12 @@ export default function Draw({
   const bottomListItems: IDrawListItem[] = [
     {
       displayText: "Lore",
-      path: "/list/content",
+      path: "/list/6FoUmw8ML88eBJ1fSHO0A8",
       icon: <MenuBookIcon />,
     },
     {
       displayText: "Tales from Teratin",
-      path: "/list/tales",
+      path: "/list/1iLinkQTnQ1Q9qqzLGW37v",
       icon: <BookOutlined />,
     },
     {
