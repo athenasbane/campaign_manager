@@ -41,27 +41,27 @@ function renderOptions(links: any) {
       },
       [BLOCKS.HEADING_1]: (node: any) => {
         return (
-          <Typography variant="h3" align="center">
+          <Typography variant="h1" align="center">
             {node.content[0].value}
           </Typography>
         );
       },
       [BLOCKS.HEADING_2]: (node: any) => {
         return (
-          <Typography variant="h4" align="center">
+          <Typography variant="h2" align="center">
             {node.content[0].value}
           </Typography>
         );
       },
       [BLOCKS.HEADING_3]: (node: any) => {
         return (
-          <Typography variant="h5" align="center">
+          <Typography variant="h3" align="center">
             {node.content[0].value}
           </Typography>
         );
       },
       [BLOCKS.HEADING_4]: (node: any) => {
-        return <Typography variant="h6">{node.content[0].value}</Typography>;
+        return <Typography variant="h4">{node.content[0].value}</Typography>;
       },
       [BLOCKS.PARAGRAPH]: (node: any) => {
         return <Typography>{node.content[0].value}</Typography>;
