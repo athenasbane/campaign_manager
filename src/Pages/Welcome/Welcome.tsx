@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
-import styles from "./Welcome.module.css";
 
 export default function Welcome() {
   const { data, error, isLoading } = useGetFrontPageQuery(undefined);
@@ -20,9 +19,13 @@ export default function Welcome() {
   }, [error, navigate, data, isLoading]);
 
   const nextThur = () => {
+    if (data.nextSession)
+      return new Date(data.nextSession).toLocaleString(undefined, {
+        dateStyle: "full",
+      });
     const d = new Date();
     d.setDate(d.getDate() + ((4 + 7 - d.getDay()) % 7));
-    return d;
+    return d.toLocaleDateString();
   };
   return (
     <Grid item container direction="column">
@@ -30,14 +33,7 @@ export default function Welcome() {
         <>
           <Grid item>
             <Typography variant="h4" align="center">
-              <span>Welcome to </span>
-              <span className={[styles.text, styles.light].join(" ")}>
-                Tordenhelm
-              </span>
-
-              <span className={[styles.text, styles.shadow].join(" ")}>
-                The Lands of Treachery
-              </span>
+              <span>Welcome to Eldoria</span>
             </Typography>
           </Grid>
           <RichContentRenderer content={data.introduction} />
@@ -52,7 +48,7 @@ export default function Welcome() {
                   </Grid>
                   <Grid item>
                     <Typography variant="h4" textAlign="center">
-                      {data.nextSession ?? nextThur().toLocaleDateString()}
+                      {nextThur()}
                     </Typography>
                   </Grid>
                 </Grid>

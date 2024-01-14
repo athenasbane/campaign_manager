@@ -1,15 +1,23 @@
 import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Session from "Components/Molecule/Session/Session";
 import { useGetSessionsDataQuery } from "Store/slices/backend";
 import theme from "theme";
 import { ESessionType } from "Types/Enum/sessions.enum";
 import { TSession } from "Types/Types/session.type";
-import { Grid } from "@mui/material";
+import { Box, Grid, Tab, Tabs } from "@mui/material";
+
+export enum Campaigns {
+  eldoria,
+  tordenhelm,
+}
 
 export default function Sessions() {
-  const { data, error, isLoading } = useGetSessionsDataQuery(undefined);
+  const [value, setValue] = useState<0 | 1>(0);
+  const { data, error, isLoading } = useGetSessionsDataQuery(
+    Campaigns[value] as keyof typeof Campaigns
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +25,10 @@ export default function Sessions() {
       navigate("/404");
     }
   }, [error, navigate]);
+
+  const handleChange = (_: React.SyntheticEvent, newValue: 0 | 1) => {
+    setValue(newValue);
+  };
 
   const sessions =
     !isLoading && data?.length && !error ? (
@@ -59,11 +71,17 @@ export default function Sessions() {
     );
 
   return (
-    <Grid item container direction="column" justifyContent="center">
+    <Box>
       <Typography align="center" variant="h3">
         Session Recap
       </Typography>
-      {sessions}
-    </Grid>
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab sx={{ width: "50%" }} label="Eldoria" />
+        <Tab sx={{ width: "50%" }} label="Tordenhelm" />
+      </Tabs>
+      <Grid item container direction="column" justifyContent="center">
+        {sessions}
+      </Grid>
+    </Box>
   );
 }

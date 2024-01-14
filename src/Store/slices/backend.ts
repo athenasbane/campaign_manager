@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { request, gql, ClientError } from "graphql-request";
+import { Campaigns } from "Pages/Sessions/Sessions";
 import { IDocumentPageFields, IMapPageFields } from "Types/contentful-code-gen";
 
 const graphqlBaseQuery =
@@ -23,6 +24,11 @@ const graphqlBaseQuery =
     }
   };
 
+const sessionsCampaign = {
+  eldoria: "5MVZ8hTfPXGlrvpjruVmnW",
+  tordenhelm: "6PM6Xg15tJKo5TYINpeS1g",
+};
+
 export const contentfulApi = createApi({
   reducerPath: "contentfulApi",
   baseQuery: graphqlBaseQuery({
@@ -34,10 +40,10 @@ export const contentfulApi = createApi({
   }),
   endpoints: (builder) => ({
     getSessionsData: builder.query({
-      query: () => ({
+      query: (campaign: keyof typeof Campaigns) => ({
         body: gql`
           query {
-            sessionsPage(id: "6PM6Xg15tJKo5TYINpeS1g") {
+            sessionsPage(id: "${sessionsCampaign[campaign]}") {
               dataCollection {
                 items {
                   ... on Session {
@@ -201,6 +207,7 @@ export const contentfulApi = createApi({
         body: gql`
           {
             frontPage(id: "Au0GrSfWTpKE23kMWkYsf") {
+              nextSession
               pageTitle
               introduction {
                 json
