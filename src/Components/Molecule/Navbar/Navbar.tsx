@@ -40,7 +40,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             to="/"
           >
             <Typography variant="h4" textAlign="center">
-              Eldoria
+              Teratin
             </Typography>
           </Link>
         </Grid>

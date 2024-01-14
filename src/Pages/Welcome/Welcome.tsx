@@ -35,31 +35,28 @@ export default function Welcome() {
             <Typography variant="h4" align="center">
               <span>Welcome to Eldoria</span>
             </Typography>
+            <Paper
+              sx={{
+                backgroundColor: theme.palette.primary.main,
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <Grid item container direction="column">
+                <Grid item>
+                  <Typography variant="h2" textAlign="center">
+                    Next Session
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h4" textAlign="center">
+                    {nextThur()}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Paper>
           </Grid>
           <RichContentRenderer content={data.introduction} />
-          <Grid item container direction="column">
-            <Grid item>
-              <Paper
-                sx={{
-                  backgroundColor: theme.palette.primary.main,
-                  marginTop: "20px",
-                }}
-              >
-                <Grid item container direction="column">
-                  <Grid item>
-                    <Typography variant="h2" textAlign="center">
-                      Next Session
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h4" textAlign="center">
-                      {nextThur()}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
         </>
       ) : (
         <>
