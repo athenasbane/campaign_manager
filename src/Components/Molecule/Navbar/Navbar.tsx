@@ -27,7 +27,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         <Grid item xs={3} textAlign="center">
           {location.pathname !== "/" ? (
             <Button onClick={() => navigate(-1)}>
-              <ArrowBackIosIcon color="info" />
+              <ArrowBackIosIcon color="secondary" />
             </Button>
           ) : null}
         </Grid>

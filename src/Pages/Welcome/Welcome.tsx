@@ -39,7 +39,12 @@ export default function Welcome() {
           <RichContentRenderer content={data.introduction} />
           <Grid item container direction="column">
             <Grid item>
-              <Paper sx={{ backgroundColor: theme.palette.secondary.main }}>
+              <Paper
+                sx={{
+                  backgroundColor: theme.palette.primary.main,
+                  marginTop: "20px",
+                }}
+              >
                 <Grid item container direction="column">
                   <Grid item>
                     <Typography variant="h2" textAlign="center">

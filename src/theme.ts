@@ -4,10 +4,10 @@ const theme: any = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#1b2f33",
+      main: "#3ca057",
     },
     secondary: {
-      main: "#28505e",
+      main: "#83f6ae",
     },
   },
   spacing: 4,
