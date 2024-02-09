@@ -9,7 +9,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
 import MapIcon from "@mui/icons-material/Map";
-import ExploreIcon from "@mui/icons-material/Explore";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
@@ -36,11 +35,6 @@ export default function Draw({
   const navigate = useNavigate();
 
   const topListItems: IDrawListItem[] = [
-    {
-      displayText: "World Map",
-      path: "/world_map",
-      icon: <ExploreIcon />,
-    },
     {
       displayText: "Other Maps",
       path: "/list/4bOnoLNoNujSq6sWnG6BEt",

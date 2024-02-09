@@ -33,7 +33,7 @@ export default function Welcome() {
         <>
           <Grid item>
             <Typography variant="h4" align="center">
-              <span>Welcome to Eldoria</span>
+              <span>{data.pageTitle}</span>
             </Typography>
             <Paper
               sx={{

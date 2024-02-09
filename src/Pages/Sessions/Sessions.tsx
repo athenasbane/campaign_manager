@@ -9,12 +9,13 @@ import { TSession } from "Types/Types/session.type";
 import { Box, Grid, Tab, Tabs } from "@mui/material";
 
 export enum Campaigns {
+  noktblast,
   eldoria,
   tordenhelm,
 }
 
 export default function Sessions() {
-  const [value, setValue] = useState<0 | 1>(0);
+  const [value, setValue] = useState<0 | 1 | 2>(0);
   const { data, error, isLoading } = useGetSessionsDataQuery(
     Campaigns[value] as keyof typeof Campaigns
   );
@@ -26,7 +27,7 @@ export default function Sessions() {
     }
   }, [error, navigate]);
 
-  const handleChange = (_: React.SyntheticEvent, newValue: 0 | 1) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: 0 | 1 | 2) => {
     setValue(newValue);
   };
 
@@ -76,8 +77,9 @@ export default function Sessions() {
         Session Recap
       </Typography>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab sx={{ width: "50%" }} label="Eldoria" />
-        <Tab sx={{ width: "50%" }} label="Tordenhelm" />
+        <Tab sx={{ width: "33%" }} label="Noktblast" />
+        <Tab sx={{ width: "33%" }} label="Eldoria" />
+        <Tab sx={{ width: "33%" }} label="Tordenhelm" />
       </Tabs>
       <Grid item container direction="column" justifyContent="center">
         {sessions}

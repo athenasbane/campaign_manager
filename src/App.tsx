@@ -13,9 +13,8 @@ import theme from "theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import Content from "Pages/Content/Content";
 import Documents from "Pages/Documents/Documents";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { Skeleton } from "@mui/material";
-const WorldMap = lazy(() => import("Pages/WorldMap/WorldMap"));
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -52,7 +51,6 @@ function App() {
               <Route path="/content/:slug" element={<Content />} />
               <Route path="/sessions" element={<Sessions />} />
               <Route path="/documents" element={<Documents />} />
-              <Route path="/world_map" element={<WorldMap />} />
               <Route path="/history" element={<History />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

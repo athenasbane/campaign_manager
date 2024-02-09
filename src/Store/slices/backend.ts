@@ -25,6 +25,7 @@ const graphqlBaseQuery =
   };
 
 const sessionsCampaign = {
+  noktblast: "56lSNM3OZNhIruz3THMzot",
   eldoria: "5MVZ8hTfPXGlrvpjruVmnW",
   tordenhelm: "6PM6Xg15tJKo5TYINpeS1g",
 };

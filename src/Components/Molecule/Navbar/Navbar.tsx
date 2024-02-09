@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Link, useLocation } from "react-router-dom";
-import theme from "theme";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +19,8 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         width: "100vw",
         pt: 8,
         pb: 4,
-        backgroundColor: theme.palette.primary.main,
+        background:
+          "linear-gradient(90deg, #ff9003 0%, rgba(0,212,255,1) 100%)",
       }}
     >
       <Grid container direction="row">
@@ -39,7 +39,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             }}
             to="/"
           >
-            <Typography variant="h4" textAlign="center">
+            <Typography variant="h3" textAlign="center">
               Teratin
             </Typography>
           </Link>
