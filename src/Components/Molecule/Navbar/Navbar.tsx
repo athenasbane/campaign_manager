@@ -51,7 +51,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             color="secondary"
             onClick={onMenuButtonClick}
           >
-            <Typography>Menu</Typography>
+            <Typography sx={{ color: "#ffff" }}>Menu</Typography>
           </Button>
         </Grid>
       </Grid>
