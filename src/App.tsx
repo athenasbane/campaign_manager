@@ -15,6 +15,7 @@ import Content from "Pages/Content/Content";
 import Documents from "Pages/Documents/Documents";
 import { Suspense } from "react";
 import { Skeleton } from "@mui/material";
+import Missions from "Pages/Missions/Missions";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -52,6 +53,7 @@ function App() {
               <Route path="/sessions" element={<Sessions />} />
               <Route path="/documents" element={<Documents />} />
               <Route path="/history" element={<History />} />
+              <Route path="/missions" element={<Missions />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -3,6 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { request, gql, ClientError } from "graphql-request";
 import { Campaigns } from "Pages/Sessions/Sessions";
 import { IDocumentPageFields, IMapPageFields } from "Types/contentful-code-gen";
+import { MissionPage } from "Types/Interfaces/missions.interface";
 
 const graphqlBaseQuery =
   ({
@@ -72,6 +73,32 @@ export const contentfulApi = createApi({
       }),
       transformResponse: (response: any) =>
         response.sessionsPage.dataCollection.items.reverse(),
+    }),
+    getMissionsPage: builder.query({
+      query: () => ({
+        body: gql`
+          {
+            missionsPage(id: "35OsBQH599pWE86UcKVHJI") {
+              title
+              missionsCollection {
+                items {
+                  sys {
+                    id
+                  }
+                  complete
+                  missionName
+                  location
+                  setter
+                  reward
+                  description
+                }
+              }
+            }
+          }
+        `,
+      }),
+      transformResponse: (response: any) =>
+        response.missionsPage as MissionPage,
     }),
     getContentPage: builder.query({
       query: (id) => ({
@@ -255,4 +282,5 @@ export const {
   useGetMapPageQuery,
   useGetDocumentPageQuery,
   useGetFrontPageQuery,
+  useGetMissionsPageQuery,
 } = contentfulApi;

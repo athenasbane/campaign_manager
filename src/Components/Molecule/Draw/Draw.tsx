@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import MapIcon from "@mui/icons-material/Map";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -45,6 +46,11 @@ export default function Draw({
       path: "/sessions",
       icon: <VisibilityIcon />,
     },
+    {
+      displayText: "Missions",
+      path: "/missions",
+      icon: <AssignmentIcon />,
+    },
   ];
 
   const bottomListItems: IDrawListItem[] = [
@@ -63,6 +69,7 @@ export default function Draw({
       path: "/history",
       icon: <HistoryEduIcon />,
     },
+
     {
       displayText: "Homebrew Documents",
       path: "/documents",
