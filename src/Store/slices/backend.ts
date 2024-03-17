@@ -196,6 +196,8 @@ export const contentfulApi = createApi({
          {
           mapPage(id: "${id}") {
             pageTitle
+            unitOfDistance
+            levelOfDetail
             map {
               title
               url

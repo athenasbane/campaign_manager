@@ -141,6 +141,10 @@ export interface IMapPageFields {
   /** Page Title */
   pageTitle: string;
 
+  unitOfDistance: string | null;
+
+  levelOfDetail: number | null;
+
   /** Map */
   map: Asset;
 }
