@@ -24,7 +24,7 @@ export default function DistanceTool({
 }: DistanceToolProps) {
   return (
     <Grid container direction="row">
-      <Grid container item direction="row" xs={9}>
+      <Grid container item direction="row" xs={6}>
         <Grid item>
           <Button
             disabled={pinOneActive}
@@ -43,8 +43,8 @@ export default function DistanceTool({
         </Grid>
       </Grid>
       {isPinOneVisable && isPinTwoVisable ? (
-        <Grid item xs={3}>
-          <Typography textAlign="end" variant="h5">
+        <Grid item xs={6} alignSelf="center">
+          <Typography textAlign="end" variant="body1">
             {`Distance: `}
             {((distance || 0) * detail).toFixed(1)}
             {unitOfDistance}

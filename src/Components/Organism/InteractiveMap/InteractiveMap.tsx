@@ -1,4 +1,4 @@
-import { Box, Collapse } from "@mui/material";
+import { Box, Collapse, Snackbar } from "@mui/material";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { distanceCalc } from "./InteractiveMapUtils";
@@ -7,6 +7,7 @@ import Line from "Components/Molecule/Line/Line";
 import MapToolBar from "Components/Molecule/MapToolBar/MapToolBar";
 import DistanceTool from "Components/Molecule/DistanceTool/DistanceTool";
 import { useAppSelector } from "hooks/store.hooks";
+import useOnScreen from "hooks/onScreen.hooks";
 
 export interface InteractiveMapProps {
   imageSrc: string;
@@ -34,6 +35,7 @@ export default function InteractiveMap({
 }: InteractiveMapProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const toolRef = useRef<HTMLDivElement | null>(null);
   const [distance, setDistance] = useState<number | undefined>(undefined);
   const [divWidth, setDivWidth] = useState<number>(300);
   const [divHeight, setDivHeight] = useState<number>(100);
@@ -48,6 +50,7 @@ export default function InteractiveMap({
   const [pinTwo, setPinTwo] = useState<IPin>({ ...initialPinState });
   const [missionPin, setMissionPin] = useState<IPin>({ ...initialPinState });
   const [pinOneActive, setPinOneActive] = useState<boolean>(true);
+  const isVisable = useOnScreen(toolRef);
 
   const handleToolChange = (_: React.SyntheticEvent, newValue: number) => {
     setActiveTool(newValue);
@@ -158,7 +161,8 @@ export default function InteractiveMap({
         handleToolBarChange={handleToolChange}
         activeTool={activeTool}
       />
-      <Collapse in={activeTool === 1}>
+
+      <Collapse ref={toolRef} in={activeTool === 1}>
         <DistanceTool
           pinOneActive={pinOneActive}
           handlePinOneActive={(newValue: boolean) => setPinOneActive(newValue)}
@@ -169,6 +173,24 @@ export default function InteractiveMap({
           unitOfDistance={unitOfDistance || " Days"}
         />
       </Collapse>
+      <Snackbar
+        open={!isVisable}
+        sx={{ backgroundColor: "rgba(0,0,0,0.5)", paddingRight: 4 }}
+      >
+        <div style={{ justifyContent: "row" }}>
+          <DistanceTool
+            pinOneActive={pinOneActive}
+            handlePinOneActive={(newValue: boolean) =>
+              setPinOneActive(newValue)
+            }
+            isPinOneVisable={pinOne.visable}
+            isPinTwoVisable={pinTwo.visable}
+            distance={distance}
+            detail={detail || 10}
+            unitOfDistance={unitOfDistance || " Days"}
+          />
+        </div>
+      </Snackbar>
       <div style={{ position: "relative" }} ref={ref} onClick={pinSet}>
         <Pin
           top={pinOne.top}
