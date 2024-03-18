@@ -37,7 +37,7 @@ export default function Draw({
 
   const topListItems: IDrawListItem[] = [
     {
-      displayText: "Other Maps",
+      displayText: "Maps",
       path: "/list/4bOnoLNoNujSq6sWnG6BEt",
       icon: <MapIcon />,
     },

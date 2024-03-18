@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
+import EmbeddedVideo from "Components/Molecule/EmbeddedVideo/EmbeddedVideo";
 
 export default function Welcome() {
   const { data, error, isLoading } = useGetFrontPageQuery(undefined);
@@ -56,6 +57,7 @@ export default function Welcome() {
               </Grid>
             </Paper>
           </Grid>
+          <EmbeddedVideo videoId="MYmcBURqxck" title="Trailer" />
           <RichContentRenderer content={data.introduction} />
         </>
       ) : (
