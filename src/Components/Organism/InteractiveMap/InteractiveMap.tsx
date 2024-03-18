@@ -6,6 +6,7 @@ import Pin from "Components/Molecule/Pin/Pin";
 import Line from "Components/Molecule/Line/Line";
 import MapToolBar from "Components/Molecule/MapToolBar/MapToolBar";
 import DistanceTool from "Components/Molecule/DistanceTool/DistanceTool";
+import { useAppSelector } from "hooks/store.hooks";
 
 export interface InteractiveMapProps {
   imageSrc: string;
@@ -36,6 +37,7 @@ export default function InteractiveMap({
   const [distance, setDistance] = useState<number | undefined>(undefined);
   const [divWidth, setDivWidth] = useState<number>(300);
   const [divHeight, setDivHeight] = useState<number>(100);
+  const [debounce, setDebounce] = useState<boolean>(true);
   const initialPinState = {
     top: 0,
     left: 0,
@@ -44,11 +46,14 @@ export default function InteractiveMap({
   const [activeTool, setActiveTool] = useState<number>(1);
   const [pinOne, setPinOne] = useState<IPin>({ ...initialPinState });
   const [pinTwo, setPinTwo] = useState<IPin>({ ...initialPinState });
+  const [missionPin, setMissionPin] = useState<IPin>({ ...initialPinState });
   const [pinOneActive, setPinOneActive] = useState<boolean>(true);
 
   const handleToolChange = (_: React.SyntheticEvent, newValue: number) => {
     setActiveTool(newValue);
   };
+
+  const activeMission = useAppSelector((state) => state.activeMission.mission);
 
   const pinSet = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -67,6 +72,56 @@ export default function InteractiveMap({
       visable: !prev.visable,
     }));
   };
+
+  const handleResize = useCallback((): void => {
+    if (imageRef.current && debounce) {
+      setDebounce(false);
+      const { height, width } = imageRef.current.getBoundingClientRect();
+
+      const resizePin = (prev: {
+        top: number;
+        left: number;
+        visable: boolean;
+      }) => {
+        const diffHeight = height / divHeight;
+        const diffWidth = width / divWidth;
+
+        const newTop = diffHeight * prev.top;
+        const newLeft = diffWidth * prev.left;
+
+        return {
+          top: newTop,
+          left: newLeft,
+          visable: prev.visable,
+        };
+      };
+
+      setPinOne(resizePin);
+      setPinTwo(resizePin);
+      setMissionPin(resizePin);
+    }
+  }, [divHeight, divWidth, debounce]);
+
+  useEffect(() => {
+    if (activeMission?.missionLocation?.imageHeight && imageRef.current) {
+      const { height, width } = imageRef.current.getBoundingClientRect();
+
+      const diffHeight = height / activeMission.missionLocation.imageHeight;
+      const diffWidth = width / activeMission.missionLocation.imageWidth;
+
+      const newTop = diffHeight * activeMission.missionLocation.yCoordinate;
+      const newLeft = diffWidth * activeMission.missionLocation.xCoordinate;
+
+      setMissionPin({ top: newTop, left: newLeft, visable: true });
+    }
+  }, [
+    activeMission?.missionLocation?.imageHeight,
+    divHeight,
+    activeMission?.missionLocation?.imageWidth,
+    divWidth,
+    activeMission?.missionLocation?.xCoordinate,
+    activeMission?.missionLocation?.yCoordinate,
+  ]);
 
   useEffect(() => {
     if (imageRef.current) {
@@ -87,43 +142,15 @@ export default function InteractiveMap({
     }
   }, [pinTwo.top, pinOne.top, pinTwo.left, pinOne.left]);
 
-  const handleResize = useCallback(
-    (_: UIEvent): void => {
-      if (imageRef.current) {
-        const { height, width } = imageRef.current.getBoundingClientRect();
-
-        const resizePin = (prev: {
-          top: number;
-          left: number;
-          visable: boolean;
-        }) => {
-          const diffHeight = height / divHeight;
-          const diffWidth = width / divWidth;
-
-          const newTop = diffHeight * prev.top;
-          const newLeft = diffWidth * prev.left;
-
-          return {
-            top: newTop,
-            left: newLeft,
-            visable: prev.visable,
-          };
-        };
-
-        setPinOne(resizePin);
-        setPinTwo(resizePin);
-      }
-    },
-    [divHeight, divWidth]
-  );
-
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-
+    const timer = setTimeout(() => setDebounce(true), 1000);
+    handleResize();
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("resize", handleResize);
     };
-  }, [divHeight, divWidth, handleResize]);
+  }, [divHeight, divWidth, handleResize, debounce]);
 
   return (
     <Box>
@@ -154,6 +181,13 @@ export default function InteractiveMap({
           left={pinTwo.left}
           isVisable={pinTwo.visable}
           color="error"
+        />
+        <Pin
+          top={missionPin.top}
+          left={missionPin.left}
+          isVisable={missionPin.visable}
+          name={activeMission?.missionLocation?.name}
+          color="warning"
         />
         {pinOne.visable && pinTwo.visable ? (
           <Line

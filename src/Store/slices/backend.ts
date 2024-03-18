@@ -91,6 +91,18 @@ export const contentfulApi = createApi({
                   setter
                   reward
                   description
+                  missionLocation {
+                    name
+                    xCoordinate
+                    yCoordinate
+                    imageWidth
+                    imageHeight
+                    mapReference {
+                      sys {
+                        id
+                      }
+                    }
+                  }
                 }
               }
             }

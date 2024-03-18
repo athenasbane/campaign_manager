@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./slices/modals";
 import { contentfulApi } from "./slices/backend";
+import activeMissionReducer from "./slices/activeMission";
 
 const store = configureStore({
   reducer: {
+    activeMission: activeMissionReducer,
     modals: modalReducer,
     [contentfulApi.reducerPath]: contentfulApi.reducer,
   },

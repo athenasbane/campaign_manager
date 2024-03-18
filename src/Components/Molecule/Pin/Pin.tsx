@@ -5,6 +5,7 @@ export interface PinProps {
   top: number;
   left: number;
   isVisable: boolean;
+  name?: string;
   color?:
     | "inherit"
     | "disabled"
@@ -17,10 +18,10 @@ export interface PinProps {
     | "warning";
 }
 
-export default function Pin({ top, left, isVisable, color }: PinProps) {
+export default function Pin({ top, left, isVisable, color, name }: PinProps) {
   return (
     <Tooltip
-      title={`x: ${top}, y: ${left}`}
+      title={name ? name : `y: ${top}, x: ${left}`}
       style={{
         visibility: isVisable ? undefined : "hidden",
       }}
@@ -29,8 +30,8 @@ export default function Pin({ top, left, isVisable, color }: PinProps) {
         color={color}
         style={{
           position: "absolute",
-          top: top - 20,
-          left: left - 10,
+          top: (top || 0) - 20,
+          left: (left || 0) - 10,
           height: 20,
           width: 20,
           zIndex: 1001,

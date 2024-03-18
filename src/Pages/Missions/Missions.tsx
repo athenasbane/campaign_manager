@@ -12,7 +12,7 @@ import MissionDetails from "Components/Molecule/MissionDetails/MissionDetails";
 export default function Missions() {
   const [selected, setSelected] = useState<Mission>();
 
-  const handleNodeSelect = (event: any, nodeIds: string) => {
+  const handleNodeSelect = (_: any, nodeIds: string) => {
     if (data) {
       const [selectedMission] = data.missionsCollection.items.filter(
         (mission) => mission.sys.id === nodeIds
