@@ -115,6 +115,7 @@ export default function Draw({
           anchor={"bottom"}
           open={open}
           onClose={closeModal}
+          sx={{ zIndex: 1401 }}
           onOpen={() => openSingleModal(EnumModalSlice.Menu)}
         >
           {list}

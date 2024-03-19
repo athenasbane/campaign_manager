@@ -1,0 +1,12 @@
+{
+  "BigChange styled component": {
+    "scope": "typescriptreact",
+    "prefix": "bcsc",
+    "description": "Create a BigChange MFE styled component",
+    "body": [
+      "export const Styled${1} = styled(${2:\"div\"})(({ theme }) => ({",
+      "  ${0}",
+      "}));"
+    ]
+  }
+}

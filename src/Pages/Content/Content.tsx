@@ -1,10 +1,10 @@
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetContentPageQuery } from "Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
 import RichContentRenderer from "helpers/RichContentRenderer";
+import { StyledTypography } from "./ContentStyles";
 
 export default function Content() {
   const { slug } = useParams();
@@ -21,13 +21,9 @@ export default function Content() {
     <Grid container item direction="column" sx={{ maxWidth: "100vw" }}>
       {data && !isLoading ? (
         <>
-          <Typography
-            variant="h3"
-            textAlign="center"
-            sx={{ maxWidth: "100vw" }}
-          >
+          <StyledTypography variant="h3" textAlign="center">
             {data.pageTitle || " "}
-          </Typography>
+          </StyledTypography>
           <RichContentRenderer
             content={data.pageContentCollection.items[0].content}
           />

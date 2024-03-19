@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { useGetDocumentPageQuery } from "Store/slices/backend";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { StyledLink } from "./DocumentsStyles";
 
 export default function Documents() {
   const { data, error, isLoading, isSuccess } = useGetDocumentPageQuery(
@@ -34,14 +35,13 @@ export default function Documents() {
         <MuiList>
           {data.documentsCollection.items.map((document) => (
             <ListItem>
-              <a
-                style={{ textDecoration: "none", color: "white" }}
+              <StyledLink
                 href={document.document.url}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 <Typography variant="h3">{document.title}</Typography>
-              </a>
+              </StyledLink>
             </ListItem>
           ))}
         </MuiList>

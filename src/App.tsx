@@ -14,8 +14,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Content from "Pages/Content/Content";
 import Documents from "Pages/Documents/Documents";
 import { Suspense } from "react";
-import { Skeleton } from "@mui/material";
 import Missions from "Pages/Missions/Missions";
+import { StyledSkeleton } from "AppStyles";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -37,14 +37,7 @@ function App() {
               dispatch(openSingleModal(EnumModalSlice.Menu)),
           }}
         >
-          <Suspense
-            fallback={
-              <Skeleton
-                variant="rectangular"
-                sx={{ width: "100%", height: "100%" }}
-              />
-            }
-          >
+          <Suspense fallback={<StyledSkeleton variant="rectangular" />}>
             <Routes>
               <Route path="/" element={<Welcome />} />
               <Route path="/map/:slug" element={<Map />} />

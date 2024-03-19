@@ -196,15 +196,7 @@ export default function InteractiveMap({
           />
         </div>
       </Snackbar>
-      <div
-        style={{ position: "relative" }}
-        ref={ref}
-        onClick={pinSet}
-        onContextMenu={(event) => {
-          event.preventDefault();
-          console.log(event);
-        }}
-      >
+      <div style={{ position: "relative" }} ref={ref} onClick={pinSet}>
         <Pin
           top={pinOne.top}
           left={pinOne.left}

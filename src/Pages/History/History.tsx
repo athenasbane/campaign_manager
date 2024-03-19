@@ -1,6 +1,5 @@
-import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "../../Components/Organism/TimelineItem/TimelineItem";
-import Item, { timelineItemClasses } from "@mui/lab/TimelineItem";
+import Item from "@mui/lab/TimelineItem";
 import { timeline } from "Constants/timeline";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
@@ -12,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { StyledTimeline } from "./HistoryStyles";
 
 export default function History() {
   const theme = useTheme();
@@ -29,17 +29,8 @@ export default function History() {
       <Typography variant="h1" textAlign="center">
         History
       </Typography>
-      <Timeline
-        sx={
-          isSmall
-            ? {
-                [`& .${timelineItemClasses.root}:before`]: {
-                  flex: 0,
-                  padding: 0,
-                },
-              }
-            : null
-        }
+      <StyledTimeline
+        isSmall={isSmall}
         position={isSmall ? "right" : "alternate"}
       >
         {items}
@@ -76,7 +67,7 @@ export default function History() {
             </Accordion>
           </TimelineContent>
         </Item>
-      </Timeline>
+      </StyledTimeline>
     </>
   );
 }
