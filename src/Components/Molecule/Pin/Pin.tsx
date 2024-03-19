@@ -34,7 +34,7 @@ export default function Pin({ top, left, isVisable, color, name }: PinProps) {
           left: (left || 0) - 10,
           height: 20,
           width: 20,
-          zIndex: 1001,
+          zIndex: 99,
           visibility: isVisable ? undefined : "hidden",
         }}
       />

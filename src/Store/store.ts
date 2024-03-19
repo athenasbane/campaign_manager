@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./slices/modals";
 import { contentfulApi } from "./slices/backend";
 import activeMissionReducer from "./slices/activeMission";
+import layoutReducer from "./slices/layout";
 
 const store = configureStore({
   reducer: {
     activeMission: activeMissionReducer,
     modals: modalReducer,
+    layout: layoutReducer,
     [contentfulApi.reducerPath]: contentfulApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

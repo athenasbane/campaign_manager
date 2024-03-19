@@ -8,6 +8,7 @@ import MapToolBar from "Components/Molecule/MapToolBar/MapToolBar";
 import DistanceTool from "Components/Molecule/DistanceTool/DistanceTool";
 import { useAppSelector } from "hooks/store.hooks";
 import useOnScreen from "hooks/onScreen.hooks";
+import { EnumLayout, selectLayoutDetails } from "Store/slices/layout";
 
 export interface InteractiveMapProps {
   imageSrc: string;
@@ -50,13 +51,17 @@ export default function InteractiveMap({
   const [pinTwo, setPinTwo] = useState<IPin>({ ...initialPinState });
   const [missionPin, setMissionPin] = useState<IPin>({ ...initialPinState });
   const [pinOneActive, setPinOneActive] = useState<boolean>(true);
-  const isVisable = useOnScreen(toolRef);
 
   const handleToolChange = (_: React.SyntheticEvent, newValue: number) => {
     setActiveTool(newValue);
   };
 
   const activeMission = useAppSelector((state) => state.activeMission.mission);
+  const navDetails = useAppSelector((state) =>
+    selectLayoutDetails(state.layout, EnumLayout.NavBar)
+  );
+
+  const isVisable = useOnScreen(toolRef, navDetails.height);
 
   const pinSet = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -191,7 +196,15 @@ export default function InteractiveMap({
           />
         </div>
       </Snackbar>
-      <div style={{ position: "relative" }} ref={ref} onClick={pinSet}>
+      <div
+        style={{ position: "relative" }}
+        ref={ref}
+        onClick={pinSet}
+        onContextMenu={(event) => {
+          event.preventDefault();
+          console.log(event);
+        }}
+      >
         <Pin
           top={pinOne.top}
           left={pinOne.left}

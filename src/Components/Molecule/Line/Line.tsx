@@ -17,7 +17,7 @@ export default function Line({
 }: LineProps) {
   return (
     <svg
-      style={{ position: "absolute", zIndex: 1000 }}
+      style={{ position: "absolute", zIndex: 98 }}
       height={divHeight}
       width={divWidth}
       xmlns="http://www.w3.org/2000/svg"

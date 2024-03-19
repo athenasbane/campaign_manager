@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import { Link, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { useAppDispatch } from "hooks/store.hooks";
+import { EnumLayout, setLayoutValue } from "Store/slices/layout";
 
 export interface INavbarProps {
   onMenuButtonClick: () => void;
@@ -13,8 +16,23 @@ export interface INavbarProps {
 export default function Navbar({ onMenuButtonClick }: INavbarProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const navRef = useRef<null | HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (navRef.current) {
+      const { height, width } = navRef.current.getBoundingClientRect();
+      dispatch(
+        setLayoutValue({
+          component: EnumLayout.NavBar,
+          details: { height, width },
+        })
+      );
+    }
+  });
   return (
     <Box
+      ref={navRef}
       sx={{
         width: "100vw",
         pt: 8,
