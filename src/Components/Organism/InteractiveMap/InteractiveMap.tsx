@@ -1,14 +1,11 @@
-import { Box, Collapse, Snackbar } from "@mui/material";
-
+import { Box } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { distanceCalc } from "./InteractiveMapUtils";
-import Pin from "Components/Molecule/Pin/Pin";
-import Line from "Components/Molecule/Line/Line";
-import MapToolBar from "Components/Molecule/MapToolBar/MapToolBar";
-import DistanceTool from "Components/Molecule/DistanceTool/DistanceTool";
 import { useAppSelector } from "hooks/store.hooks";
 import useOnScreen from "hooks/onScreen.hooks";
 import { EnumLayout, selectLayoutDetails } from "Store/slices/layout";
+import Pins from "Components/Molecule/Pins/Pins";
+import MapTools from "Components/Molecule/MapTools/MapTools";
 
 export interface InteractiveMapProps {
   imageSrc: string;
@@ -65,20 +62,17 @@ export default function InteractiveMap({
 
   const pinSet = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = ref.current?.getBoundingClientRect();
-    if (pinOneActive) {
-      setPinOne((prev) => ({
-        top: event.clientY - (rect?.top || 0),
-        left: event.clientX - (rect?.left || 0),
-        visable: !prev.visable,
-      }));
-      return;
-    }
-
-    setPinTwo((prev) => ({
+    const setPin = (prev: IPin) => ({
       top: event.clientY - (rect?.top || 0),
       left: event.clientX - (rect?.left || 0),
       visable: !prev.visable,
-    }));
+    });
+    if (pinOneActive) {
+      setPinOne(setPin);
+      return;
+    }
+
+    setPinTwo(setPin);
   };
 
   const handleResize = useCallback((): void => {
@@ -162,70 +156,34 @@ export default function InteractiveMap({
 
   return (
     <Box>
-      <MapToolBar
-        handleToolBarChange={handleToolChange}
+      <MapTools
+        handleToolChange={handleToolChange}
         activeTool={activeTool}
+        toolRef={toolRef}
+        pinOneActive={pinOneActive}
+        isPinOneVisable={pinOne.visable}
+        isPinTwoVisable={pinTwo.visable}
+        distance={distance}
+        detail={detail}
+        unitOfDistance={unitOfDistance}
+        isSnackBarVisable={isVisable}
+        handlePinOneActive={(newValue: boolean) => setPinOneActive(newValue)}
       />
-
-      <Collapse ref={toolRef} in={activeTool === 1}>
-        <DistanceTool
-          pinOneActive={pinOneActive}
-          handlePinOneActive={(newValue: boolean) => setPinOneActive(newValue)}
-          isPinOneVisable={pinOne.visable}
-          isPinTwoVisable={pinTwo.visable}
-          distance={distance}
-          detail={detail || 10}
-          unitOfDistance={unitOfDistance || " Days"}
-        />
-      </Collapse>
-      <Snackbar
-        open={!isVisable}
-        sx={{ backgroundColor: "rgba(0,0,0,0.5)", paddingRight: 4 }}
-      >
-        <div style={{ justifyContent: "row" }}>
-          <DistanceTool
-            pinOneActive={pinOneActive}
-            handlePinOneActive={(newValue: boolean) =>
-              setPinOneActive(newValue)
-            }
-            isPinOneVisable={pinOne.visable}
-            isPinTwoVisable={pinTwo.visable}
-            distance={distance}
-            detail={detail || 10}
-            unitOfDistance={unitOfDistance || " Days"}
-          />
-        </div>
-      </Snackbar>
       <div style={{ position: "relative" }} ref={ref} onClick={pinSet}>
-        <Pin
-          top={pinOne.top}
-          left={pinOne.left}
-          isVisable={pinOne.visable}
-          color="success"
+        <Pins
+          pinOneTop={pinOne.top}
+          pinOneLeft={pinOne.left}
+          isPinOneVisable={pinOne.visable}
+          pinTwoTop={pinTwo.top}
+          pinTwoLeft={pinTwo.left}
+          isPinTwoVisable={pinTwo.visable}
+          missionPinTop={missionPin.top}
+          missionPinLeft={missionPin.left}
+          isMissionPinVisable={missionPin.visable}
+          missionName={activeMission?.missionLocation?.name}
+          imageHeight={divHeight}
+          imageWidth={divWidth}
         />
-        <Pin
-          top={pinTwo.top}
-          left={pinTwo.left}
-          isVisable={pinTwo.visable}
-          color="error"
-        />
-        <Pin
-          top={missionPin.top}
-          left={missionPin.left}
-          isVisable={missionPin.visable}
-          name={activeMission?.missionLocation?.name}
-          color="warning"
-        />
-        {pinOne.visable && pinTwo.visable ? (
-          <Line
-            x1={pinOne.left}
-            y1={pinOne.top}
-            x2={pinTwo.left}
-            y2={pinTwo.top}
-            divHeight={divHeight}
-            divWidth={divWidth}
-          />
-        ) : null}
         <img
           ref={imageRef}
           style={{ position: "absolute", width, height }}
