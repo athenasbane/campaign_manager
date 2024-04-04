@@ -2,10 +2,6 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -15,17 +11,13 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { EnumModalSlice } from "Store/slices/modals";
 import { useNavigate } from "react-router-dom";
 import { BookOutlined } from "@mui/icons-material";
+import { IDrawListItem } from "Types/Interfaces/DrawListItem";
+import DrawItem from "../DrawItem/DrawItem";
 
 export interface IDrawProps {
   open: boolean;
   closeModal: () => void;
   openSingleModal: (modal: EnumModalSlice) => void;
-}
-
-export interface IDrawListItem {
-  displayText: string;
-  path: string;
-  icon: React.ReactElement;
 }
 
 export default function Draw({
@@ -35,6 +27,12 @@ export default function Draw({
 }: IDrawProps) {
   const navigate = useNavigate();
 
+  /**
+   * [TODO]
+   * Move these to contentful
+   * Will need to create a icon component that has a
+   * Dropdown in contentful that uses the selected Icon
+   */
   const topListItems: IDrawListItem[] = [
     {
       displayText: "Maps",
@@ -77,50 +75,34 @@ export default function Draw({
     },
   ];
 
-  const list = (
-    <Box
-      sx={{ width: "auto" }}
-      role="presentation"
-      onClick={closeModal}
-      onKeyDown={closeModal}
-    >
-      <List>
-        {topListItems.map((item) => (
-          <ListItem key={item.displayText} disablePadding>
-            <ListItemButton onClick={() => navigate(item.path)}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.displayText} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {bottomListItems.map((item) => (
-          <ListItem key={item.displayText} disablePadding>
-            <ListItemButton onClick={() => navigate(item.path)}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.displayText} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <div>
-      <>
-        <SwipeableDrawer
-          anchor={"bottom"}
-          open={open}
-          onClose={closeModal}
-          sx={{ zIndex: 1401 }}
-          onOpen={() => openSingleModal(EnumModalSlice.Menu)}
+      <SwipeableDrawer
+        anchor={"bottom"}
+        open={open}
+        onClose={closeModal}
+        sx={{ zIndex: 1401 }}
+        onOpen={() => openSingleModal(EnumModalSlice.Menu)}
+      >
+        <Box
+          sx={{ width: "auto" }}
+          role="presentation"
+          onClick={closeModal}
+          onKeyDown={closeModal}
         >
-          {list}
-        </SwipeableDrawer>
-      </>
+          <List>
+            {topListItems.map((item) => (
+              <DrawItem item={item} onClick={() => navigate(item.path)} />
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {bottomListItems.map((item) => (
+              <DrawItem item={item} onClick={() => navigate(item.path)} />
+            ))}
+          </List>
+        </Box>
+      </SwipeableDrawer>
     </div>
   );
 }

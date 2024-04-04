@@ -39,6 +39,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!@codemirror)/'",
@@ -49,6 +50,19 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts?(x)"
+        ],
+        "rules": {
+          "max-lines": [
+            "off",
+            100
+          ]
+        }
+      }
     ]
   },
   "browserslist": {

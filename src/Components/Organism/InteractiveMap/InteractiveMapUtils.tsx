@@ -23,3 +23,20 @@ export const distanceCalc = (
 
   return sqrt;
 };
+
+export const calculatePinCoordinates = (
+  currentHeight: number,
+  currentWidth: number,
+  imageHeight: number,
+  imageWidth: number,
+  yCoordinate: number,
+  xCoordinate: number
+): [number, number] => {
+  const diffHeight = currentHeight / imageHeight;
+  const diffWidth = currentWidth / imageWidth;
+
+  const newTop = diffHeight * yCoordinate;
+  const newLeft = diffWidth * xCoordinate;
+
+  return [newTop, newLeft];
+};
