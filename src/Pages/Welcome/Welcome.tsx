@@ -15,6 +15,7 @@ export default function Welcome() {
 
   useEffect(() => {
     if (error || (!data && !isLoading)) {
+      console.error(error);
       navigate("/404");
     }
   }, [error, navigate, data, isLoading]);
