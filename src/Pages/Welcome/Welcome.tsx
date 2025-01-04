@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import theme from "theme";
 import { useGetFrontPageQuery } from "Store/slices/backend";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
@@ -19,15 +19,16 @@ export default function Welcome() {
     }
   }, [error, navigate, data, isLoading]);
 
-  const nextThur = () => {
-    if (data.nextSession)
+  const nextWeds = useCallback(() => {
+    if (data?.nextSession)
       return new Date(data.nextSession).toLocaleString(undefined, {
         dateStyle: "full",
       });
     const d = new Date();
-    d.setDate(d.getDate() + ((4 + 7 - d.getDay()) % 7));
-    return d.toLocaleDateString();
-  };
+    d.setDate(d.getDate() + ((3 + 7 - d.getDay()) % 7));
+    return d.toLocaleDateString(undefined, { dateStyle: "full" });
+  }, [data?.nextSession]);
+
   return (
     <Grid item container direction="column">
       {data && !isLoading ? (
@@ -46,12 +47,12 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    This is going to get real
+                    Next Session
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    {nextThur()}
+                    {nextWeds()}
                   </Typography>
                 </Grid>
               </Grid>

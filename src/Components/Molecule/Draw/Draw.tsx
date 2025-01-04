@@ -92,13 +92,21 @@ export default function Draw({
         >
           <List>
             {topListItems.map((item) => (
-              <DrawItem item={item} onClick={() => navigate(item.path)} />
+              <DrawItem
+                key={item.displayText}
+                item={item}
+                onClick={() => navigate(item.path)}
+              />
             ))}
           </List>
           <Divider />
           <List>
             {bottomListItems.map((item) => (
-              <DrawItem item={item} onClick={() => navigate(item.path)} />
+              <DrawItem
+                key={item.displayText}
+                item={item}
+                onClick={() => navigate(item.path)}
+              />
             ))}
           </List>
         </Box>
