@@ -47,7 +47,7 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    Next Session
+                    Testing Testing 123
                   </Typography>
                 </Grid>
                 <Grid item>
