@@ -9,9 +9,13 @@ on:
     branches: ["main"]
 
 jobs:
-  if: github.event.pull_request.merged
-    build:
+  if_merged:
+    if: github.event.pull_request.merged
       runs-on: ubuntu-latest
+      env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
       steps:
         - uses: actions/checkout@v4
         - name: Use Node.js
@@ -21,13 +25,5 @@ jobs:
             cache: "npm"
         - run: yarn install
         - run: yarn build
-
-    deploy: 
-      runs-on: ubuntu-latest
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: "us-east-1"
-        steps:
-          - run: yarn sync
-          - run: yarn invalidate
+        - run: yarn sync
+        - run: yarn invalidate
