@@ -7,7 +7,6 @@ interface DistanceToolProps {
   handlePinOneActive: (newValue: boolean) => void;
   isPinOneVisable: boolean;
   isPinTwoVisable: boolean;
-
   detail: number;
   unitOfDistance: string;
   distance?: number;

@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import { useGetMapPageQuery } from "Store/slices/backend";
+import { useGetMapPageQuery } from "../../Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
-import InteractiveMap from "Components/Organism/InteractiveMap/InteractiveMap";
+import InteractiveMap from "../../Components/Organism/InteractiveMap/InteractiveMap";
 
 export default function Map() {
   const { slug } = useParams();

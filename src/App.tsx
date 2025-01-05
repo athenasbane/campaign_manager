@@ -1,21 +1,25 @@
 import { Routes, Route } from "react-router-dom";
-import History from "Pages/History/History";
-import Welcome from "Pages/Welcome/Welcome";
-import Map from "Pages/Map/Map";
-import MainTemplate from "Templates/Main";
-import { useAppDispatch, useAppSelector } from "hooks/store.hooks";
-import { closeAll, EnumModalSlice, openSingleModal } from "Store/slices/modals";
-import List from "Pages/List/List";
-import NotFound from "Pages/NotFound/NotFound";
-import Sessions from "Pages/Sessions/Sessions";
+import History from "./Pages/History/History";
+import Welcome from "./Pages/Welcome/Welcome";
+import Map from "./Pages/Map/Map";
+import MainTemplate from "./Templates/Main";
+import { useAppDispatch, useAppSelector } from "./hooks/store.hooks";
+import {
+  closeAll,
+  EnumModalSlice,
+  openSingleModal,
+} from "./Store/slices/modals";
+import List from "./Pages/List/List";
+import NotFound from "./Pages/NotFound/NotFound";
+import Sessions from "./Pages/Sessions/Sessions";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import theme from "theme";
+import theme from "./theme";
 import CssBaseline from "@mui/material/CssBaseline";
-import Content from "Pages/Content/Content";
-import Documents from "Pages/Documents/Documents";
+import Content from "./Pages/Content/Content";
+import Documents from "./Pages/Documents/Documents";
 import { Suspense } from "react";
-import Missions from "Pages/Missions/Missions";
-import { StyledSkeleton } from "AppStyles";
+import Missions from "./Pages/Missions/Missions";
+import { StyledSkeleton } from "./AppStyles";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);

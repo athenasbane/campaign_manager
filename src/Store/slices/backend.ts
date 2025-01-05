@@ -1,9 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { request, gql, ClientError } from "graphql-request";
-import { Campaigns } from "Pages/Sessions/Sessions";
-import { IDocumentPageFields, IMapPageFields } from "Types/contentful-code-gen";
-import { MissionPage } from "Types/Interfaces/missions.interface";
+import { Campaigns } from "../../Pages/Sessions/Sessions";
+import {
+  IDocumentPageFields,
+  IMapPageFields,
+} from "../../Types/contentful-code-gen";
+import { MissionPage } from "../../Types/Interfaces/missions.interface";
 
 const graphqlBaseQuery =
   ({

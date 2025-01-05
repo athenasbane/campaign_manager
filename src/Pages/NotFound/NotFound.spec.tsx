@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import NotFound from "Pages/NotFound/NotFound";
+import NotFound from "../../Pages/NotFound/NotFound";
 import { Provider } from "react-redux";
-import store from "Store/store";
+import store from "../../Store/store";
 
 describe("Page - NotFound", () => {
   it("should match snapshot", () => {

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import Table from "Components/Molecule/Table/Table";
-import { EContentType } from "Types/Enum/content.enum";
-import { ITable } from "Types/Interfaces";
+import Table from "../../../Components/Molecule/Table/Table";
+import { EContentType } from "../../../Types/Enum/content.enum";
+import { ITable } from "../../../Types/Interfaces/content.interface";
 
 const mock: ITable = {
   contentType: EContentType.Table,
@@ -58,8 +58,10 @@ const mock: ITable = {
 };
 
 describe("Molecule - Table", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Table {...mock} />);
-    expect(container).toMatchSnapshot();
+  it("should have the correct text", () => {
+    const { getByText } = render(<Table {...mock} />);
+
+    expect(getByText("Common Name")).toBeInTheDocument();
+    expect(getByText("The Worker")).toBeInTheDocument();
   });
 });

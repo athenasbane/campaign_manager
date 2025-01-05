@@ -1,4 +1,4 @@
-import { ISection } from "Types/Interfaces";
+import { ISection } from "../../../Types/Interfaces/content.interface";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 

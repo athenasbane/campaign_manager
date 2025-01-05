@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import MuiList from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
-import { useGetDocumentPageQuery } from "Store/slices/backend";
+import { useGetDocumentPageQuery } from "../../Store/slices/backend";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StyledLink } from "./DocumentsStyles";
@@ -33,7 +33,7 @@ export default function Documents() {
       </Grid>
       <Grid item>
         <MuiList>
-          {data.documentsCollection.items.map((document) => (
+          {data.documentsCollection.items.map((document: any) => (
             <ListItem>
               <StyledLink
                 href={document.document.url}

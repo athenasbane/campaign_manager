@@ -6,8 +6,8 @@ import { Link, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { useAppDispatch } from "hooks/store.hooks";
-import { EnumLayout, setLayoutValue } from "Store/slices/layout";
+import { useAppDispatch } from "../../../hooks/store.hooks";
+import { EnumLayout, setLayoutValue } from "../../../Store/slices/layout";
 
 export interface INavbarProps {
   onMenuButtonClick: () => void;

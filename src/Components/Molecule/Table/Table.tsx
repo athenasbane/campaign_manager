@@ -5,10 +5,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { ITable } from "Types/Interfaces";
+import { ITable } from "../../../Types/Interfaces/content.interface";
 import { useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import theme from "theme";
+import theme from "../../../theme";
 
 export interface ITableProps extends ITable {}
 

@@ -1,13 +1,14 @@
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import theme from "theme";
-import { useGetFrontPageQuery } from "Store/slices/backend";
+import theme from "../../theme";
+import { useGetFrontPageQuery } from "../../Store/slices/backend";
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import RichContentRenderer from "helpers/RichContentRenderer";
+import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
-import EmbeddedVideo from "Components/Molecule/EmbeddedVideo/EmbeddedVideo";
+import EmbeddedVideo from "../../Components/Molecule/EmbeddedVideo/EmbeddedVideo";
+import store from "../../Store/store";
 
 export default function Welcome() {
   const { data, error, isLoading } = useGetFrontPageQuery(undefined);
@@ -48,7 +49,7 @@ export default function Welcome() {
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
-                    Testing Testing 123
+                    Next Session
                   </Typography>
                 </Grid>
                 <Grid item>

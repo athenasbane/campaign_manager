@@ -46,26 +46,9 @@
     "eject": "react-scripts eject",
     "sync": "aws s3 sync ./build 's3://teratin-campaign-manager'",
     "invalidate": "aws cloudfront create-invalidation --distribution-id E1TC5U3M17OQHU --paths '/*'",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output src/@types/generated/contentful.d.ts"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.ts?(x)"
-        ],
-        "rules": {
-          "max-lines": [
-            "off",
-            100
-          ]
-        }
-      }
-    ]
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output src/@types/generated/contentful.d.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "browserslist": {
     "production": [
@@ -80,11 +63,31 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@chromatic-com/storybook": "^3.2.3",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-onboarding": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/builder-vite": "^8.4.7",
+    "@storybook/preset-create-react-app": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-vite": "^8.4.7",
+    "@storybook/react-webpack5": "^8.4.7",
+    "@storybook/test": "^8.4.7",
     "@types/react-router-hash-link": "^2.4.6",
     "contentful": "^10.6.4",
     "contentful-management": "^11.3.0",
     "contentful-typescript-codegen": "^3.4.0",
     "dotenv": "^16.3.1",
-    "prettier": "^3.0.3"
-  }
+    "eslint-plugin-storybook": "^0.11.2",
+    "prettier": "^3.0.3",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.4.7",
+    "vite": "^6.0.7",
+    "webpack": "^5.97.1"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

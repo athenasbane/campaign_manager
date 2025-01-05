@@ -1,4 +1,4 @@
-import { ESessionType } from "Types/Enum/sessions.enum";
+import { ESessionType } from "../../Types/Enum/sessions.enum";
 
 export interface ISession {
   __typename: ESessionType.Session;

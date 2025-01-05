@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import Section, { ISectionProps } from "Components/Molecule/Section/Section";
-import { THE_LEADER_SYMBOL_SMALL } from "Constants/images";
-import { EContentType } from "Types/Enum/content.enum";
+import Section, {
+  ISectionProps,
+} from "../../../Components/Molecule/Section/Section";
+import { THE_LEADER_SYMBOL_SMALL } from "../../../Constants/images";
+import { EContentType } from "../../../Types/Enum/content.enum";
 
 const mockDataNoSwap: ISectionProps = {
   contentType: EContentType.Section,
@@ -47,9 +49,8 @@ describe("Molecule - Section", () => {
     async ({ mock, firstTag, secondTag }) => {
       render(<Section {...mock} />);
 
-      const [firstSwap, secondSwap] = await screen.findAllByTestId(
-        "section_element"
-      );
+      const [firstSwap, secondSwap] =
+        await screen.findAllByTestId("section_element");
       expect(firstSwap.tagName).toBe(firstTag);
       expect(secondSwap.tagName).toBe(secondTag);
     }

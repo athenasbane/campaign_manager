@@ -2,10 +2,10 @@ import MuiList from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetListPageQuery } from "Store/slices/backend";
-import Link from "Components/Atom/Link/Link";
+import { useGetListPageQuery } from "../../Store/slices/backend";
+import Link from "../../Components/Atom/Link/Link";
 import { useEffect } from "react";
-import { EPage } from "Types/Enum/page.enum";
+import { EPage } from "../../Types/Enum/page.enum";
 
 export default function List() {
   const { slug } = useParams();

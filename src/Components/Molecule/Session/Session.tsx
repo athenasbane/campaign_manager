@@ -3,7 +3,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ISession } from "Types/Interfaces";
+import { ISession } from "../../../Types/Interfaces/session.interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export interface ISessionProps {

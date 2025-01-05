@@ -1,3 +1,3 @@
-import { ITextBlockLink, ITextBlockText } from "Types/Interfaces";
+import { ITextBlockLink, ITextBlockText } from "../../Types/Interfaces";
 
 export type TTextBlock = ITextBlockLink | ITextBlockText;
