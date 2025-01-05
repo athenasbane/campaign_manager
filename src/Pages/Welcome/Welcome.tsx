@@ -3,12 +3,12 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import theme from "../../theme";
 import { useGetFrontPageQuery } from "../../Store/slices/backend";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
 import EmbeddedVideo from "../../Components/Molecule/EmbeddedVideo/EmbeddedVideo";
-import store from "../../Store/store";
+import { nextSession } from "./WelcomeUtils";
 
 export default function Welcome() {
   const { data, error, isLoading } = useGetFrontPageQuery(undefined);
@@ -21,15 +21,10 @@ export default function Welcome() {
     }
   }, [error, navigate, data, isLoading]);
 
-  const nextWeds = useCallback(() => {
-    if (data?.nextSession)
-      return new Date(data.nextSession).toLocaleString(undefined, {
-        dateStyle: "full",
-      });
-    const d = new Date();
-    d.setDate(d.getDate() + ((3 + 7 - d.getDay()) % 7));
-    return d.toLocaleDateString(undefined, { dateStyle: "full" });
-  }, [data?.nextSession]);
+  const nextSessionDate = useMemo(
+    () => nextSession(data?.nextSession),
+    [data?.nextSession]
+  );
 
   return (
     <Grid item container direction="column">
@@ -54,7 +49,7 @@ export default function Welcome() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h4" textAlign="center">
-                    {nextWeds()}
+                    {nextSessionDate}
                   </Typography>
                 </Grid>
               </Grid>
