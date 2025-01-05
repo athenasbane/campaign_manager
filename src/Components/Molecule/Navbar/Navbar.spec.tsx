@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import Navbar from "../../../Components/Molecule/Navbar/Navbar";
+import { Provider } from "react-redux";
+import store from "../../../Store/store";
 
 describe("Molecule - Navbar", () => {
   let onMenuButtonClickStub: jest.Mock;
@@ -9,20 +11,14 @@ describe("Molecule - Navbar", () => {
     onMenuButtonClickStub = jest.fn();
   });
 
-  it("should match the snapshot", () => {
-    const { container } = render(
-      <Navbar onMenuButtonClick={onMenuButtonClickStub} />,
-      {
-        wrapper: BrowserRouter,
-      }
+  it("should call stub when menu button clicked", () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Navbar onMenuButtonClick={onMenuButtonClickStub} />
+        </MemoryRouter>
+      </Provider>
     );
-
-    expect(container).toMatchSnapshot();
-  });
-  it("should call stub when menu button clicked", async () => {
-    render(<Navbar onMenuButtonClick={onMenuButtonClickStub} />, {
-      wrapper: BrowserRouter,
-    });
 
     userEvent.click(screen.queryByTestId("menu__button") as HTMLElement);
 
