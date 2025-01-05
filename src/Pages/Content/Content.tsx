@@ -18,7 +18,7 @@ export default function Content() {
   }, [error, data, navigate, isLoading]);
 
   return (
-    <Grid container item direction="column" sx={{ maxWidth: "100vw" }}>
+    <Grid container item direction="column" maxWidth="100vw">
       {data && !isLoading ? (
         <>
           <StyledTypography variant="h3" textAlign="center">

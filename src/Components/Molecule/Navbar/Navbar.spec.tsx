@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import Navbar from "../../../Components/Molecule/Navbar/Navbar";
@@ -20,7 +20,9 @@ describe("Molecule - Navbar", () => {
       </Provider>
     );
 
-    userEvent.click(screen.queryByTestId("menu__button") as HTMLElement);
+    act(() =>
+      userEvent.click(screen.queryByTestId("menu__button") as HTMLElement)
+    );
 
     expect(onMenuButtonClickStub).toHaveBeenCalled();
   });

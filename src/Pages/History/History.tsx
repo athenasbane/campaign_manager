@@ -48,12 +48,12 @@ export default function History() {
                   alignItems="center"
                 >
                   <Grid item>
-                    <Typography sx={{ fontSize: 20 }} variant="h3">
+                    <Typography fontSize={20} variant="h3">
                       836 AF
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography variant="h3" sx={{ fontSize: 30 }}>
+                    <Typography variant="h3" fontSize={30}>
                       Present Day
                     </Typography>
                   </Grid>
