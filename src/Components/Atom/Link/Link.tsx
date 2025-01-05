@@ -1,7 +1,7 @@
 import Typography, { TypographyProps } from "@mui/material/Typography";
-import { TTypographyVariant } from "Types/Types/link.type";
+import { TTypographyVariant } from "../../../Types/Types/link.type";
 import { Link as RouterLink } from "react-router-dom";
-import theme from "theme";
+import theme from "../../../theme";
 
 export interface ILinkProps {
   typographyVariant: TTypographyVariant;

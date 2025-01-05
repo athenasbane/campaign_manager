@@ -1,5 +1,5 @@
 import { TreeItem } from "@mui/lab";
-import { Mission } from "Types/Interfaces/missions.interface";
+import { Mission } from "../../Types/Interfaces/missions.interface";
 
 export const buildSelection = (missions: Mission[]) => {
   const active = missions.filter((item: any) => !item.complete);

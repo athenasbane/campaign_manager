@@ -1,11 +1,11 @@
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Session from "Components/Molecule/Session/Session";
-import { useGetSessionsDataQuery } from "Store/slices/backend";
-import theme from "theme";
-import { ESessionType } from "Types/Enum/sessions.enum";
-import { TSession } from "Types/Types/session.type";
+import Session from "../../Components/Molecule/Session/Session";
+import { useGetSessionsDataQuery } from "../../Store/slices/backend";
+import theme from "../../theme";
+import { ESessionType } from "../../Types/Enum/sessions.enum";
+import { TSession } from "../../Types/Types/session.type";
 import { Box, Grid, Tab, Tabs } from "@mui/material";
 
 export enum Campaigns {

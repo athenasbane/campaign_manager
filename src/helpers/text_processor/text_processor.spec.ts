@@ -1,6 +1,6 @@
-import { textProcessor } from "helpers/text_processor/text_processor";
-import { EContentType } from "Types/Enum/content.enum";
-import { ITextBlock } from "Types/Interfaces";
+import { textProcessor } from "../../helpers/text_processor/text_processor";
+import { EContentType } from "../../Types/Enum/content.enum";
+import { ITextBlock } from "../../Types/Interfaces/content.interface";
 
 export const mockTextBlockOne: ITextBlock = {
   contentType: EContentType.TextBlock,

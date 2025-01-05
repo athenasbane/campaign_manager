@@ -1,5 +1,5 @@
 import { SliceCaseReducers, createSlice } from "@reduxjs/toolkit";
-import { Mission } from "Types/Interfaces/missions.interface";
+import { Mission } from "../../Types/Interfaces/missions.interface";
 
 interface IActiveMissionState {
   mission: Mission | null;

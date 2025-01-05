@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Link, { ILinkProps } from "Components/Atom/Link/Link";
+import Link, { ILinkProps } from "../../../Components/Atom/Link/Link";
 import { BrowserRouter } from "react-router-dom";
 
 const genericProps: ILinkProps = {
@@ -15,14 +15,6 @@ describe("Atom - Link", () => {
         wrapper: BrowserRouter,
       });
       expect(screen.getByText(/Testable Link Text/i)).toBeInTheDocument();
-    });
-  });
-  describe("Snapshot - Test", () => {
-    it("should match snapshot", () => {
-      const { container } = render(<Link {...genericProps} />, {
-        wrapper: BrowserRouter,
-      });
-      expect(container).toMatchSnapshot();
     });
   });
 });

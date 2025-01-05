@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { calculatePinCoordinates, distanceCalc } from "./InteractiveMapUtils";
 import { IPin } from "./InteractiveMap";
-import useOnScreen from "hooks/onScreen.hooks";
-import { EnumLayout, selectLayoutDetails } from "Store/slices/layout";
-import { useAppSelector } from "hooks/store.hooks";
+import useOnScreen from "../../../hooks/onScreen.hooks";
+import { EnumLayout, selectLayoutDetails } from "../../../Store/slices/layout";
+import { useAppSelector } from "../../../hooks/store.hooks";
 
 const initialPinState = {
   top: 0,

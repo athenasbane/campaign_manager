@@ -1,6 +1,6 @@
-import { MALFORMED_LINK_TAG } from "Constants/error_warnings";
-import { ETextBlockType } from "Types/Enum/text_block.enum";
-import { TTextBlock } from "Types/Types/text_block.type";
+import { MALFORMED_LINK_TAG } from "../../Constants/error_warnings";
+import { ETextBlockType } from "../../Types/Enum/text_block.enum";
+import { TTextBlock } from "../../Types/Types/text_block.type";
 
 export const textProcessor = (text: string): TTextBlock[] => {
   const openingLink = (text.match(/\[link\]/g) || [])?.length;

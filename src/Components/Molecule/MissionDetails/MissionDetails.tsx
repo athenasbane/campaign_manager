@@ -1,9 +1,9 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { setActiveMission } from "Store/slices/activeMission";
-import { MissionLocation } from "Types/Interfaces/missions.interface";
-import { useAppDispatch } from "hooks/store.hooks";
+import { setActiveMission } from "../../../Store/slices/activeMission";
+import { MissionLocation } from "../../../Types/Interfaces/missions.interface";
+import { useAppDispatch } from "../../../hooks/store.hooks";
 import { useNavigate } from "react-router-dom";
 
 export interface MissionDetailsProps {

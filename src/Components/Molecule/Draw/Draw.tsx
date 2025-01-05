@@ -8,10 +8,10 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import MapIcon from "@mui/icons-material/Map";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { EnumModalSlice } from "Store/slices/modals";
+import { EnumModalSlice } from "../../../Store/slices/modals";
 import { useNavigate } from "react-router-dom";
 import { BookOutlined } from "@mui/icons-material";
-import { IDrawListItem } from "Types/Interfaces/DrawListItem";
+import { IDrawListItem } from "../../../Types/Interfaces/DrawListItem";
 import DrawItem from "../DrawItem/DrawItem";
 
 export interface IDrawProps {

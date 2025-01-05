@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Main from "Templates/Main";
+import Main from "../Templates/Main";
 
 describe("Template - Main", () => {
   it("should match snapshot", () => {

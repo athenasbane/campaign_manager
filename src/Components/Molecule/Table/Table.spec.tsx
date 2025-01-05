@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import Table from "Components/Molecule/Table/Table";
-import { EContentType } from "Types/Enum/content.enum";
-import { ITable } from "Types/Interfaces";
+import Table from "../../../Components/Molecule/Table/Table";
+import { EContentType } from "../../../Types/Enum/content.enum";
+import { ITable } from "../../../Types/Interfaces/content.interface";
 
 const mock: ITable = {
   contentType: EContentType.Table,

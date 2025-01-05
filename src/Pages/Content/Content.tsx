@@ -1,9 +1,9 @@
 import Grid from "@mui/material/Grid";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetContentPageQuery } from "Store/slices/backend";
+import { useGetContentPageQuery } from "../../Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
-import RichContentRenderer from "helpers/RichContentRenderer";
+import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { StyledTypography } from "./ContentStyles";
 
 export default function Content() {

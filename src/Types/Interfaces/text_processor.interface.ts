@@ -1,4 +1,4 @@
-import { ETextBlockType } from "Types/Enum/text_block.enum";
+import { ETextBlockType } from "../../Types/Enum/text_block.enum";
 
 export interface ITextBlockText {
   textType: ETextBlockType.Text;

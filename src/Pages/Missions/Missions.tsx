@@ -2,12 +2,12 @@ import TreeView from "@mui/lab/TreeView";
 import { Grid, Skeleton, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useGetMissionsPageQuery } from "Store/slices/backend";
+import { useGetMissionsPageQuery } from "../../Store/slices/backend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { buildSelection } from "./MissionsUtils";
-import { Mission } from "Types/Interfaces/missions.interface";
-import MissionDetails from "Components/Molecule/MissionDetails/MissionDetails";
+import { Mission } from "../../Types/Interfaces/missions.interface";
+import MissionDetails from "../../Components/Molecule/MissionDetails/MissionDetails";
 
 export default function Missions() {
   const [selected, setSelected] = useState<Mission>();
@@ -15,7 +15,7 @@ export default function Missions() {
   const handleNodeSelect = (_: any, nodeIds: string) => {
     if (data) {
       const [selectedMission] = data.missionsCollection.items.filter(
-        (mission) => mission.sys.id === nodeIds
+        (mission: any) => mission.sys.id === nodeIds
       );
       setSelected(selectedMission);
     }

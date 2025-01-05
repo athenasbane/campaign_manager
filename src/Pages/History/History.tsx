@@ -1,6 +1,6 @@
 import TimelineItem from "../../Components/Organism/TimelineItem/TimelineItem";
 import Item from "@mui/lab/TimelineItem";
-import { timeline } from "Constants/timeline";
+import { timeline } from "../../Constants/timeline";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineContent from "@mui/lab/TimelineContent";

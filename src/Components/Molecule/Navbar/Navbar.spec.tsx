@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import Navbar from "Components/Molecule/Navbar/Navbar";
+import Navbar from "../../../Components/Molecule/Navbar/Navbar";
 
 describe("Molecule - Navbar", () => {
   let onMenuButtonClickStub: jest.Mock;

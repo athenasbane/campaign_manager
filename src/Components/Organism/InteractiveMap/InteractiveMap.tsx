@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import Pins from "Components/Molecule/Pins/Pins";
-import MapTools from "Components/Molecule/MapTools/MapTools";
+import Pins from "../../../Components/Molecule/Pins/Pins";
+import MapTools from "../../../Components/Molecule/MapTools/MapTools";
 import { StyledImg } from "./InteractiveMapStyles";
 import { useInteractiveMapTools } from "./useInteractiveMapTools";
 
