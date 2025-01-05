@@ -9,6 +9,7 @@ import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
 import EmbeddedVideo from "../../Components/Molecule/EmbeddedVideo/EmbeddedVideo";
 import { nextSession } from "./WelcomeUtils";
+import { StyledPaper } from "./WelcomeStyles";
 
 export default function Welcome() {
   const { data, error, isLoading } = useGetFrontPageQuery(undefined);
@@ -34,13 +35,7 @@ export default function Welcome() {
             <Typography variant="h4" align="center">
               <span>{data.pageTitle}</span>
             </Typography>
-            <Paper
-              sx={{
-                backgroundColor: theme.palette.primary.main,
-                marginTop: "20px",
-                marginBottom: "20px",
-              }}
-            >
+            <StyledPaper>
               <Grid item container direction="column">
                 <Grid item>
                   <Typography variant="h2" textAlign="center">
@@ -53,7 +48,7 @@ export default function Welcome() {
                   </Typography>
                 </Grid>
               </Grid>
-            </Paper>
+            </StyledPaper>
           </Grid>
           <EmbeddedVideo videoId="MYmcBURqxck" title="Trailer" />
           <RichContentRenderer content={data.introduction} />

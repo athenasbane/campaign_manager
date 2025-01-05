@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { BookOutlined } from "@mui/icons-material";
 import { IDrawListItem } from "../../../Types/Interfaces/DrawListItem";
 import DrawItem from "../DrawItem/DrawItem";
+import { StyledBox, StyledSwipeableDrawer } from "./DrawStyled";
 
 export interface IDrawProps {
   open: boolean;
@@ -77,15 +78,13 @@ export default function Draw({
 
   return (
     <div>
-      <SwipeableDrawer
+      <StyledSwipeableDrawer
         anchor={"bottom"}
         open={open}
         onClose={closeModal}
-        sx={{ zIndex: 1401 }}
         onOpen={() => openSingleModal(EnumModalSlice.Menu)}
       >
-        <Box
-          sx={{ width: "auto" }}
+        <StyledBox
           role="presentation"
           onClick={closeModal}
           onKeyDown={closeModal}
@@ -109,8 +108,8 @@ export default function Draw({
               />
             ))}
           </List>
-        </Box>
-      </SwipeableDrawer>
+        </StyledBox>
+      </StyledSwipeableDrawer>
     </div>
   );
 }

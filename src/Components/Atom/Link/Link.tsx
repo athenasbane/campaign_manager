@@ -8,7 +8,7 @@ export interface ILinkProps {
   path: string;
   linkDisplayLabel: string;
   typographyComponentProps?: TypographyProps;
-  display?: string;
+  display?: TypographyProps["display"];
   color?: string;
 }
 
@@ -25,7 +25,7 @@ export default function Link({
       <Typography
         data-testid="link_typography"
         color={color}
-        sx={{ display: display || "" }}
+        display={display || undefined}
         {...typographyComponentProps}
         variant={typographyVariant}
       >

@@ -24,7 +24,7 @@ export default function TextBlock({ displayText }: ITextBlockProps) {
       case ETextBlockType.Text:
         return (
           <Typography
-            sx={{ display: "inline" }}
+            display="inline"
             textAlign="justify"
             key={el.displayText + i}
           >

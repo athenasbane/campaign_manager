@@ -1,7 +1,7 @@
 import { Timeline, timelineItemClasses } from "@mui/lab";
-import styled from "styled-components";
+import styled from "@mui/material/styles/styled";
 
-export const StyledTimeline = styled(Timeline).withConfig({
+export const StyledTimeline = styled(Timeline, {
   shouldForwardProp: (prop) => prop !== "isSmall",
 })<{ isSmall: boolean }>(({ isSmall }) => ({
   ...(isSmall
