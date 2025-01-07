@@ -50,9 +50,6 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "jest": {
-    "testEnvironment": "jest-fixed-jsdom"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
