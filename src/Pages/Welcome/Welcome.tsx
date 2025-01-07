@@ -1,9 +1,7 @@
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import theme from "../../theme";
 import { useGetFrontPageQuery } from "../../Store/slices/backend";
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";

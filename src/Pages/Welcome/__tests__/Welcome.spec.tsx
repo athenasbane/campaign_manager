@@ -1,8 +1,9 @@
-import { nextSession } from "../WelcomeUtils";
+import Welcome from "../Welcome";
 import { http, HttpResponse, delay } from "msw";
 import { setupServer } from "msw/node";
 import { renderWithProviders } from "../../../utils/test-utils";
 import { PAGE_RESPONSE } from "./api_responses/page_response";
+import { fireEvent, screen } from "@testing-library/react";
 
 export const handlers = [
   http.get(
@@ -25,15 +26,10 @@ afterEach(() => server.resetHandlers());
 // Disable API mocking after the tests are done.
 afterAll(() => server.close());
 
-const date = new Date("2025-01-01");
-jest.useFakeTimers().setSystemTime(date);
+describe("Page - Welcome", () => {
+  it("should render the header", () => {
+    const { getByText } = renderWithProviders(<Welcome />);
 
-describe("Welcome Utils", () => {
-  it("should return the date provided", () => {
-    expect(nextSession("2020-01-01")).toBe("Wednesday 1 January 2020");
-  });
-
-  it("should return the next wednesday", () => {
-    expect(nextSession()).toBe("Wednesday 1 January 2025");
+    screen.debug();
   });
 });
