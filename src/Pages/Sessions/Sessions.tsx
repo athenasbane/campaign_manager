@@ -31,7 +31,6 @@ export default function Sessions() {
   const handleChange = (_: React.SyntheticEvent, newValue: 0 | 1 | 2) => {
     setValue(newValue);
   };
-
   const sessions =
     !isLoading && data?.length && !error ? (
       data.map((session: TSession, i: number) => {
