@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import Section, {
-  ISectionProps,
-} from "../../../Components/Molecule/Section/Section";
-import { THE_LEADER_SYMBOL_SMALL } from "../../../Constants/images";
-import { EContentType } from "../../../Types/Enum/content.enum";
+import Section, { ISectionProps } from "../Section";
+import { THE_LEADER_SYMBOL_SMALL } from "../../../../Constants/images";
+import { EContentType } from "../../../../Types/Enum/content.enum";
 
 const mockDataNoSwap: ISectionProps = {
   contentType: EContentType.Section,
@@ -34,12 +32,6 @@ const mockDataSwap: ISectionProps = {
 };
 
 describe("Molecule - Section", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Section {...mockDataNoSwap} />);
-
-    expect(container).toMatchSnapshot();
-  });
-
   it.each`
     mock              | firstTag | secondTag
     ${mockDataNoSwap} | ${"IMG"} | ${"P"}

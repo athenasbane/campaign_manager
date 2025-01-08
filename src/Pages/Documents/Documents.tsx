@@ -15,7 +15,6 @@ export default function Documents() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(data, error);
     if (error || (!isLoading && !data)) {
       navigate("/404");
     }
@@ -34,7 +33,7 @@ export default function Documents() {
       <Grid item>
         <MuiList>
           {data.documentsCollection.items.map((document: any) => (
-            <ListItem>
+            <ListItem key={document.title}>
               <StyledLink
                 href={document.document.url}
                 rel="noopener noreferrer"

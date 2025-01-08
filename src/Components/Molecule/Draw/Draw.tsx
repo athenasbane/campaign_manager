@@ -1,5 +1,3 @@
-import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import MenuBookIcon from "@mui/icons-material/MenuBook";

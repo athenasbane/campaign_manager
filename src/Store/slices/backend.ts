@@ -287,7 +287,9 @@ export const contentfulApi = createApi({
           }
         `,
       }),
-      transformResponse: (response: { frontPage: any }) => response?.frontPage,
+      transformResponse: (response: { frontPage: any }) => {
+        return response?.frontPage;
+      },
     }),
   }),
 });
