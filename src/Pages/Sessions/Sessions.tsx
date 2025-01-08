@@ -6,7 +6,7 @@ import { useGetSessionsDataQuery } from "../../Store/slices/backend";
 import theme from "../../theme";
 import { ESessionType } from "../../Types/Enum/sessions.enum";
 import { TSession } from "../../Types/Types/session.type";
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Grid, Tabs } from "@mui/material";
 import { StyledTab } from "./SessionsStyled";
 
 export enum Campaigns {
