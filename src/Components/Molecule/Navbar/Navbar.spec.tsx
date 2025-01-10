@@ -20,7 +20,7 @@ describe("Molecule - Navbar", () => {
       </Provider>
     );
 
-    act(() =>
+    await act(() =>
       userEvent.click(screen.queryByTestId("menu__button") as HTMLElement)
     );
 

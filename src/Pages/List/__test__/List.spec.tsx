@@ -2,7 +2,7 @@ import { MemoryRouter } from "react-router-dom";
 import { useGetListPageQuery } from "../../../Store/slices/backend";
 import { renderWithProviders } from "../../../utils/test-utils";
 import List from "../List";
-import { PAGE_RESPONSE } from "../__mocks__/page_response";
+import { PAGE_RESPONSE } from "../__mocks__/list_page_response";
 
 jest.mock("../../../Store/slices/backend", () => {
   const originalModule = jest.requireActual("../../../Store/slices/backend");

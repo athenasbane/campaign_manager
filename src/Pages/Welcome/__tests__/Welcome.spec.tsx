@@ -1,6 +1,6 @@
 import Welcome from "../Welcome";
 import { renderWithProviders } from "../../../utils/test-utils";
-import { PAGE_RESPONSE } from "../__mocks__/api_responses/page_response";
+import { PAGE_RESPONSE } from "../__mocks__/api_responses/welcome_api_response";
 import { MemoryRouter } from "react-router-dom";
 import { useGetFrontPageQuery } from "../../../Store/slices/backend";
 

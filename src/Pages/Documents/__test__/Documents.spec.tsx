@@ -2,7 +2,7 @@ import { MemoryRouter } from "react-router-dom";
 import { useGetDocumentPageQuery } from "../../../Store/slices/backend";
 import { renderWithProviders } from "../../../utils/test-utils";
 import Documents from "../Documents";
-import { PAGE_RESPONSE } from "../__mocks__/api_response";
+import { PAGE_RESPONSE } from "../__mocks__/documents_api_response";
 
 jest.mock("../../../Store/slices/backend", () => {
   const originalModule = jest.requireActual("../../../Store/slices/backend");

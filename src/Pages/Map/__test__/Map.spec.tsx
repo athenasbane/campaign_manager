@@ -2,7 +2,7 @@ import { MemoryRouter } from "react-router-dom";
 import { useGetMapPageQuery } from "../../../Store/slices/backend";
 import { renderWithProviders } from "../../../utils/test-utils";
 import Map from "../Map";
-import { PAGE_RESPONSE } from "../__mocks__/page_response";
+import { PAGE_RESPONSE } from "../__mocks__/map_api_response";
 
 jest.mock("../../../Store/slices/backend", () => {
   const originalModule = jest.requireActual("../../../Store/slices/backend");
