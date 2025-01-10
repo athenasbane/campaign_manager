@@ -23,3 +23,25 @@ Account based administration. This will involve:
 
 - Authentication
 - White labeling of Contentful via an administration panel
+- Further Test coverage
+
+### Setup
+
+If you want to create your own clone of this site go ahead things to do:
+
+For this to work you will need to fork the project create a .env file at the route level this needs to contain these params
+
+You will need to get the space id and access token from Contentful by making an account.
+
+```
+REACT_APP_CONTENTFUL_SPACE_ID=
+REACT_APP_CONTENTFUL_ACCESS_TOKEN=
+```
+
+The github actions run tests and deployments for you but the deployment steps require a AWS account with the infrastructure set up and a cli account for AWS with keys provided to github. If you want more guidance on this I can make a video.
+
+If you want to host this else where you can just build the static files using the yarn build command.
+
+Remember to remove the references to Tordenhelm, Noktblast, Eldoria and Teratin. (These will be moved to my contentful in future)
+
+Any problems raise an issue and I'll help or improve the whitelabeling of this application.
