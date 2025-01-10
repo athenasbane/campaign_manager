@@ -38,12 +38,12 @@ export default function TimelineItem({
               flexDirection={order}
             >
               <Grid item>
-                <Typography sx={{ fontSize: 20 }} variant="h3">
+                <Typography fontSize={20} variant="h3">
                   {year}
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography sx={{ fontSize: 30 }} variant="h3">
+                <Typography fontSize={30} variant="h3">
                   {title}
                 </Typography>
               </Grid>

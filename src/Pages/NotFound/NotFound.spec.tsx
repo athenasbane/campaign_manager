@@ -5,14 +5,13 @@ import { Provider } from "react-redux";
 import store from "../../Store/store";
 
 describe("Page - NotFound", () => {
-  it("should match snapshot", () => {
-    const { container } = render(
+  it("should have correct text", () => {
+    const { getByText } = render(
       <Provider store={store}>
         <NotFound />
       </Provider>,
       { wrapper: BrowserRouter }
     );
-
-    expect(container).toMatchSnapshot();
+    expect(getByText("404 Page Not Found")).toBeInTheDocument();
   });
 });

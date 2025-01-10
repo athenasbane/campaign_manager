@@ -6,7 +6,8 @@ import { useGetSessionsDataQuery } from "../../Store/slices/backend";
 import theme from "../../theme";
 import { ESessionType } from "../../Types/Enum/sessions.enum";
 import { TSession } from "../../Types/Types/session.type";
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Grid, Tabs } from "@mui/material";
+import { StyledTab } from "./SessionsStyled";
 
 export enum Campaigns {
   noktblast,
@@ -30,7 +31,6 @@ export default function Sessions() {
   const handleChange = (_: React.SyntheticEvent, newValue: 0 | 1 | 2) => {
     setValue(newValue);
   };
-
   const sessions =
     !isLoading && data?.length && !error ? (
       data.map((session: TSession, i: number) => {
@@ -46,7 +46,7 @@ export default function Sessions() {
                 align={session.increment === "act" ? "center" : "left"}
                 variant={session.increment === "act" ? "h3" : "h4"}
                 color={theme.palette.secondary.light}
-                sx={{ mt: 4 }}
+                mt={4}
               >
                 {session.displayText}
               </Typography>
@@ -54,11 +54,7 @@ export default function Sessions() {
 
           case ESessionType.Location:
             return (
-              <Typography
-                key={session.displayText + i}
-                sx={{ mt: 2 }}
-                variant="h5"
-              >
+              <Typography key={session.displayText + i} mt={2} variant="h5">
                 {session.displayText}
               </Typography>
             );
@@ -77,9 +73,9 @@ export default function Sessions() {
         Session Recap
       </Typography>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab sx={{ width: "33%" }} label="Noktblast" />
-        <Tab sx={{ width: "33%" }} label="Eldoria" />
-        <Tab sx={{ width: "33%" }} label="Tordenhelm" />
+        <StyledTab label="Noktblast" />
+        <StyledTab label="Eldoria" />
+        <StyledTab label="Tordenhelm" />
       </Tabs>
       <Grid item container direction="column" justifyContent="center">
         {sessions}

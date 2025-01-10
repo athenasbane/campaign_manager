@@ -5,25 +5,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
-      "name": "vscode-jest-tests.v2",
-      "request": "launch",
-      "args": [
-        "test",
-        "--transformIgnorePatterns",
-        "--runInBand",
-        "--watchAll=false",
-        "--testNamePattern",
-        "${jest.testNamePattern}",
-        "--runTestsByPath",
-        "${jest.testFile}"
-      ],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/react-scripts"
-    },
-    {
       "name": "Chrome",
       "type": "chrome",
       "request": "launch",
