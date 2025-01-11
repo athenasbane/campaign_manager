@@ -1,6 +1,8 @@
 # Campaign Manager
 
-Campaign Manager is a TTRPG Campaign managing website. The site connects to a CMS and builds the website around the content that you would like to be visable to your players.
+## Description
+
+Campaign Manager is a TTRPG Campaign managing website. The site connects to a CMS and builds the website around the content that you would like to be visable to your players. You can see a version of this at [Teratin](https://teratin.info)
 
 Current features include:
 
@@ -10,6 +12,10 @@ Current features include:
 - Maps (With interactive Features such as distance calculations)
 - Mission Tracking
 - Documents
+
+## The Plan
+
+I want this to be a open source campaign manager tool in future. This allows you to manage your campaign for pretty much free. My current costs for hosting are $0.61 a month to host. Using AWS but I'm pretty sure you could get that to be free with some fiddling.
 
 ## Future Development
 
