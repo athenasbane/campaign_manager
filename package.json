@@ -2,10 +2,6 @@
   "name": "campaign_manager",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "20.18.1",
-    "npm": "10.8.2"
-  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@contentful/rich-text-react-renderer": "^15.18.0",
