@@ -1,9 +1,12 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import {
+  documentToReactComponents,
+  Options,
+} from "@contentful/rich-text-react-renderer";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 
 import Typography from "@mui/material/Typography";
 
-function renderOptions(links: any) {
+function renderOptions(links: any): Options {
   // create an asset map
   const assetMap = new Map();
   // loop through the assets and add them to the map
@@ -25,6 +28,18 @@ function renderOptions(links: any) {
 
   return {
     preserveWhitespace: true,
+    renderMark: {
+      [MARKS.BOLD]: (text) => (
+        <Typography>
+          <b>{text}</b>
+        </Typography>
+      ),
+      [MARKS.ITALIC]: (text) => (
+        <Typography>
+          <i>{text}</i>
+        </Typography>
+      ),
+    },
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any, next: any) => {
         // find the asset in the assetMap by ID
@@ -66,7 +81,7 @@ function renderOptions(links: any) {
       [BLOCKS.PARAGRAPH]: (node: any) => {
         return <Typography>{node.content[0].value}</Typography>;
       },
-      [BLOCKS.TABLE]: (node: any, children: any) => {
+      [BLOCKS.TABLE]: (children: any) => {
         return (
           <div style={{ overflow: "scroll", maxWidth: "95vw" }}>
             <table>
