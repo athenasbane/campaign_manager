@@ -9,7 +9,6 @@ import { StyledTypography } from "./ContentStyles";
 export default function Content() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  // const { data, error, isLoading } = useGetContentBySlugQuery(slug as string);
   const { data, error, isLoading } = useGetContentPageQuery(slug);
   useEffect(() => {
     if (error || (!isLoading && !data)) {

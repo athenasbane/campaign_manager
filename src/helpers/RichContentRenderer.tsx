@@ -29,16 +29,8 @@ function renderOptions(links: any): Options {
   return {
     preserveWhitespace: true,
     renderMark: {
-      [MARKS.BOLD]: (text) => (
-        <Typography>
-          <b>{text}</b>
-        </Typography>
-      ),
-      [MARKS.ITALIC]: (text) => (
-        <Typography>
-          <i>{text}</i>
-        </Typography>
-      ),
+      [MARKS.BOLD]: (text) => <b>{text}</b>,
+      [MARKS.ITALIC]: (text) => <i>{text}</i>,
     },
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any, next: any) => {
@@ -54,34 +46,34 @@ function renderOptions(links: any): Options {
           />
         );
       },
-      [BLOCKS.HEADING_1]: (node: any) => {
+      [BLOCKS.HEADING_1]: (node: any, children: any) => {
         return (
           <Typography variant="h1" align="center">
-            {node.content[0].value}
+            {children}
           </Typography>
         );
       },
-      [BLOCKS.HEADING_2]: (node: any) => {
+      [BLOCKS.HEADING_2]: (node: any, children: any) => {
         return (
           <Typography variant="h2" align="center">
-            {node.content[0].value}
+            {children}
           </Typography>
         );
       },
-      [BLOCKS.HEADING_3]: (node: any) => {
+      [BLOCKS.HEADING_3]: (node: any, children: any) => {
         return (
           <Typography variant="h3" align="center">
-            {node.content[0].value}
+            {children}
           </Typography>
         );
       },
-      [BLOCKS.HEADING_4]: (node: any) => {
-        return <Typography variant="h4">{node.content[0].value}</Typography>;
+      [BLOCKS.HEADING_4]: (node: any, children: any) => {
+        return <Typography variant="h4">{children}</Typography>;
       },
-      [BLOCKS.PARAGRAPH]: (node: any) => {
-        return <Typography>{node.content[0].value}</Typography>;
+      [BLOCKS.PARAGRAPH]: (node: any, children: any) => {
+        return <Typography>{children}</Typography>;
       },
-      [BLOCKS.TABLE]: (children: any) => {
+      [BLOCKS.TABLE]: (node: any, children: any) => {
         return (
           <div style={{ overflow: "scroll", maxWidth: "95vw" }}>
             <table>
