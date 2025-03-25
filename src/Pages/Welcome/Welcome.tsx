@@ -5,7 +5,6 @@ import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { Skeleton } from "@mui/material";
-import EmbeddedVideo from "../../Components/Molecule/EmbeddedVideo/EmbeddedVideo";
 import { nextSession } from "./WelcomeUtils";
 import { StyledPaper } from "./WelcomeStyles";
 
@@ -48,7 +47,6 @@ export default function Welcome() {
               </Grid>
             </StyledPaper>
           </Grid>
-          <EmbeddedVideo videoId="MYmcBURqxck" title="Trailer" />
           <RichContentRenderer content={data.introduction} />
         </>
       ) : (
