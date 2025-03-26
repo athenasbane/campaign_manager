@@ -25,7 +25,13 @@ export const useInteractiveMapTools = () => {
   const [missionPin, setMissionPin] = useState<IPin>({ ...initialPinState });
   const [pinOneActive, setPinOneActive] = useState<boolean>(true);
 
+  const clearPins = () => {
+    setPinOne({ ...initialPinState });
+    setPinTwo({ ...initialPinState });
+  };
+
   const handleToolChange = (_: React.SyntheticEvent, newValue: number) => {
+    clearPins();
     setActiveTool(newValue);
   };
 
@@ -34,9 +40,12 @@ export const useInteractiveMapTools = () => {
     selectLayoutDetails(state.layout, EnumLayout.NavBar)
   );
 
-  const isVisable = useOnScreen(toolRef, navDetails.height);
+  const onScreen = useOnScreen(toolRef, navDetails.height);
+
+  const isVisable = activeTool === 1 ? onScreen : true;
 
   const pinSet = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (activeTool !== 1) return;
     const rect = ref.current?.getBoundingClientRect();
     const setPin = (prev: IPin) => ({
       top: event.clientY - (rect?.top || 0),

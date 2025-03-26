@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Pins from "../../../Components/Molecule/Pins/Pins";
 import MapTools from "../../../Components/Molecule/MapTools/MapTools";
-import { StyledImg } from "./InteractiveMapStyles";
+import { StyledImg, StyledZoomImg } from "./InteractiveMapStyles";
 import { useInteractiveMapTools } from "./useInteractiveMapTools";
 
 export interface InteractiveMapProps {
@@ -77,13 +77,24 @@ export default function InteractiveMap({
           imageHeight={divHeight}
           imageWidth={divWidth}
         />
-        <StyledImg
-          ref={imageRef}
-          width={width}
-          height={height}
-          src={imageSrc}
-          alt="map"
-        />
+        {activeTool === 1 ? (
+          <StyledImg
+            ref={imageRef}
+            width={width}
+            height={height}
+            src={imageSrc}
+            alt="map"
+          />
+        ) : (
+          <StyledZoomImg
+            ref={imageRef}
+            width={width}
+            height={height}
+            src={imageSrc}
+            fullwidth
+            alt="map"
+          />
+        )}
       </div>
     </Box>
   );

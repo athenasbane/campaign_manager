@@ -33,6 +33,32 @@ function renderOptions(links: any): Options {
       [MARKS.ITALIC]: (text) => <i>{text}</i>,
     },
     renderNode: {
+      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+        // find the entry in the entryMap by ID
+        const entry = entryMap.get(node.data.target.sys.id);
+
+        // render the entries as needed by looking at the __typename
+        // referenced in the GraphQL query
+        if (entry.__typename === "CodeBlock") {
+          return (
+            <pre>
+              <code>{entry.code}</code>
+            </pre>
+          );
+        }
+
+        if (entry.__typename === "VideoEmbed") {
+          return (
+            <iframe
+              src={entry.embedUrl}
+              height="100%"
+              width="100%"
+              title={entry.title}
+              allowFullScreen={true}
+            />
+          );
+        }
+      },
       [BLOCKS.EMBEDDED_ASSET]: (node: any, next: any) => {
         // find the asset in the assetMap by ID
         const asset = assetMap.get(node.data.target.sys.id);
