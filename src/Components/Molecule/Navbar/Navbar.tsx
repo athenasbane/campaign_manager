@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -41,15 +41,15 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
           "linear-gradient(90deg, #ff9003 0%, rgba(0,212,255,1) 100%)",
       }}
     >
-      <Grid container direction="row">
-        <Grid item xs={3} textAlign="center">
+      <Stack direction="row">
+        <Box sx={{ width: "25%", textAlign: "center" }}>
           {location.pathname !== "/" ? (
             <Button onClick={() => navigate(-1)}>
               <ArrowBackIosIcon color="secondary" />
             </Button>
           ) : null}
-        </Grid>
-        <Grid item xs={6}>
+        </Box>
+        <Box sx={{ width: "50%" }}>
           <Link
             style={{
               textDecoration: "none",
@@ -61,8 +61,8 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
               Teratin
             </Typography>
           </Link>
-        </Grid>
-        <Grid item xs={3} textAlign="center">
+        </Box>
+        <Box sx={{ width: "25%", textAlign: "center" }}>
           <Button
             data-testid="menu__button"
             variant="contained"
@@ -71,8 +71,8 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
           >
             <Typography sx={{ color: "#ffff" }}>Menu</Typography>
           </Button>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
     </Box>
   );
 }

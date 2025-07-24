@@ -1,5 +1,6 @@
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Navbar from "../Components/Molecule/Navbar/Navbar";
 import Draw from "../Components/Molecule/Draw/Draw";
 import { ReactNode } from "react";
@@ -24,14 +25,12 @@ export default function MainTemplate({
   return (
     <>
       <Container maxWidth="lg">
-        <Grid container direction={"column"}>
-          <Grid item sx={{ position: "fixed", zIndex: 100, left: 0 }}>
+        <Stack direction={"column"}>
+          <Box sx={{ position: "fixed", zIndex: 100, left: 0 }}>
             <Navbar onMenuButtonClick={NavbarProps.onMenuButtonClick} />
-          </Grid>
-          <Grid item sx={{ mt: 30 }}>
-            {children}
-          </Grid>
-        </Grid>
+          </Box>
+          <Box sx={{ mt: 30 }}>{children}</Box>
+        </Stack>
       </Container>
       <div>
         <Draw

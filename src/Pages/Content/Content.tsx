@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetContentPageQuery } from "../../Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
@@ -17,7 +17,7 @@ export default function Content() {
   }, [error, data, navigate, isLoading]);
 
   return (
-    <Grid container item direction="column" maxWidth="100vw">
+    <Stack direction="column" maxWidth="100vw">
       {data && !isLoading ? (
         <>
           <StyledTypography variant="h3" textAlign="center">
@@ -30,6 +30,6 @@ export default function Content() {
       ) : (
         <Skeleton variant="text" />
       )}
-    </Grid>
+    </Stack>
   );
 }

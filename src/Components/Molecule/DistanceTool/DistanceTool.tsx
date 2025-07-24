@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 interface DistanceToolProps {
   pinOneActive: boolean;
@@ -22,34 +23,34 @@ export default function DistanceTool({
   distance,
 }: DistanceToolProps) {
   return (
-    <Grid container direction="row">
-      <Grid container item direction="row" xs={6}>
-        <Grid item>
+    <Stack direction="row">
+      <Stack direction="row" sx={{ width: "50%" }}>
+        <Box>
           <Button
             disabled={pinOneActive}
             onClick={() => handlePinOneActive(true)}
           >
             Start
           </Button>
-        </Grid>
-        <Grid item>
+        </Box>
+        <Box>
           <Button
             disabled={!pinOneActive}
             onClick={() => handlePinOneActive(false)}
           >
             Destination
           </Button>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
       {isPinOneVisable && isPinTwoVisable ? (
-        <Grid item xs={6} alignSelf="center">
+        <Box sx={{ width: "50%", alignSelf: "center" }}>
           <Typography textAlign="end" variant="body1">
             {`Distance: `}
             {((distance || 0) * detail).toFixed(1)}
             {unitOfDistance}
           </Typography>
-        </Grid>
+        </Box>
       ) : null}
-    </Grid>
+    </Stack>
   );
 }

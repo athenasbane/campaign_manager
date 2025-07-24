@@ -8,7 +8,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 interface TimelineItemProps {
   title: string;
@@ -32,22 +33,18 @@ export default function TimelineItem({
       <TimelineContent>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Grid
-              container
-              justifyContent="space-between"
-              flexDirection={order}
-            >
-              <Grid item>
+            <Stack justifyContent="space-between" direction={order}>
+              <Box>
                 <Typography fontSize={20} variant="h3">
                   {year}
                 </Typography>
-              </Grid>
-              <Grid item>
+              </Box>
+              <Box>
                 <Typography fontSize={30} variant="h3">
                   {title}
                 </Typography>
-              </Grid>
-            </Grid>
+              </Box>
+            </Stack>
           </AccordionSummary>
           <AccordionDetails>
             <Typography textAlign="justify">{summary}</Typography>

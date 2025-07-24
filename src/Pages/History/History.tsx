@@ -6,7 +6,8 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineContent from "@mui/lab/TimelineContent";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -41,23 +42,23 @@ export default function History() {
           <TimelineContent>
             <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Grid
-                  container
+                <Stack
                   justifyContent="space-between"
                   textAlign="center"
                   alignItems="center"
+                  direction="row"
                 >
-                  <Grid item>
+                  <Box>
                     <Typography fontSize={20} variant="h3">
                       836 AF
                     </Typography>
-                  </Grid>
-                  <Grid item>
+                  </Box>
+                  <Box>
                     <Typography variant="h3" fontSize={30}>
                       Present Day
                     </Typography>
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography textAlign="justify">

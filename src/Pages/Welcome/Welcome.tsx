@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import { useGetFrontPageQuery } from "../../Store/slices/backend";
 import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,28 +26,28 @@ export default function Welcome() {
   );
 
   return (
-    <Grid item container direction="column">
+    <Stack direction="column">
       {data && !isLoading ? (
         <>
-          <Grid item>
+          <Box>
             <Typography variant="h4" align="center">
               <span>{data.pageTitle}</span>
             </Typography>
             <StyledPaper>
-              <Grid item container direction="column">
-                <Grid item>
+              <Stack direction="column">
+                <Box>
                   <Typography variant="h2" textAlign="center">
                     Next Session
                   </Typography>
-                </Grid>
-                <Grid item>
+                </Box>
+                <Box>
                   <Typography variant="h4" textAlign="center">
                     {nextSessionDate}
                   </Typography>
-                </Grid>
-              </Grid>
+                </Box>
+              </Stack>
             </StyledPaper>
-          </Grid>
+          </Box>
           <RichContentRenderer content={data.introduction} />
         </>
       ) : (
@@ -56,6 +57,6 @@ export default function Welcome() {
           <Skeleton variant="rectangular" />
         </>
       )}
-    </Grid>
+    </Stack>
   );
 }
