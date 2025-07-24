@@ -1,7 +1,8 @@
 import Typography from "@mui/material/Typography";
 import MuiList from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import { useGetDocumentPageQuery } from "../../Store/slices/backend";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,16 +22,16 @@ export default function Documents() {
   }, [error, data, isLoading, navigate]);
 
   const body = isSuccess ? (
-    <Grid container direction="column">
-      <Grid item>
+    <Stack direction="column">
+      <Box>
         <Typography variant="h3">{data.pageTitle}</Typography>
-      </Grid>
-      <Grid item>
+      </Box>
+      <Box>
         <Typography>
           Homebrewed Rule Sets for the Campaign for you to Download
         </Typography>
-      </Grid>
-      <Grid item>
+      </Box>
+      <Box>
         <MuiList>
           {data.documentsCollection.items.map((document: any) => (
             <ListItem key={document.title}>
@@ -44,8 +45,8 @@ export default function Documents() {
             </ListItem>
           ))}
         </MuiList>
-      </Grid>
-    </Grid>
+      </Box>
+    </Stack>
   ) : (
     <></>
   );

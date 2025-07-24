@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { setActiveMission } from "../../../Store/slices/activeMission";
 import { MissionLocation } from "../../../Types/Interfaces/missions.interface";
@@ -42,52 +43,52 @@ export default function MissionDetails({
   };
   return (
     <>
-      <Grid item flexDirection="row" marginBottom={4}>
+      <Box mb={4}>
         <Typography variant="h3" textAlign="center">
           {missionName}
         </Typography>
-      </Grid>
-      <Grid container item flexDirection="row">
-        <Grid item xs={5}>
+      </Box>
+      <Stack direction="row">
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h4">Location:</Typography>
-        </Grid>
-        <Grid item xs={5}>
+        </Box>
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h5">{location}</Typography>
-        </Grid>
-      </Grid>
-      <Grid container item flexDirection="row">
-        <Grid item xs={5}>
+        </Box>
+      </Stack>
+      <Stack direction="row">
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h4">Who:</Typography>
-        </Grid>
-        <Grid item xs={5}>
+        </Box>
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h5">{setter}</Typography>
-        </Grid>
-      </Grid>
-      <Grid container item flexDirection="row">
-        <Grid item xs={5}>
+        </Box>
+      </Stack>
+      <Stack direction="row">
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h4">Reward:</Typography>
-        </Grid>
-        <Grid item xs={5}>
+        </Box>
+        <Box sx={{ width: "50%" }}>
           <Typography variant="h5">{reward}</Typography>
-        </Grid>
-      </Grid>
-      <Grid container item flexDirection="column">
-        <Grid item>
+        </Box>
+      </Stack>
+      <Stack direction="column">
+        <Box>
           <Typography variant="h4">Description:</Typography>
-        </Grid>
-        <Grid item>
+        </Box>
+        <Box>
           <Typography variant="h6">{description}</Typography>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
       {missionLocation?.name ? (
-        <Grid container item flexDirection="row">
-          <Grid item>
+        <Stack direction="row">
+          <Box>
             <Typography variant="h4">View on Map: </Typography>
-          </Grid>
-          <Grid item>
+          </Box>
+          <Box>
             <Button onClick={handleMissionSelect}>Map</Button>
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       ) : null}
     </>
   );

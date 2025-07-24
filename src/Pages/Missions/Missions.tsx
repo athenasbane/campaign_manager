@@ -1,5 +1,5 @@
 import TreeView from "@mui/lab/TreeView";
-import { Grid, Skeleton, Typography } from "@mui/material";
+import { Stack, Box, Skeleton, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useGetMissionsPageQuery } from "../../Store/slices/backend";
@@ -43,21 +43,19 @@ export default function Missions() {
     </Typography>
   );
   return (
-    <Grid container flexDirection="column">
-      <Grid item justifyContent="center">
+    <Stack direction="column">
+      <Box sx={{ textAlign: "center" }}>
         <Typography textAlign="center" variant="h2">
           {data?.title}
         </Typography>
-      </Grid>
-      <Grid container flexDirection="row" justifyContent="center" gap={6}>
-        <Grid
-          item
-          xs={12}
-          sm={4}
+      </Box>
+      <Stack direction="row" justifyContent="center" gap={6}>
+        <Box
           sx={{
             border: "1px solid white",
             padding: 3,
             borderBottomRightRadius: 10,
+            width: { xs: "100%", sm: "33%" },
           }}
         >
           <TreeView
@@ -68,23 +66,20 @@ export default function Missions() {
           >
             {selection}
           </TreeView>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          sm={7}
+        </Box>
+        <Stack
+          direction="column"
           gap={4}
-          flexDirection="column"
           sx={{
             border: "1px solid white",
             padding: 3,
             borderBottomRightRadius: 10,
+            width: { xs: "100%", sm: "58%" },
           }}
         >
           {mission}
-        </Grid>
-      </Grid>
-    </Grid>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }

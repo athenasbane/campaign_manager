@@ -6,7 +6,7 @@ import { useGetSessionsDataQuery } from "../../Store/slices/backend";
 import theme from "../../theme";
 import { ESessionType } from "../../Types/Enum/sessions.enum";
 import { TSession } from "../../Types/Types/session.type";
-import { Box, Grid, Tabs } from "@mui/material";
+import { Box, Stack, Tabs } from "@mui/material";
 import { StyledTab } from "./SessionsStyled";
 
 export enum Campaigns {
@@ -77,9 +77,9 @@ export default function Sessions() {
         <StyledTab label="Eldoria" />
         <StyledTab label="Tordenhelm" />
       </Tabs>
-      <Grid item container direction="column" justifyContent="center">
+      <Stack direction="column" justifyContent="center">
         {sessions}
-      </Grid>
+      </Stack>
     </Box>
   );
 }
