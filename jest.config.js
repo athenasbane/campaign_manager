@@ -1,6 +1,16 @@
 module.exports = {
   roots: ["<rootDir>/src"],
-  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/*.stories.tsx",
+    "!src/**/__stories__/**",
+    "!src/Types/**",
+    "!src/**/*.type.ts",
+    "!src/**/*.interface.ts",
+    "!src/index.tsx",
+    "!src/reportWebVitals.ts",
+  ],
   setupFiles: ["react-app-polyfill/jsdom"],
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   testMatch: [
@@ -18,6 +28,13 @@ module.exports = {
     "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)",
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
     "^.+\\.module\\.(css|sass|scss)$",
+  ],
+  coveragePathIgnorePatterns: [
+    "\\.stories\\.tsx$",
+    "/__stories__/",
+    "<rootDir>/src/Types/",
+    "\\.interface\\.ts$",
+    "\\.type\\.ts$",
   ],
   modulePaths: [],
   moduleNameMapper: {
