@@ -4,25 +4,26 @@ const theme: any = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#ffb250",
+      main: "#B8860B",
     },
     secondary: {
-      main: "#50f5ff",
+      main: "#8B4513",
     },
   },
   spacing: 4,
   typography: {
+    fontFamily: "'Roboto Slab', serif",
     h1: {
-      fontFamily: "'The Wild Breath of Zelda', sans-serif",
+      fontFamily: "'IM Fell English SC', serif",
     },
     h2: {
-      fontFamily: "'The Wild Breath of Zelda', sans-serif",
+      fontFamily: "'IM Fell English SC', serif",
     },
     h3: {
-      fontFamily: "'The Wild Breath of Zelda', sans-serif",
+      fontFamily: "'IM Fell English SC', serif",
     },
     h4: {
-      fontFamily: "'The Wild Breath of Zelda', sans-serif",
+      fontFamily: "'IM Fell English SC', serif",
     },
   },
 });
