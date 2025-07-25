@@ -5,9 +5,10 @@ import Box from "@mui/material/Box";
 import { Link, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useAppDispatch } from "../../../hooks/store.hooks";
 import { EnumLayout, setLayoutValue } from "../../../Store/slices/layout";
+import { Spark, StyledNavbar } from "./NavbarStyles";
 
 export interface INavbarProps {
   onMenuButtonClick: () => void;
@@ -30,17 +31,21 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
       );
     }
   });
+  const sparks = useMemo(
+    () =>
+      Array.from({ length: 15 }).map(() => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+      })),
+    []
+  );
+
   return (
-    <Box
-      ref={navRef}
-      sx={{
-        width: "100vw",
-        pt: 8,
-        pb: 4,
-        background:
-          "linear-gradient(90deg, #ff9003 0%, rgba(0,212,255,1) 100%)",
-      }}
-    >
+    <StyledNavbar ref={navRef}>
+      {sparks.map((s, i) => (
+        <Spark key={i} top={s.top} left={s.left} delay={s.delay} />
+      ))}
       <Stack direction="row">
         <Box sx={{ width: "25%", textAlign: "center" }}>
           {location.pathname !== "/" ? (
@@ -73,6 +78,6 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
           </Button>
         </Box>
       </Stack>
-    </Box>
+    </StyledNavbar>
   );
 }
