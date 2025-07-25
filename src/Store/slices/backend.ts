@@ -29,6 +29,7 @@ const graphqlBaseQuery =
   };
 
 const sessionsCampaign = {
+  droskara: "2H9lfjk05Rh14SpuPZp2qb",
   noktblast: "56lSNM3OZNhIruz3THMzot",
   eldoria: "5MVZ8hTfPXGlrvpjruVmnW",
   tordenhelm: "6PM6Xg15tJKo5TYINpeS1g",
