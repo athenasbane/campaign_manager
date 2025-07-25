@@ -10,13 +10,14 @@ import { Box, Stack, Tabs } from "@mui/material";
 import { StyledTab } from "./SessionsStyled";
 
 export enum Campaigns {
+  droskara,
   noktblast,
   eldoria,
   tordenhelm,
 }
 
 export default function Sessions() {
-  const [value, setValue] = useState<0 | 1 | 2>(0);
+  const [value, setValue] = useState<0 | 1 | 2 | 3>(0);
   const { data, error, isLoading } = useGetSessionsDataQuery(
     Campaigns[value] as keyof typeof Campaigns
   );
@@ -73,6 +74,7 @@ export default function Sessions() {
         Session Recap
       </Typography>
       <Tabs value={value} onChange={handleChange} centered>
+        <StyledTab label="Tordenhelm - Dros'kara" />
         <StyledTab label="Noktblast" />
         <StyledTab label="Eldoria" />
         <StyledTab label="Tordenhelm" />

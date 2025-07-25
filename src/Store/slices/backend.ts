@@ -37,7 +37,6 @@ const graphqlBaseQuery =
     }
   };
 
-
 export const contentfulApi = createApi({
   reducerPath: "contentfulApi",
   baseQuery: graphqlBaseQuery({
