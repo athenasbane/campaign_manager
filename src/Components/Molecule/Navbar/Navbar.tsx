@@ -49,8 +49,8 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
       <Stack direction="row">
         <Box sx={{ width: "25%", textAlign: "center" }}>
           {location.pathname !== "/" ? (
-            <Button onClick={() => navigate(-1)}>
-              <ArrowBackIosIcon color="secondary" />
+            <Button color="primary" onClick={() => navigate(-1)}>
+              <ArrowBackIosIcon color="inherit" />
             </Button>
           ) : null}
         </Box>
@@ -71,7 +71,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
           <Button
             data-testid="menu__button"
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={onMenuButtonClick}
           >
             <Typography sx={{ color: "#ffff" }}>Menu</Typography>
