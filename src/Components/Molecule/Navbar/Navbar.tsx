@@ -46,7 +46,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
       {sparks.map((s, i) => (
         <Spark key={i} top={s.top} left={s.left} delay={s.delay} />
       ))}
-      <Stack direction="row">
+      <Stack direction="row" alignItems="center">
         <Box sx={{ width: "25%", textAlign: "center" }}>
           {location.pathname !== "/" ? (
             <Button color="primary" onClick={() => navigate(-1)}>
