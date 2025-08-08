@@ -20,6 +20,7 @@ import Documents from "./Pages/Documents/Documents";
 import { Suspense } from "react";
 import Missions from "./Pages/Missions/Missions";
 import { StyledSkeleton } from "./AppStyles";
+import { ExchangeRates } from "./Pages/ExchangeRates/ExchangeRates";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -51,6 +52,7 @@ function App() {
               <Route path="/documents" element={<Documents />} />
               <Route path="/history" element={<History />} />
               <Route path="/missions" element={<Missions />} />
+              <Route path="/exchange" element={<ExchangeRates />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

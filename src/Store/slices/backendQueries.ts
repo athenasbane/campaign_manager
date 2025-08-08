@@ -220,3 +220,17 @@ export const FRONT_PAGE_QUERY = gql`
     }
   }
 `;
+
+export const GET_EXCHANGE_RATE_PAGE = gql`
+  query GetExchangeRatePage {
+    exchangeRatePage(id: "688Lc7vys8mUrpwFdj7a7z") {
+      pageTitle
+      exchangeRates {
+        ... on ExchangeRates {
+          currencyInformation
+          exchangeRates
+        }
+      }
+    }
+  }
+`;
