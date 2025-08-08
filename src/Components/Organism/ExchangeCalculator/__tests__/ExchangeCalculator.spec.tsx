@@ -27,7 +27,7 @@ describe("ExchangeCalculator", () => {
     const input = screen.getAllByRole("textbox")[0] as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: "3" } });
-    expect(screen.getByText("3.00 GLD")).toBeInTheDocument();
+    expect(screen.getByText("3.00 🪙")).toBeInTheDocument();
   });
 
   it("updates result when 'to' currency changes", async () => {
@@ -41,7 +41,7 @@ describe("ExchangeCalculator", () => {
     const toOption = await screen.findByText(/ɱ — Cirran Mark/i);
     await user.click(toOption);
 
-    expect(screen.getByText("1.10 CIR")).toBeInTheDocument(); // 1 * 1.1
+    expect(screen.getByText("1.10 ɱ")).toBeInTheDocument(); // 1 * 1.1
   });
 
   it("converts correctly from CIR to GLD with amount", async () => {
@@ -65,7 +65,7 @@ describe("ExchangeCalculator", () => {
     await user.clear(input);
     await user.type(input, "2");
 
-    expect(await screen.findByText("1.80 GLD")).toBeInTheDocument(); // 2 * 0.9
+    expect(await screen.findByText("1.80 🪙")).toBeInTheDocument(); // 2 * 0.9
   });
 
   it("converts correctly from CIR to GLD with amount", async () => {
@@ -95,6 +95,6 @@ describe("ExchangeCalculator", () => {
     await user.clear(input2);
     await user.type(input2, "10");
 
-    expect(await screen.findByText("1.62 GLD")).toBeInTheDocument(); // 2 * 0.9 * 0.9
+    expect(await screen.findByText("1.62 🪙")).toBeInTheDocument(); // 2 * 0.9 * 0.9
   });
 });
