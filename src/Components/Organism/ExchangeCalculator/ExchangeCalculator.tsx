@@ -25,6 +25,7 @@ export const ExchangeCalculator = ({
   const [from, setFrom] = useState<CurrencyCode>("GLD");
   const [to, setTo] = useState<CurrencyCode>("GLD");
   const [amount, setAmount] = useState(1);
+  const [commission, setCommission] = useState<number>(0);
 
   const currencyCodes = exchangeRates?.currencyInformation
     ? (Object.keys(exchangeRates?.currencyInformation) as CurrencyCode[])
@@ -42,8 +43,11 @@ export const ExchangeCalculator = ({
       ] as CurrencyCode[]);
 
   const result = useMemo(
-    () => (exchangeRates?.exchangeRates[from][to] || 0) * amount,
-    [exchangeRates, from, to, amount]
+    () =>
+      (exchangeRates?.exchangeRates[from][to] || 0) *
+      amount *
+      (1 - commission / 100),
+    [exchangeRates, from, to, amount, commission]
   );
 
   if (!exchangeRates) {
@@ -125,6 +129,22 @@ export const ExchangeCalculator = ({
               ))}
             </Select>
           </FormControl>
+        </Grid2>
+        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+          <TextField
+            label="Commission"
+            id="outlined-end-adornment"
+            fullWidth
+            value={commission}
+            onChange={(e) => setCommission(Number(e.target.value))}
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="start">%</InputAdornment>
+                ),
+              },
+            }}
+          />
         </Grid2>
       </Grid2>
       <Grid2>
