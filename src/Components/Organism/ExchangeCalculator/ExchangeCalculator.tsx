@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react";
-import { Result, StyledBox, Title } from "./ExchangeCalculatorStyles";
+import { Result, StyledBox } from "./ExchangeCalculatorStyles";
 
 import { CurrencyCode } from "../../../Types/Types/exhange_rates.type";
 import { ExchangeRateResponse } from "../../../Types/Interfaces/exchangeRateResponse.interface";
 import {
-  Box,
   Input,
   MenuItem,
   Select,
@@ -57,7 +56,6 @@ export const ExchangeCalculator = ({
 
   return (
     <Stack justifyContent="center" alignItems="center">
-      <Title>Currency Converter</Title>
       <StyledBox>
         <Input
           value={amount}

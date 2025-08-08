@@ -11,7 +11,7 @@ export const ExchangeRates = () => {
     return <StyledTypography>Loading...</StyledTypography>;
   }
   return (
-    <Stack direction="column">
+    <Stack direction="column" gap={4}>
       <StyledTypography variant="h3" textAlign="center">
         {data?.pageTitle || "Exchange Rates"}
       </StyledTypography>

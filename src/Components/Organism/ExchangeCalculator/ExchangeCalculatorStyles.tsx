@@ -17,5 +17,5 @@ export const StyledBox = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5;
+  gap: 3rem;
 `;
