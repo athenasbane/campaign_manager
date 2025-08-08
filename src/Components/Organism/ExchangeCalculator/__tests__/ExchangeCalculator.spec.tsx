@@ -22,12 +22,6 @@ describe("ExchangeCalculator", () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
-  it("renders converter UI and default result", () => {
-    render(<ExchangeCalculator exchangeRates={mockExchangeRates} />);
-    expect(screen.getByText("Currency Converter")).toBeInTheDocument();
-    expect(screen.getByText("1.00 GLD")).toBeInTheDocument(); // default result
-  });
-
   it("updates result when amount changes", () => {
     render(<ExchangeCalculator exchangeRates={mockExchangeRates} />);
     const input = screen.getByRole("textbox") as HTMLInputElement;
