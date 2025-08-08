@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
-import { Result, StyledBox } from "./ExchangeCalculatorStyles";
+import { Result } from "./ExchangeCalculatorStyles";
 
 import { CurrencyCode } from "../../../Types/Types/exhange_rates.type";
 import { ExchangeRateResponse } from "../../../Types/Interfaces/exchangeRateResponse.interface";
 import {
-  Input,
+  FormControl,
+  Grid2,
+  InputAdornment,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
-  Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 
@@ -55,43 +58,80 @@ export const ExchangeCalculator = ({
   };
 
   return (
-    <Stack justifyContent="center" alignItems="center">
-      <StyledBox>
-        <Input
-          value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
-        />
-        <Select
-          labelId="from-select-label"
-          inputProps={{ "aria-label": "From Currency" }}
-          value={from}
-          onChange={handleFromChange}
-        >
-          {currencyCodes.map((code) => (
-            <MenuItem key={code} value={code}>
-              {exchangeRates.currencyInformation[code].symbol} —{" "}
-              {exchangeRates.currencyInformation[code].name}
-            </MenuItem>
-          ))}
-        </Select>
-        <span>→</span>
-        <Select
-          labelId="to-select-label"
-          inputProps={{ "aria-label": "To Currency" }}
-          value={to}
-          onChange={handleToChange}
-        >
-          {currencyCodes.map((code) => (
-            <MenuItem key={code} value={code}>
-              {exchangeRates.currencyInformation[code].symbol} —{" "}
-              {exchangeRates.currencyInformation[code].name}
-            </MenuItem>
-          ))}
-        </Select>
-      </StyledBox>
-      <Result>
-        {result.toFixed(2)} {to}
-      </Result>
-    </Stack>
+    <Grid2
+      container
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+    >
+      <Grid2 justifyContent="center" alignItems="center" gap={3} container>
+        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+          <TextField
+            label="Amount"
+            id="outlined-start-adornment"
+            fullWidth
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {exchangeRates?.currencyInformation[from].symbol}
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+        </Grid2>
+        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+          <FormControl fullWidth>
+            <InputLabel id="from-select-label">From</InputLabel>
+            <Select
+              label="From"
+              fullWidth
+              labelId="from-select-label"
+              inputProps={{ "aria-label": "From Currency" }}
+              value={from}
+              onChange={handleFromChange}
+            >
+              {currencyCodes.map((code) => (
+                <MenuItem key={code} value={code}>
+                  {exchangeRates.currencyInformation[code].symbol} —{" "}
+                  {exchangeRates.currencyInformation[code].name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid2>
+        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+          <div>→</div>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: "auto" }}>
+          <FormControl fullWidth>
+            <InputLabel id="to-select-label">To</InputLabel>
+            <Select
+              label="To"
+              fullWidth
+              labelId="to-select-label"
+              inputProps={{ "aria-label": "To Currency" }}
+              value={to}
+              onChange={handleToChange}
+            >
+              {currencyCodes.map((code) => (
+                <MenuItem key={code} value={code}>
+                  {exchangeRates.currencyInformation[code].symbol} —{" "}
+                  {exchangeRates.currencyInformation[code].name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid2>
+      </Grid2>
+      <Grid2>
+        <Result>
+          {result.toFixed(2)} {to}
+        </Result>
+      </Grid2>
+    </Grid2>
   );
 };
