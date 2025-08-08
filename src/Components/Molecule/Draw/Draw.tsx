@@ -3,6 +3,7 @@ import Divider from "@mui/material/Divider";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DownloadIcon from "@mui/icons-material/Download";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import MapIcon from "@mui/icons-material/Map";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -47,6 +48,11 @@ export default function Draw({
       displayText: "Missions",
       path: "/missions",
       icon: <AssignmentIcon />,
+    },
+    {
+      displayText: "Exchange Rates",
+      path: "/exchange",
+      icon: <CurrencyExchangeIcon />,
     },
   ];
 

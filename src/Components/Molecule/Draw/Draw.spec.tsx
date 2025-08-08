@@ -16,6 +16,6 @@ describe("Molecule - Draw", () => {
       { wrapper: BrowserRouter }
     );
 
-    expect(getAllByTestId("draw_item").length).toBe(7);
+    expect(getAllByTestId("draw_item").length).toBe(8);
   });
 });
