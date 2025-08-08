@@ -24,7 +24,7 @@ describe("ExchangeCalculator", () => {
 
   it("updates result when amount changes", () => {
     render(<ExchangeCalculator exchangeRates={mockExchangeRates} />);
-    const input = screen.getByRole("textbox") as HTMLInputElement;
+    const input = screen.getAllByRole("textbox")[0] as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: "3" } });
     expect(screen.getByText("3.00 GLD")).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe("ExchangeCalculator", () => {
     const fromSelect = screen.getByLabelText("From Currency");
     const toSelect = screen.getByLabelText("To Currency");
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getAllByRole("textbox")[0];
 
     // Change from to CIR
     await user.click(fromSelect);
@@ -66,5 +66,35 @@ describe("ExchangeCalculator", () => {
     await user.type(input, "2");
 
     expect(await screen.findByText("1.80 GLD")).toBeInTheDocument(); // 2 * 0.9
+  });
+
+  it("converts correctly from CIR to GLD with amount", async () => {
+    render(<ExchangeCalculator exchangeRates={mockExchangeRates} />);
+    const user = userEvent.setup();
+
+    const fromSelect = screen.getByLabelText("From Currency");
+    const toSelect = screen.getByLabelText("To Currency");
+
+    const input = screen.getAllByRole("textbox")[0];
+
+    // Change from to CIR
+    await user.click(fromSelect);
+    await user.click(screen.getByText(/ɱ — Cirran Mark/i));
+
+    // Change to to GLD
+    await user.click(toSelect);
+    await user.click(screen.getAllByText(/🪙 — Gold/i)[1]);
+
+    // Change input to 2
+    await user.clear(input);
+    await user.type(input, "2");
+
+    const input2 = screen.getAllByRole("textbox")[1];
+
+    // Change input to 2
+    await user.clear(input2);
+    await user.type(input2, "10");
+
+    expect(await screen.findByText("1.62 GLD")).toBeInTheDocument(); // 2 * 0.9 * 0.9
   });
 });
