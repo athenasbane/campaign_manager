@@ -149,7 +149,7 @@ export const ExchangeCalculator = ({
       </Grid2>
       <Grid2>
         <Result>
-          {result.toFixed(2)} {to}
+          {result.toFixed(2)} {exchangeRates.currencyInformation[to].symbol}
         </Result>
       </Grid2>
     </Grid2>
