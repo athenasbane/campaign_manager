@@ -33,7 +33,7 @@ export default function TimelineItem({
       <TimelineContent>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Stack justifyContent="space-between" direction={order}>
+            <Stack justifyContent="space-between" gap={2} direction={order}>
               <Box>
                 <Typography fontSize={20} variant="h3">
                   {year}
