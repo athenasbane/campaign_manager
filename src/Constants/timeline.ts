@@ -61,4 +61,20 @@ export const timeline: ITimeline[] = [
     summary: `Often refered too as "The Dark Times". The Empero declared that all of Tordenhelm must be brought into compliance with Imperial Law. The Old Gods before this time were respected, the Tip Lords ruled in their Dominions free of Imperial interference. The Nals project was fast tracked using the newly found blasphemous as prison labour to complete them. This was met with sometimes disastrous results. The flooding of Shamphel (Now Shambles). The Wild Lands wars saw the complete breakdown of relationship between the Moving Cities and Torden. To the point that the Empire denies their existence to this very day`,
     year: "404 AF",
   },
+  {
+    title: "The Breaking of the Imperium",
+    summary: `The Tordenhelm Rebellion began when Imperial forces, already weakened, were overrun by a Daemonic invasion. In the chaos, long-oppressed factions rose against their masters, including the Cirrane Republican Army (CRA), the Prannian Tribes, and The Raven of New Shamphel. The Imperium collapsed under the onslaught, leaving its remnants undefended and the fledgling nations to face the Daemons alone. In this crucible, The Five—also known as Birbick’s Bastards—forged alliances and struck down the invasion’s leaders, culminating in the destruction of Hildraugr, the Lord of Death. Though the Divine Barrier remained shattered, one of the Five sacrificed themselves to restore it. In the aftermath, Balfor ascended to divinity, taking the Domain of Leader within the mortal Five, replacing the fallen god Zucleith.`,
+    year: "836 AF",
+  },
+  {
+    title: "The Age of Smoke",
+    summary:
+      "In the two centuries following the Tordenhelm Rebellion, the collapse of the Imperium and the Daemonic Invasion left the continent fractured. With the Divine Barrier restored and the Daemons banished, the survivors turned to rebuilding. Power shifted from crowns and priesthoods to merchant houses and industrialists, laying the foundation for the early arcano-tech revolution. The Cirrane Republic, forged in the fires of rebellion, became a major democratic power along the coast, though plagued by piracy and political factionalism. New Shamphel, reborn from The Shambles through the heroism of The Raven, grew into a sprawling metropolis—its revolutionary legacy gradually replaced by corporate dominance. Viirvashness secured its place as a neutral financial hub, mediating trade and investment between rival powers. The fall of Imperial authority in the Mere Lands and other frontier regions opened the way for corporate exploitation. Periwinkel Industries and Spire Arcano-Tech emerged as the dominant forces, monopolizing aetheric crystal extraction and mass-producing enchanted goods. Arcano-tech replaced traditional magic in much of daily life, even as it deepened the divide between rich and poor. In the absence of centralized control, new nations rose from former Imperial provinces—some adopting democracy like the Cirrane Republic, others ruled by oligarchs, warlords, or monarchs. The surviving city of Torden became an ossified relic under the still-reigning Empero, whose belief in the Imperium’s restoration persists in defiance of reality. By the dawn of the Age of Smoke, railways and aetheric engines had reshaped the land, industry choked the skies with soot, and the promise of freedom born from the Rebellion had long since faded into a world defined by profit, exploitation, and uneasy peace.",
+    year: "967 AF",
+  },
+  {
+    title: "Present Day",
+    summary: "The events of the Dros'kara campaign",
+    year: "1236PF",
+  },
 ];
