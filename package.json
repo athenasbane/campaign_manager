@@ -86,8 +86,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --transformIgnorePatterns 'node_modules/(?!@codemirror)/' ",
     "test:vitest": "vitest",
-    "sync": "aws s3 sync ./build 's3://teratin-campaign-manager'",
-    "invalidate": "aws cloudfront create-invalidation --distribution-id E1TC5U3M17OQHU --paths '/*'",
+    "sync": "aws s3 sync ./build 's3://teratin'",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id EOSD7OT72QWH8 --paths '/*'",
     "contentful-typescript-codegen": "contentful-typescript-codegen --output src/@types/generated/contentful.d.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
