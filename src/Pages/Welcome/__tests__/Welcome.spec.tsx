@@ -17,9 +17,9 @@ describe("Page - Welcome", () => {
     const { getByText } = renderWithProviders(
       <MemoryRouter>
         <Welcome />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
-    expect(getByText("Next Session")).toBeInTheDocument();
+    expect(getByText("Next Session:")).toBeInTheDocument();
   });
 });
