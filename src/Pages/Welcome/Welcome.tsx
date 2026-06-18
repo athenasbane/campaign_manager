@@ -22,7 +22,7 @@ export default function Welcome() {
 
   const nextSessionDate = useMemo(
     () => nextSession(data?.nextSession),
-    [data?.nextSession]
+    [data?.nextSession],
   );
 
   return (
@@ -37,7 +37,7 @@ export default function Welcome() {
               <Stack direction="column">
                 <Box>
                   <Typography variant="h2" textAlign="center">
-                    Next Session
+                    Next Session:
                   </Typography>
                 </Box>
                 <Box>
