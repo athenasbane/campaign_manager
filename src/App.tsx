@@ -21,6 +21,9 @@ import { Suspense } from "react";
 import Missions from "./Pages/Missions/Missions";
 import { StyledSkeleton } from "./AppStyles";
 import { ExchangeRates } from "./Pages/ExchangeRates/ExchangeRates";
+import Login from "./Pages/Login/Login";
+import Player from "./Pages/Player/Player";
+import ProtectedRoute from "./Components/Organism/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
@@ -53,6 +56,15 @@ function App() {
               <Route path="/history" element={<History />} />
               <Route path="/missions" element={<Missions />} />
               <Route path="/exchange" element={<ExchangeRates />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/me"
+                element={
+                  <ProtectedRoute>
+                    <Player />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

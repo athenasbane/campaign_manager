@@ -7,6 +7,7 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import MapIcon from "@mui/icons-material/Map";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import PersonIcon from "@mui/icons-material/Person";
 import { EnumModalSlice } from "../../../Store/slices/modals";
 import { useNavigate } from "react-router-dom";
 import { BookOutlined } from "@mui/icons-material";
@@ -53,6 +54,11 @@ export default function Draw({
       displayText: "Exchange Rates",
       path: "/exchange",
       icon: <CurrencyExchangeIcon />,
+    },
+    {
+      displayText: "My Character",
+      path: "/me",
+      icon: <PersonIcon />,
     },
   ];
 

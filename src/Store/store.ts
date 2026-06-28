@@ -3,12 +3,16 @@ import modalReducer from "./slices/modals";
 import { contentfulApi } from "./slices/backend";
 import activeMissionReducer from "./slices/activeMission";
 import layoutReducer from "./slices/layout";
+import authReducer from "./slices/auth";
+import { playerApi } from "./slices/playerApi";
 
 const rootReducer = combineReducers({
   activeMission: activeMissionReducer,
+  auth: authReducer,
   modals: modalReducer,
   layout: layoutReducer,
   [contentfulApi.reducerPath]: contentfulApi.reducer,
+  [playerApi.reducerPath]: playerApi.reducer,
 });
 
 export function setupStore(preloadedState?: Partial<RootState>) {
@@ -16,7 +20,8 @@ export function setupStore(preloadedState?: Partial<RootState>) {
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }).concat(
-        contentfulApi.middleware
+        contentfulApi.middleware,
+        playerApi.middleware
       ),
     preloadedState,
   });
