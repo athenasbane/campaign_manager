@@ -145,6 +145,34 @@ export interface IMapPageFields {
 
   levelOfDetail: number | null;
 
+  mapId?: string | null;
+
+  tileUrlTemplate?: string | null;
+
+  imageWidth?: number | null;
+
+  imageHeight?: number | null;
+
+  minZoom?: number | null;
+
+  maxZoom?: number | null;
+
+  defaultZoom?: number | null;
+
+  defaultCenter?: string | [number, number] | null;
+
+  featureCollection?: {
+    items?: {
+      key: string;
+      name: string;
+      type: "landmark" | "district" | "route" | "gate" | "street";
+      geometry: string;
+      publicSummary?: string | null;
+      revealedSummary?: string | null;
+      visibilityKey?: string | null;
+    }[];
+  } | null;
+
   /** Map */
   map: Asset;
 }

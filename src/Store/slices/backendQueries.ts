@@ -151,7 +151,34 @@ export const buildListPageQuery = (id: string) => gql`
   }
 `;
 
-export const buildMapPageQuery = (id: string) => gql`
+const INTERACTIVE_MAP_FIELDS = `
+  mapId
+  tileUrlTemplate
+  imageWidth
+  imageHeight
+  minZoom
+  maxZoom
+  defaultZoom
+  defaultCenter
+  featureCollection {
+    items {
+      ... on MapFeature {
+        key
+        name
+        type
+        geometry
+        publicSummary
+        revealedSummary
+        visibilityKey
+      }
+    }
+  }
+`;
+
+export const buildMapPageQuery = (
+  id: string,
+  includeInteractiveFields = false
+) => gql`
   {
     mapPage(id: "${id}") {
       pageTitle
@@ -160,7 +187,10 @@ export const buildMapPageQuery = (id: string) => gql`
       map {
         title
         url
+        width
+        height
       }
+      ${includeInteractiveFields ? INTERACTIVE_MAP_FIELDS : ""}
     }
   }
 `;
