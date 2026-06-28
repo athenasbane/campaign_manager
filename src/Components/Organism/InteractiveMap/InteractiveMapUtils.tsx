@@ -24,6 +24,18 @@ export const distanceCalc = (
   return sqrt;
 };
 
+export const mapCoordinateDistanceCalc = (
+  pointOne: [number, number],
+  pointTwo: [number, number],
+  imageHeight: number,
+  imageWidth: number
+) => {
+  const yDistance = Math.abs(pointOne[1] - pointTwo[1]) / imageHeight;
+  const xDistance = Math.abs(pointOne[0] - pointTwo[0]) / imageWidth;
+
+  return Math.sqrt(xDistance ** 2 + yDistance ** 2);
+};
+
 export const calculatePinCoordinates = (
   currentHeight: number,
   currentWidth: number,

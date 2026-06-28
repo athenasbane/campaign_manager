@@ -77,11 +77,32 @@ export const contentfulApi = createApi({
       transformResponse: (response: any) => response?.listPage,
     }),
     getMapPage: builder.query({
-      query: (id) => ({
-        body: buildMapPageQuery(id),
-      }),
-      transformResponse: (response: { mapPage: IMapPageFields }) =>
-        response?.mapPage,
+      queryFn: async (id, _api, _extraOptions, baseQuery) => {
+        const interactiveResponse = await baseQuery({
+          body: buildMapPageQuery(id, true),
+        });
+
+        if ("data" in interactiveResponse && interactiveResponse.data) {
+          return {
+            data: (interactiveResponse.data as { mapPage: IMapPageFields })
+              ?.mapPage,
+          };
+        }
+
+        const legacyResponse = await baseQuery({
+          body: buildMapPageQuery(id, false),
+        });
+
+        if ("data" in legacyResponse && legacyResponse.data) {
+          return {
+            data: (legacyResponse.data as { mapPage: IMapPageFields })?.mapPage,
+          };
+        }
+
+        return {
+          error: legacyResponse.error || interactiveResponse.error,
+        };
+      },
     }),
     getDocumentPage: builder.query({
       query: (id) => ({

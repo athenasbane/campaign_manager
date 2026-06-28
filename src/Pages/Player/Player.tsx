@@ -6,9 +6,18 @@ import { useGetPlayerProfileQuery } from "../../Store/slices/playerApi";
 import { logout } from "../../Store/slices/auth";
 import { useAppDispatch } from "../../hooks/store.hooks";
 import { StyledPlayerSection } from "./PlayerStyles";
+import { useGetMapPageQuery } from "../../Store/slices/backend";
+import { normaliseMapPage } from "../../Components/Organism/InteractiveMap/InteractiveMapAdapter";
+import InteractiveMap from "../../Components/Organism/InteractiveMap/InteractiveMap";
 
 export default function Player() {
   const { data, error, isLoading } = useGetPlayerProfileQuery();
+  const { data: mapPage, isLoading: isMapLoading } = useGetMapPageQuery(
+    data?.defaultMapSlug || "",
+    {
+      skip: !data?.defaultMapSlug,
+    }
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -49,6 +58,25 @@ export default function Player() {
         </Button>
       </Stack>
       <Typography variant="h4">For {data.displayName}</Typography>
+      {data.defaultMapSlug ? (
+        <StyledPlayerSection>
+          <Stack direction="column" gap={2}>
+            <Typography variant="h3">Personal Map</Typography>
+            {isMapLoading || !mapPage ? (
+              <Skeleton variant="rectangular" height={360} />
+            ) : (
+              <InteractiveMap
+                imageSrc={mapPage.map.url}
+                unitOfDistance={mapPage.unitOfDistance}
+                width="100%"
+                height={520}
+                detail={mapPage.levelOfDetail}
+                mapData={normaliseMapPage(mapPage, data)}
+              />
+            )}
+          </Stack>
+        </StyledPlayerSection>
+      ) : null}
       {data.privateSections.map((section) => (
         <StyledPlayerSection key={section.title}>
           <Stack direction="column" gap={1}>

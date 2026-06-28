@@ -93,6 +93,21 @@ const normalisePrivateSections = (privateSections) => {
   return [];
 };
 
+const normaliseStringList = (value) => {
+  if (Array.isArray(value)) {
+    return value.filter((item) => typeof item === "string");
+  }
+
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
 const buildPrivateSections = (playerContent) => {
   const configuredSections = normalisePrivateSections(
     playerContent.privateSections
@@ -132,6 +147,9 @@ export const handler = async (event) => {
         playerContent.resolvedContent?.fields.name ||
         "Unknown Character",
       privateSections: buildPrivateSections(playerContent),
+      defaultMapSlug: playerContent.defaultMapSlug || null,
+      knownMapFeatureKeys: normaliseStringList(playerContent.knownMapFeatureKeys),
+      revealedMapAreaKeys: normaliseStringList(playerContent.revealedMapAreaKeys),
     });
   } catch (error) {
     console.error(error);
