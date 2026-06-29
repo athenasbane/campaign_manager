@@ -14,7 +14,7 @@ export default function Section({
     <Stack direction="row">
       {swapSections ? (
         <Box>
-          <Typography data-testid="section_element" textAlign="justify">
+          <Typography data-testid="section_element" sx={{ textAlign: "justify" }}>
             {textBlock.displayText}
           </Typography>
           <img
@@ -32,7 +32,7 @@ export default function Section({
             alt={image.altText}
             src={image.imageSrc}
           />
-          <Typography data-testid="section_element" textAlign="justify">
+          <Typography data-testid="section_element" sx={{ textAlign: "justify" }}>
             {textBlock.displayText}
           </Typography>
         </Box>

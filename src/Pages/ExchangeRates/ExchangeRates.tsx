@@ -11,8 +11,8 @@ export const ExchangeRates = () => {
     return <StyledTypography>Loading...</StyledTypography>;
   }
   return (
-    <Stack direction="column" gap={4}>
-      <StyledTypography variant="h3" textAlign="center">
+    <Stack direction="column" sx={{ gap: 4 }}>
+      <StyledTypography variant="h3" sx={{ textAlign: "center" }}>
         {data?.pageTitle || "Exchange Rates"}
       </StyledTypography>
       <ExchangeCalculator exchangeRates={data?.exchangeRates} />

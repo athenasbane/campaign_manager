@@ -2,17 +2,56 @@ import { render, screen, fireEvent } from "@testing-library/react";
 
 import userEvent from "@testing-library/user-event";
 import { ExchangeRateResponse } from "../../../../Types/Interfaces/exchangeRateResponse.interface";
+import { CurrencyCode } from "../../../../Types/Types/exhange_rates.type";
 import { ExchangeCalculator } from "../ExchangeCalculator";
+
+const currencyCodes: CurrencyCode[] = [
+  "GLD",
+  "CIR",
+  "FRT",
+  "PRA",
+  "KRA",
+  "SHA",
+  "FRE",
+  "MAM",
+  "MON",
+  "VIL",
+];
+
+const currencyInformation = currencyCodes.reduce<
+  ExchangeRateResponse["exchangeRates"]["currencyInformation"]
+>(
+  (acc, code) => ({
+    ...acc,
+    [code]: { name: code, symbol: code, region: "Test" },
+  }),
+  {} as ExchangeRateResponse["exchangeRates"]["currencyInformation"]
+);
+
+const exchangeRates = currencyCodes.reduce<
+  ExchangeRateResponse["exchangeRates"]["exchangeRates"]
+>(
+  (acc, from) => ({
+    ...acc,
+    [from]: currencyCodes.reduce<Record<CurrencyCode, number>>(
+      (rates, to) => ({ ...rates, [to]: from === to ? 1 : 0 }),
+      {} as Record<CurrencyCode, number>
+    ),
+  }),
+  {} as ExchangeRateResponse["exchangeRates"]["exchangeRates"]
+);
 
 // Mock exchange rate data
 const mockExchangeRates: ExchangeRateResponse["exchangeRates"] = {
   currencyInformation: {
+    ...currencyInformation,
     GLD: { name: "Gold", symbol: "🪙", region: "Universal" },
     CIR: { name: "Cirran Mark", symbol: "ɱ", region: "Cirrane Republic" },
   },
   exchangeRates: {
-    GLD: { GLD: 1, CIR: 1.1 },
-    CIR: { GLD: 0.9, CIR: 1 },
+    ...exchangeRates,
+    GLD: { ...exchangeRates.GLD, CIR: 1.1 },
+    CIR: { ...exchangeRates.CIR, GLD: 0.9 },
   },
 };
 

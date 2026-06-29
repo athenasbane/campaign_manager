@@ -13,7 +13,7 @@ export default function DrawItem({ onClick, item }: DrawItemProps) {
   return (
     <ListItem data-testid="draw_item" key={item.displayText} disablePadding>
       <ListItemButton onClick={onClick}>
-        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemIcon sx={{ minWidth: 64 }}>{item.icon}</ListItemIcon>
         <ListItemText primary={item.displayText} />
       </ListItemButton>
     </ListItem>

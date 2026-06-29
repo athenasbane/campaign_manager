@@ -36,12 +36,12 @@ export default function Welcome() {
             <StyledPaper>
               <Stack direction="column">
                 <Box>
-                  <Typography variant="h2" textAlign="center">
+                  <Typography variant="h2" sx={{ textAlign: "center" }}>
                     Next Session:
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="h4" textAlign="center">
+                  <Typography variant="h4" sx={{ textAlign: "center" }}>
                     {nextSessionDate}
                   </Typography>
                 </Box>

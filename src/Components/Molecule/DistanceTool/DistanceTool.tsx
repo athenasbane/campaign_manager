@@ -44,7 +44,7 @@ export default function DistanceTool({
       </Stack>
       {isPinOneVisable && isPinTwoVisable ? (
         <Box sx={{ width: "50%", alignSelf: "center" }}>
-          <Typography textAlign="end" variant="body1">
+          <Typography sx={{ textAlign: "end" }} variant="body1">
             {`Distance: `}
             {((distance || 0) * detail).toFixed(1)}
             {unitOfDistance}

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { Link, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { useAppDispatch } from "../../../hooks/store.hooks";
 import { EnumLayout, setLayoutValue } from "../../../Store/slices/layout";
 import { Spark, StyledNavbar } from "./NavbarStyles";
@@ -13,6 +13,12 @@ import { Spark, StyledNavbar } from "./NavbarStyles";
 export interface INavbarProps {
   onMenuButtonClick: () => void;
 }
+
+const sparks = Array.from({ length: 15 }).map((_, index) => ({
+  top: `${(index * 37) % 100}%`,
+  left: `${(index * 53) % 100}%`,
+  delay: `${(index * 0.35) % 5}s`,
+}));
 
 export default function Navbar({ onMenuButtonClick }: INavbarProps) {
   const navigate = useNavigate();
@@ -31,22 +37,13 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
       );
     }
   });
-  const sparks = useMemo(
-    () =>
-      Array.from({ length: 15 }).map(() => ({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        delay: `${Math.random() * 5}s`,
-      })),
-    []
-  );
 
   return (
     <StyledNavbar ref={navRef}>
       {sparks.map((s, i) => (
         <Spark key={i} top={s.top} left={s.left} delay={s.delay} />
       ))}
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" sx={{ alignItems: "center" }}>
         <Box sx={{ width: "25%", textAlign: "center" }}>
           {location.pathname !== "/" ? (
             <Button color="primary" onClick={() => navigate(-1)}>
@@ -62,7 +59,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
             }}
             to="/"
           >
-            <Typography variant="h3" textAlign="center">
+            <Typography variant="h3" sx={{ textAlign: "center" }}>
               Teratin
             </Typography>
           </Link>

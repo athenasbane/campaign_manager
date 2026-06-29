@@ -11,7 +11,6 @@ module.exports = {
     "!src/index.tsx",
     "!src/reportWebVitals.ts",
   ],
-  setupFiles: ["react-app-polyfill/jsdom"],
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   testMatch: [
     "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",

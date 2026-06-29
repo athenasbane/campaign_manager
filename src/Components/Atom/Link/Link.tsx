@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Typography, { TypographyProps } from "@mui/material/Typography";
 import { TTypographyVariant } from "../../../Types/Types/link.type";
 import { Link as RouterLink } from "react-router-dom";
@@ -8,7 +9,7 @@ export interface ILinkProps {
   path: string;
   linkDisplayLabel: string;
   typographyComponentProps?: TypographyProps;
-  display?: TypographyProps["display"];
+  display?: CSSProperties["display"];
   color?: string;
 }
 
@@ -20,13 +21,18 @@ export default function Link({
   display,
   color = theme.palette.contrastText,
 }: ILinkProps) {
+  const { sx, ...restTypographyProps } = typographyComponentProps;
+
   return (
     <RouterLink style={{ textDecoration: "none", color: "inherit" }} to={path}>
       <Typography
         data-testid="link_typography"
         color={color}
-        display={display || undefined}
-        {...typographyComponentProps}
+        sx={[
+          ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+          ...(display ? [{ display }] : []),
+        ]}
+        {...restTypographyProps}
         variant={typographyVariant}
       >
         {linkDisplayLabel}

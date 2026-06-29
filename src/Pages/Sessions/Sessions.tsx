@@ -47,7 +47,7 @@ export default function Sessions() {
                 align={session.increment === "act" ? "center" : "left"}
                 variant={session.increment === "act" ? "h3" : "h4"}
                 color={theme.palette.secondary.light}
-                mt={4}
+                sx={{ mt: 4 }}
               >
                 {session.displayText}
               </Typography>
@@ -55,7 +55,11 @@ export default function Sessions() {
 
           case ESessionType.Location:
             return (
-              <Typography key={session.displayText + i} mt={2} variant="h5">
+              <Typography
+                key={session.displayText + i}
+                sx={{ mt: 2 }}
+                variant="h5"
+              >
                 {session.displayText}
               </Typography>
             );
@@ -79,7 +83,7 @@ export default function Sessions() {
         <StyledTab label="Eldoria" />
         <StyledTab label="Tordenhelm" />
       </Tabs>
-      <Stack direction="column" justifyContent="center">
+      <Stack direction="column" sx={{ justifyContent: "center" }}>
         {sessions}
       </Stack>
     </Box>

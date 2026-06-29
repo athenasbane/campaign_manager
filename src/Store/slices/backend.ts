@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { request, ClientError } from "graphql-request";
 import { Campaigns } from "../../Pages/Sessions/Sessions";
-import {
+import type {
   IDocumentPageFields,
   IMapPageFields,
 } from "../../Types/contentful-code-gen";

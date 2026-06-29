@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
-import styled from "@mui/material/styles/styled";
-import { keyframes } from "@mui/material/styles";
+import { keyframes, styled } from "@mui/material/styles";
 
 const sparkAnimation = keyframes`
   0%, 100% { opacity: 0; transform: scale(0); }

@@ -12,7 +12,7 @@ import {
 import List from "./Pages/List/List";
 import NotFound from "./Pages/NotFound/NotFound";
 import Sessions from "./Pages/Sessions/Sessions";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import Content from "./Pages/Content/Content";

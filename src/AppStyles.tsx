@@ -1,5 +1,5 @@
 import Skeleton from "@mui/material/Skeleton";
-import styled from "@mui/material/styles/styled";
+import { styled } from "@mui/material/styles";
 
 export const StyledSkeleton = styled(Skeleton)(({ theme: _ }) => ({
   width: "100%",
