@@ -103,6 +103,29 @@ const normaliseMapCoordinate = (
   Math.min(Math.max(roundCoordinate(point[1]), 0), data.imageHeight),
 ];
 
+const createSimpleImageTileLayer = (
+  urlTemplate: string,
+  options: L.TileLayerOptions,
+  imageHeight: number
+) => {
+  const layer = L.tileLayer(urlTemplate, options);
+
+  layer.getTileUrl = (coords) => {
+    const tileSize = layer.getTileSize().y;
+    const rowCount = Math.ceil((imageHeight * 2 ** coords.z) / tileSize);
+
+    return L.Util.template(urlTemplate, {
+      ...layer.options,
+      x: coords.x,
+      y: coords.y + rowCount,
+      z: coords.z,
+      r: L.Browser.retina ? "@2x" : "",
+    });
+  };
+
+  return layer;
+};
+
 const buildDraftGeometry = (
   mode: DmGeometryMode,
   points: [number, number][]
@@ -516,12 +539,12 @@ export default function InteractiveMap({
     }
 
     baseLayerRef.current = data.tileUrlTemplate
-      ? L.tileLayer(data.tileUrlTemplate, {
+      ? createSimpleImageTileLayer(data.tileUrlTemplate, {
           bounds,
           maxZoom: data.maxZoom,
           minZoom: data.minZoom,
           noWrap: true,
-        }).addTo(mapRef.current)
+        }, data.imageHeight).addTo(mapRef.current)
       : L.imageOverlay(data.imageSrc, bounds).addTo(mapRef.current);
   }, [
     bounds,
