@@ -10,7 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import PersonIcon from "@mui/icons-material/Person";
 import { EnumModalSlice } from "../../../Store/slices/modals";
 import { useNavigate } from "react-router-dom";
-import { BookOutlined } from "@mui/icons-material";
+import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
 import { IDrawListItem } from "../../../Types/Interfaces/DrawListItem";
 import DrawItem from "../DrawItem/DrawItem";
 import { StyledBox, StyledSwipeableDrawer } from "./DrawStyled";
@@ -71,7 +71,7 @@ export default function Draw({
     {
       displayText: "Tales from Teratin",
       path: "/list/1iLinkQTnQ1Q9qqzLGW37v",
-      icon: <BookOutlined />,
+      icon: <BookOutlinedIcon />,
     },
     {
       displayText: "History",
