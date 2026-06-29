@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
+const DEFAULT_VIDEO_HEIGHT = 495;
+
 interface IProps {
   videoId: string;
   autoPlay?: boolean;
@@ -12,10 +14,8 @@ const VideoIframe: React.FC<IProps> = (props) => {
     autoPlay ? "?autoplay=1" : ""
   }`;
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const defaultHeight = 495;
-  const [videoHeight, setVideoHeight] = useState<number>(
-    iframeRef.current ? iframeRef.current.offsetWidth * 0.5625 : defaultHeight
-  );
+  const [videoHeight, setVideoHeight] =
+    useState<number>(DEFAULT_VIDEO_HEIGHT);
 
   const handleChangeVideoWidth = useCallback(() => {
     const ratio =
@@ -28,28 +28,17 @@ const VideoIframe: React.FC<IProps> = (props) => {
         : 1.85;
     const height = iframeRef.current
       ? iframeRef.current.offsetWidth * 0.5625
-      : defaultHeight;
+      : DEFAULT_VIDEO_HEIGHT;
     return setVideoHeight(Math.floor(height * ratio));
   }, []);
 
   useEffect(() => {
     window.addEventListener("resize", handleChangeVideoWidth);
-    const ratio =
-      window.innerWidth > 990
-        ? 1.0
-        : window.innerWidth > 522
-        ? 1.2
-        : window.innerWidth > 400
-        ? 1.45
-        : 1.85;
-    const height = iframeRef.current
-      ? iframeRef.current.offsetWidth * 0.5625
-      : defaultHeight;
-    setVideoHeight(Math.floor(height * ratio));
+    handleChangeVideoWidth();
     return function cleanup() {
       window.removeEventListener("resize", handleChangeVideoWidth);
     };
-  }, [videoHeight, handleChangeVideoWidth]);
+  }, [handleChangeVideoWidth]);
 
   return (
     <iframe

@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../src/theme";

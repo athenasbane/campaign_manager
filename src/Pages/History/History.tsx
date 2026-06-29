@@ -17,7 +17,7 @@ export default function History() {
   ));
   return (
     <>
-      <Typography variant="h1" textAlign="center">
+      <Typography variant="h1" sx={{ textAlign: "center" }}>
         History
       </Typography>
       <StyledTimeline

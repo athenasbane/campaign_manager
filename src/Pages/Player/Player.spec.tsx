@@ -3,6 +3,7 @@ import { renderWithProviders } from "../../utils/test-utils";
 import { useGetPlayerProfileQuery } from "../../Store/slices/playerApi";
 import { useGetMapPageQuery } from "../../Store/slices/backend";
 import { PAGE_RESPONSE } from "../Map/__mocks__/map_api_response";
+import Player from "./Player";
 
 const mockInteractiveMap = jest.fn((_: unknown) => (
   <div data-testid="personal-map" />
@@ -22,8 +23,6 @@ jest.mock(
   "../../Components/Organism/InteractiveMap/InteractiveMap",
   () => (props: unknown) => mockInteractiveMap(props)
 );
-
-import Player from "./Player";
 
 describe("Page - Player", () => {
   beforeEach(() => {

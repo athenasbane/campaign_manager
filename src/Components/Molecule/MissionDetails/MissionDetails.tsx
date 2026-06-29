@@ -43,8 +43,8 @@ export default function MissionDetails({
   };
   return (
     <>
-      <Box mb={4}>
-        <Typography variant="h3" textAlign="center">
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h3" sx={{ textAlign: "center" }}>
           {missionName}
         </Typography>
       </Box>

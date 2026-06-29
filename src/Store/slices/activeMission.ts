@@ -1,20 +1,27 @@
-import { SliceCaseReducers, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Mission } from "../../Types/Interfaces/missions.interface";
 
+type ActiveMission = Pick<
+  Mission,
+  | "missionName"
+  | "location"
+  | "setter"
+  | "reward"
+  | "description"
+  | "missionLocation"
+>;
+
 interface IActiveMissionState {
-  mission: Mission | null;
+  mission: ActiveMission | null;
 }
 
 const initialState: IActiveMissionState = { mission: null };
 
-export const activeMissionSlice = createSlice<
-  IActiveMissionState,
-  SliceCaseReducers<IActiveMissionState>
->({
+export const activeMissionSlice = createSlice({
   name: "activeMission",
   initialState,
   reducers: {
-    setActiveMission: (state, action: { type: string; payload: Mission }) => {
+    setActiveMission: (state, action: PayloadAction<ActiveMission>) => {
       state.mission = action.payload;
     },
   },

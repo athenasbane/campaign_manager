@@ -38,18 +38,18 @@ export default function Missions() {
   const mission = selected ? (
     <MissionDetails {...selected} />
   ) : (
-    <Typography textAlign="center" variant="h3">
+    <Typography sx={{ textAlign: "center" }} variant="h3">
       Select a mission
     </Typography>
   );
   return (
     <Stack direction="column">
       <Box sx={{ textAlign: "center" }}>
-        <Typography textAlign="center" variant="h2">
+        <Typography sx={{ textAlign: "center" }} variant="h2">
           {data?.title}
         </Typography>
       </Box>
-      <Stack direction="row" justifyContent="center" gap={6}>
+      <Stack direction="row" sx={{ justifyContent: "center", gap: 6 }}>
         <Box
           sx={{
             border: "1px solid white",
@@ -69,8 +69,8 @@ export default function Missions() {
         </Box>
         <Stack
           direction="column"
-          gap={4}
           sx={{
+            gap: 4,
             border: "1px solid white",
             padding: 3,
             borderBottomRightRadius: 10,

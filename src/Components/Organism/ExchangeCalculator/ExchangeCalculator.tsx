@@ -5,7 +5,7 @@ import { CurrencyCode } from "../../../Types/Types/exhange_rates.type";
 import { ExchangeRateResponse } from "../../../Types/Interfaces/exchangeRateResponse.interface";
 import {
   FormControl,
-  Grid2,
+  Grid as Grid2,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -64,12 +64,17 @@ export const ExchangeCalculator = ({
   return (
     <Grid2
       container
-      justifyContent="center"
-      alignItems="center"
-      direction="column"
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
     >
-      <Grid2 justifyContent="center" alignItems="center" gap={3} container>
-        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+      <Grid2
+        container
+        sx={{ justifyContent: "center", alignItems: "center", gap: 3 }}
+      >
+        <Grid2 sx={{ justifyContent: "center" }} size={{ xs: 12, md: "auto" }}>
           <TextField
             label="Amount"
             id="outlined-start-adornment"
@@ -87,7 +92,7 @@ export const ExchangeCalculator = ({
             }}
           />
         </Grid2>
-        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+        <Grid2 sx={{ justifyContent: "center" }} size={{ xs: 12, md: "auto" }}>
           <FormControl fullWidth>
             <InputLabel id="from-select-label">From</InputLabel>
             <Select
@@ -107,7 +112,7 @@ export const ExchangeCalculator = ({
             </Select>
           </FormControl>
         </Grid2>
-        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+        <Grid2 sx={{ justifyContent: "center" }} size={{ xs: 12, md: "auto" }}>
           <div>→</div>
         </Grid2>
         <Grid2 size={{ xs: 12, md: "auto" }}>
@@ -130,7 +135,7 @@ export const ExchangeCalculator = ({
             </Select>
           </FormControl>
         </Grid2>
-        <Grid2 justifyContent="center" size={{ xs: 12, md: "auto" }}>
+        <Grid2 sx={{ justifyContent: "center" }} size={{ xs: 12, md: "auto" }}>
           <TextField
             label="Commission"
             id="outlined-end-adornment"

@@ -17,10 +17,10 @@ export default function Content() {
   }, [error, data, navigate, isLoading]);
 
   return (
-    <Stack direction="column" maxWidth="100vw">
+    <Stack direction="column" sx={{ maxWidth: "100vw" }}>
       {data && !isLoading ? (
         <>
-          <StyledTypography variant="h3" textAlign="center">
+          <StyledTypography variant="h3" sx={{ textAlign: "center" }}>
             {data.pageTitle || " "}
           </StyledTypography>
           <RichContentRenderer

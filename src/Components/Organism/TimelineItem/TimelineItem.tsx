@@ -33,21 +33,24 @@ export default function TimelineItem({
       <TimelineContent>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Stack justifyContent="space-between" gap={2} direction={order}>
+            <Stack
+              direction={order}
+              sx={{ justifyContent: "space-between", gap: 2 }}
+            >
               <Box>
-                <Typography fontSize={20} variant="h3">
+                <Typography sx={{ fontSize: 20 }} variant="h3">
                   {year}
                 </Typography>
               </Box>
               <Box>
-                <Typography fontSize={30} variant="h3">
+                <Typography sx={{ fontSize: 30 }} variant="h3">
                   {title}
                 </Typography>
               </Box>
             </Stack>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography textAlign="justify">{summary}</Typography>
+            <Typography sx={{ textAlign: "justify" }}>{summary}</Typography>
           </AccordionDetails>
         </Accordion>
       </TimelineContent>

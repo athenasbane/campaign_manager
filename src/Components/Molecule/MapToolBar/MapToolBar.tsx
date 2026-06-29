@@ -3,7 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import MapIcon from "@mui/icons-material/Map";
 import { Typography } from "@mui/material";
 import { StyledBox } from "./MapToolBarStyled";
-import { Search } from "@mui/icons-material";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface MapToolBarProps {
   handleToolBarChange: (_: React.SyntheticEvent, newValue: number) => void;
@@ -30,7 +30,7 @@ export default function MapToolBar({
           value={2}
           label={
             <>
-              <Search />
+              <SearchIcon />
               <Typography>Zoom</Typography>
             </>
           }

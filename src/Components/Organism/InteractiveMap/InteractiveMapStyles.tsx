@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import styled from "@mui/material/styles/styled";
+import { styled } from "@mui/material/styles";
 
 export const StyledMapContainer = styled(Box)(({ theme }) => ({
   minHeight: 420,

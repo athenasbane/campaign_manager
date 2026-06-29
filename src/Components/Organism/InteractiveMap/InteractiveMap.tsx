@@ -622,7 +622,7 @@ export default function InteractiveMap({
 
   return (
     <Box>
-      <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+      <Stack direction={{ xs: "column", md: "row" }} sx={{ gap: 2 }}>
         <FeatureSearch elevation={2}>
           <TextField
             fullWidth
@@ -644,7 +644,7 @@ export default function InteractiveMap({
           </List>
           {enableDmTools ? (
             <DmToolsPanel elevation={0}>
-              <Stack direction="column" gap={1.5}>
+              <Stack direction="column" sx={{ gap: 1.5 }}>
                 <Typography variant="h4">DM Tools</Typography>
                 <ButtonGroup size="small" variant="outlined">
                   <Button
@@ -672,7 +672,7 @@ export default function InteractiveMap({
                     Box
                   </Button>
                 </ButtonGroup>
-                <Stack direction="row" gap={1}>
+                <Stack direction="row" sx={{ gap: 1 }}>
                   <Button
                     size="small"
                     variant="outlined"

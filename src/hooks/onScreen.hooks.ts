@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo, useState } from "react";
 
 export default function useOnScreen(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   verticalOffset?: number
 ) {
   const [isIntersecting, setIntersecting] = useState(false);

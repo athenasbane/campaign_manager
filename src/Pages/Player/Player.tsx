@@ -34,7 +34,7 @@ export default function Player() {
 
   if (isLoading) {
     return (
-      <Stack direction="column" gap={2}>
+      <Stack direction="column" sx={{ gap: 2 }}>
         <Skeleton variant="text" />
         <Skeleton variant="rectangular" height={120} />
       </Stack>
@@ -46,8 +46,11 @@ export default function Player() {
   }
 
   return (
-    <Stack component="main" direction="column" gap={3}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Stack component="main" direction="column" sx={{ gap: 3 }}>
+      <Stack
+        direction="row"
+        sx={{ justifyContent: "space-between", alignItems: "center" }}
+      >
         <Typography variant="h2">{data.characterName}</Typography>
         <Button
           startIcon={<LogoutIcon />}
@@ -60,7 +63,7 @@ export default function Player() {
       <Typography variant="h4">For {data.displayName}</Typography>
       {data.defaultMapSlug ? (
         <StyledPlayerSection>
-          <Stack direction="column" gap={2}>
+          <Stack direction="column" sx={{ gap: 2 }}>
             <Typography variant="h3">Personal Map</Typography>
             {isMapLoading || !mapPage ? (
               <Skeleton variant="rectangular" height={360} />
@@ -79,7 +82,7 @@ export default function Player() {
       ) : null}
       {data.privateSections.map((section) => (
         <StyledPlayerSection key={section.title}>
-          <Stack direction="column" gap={1}>
+          <Stack direction="column" sx={{ gap: 1 }}>
             <Typography variant="h3">{section.title}</Typography>
             <Typography>{section.body}</Typography>
           </Stack>

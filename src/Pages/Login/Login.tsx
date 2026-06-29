@@ -55,12 +55,12 @@ export default function Login() {
   };
 
   return (
-    <Stack component="main" direction="column" gap={3}>
-      <Typography variant="h2" textAlign="center">
+    <Stack component="main" direction="column" sx={{ gap: 3 }}>
+      <Typography variant="h2" sx={{ textAlign: "center" }}>
         Player Login
       </Typography>
       <Box component="form" onSubmit={handleSubmit}>
-        <Stack direction="column" gap={3}>
+        <Stack direction="column" sx={{ gap: 3 }}>
           {errorMessage ? <Alert severity="error">{errorMessage}</Alert> : null}
           <TextField
             label="Email"

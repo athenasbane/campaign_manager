@@ -1,7 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import History from "./Pages/History/History";
-import Welcome from "./Pages/Welcome/Welcome";
-import Map from "./Pages/Map/Map";
 import MainTemplate from "./Templates/Main";
 import { useAppDispatch, useAppSelector } from "./hooks/store.hooks";
 import {
@@ -9,21 +6,29 @@ import {
   EnumModalSlice,
   openSingleModal,
 } from "./Store/slices/modals";
-import List from "./Pages/List/List";
-import NotFound from "./Pages/NotFound/NotFound";
-import Sessions from "./Pages/Sessions/Sessions";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import CssBaseline from "@mui/material/CssBaseline";
-import Content from "./Pages/Content/Content";
-import Documents from "./Pages/Documents/Documents";
-import { Suspense } from "react";
-import Missions from "./Pages/Missions/Missions";
+import { lazy, Suspense } from "react";
 import { StyledSkeleton } from "./AppStyles";
-import { ExchangeRates } from "./Pages/ExchangeRates/ExchangeRates";
-import Login from "./Pages/Login/Login";
-import Player from "./Pages/Player/Player";
 import ProtectedRoute from "./Components/Organism/ProtectedRoute/ProtectedRoute";
+
+const Welcome = lazy(() => import("./Pages/Welcome/Welcome"));
+const Map = lazy(() => import("./Pages/Map/Map"));
+const List = lazy(() => import("./Pages/List/List"));
+const Content = lazy(() => import("./Pages/Content/Content"));
+const Sessions = lazy(() => import("./Pages/Sessions/Sessions"));
+const Documents = lazy(() => import("./Pages/Documents/Documents"));
+const History = lazy(() => import("./Pages/History/History"));
+const Missions = lazy(() => import("./Pages/Missions/Missions"));
+const ExchangeRates = lazy(() =>
+  import("./Pages/ExchangeRates/ExchangeRates").then((module) => ({
+    default: module.ExchangeRates,
+  }))
+);
+const Login = lazy(() => import("./Pages/Login/Login"));
+const Player = lazy(() => import("./Pages/Player/Player"));
+const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 
 function App() {
   const navOpen = useAppSelector((state) => state.modals[EnumModalSlice.Menu]);
