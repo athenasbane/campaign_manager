@@ -5,8 +5,12 @@ import {
   CognitoUserSession,
 } from "amazon-cognito-identity-js";
 
-const userPoolId = process.env.REACT_APP_COGNITO_USER_POOL_ID;
-const clientId = process.env.REACT_APP_COGNITO_CLIENT_ID;
+const getClientEnv = (key: string) =>
+  import.meta.env[key] ??
+  (typeof process !== "undefined" ? process.env[key] : undefined);
+
+const userPoolId = getClientEnv("REACT_APP_COGNITO_USER_POOL_ID");
+const clientId = getClientEnv("REACT_APP_COGNITO_CLIENT_ID");
 
 const getUserPool = () => {
   if (!userPoolId || !clientId) {
