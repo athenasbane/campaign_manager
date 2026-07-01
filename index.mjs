@@ -25,7 +25,7 @@ const fetchPlayerContent = async (cognitoSub) => {
     content_type: "playerContent",
     "fields.cognitoSub": cognitoSub,
     limit: "1",
-    include: "2",
+    include: "10",
   });
 
   const response = await fetch(
@@ -56,6 +56,7 @@ const fetchPlayerContent = async (cognitoSub) => {
 
   return {
     ...playerEntry.fields,
+    includedEntries,
     resolvedContent:
       playerEntry.fields.content?.sys?.id &&
       includedEntries.get(playerEntry.fields.content.sys.id),
@@ -72,7 +73,25 @@ const richTextToPlainText = (node) => {
   }
 
   if (Array.isArray(node.content)) {
-    return node.content.map(richTextToPlainText).join("");
+    const childText = node.content.map(richTextToPlainText).filter(Boolean);
+
+    if (node.nodeType === "document") {
+      return childText.join("\n\n");
+    }
+
+    if (node.nodeType === "unordered-list" || node.nodeType === "ordered-list") {
+      return childText.join("\n");
+    }
+
+    if (node.nodeType === "list-item") {
+      return `- ${childText.join(" ").trim()}`;
+    }
+
+    if (node.nodeType?.startsWith("heading-") || node.nodeType === "paragraph") {
+      return childText.join("").trim();
+    }
+
+    return childText.join("");
   }
 
   return "";
@@ -118,12 +137,10 @@ const buildPrivateSections = (playerContent) => {
   }
 
   if (playerContent.resolvedContent) {
-    return [
-      {
-        title: playerContent.resolvedContent.fields.name || "Private Notes",
-        body: richTextToPlainText(playerContent.resolvedContent.fields.content),
-      },
-    ];
+    return buildSectionsFromEntry(
+      playerContent.resolvedContent,
+      playerContent.includedEntries
+    );
   }
 
   return [];
@@ -134,6 +151,79 @@ const getEntryTitle = (entry) =>
   entry?.fields.pageTitle ||
   entry?.fields.contentName ||
   null;
+
+const getLinkedEntry = (link, includedEntries) =>
+  link?.sys?.id ? includedEntries.get(link.sys.id) : undefined;
+
+const getLinkedEntries = (links, includedEntries) =>
+  Array.isArray(links)
+    ? links
+        .map((link) => getLinkedEntry(link, includedEntries))
+        .filter(Boolean)
+    : [];
+
+const getEntryBody = (entry, includedEntries, visited = new Set()) => {
+  if (!entry || visited.has(entry.sys.id)) {
+    return "";
+  }
+
+  visited.add(entry.sys.id);
+
+  if (entry.fields.content) {
+    return richTextToPlainText(entry.fields.content).trim();
+  }
+
+  return getLinkedEntries(entry.fields.pageContent, includedEntries)
+    .map((linkedEntry) => getEntryBody(linkedEntry, includedEntries, visited))
+    .filter(Boolean)
+    .join("\n\n");
+};
+
+const getEntryRichText = (entry, includedEntries, visited = new Set()) => {
+  if (!entry || visited.has(entry.sys.id)) {
+    return null;
+  }
+
+  visited.add(entry.sys.id);
+
+  if (entry.fields.content) {
+    return entry.fields.content;
+  }
+
+  const linkedBodies = getLinkedEntries(entry.fields.pageContent, includedEntries)
+    .map((linkedEntry) =>
+      getEntryRichText(linkedEntry, includedEntries, visited)
+    )
+    .filter(Boolean);
+
+  return linkedBodies[0] || null;
+};
+
+const buildSectionsFromEntry = (entry, includedEntries) => {
+  const linkedSections = getLinkedEntries(entry.fields.links, includedEntries)
+    .map((linkedEntry) => ({
+      title: getEntryTitle(linkedEntry) || "Private Notes",
+      body: getEntryBody(linkedEntry, includedEntries),
+      bodyRichText: getEntryRichText(linkedEntry, includedEntries),
+    }))
+    .filter((section) => section.body || section.bodyRichText);
+
+  if (linkedSections.length) {
+    return linkedSections;
+  }
+
+  const body = getEntryBody(entry, includedEntries);
+
+  return body
+    ? [
+        {
+          title: getEntryTitle(entry) || "Private Notes",
+          body,
+          bodyRichText: getEntryRichText(entry, includedEntries),
+        },
+      ]
+    : [];
+};
 
 export const handler = async (event) => {
   try {
