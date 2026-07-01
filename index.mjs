@@ -129,6 +129,12 @@ const buildPrivateSections = (playerContent) => {
   return [];
 };
 
+const getEntryTitle = (entry) =>
+  entry?.fields.name ||
+  entry?.fields.pageTitle ||
+  entry?.fields.contentName ||
+  null;
+
 export const handler = async (event) => {
   try {
     const claims = event.requestContext.authorizer.jwt.claims;
@@ -144,7 +150,7 @@ export const handler = async (event) => {
       displayName: playerContent.displayName || claims.email,
       characterName:
         playerContent.characterName ||
-        playerContent.resolvedContent?.fields.name ||
+        getEntryTitle(playerContent.resolvedContent) ||
         "Unknown Character",
       privateSections: buildPrivateSections(playerContent),
       defaultMapSlug: playerContent.defaultMapSlug || null,
