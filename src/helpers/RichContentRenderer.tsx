@@ -113,14 +113,22 @@ function renderOptions(links: any): Options {
 }
 
 export interface IContent {
-  content: {
-    json: any;
-    links: any;
-  };
+  content:
+    | {
+        json: any;
+        links?: any;
+      }
+    | any;
 }
 
 export default function RichContentRenderer({ content }: IContent) {
+  const richTextDocument = content.json || content;
+  const links = content.links || {
+    assets: { block: [] },
+    entries: { block: [], inline: [] },
+  };
+
   return (
-    <>{documentToReactComponents(content.json, renderOptions(content.links))}</>
+    <>{documentToReactComponents(richTextDocument, renderOptions(links))}</>
   );
 }

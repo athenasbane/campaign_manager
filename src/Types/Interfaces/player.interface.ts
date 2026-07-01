@@ -1,6 +1,7 @@
 export interface PlayerSection {
   title: string;
   body: string;
+  bodyRichText?: unknown;
 }
 
 export interface PlayerProfile {

@@ -42,6 +42,36 @@ describe("Page - Player", () => {
           {
             title: "Known Secrets",
             body: "The Iron Bank vault contains a hidden ledger.",
+            bodyRichText: {
+              nodeType: "document",
+              data: {},
+              content: [
+                {
+                  nodeType: "heading-2",
+                  data: {},
+                  content: [
+                    {
+                      nodeType: "text",
+                      value: "Secret Ledger",
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+                {
+                  nodeType: "paragraph",
+                  data: {},
+                  content: [
+                    {
+                      nodeType: "text",
+                      value: "The Iron Bank vault contains a hidden ledger.",
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+              ],
+            },
           },
         ],
       },
@@ -56,6 +86,7 @@ describe("Page - Player", () => {
     expect(getByText("Fane")).toBeInTheDocument();
     expect(getByText("For Laura")).toBeInTheDocument();
     expect(getByText("Known Secrets")).toBeInTheDocument();
+    expect(getByText("Secret Ledger")).toBeInTheDocument();
     expect(
       getByText("The Iron Bank vault contains a hidden ledger.")
     ).toBeInTheDocument();
