@@ -1,11 +1,19 @@
 import {
   InteractiveMapData,
   MapFeature,
+  MapFeatureType,
   MapGeometry,
   PlayerMapVisibility,
 } from "../../../Types/Interfaces/interactiveMap.interface";
 
-interface RawMapFeature extends Partial<Omit<MapFeature, "geometry">> {
+interface RawMapFeature
+  extends Partial<Omit<MapFeature, "geometry" | "type">> {
+  type?:
+    | MapFeature["type"]
+    | readonly MapFeature["type"][]
+    | string
+    | readonly string[]
+    | null;
   geometry?: MapFeature["geometry"] | string | null;
 }
 
@@ -31,8 +39,26 @@ interface RawMapPage {
   } | null;
 }
 
+interface NormalisedRawMapFeature
+  extends Partial<Omit<MapFeature, "geometry" | "type">> {
+  type?: MapFeatureType | null;
+  geometry?: MapGeometry | null;
+}
+
 const DEFAULT_IMAGE_WIDTH = 1000;
 const DEFAULT_IMAGE_HEIGHT = 1000;
+const MAP_FEATURE_TYPES = new Set<MapFeatureType>([
+  "landmark",
+  "district",
+  "route",
+  "gate",
+  "street",
+]);
+const DEFAULT_FEATURE_MIN_ZOOM: Partial<Record<MapFeatureType, number>> = {
+  district: 0,
+  route: 1,
+  street: 2,
+};
 
 const parseJsonField = <T,>(value: T | string | null | undefined): T | null => {
   if (!value) {
@@ -127,8 +153,55 @@ const normaliseGeometry = (geometry: unknown): MapGeometry | null => {
   return null;
 };
 
-const isMapFeature = (feature: RawMapFeature): feature is MapFeature => {
+const normaliseFeatureType = (type: RawMapFeature["type"]) => {
+  const value = Array.isArray(type) ? type[0] : type;
+
+  return typeof value === "string" && MAP_FEATURE_TYPES.has(value as MapFeatureType)
+    ? (value as MapFeatureType)
+    : null;
+};
+
+const isFiniteNumber = (value: unknown): value is number =>
+  typeof value === "number" && Number.isFinite(value);
+
+const getDefaultFeatureMinZoom = (type: MapFeatureType) =>
+  DEFAULT_FEATURE_MIN_ZOOM[type] ?? null;
+
+const isFogAreaFeature = (feature: MapFeature) =>
+  feature.geometry.type === "polygon" || feature.geometry.type === "rectangle";
+
+const isMapFeature = (
+  feature: NormalisedRawMapFeature
+): feature is MapFeature => {
   return Boolean(feature.key && feature.name && feature.type && feature.geometry);
+};
+
+const normaliseFeature = (feature: RawMapFeature): NormalisedRawMapFeature => {
+  const type = normaliseFeatureType(feature.type);
+  const parsedGeometry = parseJsonField<
+    MapFeature["geometry"] & {
+      minZoom?: unknown;
+      maxZoom?: unknown;
+    }
+  >(feature.geometry);
+
+  return {
+    ...feature,
+    type,
+    geometry: normaliseGeometry(parsedGeometry),
+    minZoom: isFiniteNumber(feature.minZoom)
+      ? feature.minZoom
+      : isFiniteNumber(parsedGeometry?.minZoom)
+        ? parsedGeometry.minZoom
+      : type
+        ? getDefaultFeatureMinZoom(type)
+        : null,
+    maxZoom: isFiniteNumber(feature.maxZoom)
+      ? feature.maxZoom
+      : isFiniteNumber(parsedGeometry?.maxZoom)
+        ? parsedGeometry.maxZoom
+        : null,
+  };
 };
 
 export const normaliseMapPage = (
@@ -147,13 +220,14 @@ export const normaliseMapPage = (
     page.featureCollection?.items ||
     []
   )
-    .map((feature) => ({
-      ...feature,
-      geometry: normaliseGeometry(parseJsonField(feature.geometry)),
-    }))
+    .map(normaliseFeature)
     .filter(isMapFeature);
 
   const isKnown = (feature: MapFeature) => {
+    if (isFogAreaFeature(feature)) {
+      return true;
+    }
+
     if (!feature.visibilityKey) {
       return true;
     }
@@ -191,10 +265,7 @@ export const normaliseMapPage = (
       ],
     features: features.filter(isKnown),
     fogFeatures: features.filter(
-      (feature) =>
-        !isRevealed(feature) &&
-        (feature.geometry.type === "polygon" ||
-          feature.geometry.type === "rectangle")
+      (feature) => !isRevealed(feature) && isFogAreaFeature(feature)
     ),
   };
 };

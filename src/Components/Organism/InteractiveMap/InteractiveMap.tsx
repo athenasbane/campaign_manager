@@ -396,6 +396,13 @@ const addFogLayer = (group: L.LayerGroup, feature: MapFeature) => {
   }
 };
 
+const isFeatureVisibleAtZoom = (feature: MapFeature, zoom: number) => {
+  return (
+    (feature.minZoom == null || zoom >= feature.minZoom) &&
+    (feature.maxZoom == null || zoom <= feature.maxZoom)
+  );
+};
+
 export default function InteractiveMap({
   imageSrc,
   width = "100%",
@@ -431,6 +438,7 @@ export default function InteractiveMap({
     null
   );
   const [featureFilter, setFeatureFilter] = useState("");
+  const [currentZoom, setCurrentZoom] = useState(data.defaultZoom);
 
   const bounds: LatLngBoundsExpression = useMemo(
     () => [
@@ -443,14 +451,22 @@ export default function InteractiveMap({
   const visibleFeatures = useMemo(() => {
     const filter = featureFilter.trim().toLowerCase();
 
-    if (!filter) {
-      return data.features;
-    }
+    return data.features.filter((feature) => {
+      const matchesSearch =
+        !filter ||
+        `${feature.name} ${feature.type}`.toLowerCase().includes(filter);
 
-    return data.features.filter((feature) =>
-      `${feature.name} ${feature.type}`.toLowerCase().includes(filter)
-    );
-  }, [data.features, featureFilter]);
+      return matchesSearch && isFeatureVisibleAtZoom(feature, currentZoom);
+    });
+  }, [currentZoom, data.features, featureFilter]);
+
+  const visibleFogFeatures = useMemo(
+    () =>
+      data.fogFeatures.filter((feature) =>
+        isFeatureVisibleAtZoom(feature, currentZoom)
+      ),
+    [currentZoom, data.fogFeatures]
+  );
 
   const draftGeometry = useMemo(
     () => buildDraftGeometry(dmMode, dmPoints),
@@ -521,6 +537,7 @@ export default function InteractiveMap({
     map.setMaxBounds(bounds);
     map.setView(toLeafletPoint(data.defaultCenter), data.defaultZoom);
     map.fitBounds(bounds);
+    setCurrentZoom(map.getZoom());
     mapRef.current = map;
 
     return () => {
@@ -528,6 +545,22 @@ export default function InteractiveMap({
       mapRef.current = null;
     };
   }, [bounds, data.defaultCenter, data.defaultZoom, data.maxZoom, data.minZoom]);
+
+  useEffect(() => {
+    if (!mapRef.current) {
+      return;
+    }
+
+    const map = mapRef.current;
+    const updateZoom = () => setCurrentZoom(map.getZoom());
+
+    updateZoom();
+    map.on("zoomend", updateZoom);
+
+    return () => {
+      map.off("zoomend", updateZoom);
+    };
+  }, []);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -576,9 +609,18 @@ export default function InteractiveMap({
 
     fogLayerRef.current?.remove();
     const group = L.layerGroup().addTo(mapRef.current);
-    data.fogFeatures.forEach((feature) => addFogLayer(group, feature));
+    visibleFogFeatures.forEach((feature) => addFogLayer(group, feature));
     fogLayerRef.current = group;
-  }, [data.fogFeatures]);
+  }, [visibleFogFeatures]);
+
+  useEffect(() => {
+    if (
+      selectedFeature &&
+      !isFeatureVisibleAtZoom(selectedFeature, currentZoom)
+    ) {
+      setSelectedFeature(null);
+    }
+  }, [currentZoom, selectedFeature]);
 
   useEffect(() => {
     if (!mapRef.current) {

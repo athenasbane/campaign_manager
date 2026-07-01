@@ -31,6 +31,8 @@ export interface MapFeature {
   publicSummary?: string | null;
   revealedSummary?: string | null;
   visibilityKey?: string | null;
+  minZoom?: number | null;
+  maxZoom?: number | null;
 }
 
 export interface PlayerMapVisibility {

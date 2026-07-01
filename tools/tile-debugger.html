@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map Tile Debugger</title>
+    <link rel="stylesheet" href="/leaflet.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: #121212;
+        color: #f4f1ea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+      }
+
+      aside {
+        border-right: 1px solid #343434;
+        background: #1d1d1d;
+        padding: 16px;
+        overflow: auto;
+      }
+
+      main {
+        min-width: 0;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+      }
+
+      h1 {
+        font-size: 20px;
+        line-height: 1.2;
+        margin: 0 0 16px;
+      }
+
+      label {
+        display: block;
+        color: #c9c3b8;
+        font-size: 12px;
+        margin: 14px 0 6px;
+      }
+
+      input,
+      select,
+      button,
+      textarea {
+        width: 100%;
+        border: 1px solid #4a4a4a;
+        background: #111;
+        color: #f4f1ea;
+        border-radius: 6px;
+        font: inherit;
+        min-height: 34px;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 7px 9px;
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      button {
+        cursor: pointer;
+        background: #2b3a46;
+        margin-top: 10px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .toggle-row {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        color: #ddd6cb;
+        font-size: 13px;
+      }
+
+      .toggle-row input {
+        width: 16px;
+        min-height: 16px;
+      }
+
+      #map {
+        min-height: 0;
+        background: #dadada;
+      }
+
+      .status {
+        border-top: 1px solid #343434;
+        background: #171717;
+        padding: 10px 14px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+      }
+
+      .tile-label {
+        display: grid;
+        place-items: center;
+        width: 256px;
+        height: 256px;
+        border: 1px solid rgba(255, 216, 128, 0.72);
+        color: #ffe08a;
+        text-shadow: 0 1px 2px #000;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+        pointer-events: none;
+      }
+
+      .selected-tile {
+        pointer-events: none;
+      }
+
+      .hint {
+        color: #aaa196;
+        font-size: 12px;
+        line-height: 1.45;
+        margin: 8px 0 0;
+      }
+
+      .section {
+        border-top: 1px solid #343434;
+        margin-top: 18px;
+        padding-top: 14px;
+      }
+
+      .split-preview-tile {
+        outline: 2px solid rgba(20, 184, 166, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <h1>Map Tile Debugger</h1>
+
+      <label for="cloudTemplate">CloudFront template</label>
+      <input
+        id="cloudTemplate"
+        value="https://d2ym56h75q57hl.cloudfront.net/maps/circular-city/{z}/{x}/{y}.png"
+      />
+
+      <label for="localTemplate">Local template</label>
+      <input id="localTemplate" value="/local-tiles/{z}/{x}/{y}.png" />
+
+      <div class="row">
+        <div>
+          <label for="imageWidth">Image width</label>
+          <input id="imageWidth" type="number" value="1536" />
+        </div>
+        <div>
+          <label for="imageHeight">Image height</label>
+          <input id="imageHeight" type="number" value="1024" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="minZoom">Min zoom</label>
+          <input id="minZoom" type="number" value="-3" />
+        </div>
+        <div>
+          <label for="maxZoom">Max zoom</label>
+          <input id="maxZoom" type="number" value="2" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="startZoom">Start zoom</label>
+          <input id="startZoom" type="number" value="2" />
+        </div>
+        <div>
+          <label for="tileSize">Tile size</label>
+          <input id="tileSize" type="number" value="256" />
+        </div>
+      </div>
+
+      <label for="mode">Layer mode</label>
+      <select id="mode">
+        <option value="both">Cloud + local overlay</option>
+        <option value="cloud">CloudFront only</option>
+        <option value="local">Local only</option>
+      </select>
+
+      <label for="localOpacity">Local overlay opacity</label>
+      <input id="localOpacity" type="range" min="0" max="1" step="0.05" value="0.65" />
+
+      <label class="toggle-row">
+        <input id="showGrid" type="checkbox" checked />
+        <span>Show tile grid labels</span>
+      </label>
+
+      <label class="toggle-row">
+        <input id="showSelection" type="checkbox" checked />
+        <span>Highlight selected tile</span>
+      </label>
+
+      <button id="apply">Apply settings</button>
+      <button id="copySelected">Copy selected tile key</button>
+      <button id="copyVisible">Copy visible tile keys</button>
+
+      <label for="selected">Selected tile</label>
+      <textarea id="selected" readonly></textarea>
+
+      <label for="visible">Visible CloudFront tile keys</label>
+      <textarea id="visible" readonly></textarea>
+
+      <div class="section">
+        <h1>Image Splitter</h1>
+
+        <label for="splitImage">Source image</label>
+        <input id="splitImage" type="file" accept="image/*" />
+
+        <div class="row">
+          <div>
+            <label for="splitCols">Columns</label>
+            <input id="splitCols" type="number" min="1" max="20" value="4" />
+          </div>
+          <div>
+            <label for="splitRows">Rows</label>
+            <input id="splitRows" type="number" min="1" max="20" value="3" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="splitRotation">Rotation degrees</label>
+            <input id="splitRotation" type="number" step="0.5" value="0" />
+          </div>
+          <div>
+            <label for="splitFit">Fit mode</label>
+            <select id="splitFit">
+              <option value="cover">Cover crop</option>
+              <option value="contain">Contain pad</option>
+              <option value="stretch">Stretch</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="toggle-row">
+          <input id="previewSplit" type="checkbox" checked />
+          <span>Preview split over selected tile block</span>
+        </label>
+
+        <button id="prepareSplit">Prepare split preview</button>
+        <button id="writeSplit">Write split to local tiles</button>
+        <button id="uploadSplit">Upload split tiles to S3</button>
+        <button id="copySplitKeys">Copy split tile keys</button>
+
+        <div class="row">
+          <div>
+            <label for="uploadBucket">S3 bucket</label>
+            <input id="uploadBucket" value="teratin" />
+          </div>
+          <div>
+            <label for="uploadPrefix">S3 prefix</label>
+            <input id="uploadPrefix" value="maps/circular-city" />
+          </div>
+        </div>
+
+        <label for="distributionId">CloudFront distribution</label>
+        <input id="distributionId" value="EOSD7OT72QWH8" />
+
+        <label class="toggle-row">
+          <input id="invalidateUpload" type="checkbox" checked />
+          <span>Invalidate uploaded CloudFront paths</span>
+        </label>
+
+        <label for="splitOutput">Split tile keys</label>
+        <textarea id="splitOutput" readonly></textarea>
+
+        <p class="hint">
+          Select the top-left destination tile on the map first. The splitter
+          writes PNGs into your local tile folder only; inspect with local
+          overlay before uploading to S3.
+        </p>
+      </div>
+
+      <p class="hint">
+        Click the map to select a tile. Use local overlay mode after editing
+        files under your local tile directory, then refresh or click Apply.
+      </p>
+    </aside>
+
+    <main>
+      <div id="map"></div>
+      <div id="status" class="status"></div>
+    </main>
+
+    <script src="/leaflet.js"></script>
+    <script>
+      const fields = {
+        cloudTemplate: document.getElementById("cloudTemplate"),
+        localTemplate: document.getElementById("localTemplate"),
+        imageWidth: document.getElementById("imageWidth"),
+        imageHeight: document.getElementById("imageHeight"),
+        minZoom: document.getElementById("minZoom"),
+        maxZoom: document.getElementById("maxZoom"),
+        startZoom: document.getElementById("startZoom"),
+        tileSize: document.getElementById("tileSize"),
+        mode: document.getElementById("mode"),
+        localOpacity: document.getElementById("localOpacity"),
+        showGrid: document.getElementById("showGrid"),
+        showSelection: document.getElementById("showSelection"),
+      };
+
+      const selectedOutput = document.getElementById("selected");
+      const visibleOutput = document.getElementById("visible");
+      const splitOutput = document.getElementById("splitOutput");
+      const status = document.getElementById("status");
+      const splitFields = {
+        image: document.getElementById("splitImage"),
+        cols: document.getElementById("splitCols"),
+        rows: document.getElementById("splitRows"),
+        rotation: document.getElementById("splitRotation"),
+        fit: document.getElementById("splitFit"),
+        preview: document.getElementById("previewSplit"),
+        bucket: document.getElementById("uploadBucket"),
+        prefix: document.getElementById("uploadPrefix"),
+        distributionId: document.getElementById("distributionId"),
+        invalidate: document.getElementById("invalidateUpload"),
+      };
+
+      const saved = JSON.parse(localStorage.getItem("tileDebuggerSettings") || "{}");
+      for (const [key, field] of Object.entries(fields)) {
+        if (saved[key] === undefined) continue;
+        if (field.type === "checkbox") field.checked = saved[key];
+        else field.value = saved[key];
+      }
+
+      const toLeafletPoint = ([x, y]) => [y, x];
+      const getNumber = (key) => Number(fields[key].value);
+      const getSettings = () => ({
+        cloudTemplate: fields.cloudTemplate.value,
+        localTemplate: fields.localTemplate.value,
+        imageWidth: getNumber("imageWidth"),
+        imageHeight: getNumber("imageHeight"),
+        minZoom: getNumber("minZoom"),
+        maxZoom: getNumber("maxZoom"),
+        startZoom: getNumber("startZoom"),
+        tileSize: getNumber("tileSize"),
+        mode: fields.mode.value,
+        localOpacity: Number(fields.localOpacity.value),
+        showGrid: fields.showGrid.checked,
+        showSelection: fields.showSelection.checked,
+      });
+
+      const saveSettings = () => {
+        const values = {};
+        for (const [key, field] of Object.entries(fields)) {
+          values[key] = field.type === "checkbox" ? field.checked : field.value;
+        }
+        localStorage.setItem("tileDebuggerSettings", JSON.stringify(values));
+      };
+
+      let settings = getSettings();
+      let bounds = [
+        [0, 0],
+        [settings.imageHeight, settings.imageWidth],
+      ];
+
+      const map = L.map("map", {
+        crs: L.CRS.Simple,
+        minZoom: settings.minZoom,
+        maxZoom: settings.maxZoom,
+        attributionControl: false,
+      });
+
+      map.fitBounds(bounds);
+      map.setView(toLeafletPoint([settings.imageWidth / 2, settings.imageHeight / 2]), settings.startZoom);
+
+      let cloudLayer;
+      let localLayer;
+      let gridLayer;
+      let selectedRect;
+      let selectedTile = null;
+      let splitTiles = [];
+      let splitPreviewLayer;
+      let localCacheBust = Date.now();
+
+      const imageTileYFromLeaflet = (coords, s) => {
+        const rowCount = Math.ceil((s.imageHeight * 2 ** coords.z) / s.tileSize);
+        return coords.y + rowCount;
+      };
+
+      const templateUrl = (template, coords, s) =>
+        L.Util.template(template, {
+          x: coords.x,
+          y: imageTileYFromLeaflet(coords, s),
+          z: coords.z,
+        });
+
+      const createImageTileLayer = (template, opacity, cacheBust = null) => {
+        const layer = L.tileLayer(template, {
+          bounds,
+          minZoom: settings.minZoom,
+          maxZoom: settings.maxZoom,
+          noWrap: true,
+          tileSize: settings.tileSize,
+          opacity,
+        });
+
+        layer.getTileUrl = (coords) => {
+          const url = templateUrl(template, coords, settings);
+          return cacheBust ? `${url}?v=${cacheBust}` : url;
+        };
+
+        return layer;
+      };
+
+      const buildGridLayer = () => {
+        const Grid = L.GridLayer.extend({
+          createTile(coords) {
+            const tile = L.DomUtil.create("div", "tile-label");
+            const y = imageTileYFromLeaflet(coords, settings);
+            tile.textContent = `${coords.z}/${coords.x}/${y}`;
+            return tile;
+          },
+        });
+
+        return new Grid({
+          bounds,
+          minZoom: settings.minZoom,
+          maxZoom: settings.maxZoom,
+          tileSize: settings.tileSize,
+        });
+      };
+
+      const selectedBounds = (tile) => {
+        const scale = 2 ** tile.z;
+        const x0 = (tile.x * settings.tileSize) / scale;
+        const y0 = Math.max(
+          settings.imageHeight - (((tile.y + 1) * settings.tileSize) / scale),
+          0
+        );
+        const x1 = Math.min(((tile.x + 1) * settings.tileSize) / scale, settings.imageWidth);
+        const y1 = Math.min(
+          settings.imageHeight - ((tile.y * settings.tileSize) / scale),
+          settings.imageHeight
+        );
+        return [
+          [y0, x0],
+          [y1, x1],
+        ];
+      };
+
+      const keyForTile = (tile) => `${tile.z}/${tile.x}/${tile.y}.png`;
+      const urlForTile = (tile) =>
+        L.Util.template(settings.cloudTemplate, {
+          z: tile.z,
+          x: tile.x,
+          y: tile.y,
+        });
+
+      const updateSelection = (tile, latlng) => {
+        selectedTile = tile;
+        selectedOutput.value = [
+          `key: maps/circular-city/${keyForTile(tile)}`,
+          `url: ${urlForTile(tile)}`,
+          latlng ? `map point: x=${Math.round(latlng.lng)}, y=${Math.round(latlng.lat)}` : "",
+        ]
+          .filter(Boolean)
+          .join("\n");
+
+        if (selectedRect) selectedRect.remove();
+        if (settings.showSelection) {
+          selectedRect = L.rectangle(selectedBounds(tile), {
+            color: "#00a3ff",
+            weight: 3,
+            fillOpacity: 0,
+            className: "selected-tile",
+          }).addTo(map);
+        }
+
+        if (splitFields.preview.checked && splitTiles.length > 0) {
+          drawSplitPreview();
+        }
+      };
+
+      const tileFromLatLng = (latlng) => {
+        const z = map.getZoom();
+        const scale = 2 ** z;
+        const rowCount = Math.ceil((settings.imageHeight * scale) / settings.tileSize);
+        const bottomOriginY = Math.floor((latlng.lat * scale) / settings.tileSize);
+        const x = Math.floor((latlng.lng * scale) / settings.tileSize);
+        const y = rowCount - bottomOriginY - 1;
+        return { z, x, y };
+      };
+
+      const visibleKeys = () => {
+        const urls = Array.from(document.querySelectorAll(".leaflet-tile"))
+          .map((img) => img.src)
+          .filter((src) => src.includes("/maps/circular-city/"))
+          .sort();
+
+        return Array.from(new Set(urls)).map((url) =>
+          url.replace(/^.*\/maps\/circular-city\//, "maps/circular-city/")
+        );
+      };
+
+      const refreshVisibleOutput = () => {
+        visibleOutput.value = visibleKeys().join("\n");
+        status.textContent = `zoom=${map.getZoom()} center=x:${Math.round(map.getCenter().lng)} y:${Math.round(map.getCenter().lat)} visibleTiles=${visibleKeys().length}`;
+      };
+
+      const loadSelectedImage = () =>
+        new Promise((resolveImage, rejectImage) => {
+          const file = splitFields.image.files?.[0];
+
+          if (!file) {
+            rejectImage(new Error("Choose an image first"));
+            return;
+          }
+
+          const image = new Image();
+          image.onload = () => resolveImage(image);
+          image.onerror = () => rejectImage(new Error("Could not load image"));
+          image.src = URL.createObjectURL(file);
+        });
+
+      const renderPreparedImage = async () => {
+        const source = await loadSelectedImage();
+        const cols = Number(splitFields.cols.value);
+        const rows = Number(splitFields.rows.value);
+        const tileSize = settings.tileSize;
+        const width = cols * tileSize;
+        const height = rows * tileSize;
+        const rotation = (Number(splitFields.rotation.value) * Math.PI) / 180;
+        const fit = splitFields.fit.value;
+        const prepared = document.createElement("canvas");
+        const ctx = prepared.getContext("2d");
+
+        prepared.width = width;
+        prepared.height = height;
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, width, height);
+        ctx.translate(width / 2, height / 2);
+        ctx.rotate(rotation);
+
+        const rotatedWidth =
+          Math.abs(source.width * Math.cos(rotation)) +
+          Math.abs(source.height * Math.sin(rotation));
+        const rotatedHeight =
+          Math.abs(source.width * Math.sin(rotation)) +
+          Math.abs(source.height * Math.cos(rotation));
+        let drawWidth = width;
+        let drawHeight = height;
+
+        if (fit === "cover") {
+          const scale = Math.max(width / rotatedWidth, height / rotatedHeight);
+          drawWidth = source.width * scale;
+          drawHeight = source.height * scale;
+        }
+
+        if (fit === "contain") {
+          const scale = Math.min(width / rotatedWidth, height / rotatedHeight);
+          drawWidth = source.width * scale;
+          drawHeight = source.height * scale;
+        }
+
+        ctx.drawImage(source, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
+        URL.revokeObjectURL(source.src);
+        return prepared;
+      };
+
+      const canvasToDataUrl = (canvas) => canvas.toDataURL("image/png");
+
+      const prepareSplit = async () => {
+        if (!selectedTile) {
+          throw new Error("Select the top-left destination tile first");
+        }
+
+        const cols = Number(splitFields.cols.value);
+        const rows = Number(splitFields.rows.value);
+
+        if (!Number.isInteger(cols) || cols < 1 || !Number.isInteger(rows) || rows < 1) {
+          throw new Error("Columns and rows must be positive integers");
+        }
+
+        const prepared = await renderPreparedImage();
+        const tileCanvas = document.createElement("canvas");
+        const tileCtx = tileCanvas.getContext("2d");
+        const tileSize = settings.tileSize;
+        tileCanvas.width = tileSize;
+        tileCanvas.height = tileSize;
+        splitTiles = [];
+
+        for (let dy = 0; dy < rows; dy += 1) {
+          for (let dx = 0; dx < cols; dx += 1) {
+            tileCtx.clearRect(0, 0, tileSize, tileSize);
+            tileCtx.drawImage(
+              prepared,
+              dx * tileSize,
+              dy * tileSize,
+              tileSize,
+              tileSize,
+              0,
+              0,
+              tileSize,
+              tileSize
+            );
+
+            splitTiles.push({
+              z: selectedTile.z,
+              x: selectedTile.x + dx,
+              y: selectedTile.y + dy,
+              dataUrl: canvasToDataUrl(tileCanvas),
+            });
+          }
+        }
+
+        splitOutput.value = splitTiles
+          .map((tile) => `maps/circular-city/${keyForTile(tile)}`)
+          .join("\n");
+
+        drawSplitPreview();
+      };
+
+      const drawSplitPreview = () => {
+        if (splitPreviewLayer) {
+          splitPreviewLayer.remove();
+          splitPreviewLayer = null;
+        }
+
+        if (!splitFields.preview.checked || splitTiles.length === 0) {
+          return;
+        }
+
+        splitPreviewLayer = L.layerGroup().addTo(map);
+
+        splitTiles.forEach((tile) => {
+          const overlay = L.imageOverlay(tile.dataUrl, selectedBounds(tile), {
+            opacity: 0.82,
+            className: "split-preview-tile",
+          });
+          overlay.addTo(splitPreviewLayer);
+        });
+      };
+
+      const writeSplit = async () => {
+        if (splitTiles.length === 0) {
+          await prepareSplit();
+        }
+
+        const response = await fetch("/write-tiles", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tiles: splitTiles }),
+        });
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        const result = await response.json();
+        localCacheBust = Date.now();
+        rebuildLayers();
+        splitOutput.value = result.written
+          .map((key) => `maps/circular-city/${key}`)
+          .join("\n");
+      };
+
+      const splitKeysFromOutput = () =>
+        splitOutput.value
+          .split(/\s+/)
+          .map((value) => value.trim())
+          .filter((value) => value.includes(".png"));
+
+      const uploadSplit = async () => {
+        if (splitTiles.length === 0 && splitKeysFromOutput().length === 0) {
+          await writeSplit();
+        }
+
+        const keys =
+          splitTiles.length > 0
+            ? splitTiles.map((tile) => keyForTile(tile))
+            : splitKeysFromOutput();
+
+        const response = await fetch("/upload-tiles", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            keys,
+            bucket: splitFields.bucket.value,
+            prefix: splitFields.prefix.value,
+            distributionId: splitFields.distributionId.value,
+            invalidate: splitFields.invalidate.checked,
+          }),
+        });
+
+        const text = await response.text();
+
+        if (!response.ok) {
+          throw new Error(text);
+        }
+
+        const result = JSON.parse(text);
+        splitOutput.value = [
+          "Uploaded:",
+          ...result.uploaded,
+          "",
+          result.invalidation
+            ? `Invalidation: ${result.invalidation.Id || result.invalidation}`
+            : "Invalidation: skipped",
+        ].join("\n");
+      };
+
+      const rebuildLayers = () => {
+        saveSettings();
+        settings = getSettings();
+        bounds = [
+          [0, 0],
+          [settings.imageHeight, settings.imageWidth],
+        ];
+
+        map.setMinZoom(settings.minZoom);
+        map.setMaxZoom(settings.maxZoom);
+        map.setMaxBounds(bounds);
+
+        if (cloudLayer) cloudLayer.remove();
+        if (localLayer) localLayer.remove();
+        if (gridLayer) gridLayer.remove();
+        if (selectedRect) selectedRect.remove();
+        if (splitPreviewLayer) splitPreviewLayer.remove();
+
+        if (settings.mode === "cloud" || settings.mode === "both") {
+          cloudLayer = createImageTileLayer(settings.cloudTemplate, 1).addTo(map);
+        }
+
+        if (settings.mode === "local" || settings.mode === "both") {
+          localLayer = createImageTileLayer(
+            settings.localTemplate,
+            settings.mode === "local" ? 1 : settings.localOpacity,
+            localCacheBust
+          ).addTo(map);
+        }
+
+        if (settings.showGrid) {
+          gridLayer = buildGridLayer().addTo(map);
+        }
+
+        if (selectedTile) updateSelection(selectedTile);
+        if (splitFields.preview.checked && splitTiles.length > 0) {
+          drawSplitPreview();
+        }
+        window.setTimeout(refreshVisibleOutput, 300);
+      };
+
+      map.on("click", (event) => {
+        updateSelection(tileFromLatLng(event.latlng), event.latlng);
+        refreshVisibleOutput();
+      });
+      map.on("moveend zoomend", () => window.setTimeout(refreshVisibleOutput, 100));
+
+      document.getElementById("apply").addEventListener("click", rebuildLayers);
+      fields.localOpacity.addEventListener("input", () => {
+        if (localLayer && settings.mode === "both") {
+          localLayer.setOpacity(Number(fields.localOpacity.value));
+        }
+      });
+      fields.showGrid.addEventListener("change", rebuildLayers);
+      fields.mode.addEventListener("change", rebuildLayers);
+      splitFields.preview.addEventListener("change", drawSplitPreview);
+
+      document.getElementById("copySelected").addEventListener("click", async () => {
+        if (!selectedOutput.value) return;
+        await navigator.clipboard.writeText(selectedOutput.value);
+      });
+
+      document.getElementById("copyVisible").addEventListener("click", async () => {
+        refreshVisibleOutput();
+        await navigator.clipboard.writeText(visibleOutput.value);
+      });
+
+      document.getElementById("prepareSplit").addEventListener("click", async () => {
+        try {
+          await prepareSplit();
+        } catch (error) {
+          splitOutput.value = error.message;
+        }
+      });
+
+      document.getElementById("writeSplit").addEventListener("click", async () => {
+        try {
+          await writeSplit();
+        } catch (error) {
+          splitOutput.value = error.message;
+        }
+      });
+
+      document.getElementById("uploadSplit").addEventListener("click", async () => {
+        try {
+          await uploadSplit();
+        } catch (error) {
+          splitOutput.value = error.message;
+        }
+      });
+
+      document.getElementById("copySplitKeys").addEventListener("click", async () => {
+        if (!splitOutput.value) return;
+        await navigator.clipboard.writeText(splitOutput.value);
+      });
+
+      rebuildLayers();
+    </script>
+  </body>
+</html>
