@@ -10,19 +10,19 @@ function renderOptions(links: any): Options {
   // create an asset map
   const assetMap = new Map();
   // loop through the assets and add them to the map
-  for (const asset of links.assets.block) {
+  for (const asset of links.assets?.block || []) {
     assetMap.set(asset.sys.id, asset);
   }
 
   // create an entry map
   const entryMap = new Map();
   // loop through the block linked entries and add them to the map
-  for (const entry of links.entries.block) {
+  for (const entry of links.entries?.block || []) {
     entryMap.set(entry.sys.id, entry);
   }
 
   // loop through the inline linked entries and add them to the map
-  for (const entry of links.entries.inline) {
+  for (const entry of links.entries?.inline || []) {
     entryMap.set(entry.sys.id, entry);
   }
 
@@ -36,6 +36,10 @@ function renderOptions(links: any): Options {
       [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
         // find the entry in the entryMap by ID
         const entry = entryMap.get(node.data.target.sys.id);
+
+        if (!entry) {
+          return null;
+        }
 
         // render the entries as needed by looking at the __typename
         // referenced in the GraphQL query
@@ -63,11 +67,19 @@ function renderOptions(links: any): Options {
         // find the asset in the assetMap by ID
         const asset = assetMap.get(node.data.target.sys.id);
 
+        if (!asset) {
+          return null;
+        }
+
+        const assetUrl = asset.url || asset.fields?.file?.url || "";
+        const src = assetUrl.startsWith("//") ? `https:${assetUrl}` : assetUrl;
+        const alt = asset.description || asset.fields?.description || "";
+
         // render the asset accordingly
         return (
           <img
-            src={asset.url}
-            alt={asset.description}
+            src={src}
+            alt={alt}
             style={{ maxWidth: "100%" }}
           />
         );
