@@ -79,4 +79,74 @@ describe("RichContentRenderer", () => {
       "https://example.com/video"
     );
   });
+
+  it("renders raw rich text documents when embedded links are missing", () => {
+    const { getByText } = render(
+      <RichContentRenderer
+        content={{
+          nodeType: "document",
+          data: {},
+          content: [
+            {
+              nodeType: "paragraph",
+              data: {},
+              content: [{ nodeType: "text", value: "Visible text", marks: [] }],
+            },
+            {
+              nodeType: "embedded-entry-block",
+              content: [],
+              data: { target: { sys: { id: "missing-entry" } } },
+            },
+            {
+              nodeType: "embedded-asset-block",
+              content: [],
+              data: { target: { sys: { id: "missing-asset" } } },
+            },
+          ],
+        }}
+      />
+    );
+
+    expect(getByText("Visible text")).toBeInTheDocument();
+  });
+
+  it("renders embedded assets from Contentful delivery asset fields", () => {
+    const { container } = render(
+      <RichContentRenderer
+        content={{
+          json: {
+            nodeType: "document",
+            data: {},
+            content: [
+              {
+                nodeType: "embedded-asset-block",
+                content: [],
+                data: { target: { sys: { id: "asset1" } } },
+              },
+            ],
+          },
+          links: {
+            assets: {
+              block: [
+                {
+                  sys: { id: "asset1" },
+                  fields: {
+                    description: "Portrait",
+                    file: {
+                      url: "//images.ctfassets.net/example/portrait.png",
+                    },
+                  },
+                },
+              ],
+            },
+            entries: { block: [], inline: [] },
+          },
+        }}
+      />
+    );
+
+    expect(container.querySelector("img")?.getAttribute("src")).toBe(
+      "https://images.ctfassets.net/example/portrait.png"
+    );
+  });
 });

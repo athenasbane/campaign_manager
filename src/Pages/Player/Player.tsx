@@ -10,6 +10,7 @@ import { useGetMapPageQuery } from "../../Store/slices/backend";
 import { normaliseMapPage } from "../../Components/Organism/InteractiveMap/InteractiveMapAdapter";
 import InteractiveMap from "../../Components/Organism/InteractiveMap/InteractiveMap";
 import RichContentRenderer from "../../helpers/RichContentRenderer";
+import { ListView } from "../List/List";
 
 export default function Player() {
   const { data, error, isLoading } = useGetPlayerProfileQuery();
@@ -62,6 +63,11 @@ export default function Player() {
         </Button>
       </Stack>
       <Typography variant="h4">For {data.displayName}</Typography>
+      {data.rootPage ? (
+        <StyledPlayerSection>
+          <ListView data={data.rootPage} basePath="/me" />
+        </StyledPlayerSection>
+      ) : null}
       {data.defaultMapSlug ? (
         <StyledPlayerSection>
           <Stack direction="column" sx={{ gap: 2 }}>
@@ -81,7 +87,7 @@ export default function Player() {
           </Stack>
         </StyledPlayerSection>
       ) : null}
-      {data.privateSections.map((section) => (
+      {!data.rootPage && data.privateSections.map((section) => (
         <StyledPlayerSection key={section.title}>
           <Stack direction="column" sx={{ gap: 1 }}>
             <Typography variant="h3">{section.title}</Typography>

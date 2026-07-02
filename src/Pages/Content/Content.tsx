@@ -6,6 +6,17 @@ import { useEffect } from "react";
 import RichContentRenderer from "../../helpers/RichContentRenderer";
 import { StyledTypography } from "./ContentStyles";
 
+export function ContentView({ data }: { data: any }) {
+  return (
+    <Stack direction="column" sx={{ maxWidth: "100vw" }}>
+      <StyledTypography variant="h3" sx={{ textAlign: "center" }}>
+        {data.pageTitle || " "}
+      </StyledTypography>
+      <RichContentRenderer content={data.pageContentCollection.items[0].content} />
+    </Stack>
+  );
+}
+
 export default function Content() {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -18,18 +29,7 @@ export default function Content() {
 
   return (
     <Stack direction="column" sx={{ maxWidth: "100vw" }}>
-      {data && !isLoading ? (
-        <>
-          <StyledTypography variant="h3" sx={{ textAlign: "center" }}>
-            {data.pageTitle || " "}
-          </StyledTypography>
-          <RichContentRenderer
-            content={data.pageContentCollection.items[0].content}
-          />
-        </>
-      ) : (
-        <Skeleton variant="text" />
-      )}
+      {data && !isLoading ? <ContentView data={data} /> : <Skeleton variant="text" />}
     </Stack>
   );
 }

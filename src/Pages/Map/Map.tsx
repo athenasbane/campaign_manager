@@ -7,6 +7,36 @@ import InteractiveMap from "../../Components/Organism/InteractiveMap/Interactive
 import { useAppSelector } from "../../hooks/store.hooks";
 import { useGetPlayerProfileQuery } from "../../Store/slices/playerApi";
 import { normaliseMapPage } from "../../Components/Organism/InteractiveMap/InteractiveMapAdapter";
+import { PlayerProfile } from "../../Types/Interfaces/player.interface";
+
+interface MapViewProps {
+  data: any;
+  playerProfile?: PlayerProfile;
+  enableDmTools?: boolean;
+}
+
+export function MapView({ data, playerProfile, enableDmTools }: MapViewProps) {
+  const mapData = useMemo(
+    () => normaliseMapPage(data, playerProfile),
+    [data, playerProfile]
+  );
+
+  return (
+    <>
+      <Typography align="center" variant="h3">
+        {data.pageTitle}
+      </Typography>
+      <InteractiveMap
+        imageSrc={data.map.url}
+        unitOfDistance={data.unitOfDistance}
+        width="100%"
+        detail={data.levelOfDetail}
+        mapData={mapData}
+        enableDmTools={enableDmTools}
+      />
+    </>
+  );
+}
 
 export default function Map() {
   const { slug } = useParams();
@@ -17,10 +47,6 @@ export default function Map() {
   const { data: playerProfile } = useGetPlayerProfileQuery(undefined, {
     skip: !token,
   });
-  const mapData = useMemo(
-    () => (data ? normaliseMapPage(data, playerProfile) : undefined),
-    [data, playerProfile]
-  );
 
   useEffect(() => {
     if (error || (!data && !isLoading)) {
@@ -30,19 +56,11 @@ export default function Map() {
 
   const map =
     data && !isLoading ? (
-      <>
-        <Typography align="center" variant="h3">
-          {data.pageTitle}
-        </Typography>
-        <InteractiveMap
-          imageSrc={data.map.url}
-          unitOfDistance={data.unitOfDistance}
-          width="100%"
-          detail={data.levelOfDetail}
-          mapData={mapData}
-          enableDmTools={searchParams.get("dmTools") === "true"}
-        />
-      </>
+      <MapView
+        data={data}
+        playerProfile={playerProfile}
+        enableDmTools={searchParams.get("dmTools") === "true"}
+      />
     ) : (
       <>
         <Skeleton variant="text" sx={{ fontSize: "2rem" }} />

@@ -20,7 +20,21 @@ export const playerApi = createApi({
     getPlayerProfile: builder.query<PlayerProfile, void>({
       query: () => "/player/me",
     }),
+    getPlayerListPage: builder.query<any, string>({
+      query: (id) => `/player/list/${id}`,
+    }),
+    getPlayerContentPage: builder.query<any, string>({
+      query: (id) => `/player/content/${id}`,
+    }),
+    getPlayerMapPage: builder.query<any, string>({
+      query: (id) => `/player/map/${id}`,
+    }),
   }),
 });
 
-export const { useGetPlayerProfileQuery } = playerApi;
+export const {
+  useGetPlayerProfileQuery,
+  useGetPlayerListPageQuery,
+  useGetPlayerContentPageQuery,
+  useGetPlayerMapPageQuery,
+} = playerApi;

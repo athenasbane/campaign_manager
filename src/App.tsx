@@ -28,6 +28,9 @@ const ExchangeRates = lazy(() =>
 );
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Player = lazy(() => import("./Pages/Player/Player"));
+const PlayerList = lazy(() => import("./Pages/Player/PlayerList"));
+const PlayerContent = lazy(() => import("./Pages/Player/PlayerContent"));
+const PlayerMap = lazy(() => import("./Pages/Player/PlayerMap"));
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 
 function App() {
@@ -67,6 +70,30 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Player />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/me/list/:slug"
+                element={
+                  <ProtectedRoute>
+                    <PlayerList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/me/content/:slug"
+                element={
+                  <ProtectedRoute>
+                    <PlayerContent />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/me/map/:slug"
+                element={
+                  <ProtectedRoute>
+                    <PlayerMap />
                   </ProtectedRoute>
                 }
               />
