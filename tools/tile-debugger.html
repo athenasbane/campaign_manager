@@ -168,11 +168,11 @@
       <div class="row">
         <div>
           <label for="imageWidth">Image width</label>
-          <input id="imageWidth" type="number" value="1536" />
+          <input id="imageWidth" type="number" value="1254" />
         </div>
         <div>
           <label for="imageHeight">Image height</label>
-          <input id="imageHeight" type="number" value="1024" />
+          <input id="imageHeight" type="number" value="1254" />
         </div>
       </div>
 
@@ -344,7 +344,8 @@
         invalidate: document.getElementById("invalidateUpload"),
       };
 
-      const saved = JSON.parse(localStorage.getItem("tileDebuggerSettings") || "{}");
+      const settingsKey = "tileDebuggerSettings:v2";
+      const saved = JSON.parse(localStorage.getItem(settingsKey) || "{}");
       for (const [key, field] of Object.entries(fields)) {
         if (saved[key] === undefined) continue;
         if (field.type === "checkbox") field.checked = saved[key];
@@ -373,7 +374,7 @@
         for (const [key, field] of Object.entries(fields)) {
           values[key] = field.type === "checkbox" ? field.checked : field.value;
         }
-        localStorage.setItem("tileDebuggerSettings", JSON.stringify(values));
+        localStorage.setItem(settingsKey, JSON.stringify(values));
       };
 
       let settings = getSettings();
@@ -402,8 +403,7 @@
       let localCacheBust = Date.now();
 
       const imageTileYFromLeaflet = (coords, s) => {
-        const rowCount = Math.ceil((s.imageHeight * 2 ** coords.z) / s.tileSize);
-        return coords.y + rowCount;
+        return -coords.y - 1;
       };
 
       const templateUrl = (template, coords, s) =>
@@ -452,15 +452,9 @@
       const selectedBounds = (tile) => {
         const scale = 2 ** tile.z;
         const x0 = (tile.x * settings.tileSize) / scale;
-        const y0 = Math.max(
-          settings.imageHeight - (((tile.y + 1) * settings.tileSize) / scale),
-          0
-        );
+        const y0 = (tile.y * settings.tileSize) / scale;
         const x1 = Math.min(((tile.x + 1) * settings.tileSize) / scale, settings.imageWidth);
-        const y1 = Math.min(
-          settings.imageHeight - ((tile.y * settings.tileSize) / scale),
-          settings.imageHeight
-        );
+        const y1 = Math.min(((tile.y + 1) * settings.tileSize) / scale, settings.imageHeight);
         return [
           [y0, x0],
           [y1, x1],
@@ -503,16 +497,15 @@
       const tileFromLatLng = (latlng) => {
         const z = map.getZoom();
         const scale = 2 ** z;
-        const rowCount = Math.ceil((settings.imageHeight * scale) / settings.tileSize);
-        const bottomOriginY = Math.floor((latlng.lat * scale) / settings.tileSize);
         const x = Math.floor((latlng.lng * scale) / settings.tileSize);
-        const y = rowCount - bottomOriginY - 1;
+        const y = Math.floor(latlng.lat * scale / settings.tileSize);
         return { z, x, y };
       };
 
       const visibleKeys = () => {
         const urls = Array.from(document.querySelectorAll(".leaflet-tile"))
-          .map((img) => img.src)
+          .map((tile) => tile.src)
+          .filter((src) => typeof src === "string")
           .filter((src) => src.includes("/maps/circular-city/"))
           .sort();
 
@@ -731,6 +724,7 @@
       const rebuildLayers = () => {
         saveSettings();
         settings = getSettings();
+        localCacheBust = Date.now();
         bounds = [
           [0, 0],
           [settings.imageHeight, settings.imageWidth],
