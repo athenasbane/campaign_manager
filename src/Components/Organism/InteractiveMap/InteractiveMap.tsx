@@ -94,6 +94,16 @@ const escapeHtml = (value: string) =>
 type DmGeometryMode = "point" | "polygon" | "polyline" | "rectangle";
 
 const roundCoordinate = (value: number) => Math.round(value);
+const TILE_ASSET_VERSION = "2026-07-07-circular-city";
+
+const withTileAssetVersion = (urlTemplate: string) => {
+  if (!urlTemplate.includes("/maps/circular-city/")) {
+    return urlTemplate;
+  }
+
+  const separator = urlTemplate.includes("?") ? "&" : "?";
+  return `${urlTemplate}${separator}v=${TILE_ASSET_VERSION}`;
+};
 
 const normaliseMapCoordinate = (
   point: [number, number],
@@ -105,19 +115,16 @@ const normaliseMapCoordinate = (
 
 const createSimpleImageTileLayer = (
   urlTemplate: string,
-  options: L.TileLayerOptions,
-  imageHeight: number
+  options: L.TileLayerOptions
 ) => {
-  const layer = L.tileLayer(urlTemplate, options);
+  const versionedUrlTemplate = withTileAssetVersion(urlTemplate);
+  const layer = L.tileLayer(versionedUrlTemplate, options);
 
   layer.getTileUrl = (coords) => {
-    const tileSize = layer.getTileSize().y;
-    const rowCount = Math.ceil((imageHeight * 2 ** coords.z) / tileSize);
-
-    return L.Util.template(urlTemplate, {
+    return L.Util.template(versionedUrlTemplate, {
       ...layer.options,
       x: coords.x,
-      y: coords.y + rowCount,
+      y: -coords.y - 1,
       z: coords.z,
       r: L.Browser.retina ? "@2x" : "",
     });
@@ -577,7 +584,7 @@ export default function InteractiveMap({
           maxZoom: data.maxZoom,
           minZoom: data.minZoom,
           noWrap: true,
-        }, data.imageHeight).addTo(mapRef.current)
+        }).addTo(mapRef.current)
       : L.imageOverlay(data.imageSrc, bounds).addTo(mapRef.current);
   }, [
     bounds,
