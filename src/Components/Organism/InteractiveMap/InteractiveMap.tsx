@@ -8,6 +8,7 @@ import {
   List,
   ListItemButton,
   ListItemText,
+  MenuItem,
   Stack,
   TextField,
   Typography,
@@ -15,6 +16,7 @@ import {
 import {
   InteractiveMapData,
   MapFeature,
+  MapFeatureType,
 } from "../../../Types/Interfaces/interactiveMap.interface";
 import {
   DetailPanel,
@@ -91,10 +93,77 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
+const getStreetLabelPlacement = (coordinates: [number, number][]) => {
+  let longestSegment:
+    | {
+        midpoint: [number, number];
+        angle: number;
+        length: number;
+      }
+    | null = null;
+
+  coordinates.slice(1).forEach((point, index) => {
+    const start = coordinates[index];
+    const dx = point[0] - start[0];
+    const dy = point[1] - start[1];
+    const length = Math.hypot(dx, dy);
+
+    if (length === 0 || (longestSegment && length <= longestSegment.length)) {
+      return;
+    }
+
+    let angle = (Math.atan2(-dy, dx) * 180) / Math.PI;
+
+    if (angle > 90 || angle < -90) {
+      angle += 180;
+    }
+
+    longestSegment = {
+      midpoint: [(start[0] + point[0]) / 2, (start[1] + point[1]) / 2],
+      angle,
+      length,
+    };
+  });
+
+  return longestSegment;
+};
+
+const addStreetLabel = (
+  group: L.LayerGroup,
+  name: string,
+  coordinates: [number, number][]
+) => {
+  const placement = getStreetLabelPlacement(coordinates);
+
+  if (!placement) {
+    return;
+  }
+
+  L.marker(toLeafletPoint(placement.midpoint), {
+    interactive: false,
+    keyboard: false,
+    icon: L.divIcon({
+      className: "interactive-map-street-label-marker",
+      html: `<span class="interactive-map-street-label" style="--street-label-angle: ${placement.angle}deg;">${escapeHtml(
+        name
+      )}</span>`,
+      iconAnchor: [0, 0],
+      iconSize: [0, 0],
+    }),
+  }).addTo(group);
+};
+
 type DmGeometryMode = "point" | "polygon" | "polyline" | "rectangle";
 
 const roundCoordinate = (value: number) => Math.round(value);
 const TILE_ASSET_VERSION = "2026-07-07-circular-city";
+const MAP_FEATURE_TYPE_OPTIONS: MapFeatureType[] = [
+  "landmark",
+  "district",
+  "route",
+  "gate",
+  "street",
+];
 
 const withTileAssetVersion = (urlTemplate: string) => {
   if (!urlTemplate.includes("/maps/circular-city/")) {
@@ -170,6 +239,16 @@ const buildDraftGeometry = (
     type: mode,
     coordinates: points,
   };
+};
+
+const parseOptionalNumber = (value: string) => {
+  if (!value.trim()) {
+    return null;
+  }
+
+  const parsed = Number(value);
+
+  return Number.isFinite(parsed) ? parsed : null;
 };
 
 const renderDraftGeometry = (
@@ -305,8 +384,14 @@ const addFeatureLayer = (
         )
       );
 
+    if (feature.type === "street") {
+      addStreetLabel(group, feature.name, coordinates);
+    }
+
     segments.forEach((segment) => {
-      segment.bindTooltip(feature.name);
+      if (feature.type !== "street") {
+        segment.bindTooltip(feature.name);
+      }
       segment.on("click", () => onSelect(feature));
       segment.on("mouseover", () => {
         segments.forEach((item) => item.setStyle({ opacity: 1, weight: 5 }));
@@ -441,6 +526,12 @@ export default function InteractiveMap({
   const selectedLayerRef = useRef<L.LayerGroup | null>(null);
   const [dmMode, setDmMode] = useState<DmGeometryMode>("point");
   const [dmPoints, setDmPoints] = useState<[number, number][]>([]);
+  const [dmFeatureKey, setDmFeatureKey] = useState("");
+  const [dmFeatureName, setDmFeatureName] = useState("");
+  const [dmFeatureType, setDmFeatureType] =
+    useState<MapFeatureType>("landmark");
+  const [dmMinZoom, setDmMinZoom] = useState("");
+  const [dmMaxZoom, setDmMaxZoom] = useState("");
   const [selectedFeature, setSelectedFeature] = useState<MapFeature | null>(
     null
   );
@@ -482,6 +573,43 @@ export default function InteractiveMap({
   const draftGeometryText = draftGeometry
     ? JSON.stringify(draftGeometry, null, 2)
     : "";
+  const draftContentfulGeometry = useMemo(() => {
+    if (!draftGeometry) {
+      return null;
+    }
+
+    const minZoom = parseOptionalNumber(dmMinZoom);
+    const maxZoom = parseOptionalNumber(dmMaxZoom);
+
+    return {
+      ...draftGeometry,
+      ...(minZoom == null ? {} : { minZoom }),
+      ...(maxZoom == null ? {} : { maxZoom }),
+    };
+  }, [dmMaxZoom, dmMinZoom, draftGeometry]);
+  const draftContentfulFields = useMemo(() => {
+    if (!draftContentfulGeometry) {
+      return null;
+    }
+
+    return {
+      key: dmFeatureKey.trim(),
+      name: dmFeatureName.trim(),
+      type: dmFeatureType,
+      geometry: JSON.stringify(draftContentfulGeometry),
+      publicSummary: "",
+      revealedSummary: "",
+      visibilityKey: "",
+    };
+  }, [
+    draftContentfulGeometry,
+    dmFeatureKey,
+    dmFeatureName,
+    dmFeatureType,
+  ]);
+  const draftContentfulFieldsText = draftContentfulFields
+    ? JSON.stringify(draftContentfulFields, null, 2)
+    : "";
 
   const handleDmModeChange = (mode: DmGeometryMode) => {
     setDmMode(mode);
@@ -498,6 +626,14 @@ export default function InteractiveMap({
     }
 
     navigator.clipboard.writeText(draftGeometryText);
+  };
+
+  const copyDraftContentfulFields = () => {
+    if (!draftContentfulFieldsText || !navigator.clipboard) {
+      return;
+    }
+
+    navigator.clipboard.writeText(draftContentfulFieldsText);
   };
 
   const focusFeature = useCallback((feature: MapFeature) => {
@@ -744,6 +880,51 @@ export default function InteractiveMap({
                     Box
                   </Button>
                 </ButtonGroup>
+                <TextField
+                  size="small"
+                  label="Contentful key"
+                  value={dmFeatureKey}
+                  onChange={(event) => setDmFeatureKey(event.target.value)}
+                />
+                <TextField
+                  size="small"
+                  label="Contentful name"
+                  value={dmFeatureName}
+                  onChange={(event) => setDmFeatureName(event.target.value)}
+                />
+                <TextField
+                  select
+                  size="small"
+                  label="Contentful type"
+                  value={dmFeatureType}
+                  onChange={(event) =>
+                    setDmFeatureType(event.target.value as MapFeatureType)
+                  }
+                >
+                  {MAP_FEATURE_TYPE_OPTIONS.map((type) => (
+                    <MenuItem key={type} value={type}>
+                      {type}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <Stack direction="row" sx={{ gap: 1 }}>
+                  <TextField
+                    fullWidth
+                    size="small"
+                    type="number"
+                    label="Min zoom"
+                    value={dmMinZoom}
+                    onChange={(event) => setDmMinZoom(event.target.value)}
+                  />
+                  <TextField
+                    fullWidth
+                    size="small"
+                    type="number"
+                    label="Max zoom"
+                    value={dmMaxZoom}
+                    onChange={(event) => setDmMaxZoom(event.target.value)}
+                  />
+                </Stack>
                 <Stack direction="row" sx={{ gap: 1 }}>
                   <Button
                     size="small"
@@ -769,11 +950,20 @@ export default function InteractiveMap({
                   >
                     Copy JSON
                   </Button>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    disabled={!draftContentfulFieldsText}
+                    onClick={copyDraftContentfulFields}
+                  >
+                    Copy Contentful
+                  </Button>
                 </Stack>
                 <Divider />
                 <Typography variant="body2">
                   Points: {dmPoints.length}
                 </Typography>
+                <Typography variant="body2">Geometry JSON</Typography>
                 <Box
                   component="pre"
                   sx={{
@@ -784,6 +974,19 @@ export default function InteractiveMap({
                   }}
                 >
                   {draftGeometryText || "Click the map to draft geometry."}
+                </Box>
+                <Typography variant="body2">Contentful fields</Typography>
+                <Box
+                  component="pre"
+                  sx={{
+                    fontSize: 12,
+                    margin: 0,
+                    overflow: "auto",
+                    whiteSpace: "pre-wrap",
+                  }}
+                >
+                  {draftContentfulFieldsText ||
+                    "Add geometry to generate Contentful fields."}
                 </Box>
               </Stack>
             </DmToolsPanel>

@@ -28,6 +28,33 @@ export const StyledMapContainer = styled(Box)(({ theme }) => ({
     overflowWrap: "break-word",
     whiteSpace: "normal",
   },
+  ".interactive-map-street-label-marker": {
+    background: "transparent",
+    border: 0,
+    pointerEvents: "none",
+  },
+  ".interactive-map-street-label": {
+    color: "#fff4d6",
+    display: "block",
+    fontSize: 12,
+    fontWeight: 700,
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: 1,
+    maxWidth: 180,
+    overflow: "hidden",
+    pointerEvents: "none",
+    position: "absolute",
+    textAlign: "center",
+    textOverflow: "ellipsis",
+    textShadow:
+      "0 1px 2px rgba(0, 0, 0, 0.85), 0 -1px 2px rgba(0, 0, 0, 0.85)",
+    top: 0,
+    transform:
+      "translate(-50%, -50%) rotate(var(--street-label-angle, 0deg))",
+    transformOrigin: "center",
+    whiteSpace: "nowrap",
+  },
 }));
 
 export const FeatureSearch = styled(Paper)(({ theme }) => ({
