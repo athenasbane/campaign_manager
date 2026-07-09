@@ -93,7 +93,13 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
-const getStreetLabelPlacement = (coordinates: [number, number][]) => {
+const getStreetLabelPlacement = (
+  coordinates: [number, number][]
+): {
+  midpoint: [number, number];
+  angle: number;
+  length: number;
+} | null => {
   let longestSegment:
     | {
         midpoint: [number, number];
@@ -102,14 +108,15 @@ const getStreetLabelPlacement = (coordinates: [number, number][]) => {
       }
     | null = null;
 
-  coordinates.slice(1).forEach((point, index) => {
-    const start = coordinates[index];
+  for (let index = 1; index < coordinates.length; index += 1) {
+    const point = coordinates[index];
+    const start = coordinates[index - 1];
     const dx = point[0] - start[0];
     const dy = point[1] - start[1];
     const length = Math.hypot(dx, dy);
 
     if (length === 0 || (longestSegment && length <= longestSegment.length)) {
-      return;
+      continue;
     }
 
     let angle = (Math.atan2(-dy, dx) * 180) / Math.PI;
@@ -123,7 +130,7 @@ const getStreetLabelPlacement = (coordinates: [number, number][]) => {
       angle,
       length,
     };
-  });
+  }
 
   return longestSegment;
 };
@@ -145,6 +152,27 @@ const addStreetLabel = (
     icon: L.divIcon({
       className: "interactive-map-street-label-marker",
       html: `<span class="interactive-map-street-label" style="--street-label-angle: ${placement.angle}deg;">${escapeHtml(
+        name
+      )}</span>`,
+      iconAnchor: [0, 0],
+      iconSize: [0, 0],
+    }),
+  }).addTo(group);
+};
+
+const addDistrictLabel = (
+  group: L.LayerGroup,
+  name: string,
+  coordinates: [number, number][]
+) => {
+  const center = L.latLngBounds(toLeafletPath(coordinates)).getCenter();
+
+  L.marker(center, {
+    interactive: false,
+    keyboard: false,
+    icon: L.divIcon({
+      className: "interactive-map-district-label-marker",
+      html: `<span class="interactive-map-district-label">${escapeHtml(
         name
       )}</span>`,
       iconAnchor: [0, 0],
@@ -365,6 +393,10 @@ const addFeatureLayer = (
 
   if (feature.geometry.type === "polygon") {
     layer = L.polygon(toLeafletPath(feature.geometry.coordinates), commonOptions);
+
+    if (feature.type === "district") {
+      addDistrictLabel(group, feature.name, feature.geometry.coordinates);
+    }
   }
 
   if (feature.geometry.type === "polyline") {
@@ -431,7 +463,9 @@ const addFeatureLayer = (
     return;
   }
 
-  layer.bindTooltip(feature.name);
+  if (feature.type !== "district") {
+    layer.bindTooltip(feature.name);
+  }
   layer.on("click", () => onSelect(feature));
 
   if (
