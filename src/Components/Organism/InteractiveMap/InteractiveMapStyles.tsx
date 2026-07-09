@@ -55,6 +55,31 @@ export const StyledMapContainer = styled(Box)(({ theme }) => ({
     transformOrigin: "center",
     whiteSpace: "nowrap",
   },
+  ".interactive-map-district-label-marker": {
+    background: "transparent",
+    border: 0,
+    pointerEvents: "none",
+  },
+  ".interactive-map-district-label": {
+    color: "#fff4d6",
+    display: "block",
+    fontSize: 14,
+    fontWeight: 800,
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: 1.15,
+    maxWidth: 220,
+    overflow: "hidden",
+    pointerEvents: "none",
+    position: "absolute",
+    textAlign: "center",
+    textOverflow: "ellipsis",
+    textShadow:
+      "0 1px 2px rgba(0, 0, 0, 0.9), 0 -1px 2px rgba(0, 0, 0, 0.9)",
+    top: 0,
+    transform: "translate(-50%, -50%)",
+    whiteSpace: "normal",
+  },
 }));
 
 export const FeatureSearch = styled(Paper)(({ theme }) => ({
