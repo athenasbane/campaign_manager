@@ -24,7 +24,7 @@ jobs:
       REACT_APP_COGNITO_USER_POOL_ID: ${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }}
       REACT_APP_COGNITO_CLIENT_ID: ${{ secrets.REACT_APP_COGNITO_CLIENT_ID }}
       REACT_APP_PLAYER_API_URL: ${{ secrets.REACT_APP_PLAYER_API_URL }}
-      REACT_APP_CAMPAIGN_API_URL: ${{ secrets.REACT_APP_CAMPAIGN_API_URL }}
+      REACT_APP_CAMPAIGN_API_URL: "https://jqco73giv8.execute-api.eu-west-2.amazonaws.com"
 
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +34,14 @@ jobs:
           node-version: 24.x
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - name: Require the Luxtria API before deploying the new player frontend
-        run: node -e 'if (!process.env.REACT_APP_CAMPAIGN_API_URL?.startsWith("https://")) { console.error("Configure REACT_APP_CAMPAIGN_API_URL with the deployed HTTPS Luxtria API before rollout."); process.exit(1); }'
+      - name: Build and deploy the durable Luxtria API
+        run: |
+          node scripts/build-luxtria-lambda.mjs
+          aws lambda update-function-code --function-name luxtria-campaign-api --zip-file fileb://.local/luxtria-lambda.zip --region eu-west-2 --query LastModified --output text
+          aws lambda wait function-updated --function-name luxtria-campaign-api --region eu-west-2
+      - name: Verify the live API before deploying the player frontend
+        run: |
+          node --input-type=module -e 'const r = await fetch(process.env.REACT_APP_CAMPAIGN_API_URL + "/api/campaigns/luxtria/maps/luxtria"); const map = await r.json(); if (!r.ok || map.mapId !== "luxtria" || !Array.isArray(map.features) || map.features.length < 16) throw new Error("Live Luxtria API is not ready");'
       - run: yarn build
       - run: yarn sync
       - run: yarn invalidate

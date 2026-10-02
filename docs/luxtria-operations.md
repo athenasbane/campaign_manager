@@ -40,7 +40,7 @@ The configured root is the owner-supplied `Luxtria/Campaign` directory. Reads st
 
 129 notes were imported as GM-only drafts. Frontmatter such as `lore_audience`, `knowledge`, `canon`, and `lore_include` is retained as source metadata. Folder names never authorize publication. The initial report contains 162 link/attachment warnings and 17 possible duplicate names, largely because several guides share subject names and some references point outside the selected directory. These are review items; the importer does not merge similarly named canon or import protected attachments.
 
-Use `preview_obsidian_import` to obtain a manifest and digest, then `import_obsidian_drafts` for bounded batches (max 30) against that digest. Existing notes require exact expected versions. Source changes invalidate the digest. Imports do not publish. Stable IDs derive from the source path: renaming a source file creates a different ID, so resolve renames deliberately rather than importing duplicates.
+Use `preview_obsidian_import` to obtain a manifest and digest, then `import_obsidian_drafts` for bounded batches (max 25) against that digest. Existing notes require exact expected versions. Source changes invalidate the digest. Imports do not publish. Stable IDs derive from the source path: renaming a source file creates a different ID, so resolve renames deliberately rather than importing duplicates.
 
 The initial local CLI can be rerun:
 
@@ -73,16 +73,25 @@ Read status and bookmarks persist per campaign character and entry version. Upda
 
 ## Persistence and deployment
 
-**This release is running locally, not deployed.** The earlier production site deploys static assets to S3/CloudFront. A static upload alone cannot run the new API. The deployment workflow now requires a configured HTTPS `REACT_APP_CAMPAIGN_API_URL` before shipping the redesigned frontend.
+Production retains S3/CloudFront at https://teratin.online and uses the existing London HTTP API Gateway for `/api/campaigns/*`. Cognito stays in the existing player pool. `infrastructure/luxtria.yaml` describes the new infrastructure, including IAM roles limited to the campaign table and logs.
 
-Choose either:
+DynamoDB is authoritative in production. `dynamo-store.mjs` hydrates a disposable in-memory SQLite view to reuse the tested permission rules and FTS search. Reader operations hydrate only published notes, never GM drafts. History and mutation records are fetched by exact key when needed. Writes commit changed durable rows, publication snapshots, history, audit and mutation results in one DynamoDB transaction, protected by a campaign revision. Reads detect a concurrent commit during hydration and retry once. Cloud imports accept up to 25 notes per atomic batch. The local development API continues to use private SQLite on disk.
 
-1. One persistent Node host serving the built frontend and API on the same HTTPS origin. Build without `REACT_APP_CAMPAIGN_API_URL`, bind the Node server with `LUXTRIA_API_HOST=0.0.0.0`, and set `LUXTRIA_DB_PATH` to a durable mounted path. Terminate HTTPS with the host/reverse proxy. Install full dependencies: this existing project currently keeps some runtime dependencies such as dotenv in devDependencies.
-2. Retain S3/CloudFront for the frontend and run the API on a persistent Node host. Build with `REACT_APP_CAMPAIGN_API_URL=https://api.example`, configure `LUXTRIA_ALLOWED_ORIGIN` as the exact frontend origin, and point the local MCP's `LUXTRIA_API_URL` at the HTTPS API. Supply the same verified Cognito pool/client to both components.
+The first cloud release copies the 129 local imported notes as GM-only drafts; it does not publish them. Source notes and private deployment parameters are never uploaded to the public frontend bucket. The local MCP targets the production HTTPS API after rollout. To author against a local development database instead, use `LUXTRIA_API_URL=http://127.0.0.1:3001` in the ignored `.env.campaign` and restart the MCP connection.
 
-The API base URL should be the origin, without `/api/campaigns` appended. HTTPS is required for a remote MCP target. Do not run this SQLite implementation in an ephemeral Lambda filesystem or across independent replicas. A future multi-instance deployment needs shared database persistence and migrations. Live Cognito sign-in, DNS/TLS, CORS, hosting, and existing Contentful archive credentials need verification on the chosen deployed environment. No cloud resources, user accounts, or live content were changed by this implementation.
+### Cost controls
 
-Back up SQLite with its online backup API or stop the API before copying the database. Do not copy only the main file while live WAL writes are occurring. Keep backups private; they contain unpublished notes and all character knowledge. Protect and rotate the GM key as a server credential, and update the API and local MCP together. No public attachment store is provisioned by this release.
+- DynamoDB has fixed 25 read / 5 write capacity units, without autoscaling or secondary indexes. Its existing free allowance may cover this capacity and the first 25 GB of storage; eligibility and usage are shared with other tables. Provisioned capacity is charged even while idle if outside that allowance.
+- The campaign gateway route is throttled to 1 request/second with a burst of 10. The account concurrency quota remains 10; AWS disallowed reserving two executions at that quota. Other API routes are unchanged. No public Lambda Function URL exists to bypass the gateway throttle.
+- Every real API request must pass durable daily (1,000) and monthly (10,000) quotas. Quotas fail closed; rejected admissions are cached briefly to reduce database work. Preflight requests perform no database work.
+- API memory is 512 MB, timeout 15 seconds, logs expire after 7 days, and there is no provisioned concurrency, EC2, load balancer, NAT gateway, RDS, or paid search service.
+- The account-wide `Luxtria monthly cost guard` budget emails the owner at $2 and $5 actual monthly spend. Its $5 SNS alert invokes an isolated cutoff function that sets only the new campaign API's concurrency to zero. Existing applications are not shut down. Billing updates and alerts can be delayed: this is not a guaranteed $5 bill cap. Existing AWS resources count towards the account-wide budget.
+- If cut off, investigate the cause and cost before explicitly restoring access with `aws lambda delete-function-concurrency --function-name luxtria-campaign-api --region eu-west-2`. It does not automatically resume next month. Quota and capacity changes require a deliberate release.
+- Hydration is bounded to 5,000 rows and 8 MB compressed per prefix and 32 MB materialized per operation; oversized notes/batches are rejected. Review storage design before exceeding that campaign size rather than silently increasing capacity.
+
+Build the code-only Lambda zip with `yarn build:lambda`. The merge deployment workflow updates the Lambda, checks the live anonymous atlas, then builds/uploads the frontend and invalidates CloudFront. The private CloudFormation parameters are prepared with `node scripts/prepare-luxtria-deployment.mjs` into an ignored mode-0600 file. Never print that file or add it to Git. Infrastructure updates are separate from routine code deployment and must preserve the NoEcho GM credential, fixed capacity, gateway throttle and budget subscription. The protected table is retained on stack deletion.
+
+Keep offline backups private: unpublished notes and character knowledge are sensitive. Export via the GM API or a private DynamoDB export/backup; backups have their own storage charges. The current rollout does not automatically enable paid PITR. Keep the local pre-deployment SQLite copy for recovery. Protect and rotate the GM key together in Lambda and the local MCP. No public attachment store is provisioned.
 
 ## Verification
 

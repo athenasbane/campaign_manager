@@ -286,7 +286,7 @@ export function createLuxtriaMcp({
     "Validate at most 50 proposed lore entries and report versions, possible duplicates and missing references. Does not save or publish.",
     {
       ...scope,
-      entries: z.array(entrySchema).min(1).max(50),
+      entries: z.array(entrySchema).min(1).max(25),
     },
     true,
     ({ campaign, entries }) =>
@@ -305,7 +305,7 @@ export function createLuxtriaMcp({
           }),
         )
         .min(1)
-        .max(50),
+        .max(25),
       ...mutation,
     },
     false,
@@ -389,7 +389,7 @@ export function createLuxtriaMcp({
       subdirectory: z.string().max(500).default(""),
       digest: z.string().length(64),
       offset: z.number().int().min(0).default(0),
-      limit: z.number().int().min(1).max(30).default(20),
+      limit: z.number().int().min(1).max(25).default(20),
       expectedVersions: z
         .record(z.string(), z.number().int().min(0))
         .default({}),

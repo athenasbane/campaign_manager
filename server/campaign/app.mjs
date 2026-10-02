@@ -35,9 +35,9 @@ export function createCampaignApp(
   });
   const base = "/api/campaigns/:campaign";
   const route = (method, path, work) =>
-    app[method](base + path, (req, res, next) => {
+    app[method](base + path, async (req, res, next) => {
       try {
-        res.json(work(req.params.campaign, req.actor, req));
+        res.json(await work(req.params.campaign, req.actor, req));
       } catch (error) {
         next(error);
       }
