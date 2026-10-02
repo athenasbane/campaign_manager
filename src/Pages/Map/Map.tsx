@@ -1,4 +1,9 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  Navigate,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { useGetMapPageQuery } from "../../Store/slices/backend";
 import Skeleton from "@mui/material/Skeleton";
@@ -18,7 +23,7 @@ interface MapViewProps {
 export function MapView({ data, playerProfile, enableDmTools }: MapViewProps) {
   const mapData = useMemo(
     () => normaliseMapPage(data, playerProfile),
-    [data, playerProfile]
+    [data, playerProfile],
   );
 
   return (
@@ -39,6 +44,16 @@ export function MapView({ data, playerProfile, enableDmTools }: MapViewProps) {
 }
 
 export default function Map() {
+  const { slug } = useParams();
+  const [params] = useSearchParams();
+  if (slug === "3Ou4xfIid0wF2MduAxzvie")
+    return (
+      <Navigate to={`/world/map${params.size ? `?${params}` : ""}`} replace />
+    );
+  return <LegacyMap />;
+}
+
+function LegacyMap() {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

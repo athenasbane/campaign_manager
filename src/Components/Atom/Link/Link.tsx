@@ -19,7 +19,7 @@ export default function Link({
   linkDisplayLabel,
   typographyComponentProps = {},
   display,
-  color = theme.palette.contrastText,
+  color = theme.palette.text.primary,
 }: ILinkProps) {
   const { sx, ...restTypographyProps } = typographyComponentProps;
 

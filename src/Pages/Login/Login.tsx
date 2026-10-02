@@ -21,7 +21,7 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from =
-    (location.state as LoginLocationState | null)?.from?.pathname || "/me";
+    (location.state as LoginLocationState | null)?.from?.pathname || "/character";
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,9 +55,10 @@ export default function Login() {
   };
 
   return (
-    <Stack component="main" direction="column" sx={{ gap: 3 }}>
+    <Stack component="section" className="campaign-login" direction="column" sx={{ gap: 6 }}>
+      <span className="eyebrow">Luxtria / Your character</span>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
-        Player Login
+        Open your next chapter.
       </Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <Stack direction="column" sx={{ gap: 3 }}>
@@ -83,7 +84,7 @@ export default function Login() {
             color="primary"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Logging in" : "Login"}
+            {isSubmitting ? "Signing in…" : "Sign in"}
           </Button>
         </Stack>
       </Box>

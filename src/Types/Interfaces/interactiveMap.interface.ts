@@ -33,6 +33,8 @@ export interface MapFeature {
   visibilityKey?: string | null;
   minZoom?: number | null;
   maxZoom?: number | null;
+  private?: boolean;
+  entries?: { id: string; title: string; type: string; private: boolean }[];
 }
 
 export interface PlayerMapVisibility {
@@ -52,4 +54,8 @@ export interface InteractiveMapData {
   defaultCenter: [number, number];
   features: MapFeature[];
   fogFeatures: MapFeature[];
+  title?: string;
+  unitOfDistance?: string | null;
+  distanceScale?: number | null;
+  canEdit?: boolean;
 }

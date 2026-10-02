@@ -5,11 +5,11 @@ import store from "./Store/store";
 import { BrowserRouter } from "react-router-dom";
 
 it("should render the title", () => {
-  const { getByText } = render(
+  const { getByRole } = render(
     <Provider store={store}>
       <App />
     </Provider>,
     { wrapper: BrowserRouter }
   );
-  expect(getByText("Teratin")).toBeInTheDocument();
+  expect(getByRole("link", { name: "Teratin home" })).toBeInTheDocument();
 });

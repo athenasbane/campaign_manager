@@ -1,0 +1,206 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Luxtria API with fixed low capacity and no automatic scaling
+Parameters:
+  GmToken:
+    Type: String
+    NoEcho: true
+    MinLength: 32
+  CognitoPool:
+    Type: String
+  CognitoClient:
+    Type: String
+Resources:
+  Data:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: luxtria-campaign-data
+      BillingMode: PROVISIONED
+      ProvisionedThroughput:
+        ReadCapacityUnits: 25
+        WriteCapacityUnits: 5
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      DeletionProtectionEnabled: true
+      TimeToLiveSpecification:
+        AttributeName: expires
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: Luxtria
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/luxtria-campaign-api
+      RetentionInDays: 7
+      Tags:
+        - Key: Project
+          Value: Luxtria
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: campaign-data-and-logs
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:Query
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                Resource: !GetAtt Data.Arn
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !GetAtt Logs.Arn
+  Api:
+    Type: AWS::Lambda::Function
+    DependsOn: Logs
+    Properties:
+      FunctionName: luxtria-campaign-api
+      Runtime: nodejs24.x
+      Handler: index.handler
+      Role: !GetAtt Role.Arn
+      MemorySize: 512
+      Timeout: 15
+      Code:
+        ZipFile: 'exports.handler = async () => ({ statusCode: 503, body: "Deployment pending" });'
+      Environment:
+        Variables:
+          LUXTRIA_TABLE: !Ref Data
+          LUXTRIA_ALLOWED_ORIGIN: https://teratin.online
+          LUXTRIA_COGNITO_USER_POOL_ID: !Ref CognitoPool
+          LUXTRIA_COGNITO_CLIENT_ID: !Ref CognitoClient
+          LUXTRIA_GM_TOKEN: !Ref GmToken
+      Tags:
+        - Key: Project
+          Value: Luxtria
+  Integration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: jqco73giv8
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Api.Arn
+      PayloadFormatVersion: "2.0"
+      TimeoutInMillis: 16000
+  CampaignRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: jqco73giv8
+      RouteKey: "ANY /api/campaigns/{proxy+}"
+      Target: !Sub "integrations/${Integration}"
+  GatewayPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Api
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:jqco73giv8/*/*/api/campaigns/*"
+  BudgetTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: luxtria-cost-cutoff
+      Tags:
+        - Key: Project
+          Value: Luxtria
+  BudgetTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: [!Ref BudgetTopic]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: budgets.amazonaws.com
+            Action: sns:Publish
+            Resource: !Ref BudgetTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+              ArnLike:
+                aws:SourceArn: !Sub "arn:aws:budgets::${AWS::AccountId}:*"
+  CutoffRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: stop-only-luxtria
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: lambda:PutFunctionConcurrency
+                Resource: !GetAtt Api.Arn
+  Cutoff:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: luxtria-cost-cutoff
+      Runtime: nodejs24.x
+      Handler: index.handler
+      Role: !GetAtt CutoffRole.Arn
+      Timeout: 10
+      MemorySize: 128
+      Environment:
+        Variables:
+          API_FUNCTION: !Ref Api
+          TOPIC: !Ref BudgetTopic
+      Code:
+        ZipFile: |
+          const { LambdaClient, PutFunctionConcurrencyCommand } = require('@aws-sdk/client-lambda');
+          const client = new LambdaClient({});
+          exports.handler = async event => {
+            if (!event.Records?.length || event.Records.some(r => r.Sns?.TopicArn !== process.env.TOPIC)) throw new Error('Only the budget topic may trigger cutoff');
+            await client.send(new PutFunctionConcurrencyCommand({ FunctionName: process.env.API_FUNCTION, ReservedConcurrentExecutions: 0 }));
+            return { stopped: true };
+          };
+      Tags:
+        - Key: Project
+          Value: Luxtria
+  CutoffPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Cutoff
+      Principal: sns.amazonaws.com
+      SourceArn: !Ref BudgetTopic
+  CutoffSubscription:
+    Type: AWS::SNS::Subscription
+    DependsOn: CutoffPermission
+    Properties:
+      Protocol: lambda
+      TopicArn: !Ref BudgetTopic
+      Endpoint: !GetAtt Cutoff.Arn
+Outputs:
+  ApiUrl:
+    Value: https://jqco73giv8.execute-api.eu-west-2.amazonaws.com
+  BudgetTopic:
+    Value: !Ref BudgetTopic
+  Table:
+    Value: !Ref Data

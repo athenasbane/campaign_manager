@@ -1,44 +1,45 @@
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+import { ReactNode, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Molecule/Navbar/Navbar";
 import Draw from "../Components/Molecule/Draw/Draw";
-import { ReactNode } from "react";
-
+import {
+  CampaignNavigation,
+  CampaignSidebar,
+} from "../Components/Campaign/Navigation";
 export interface IMainTemplateProps {
   children: ReactNode;
-  NavbarProps: {
-    onMenuButtonClick: () => void;
-  };
+  NavbarProps: { onMenuButtonClick: () => void };
   DrawProps: {
     open: boolean;
     closeModal: () => void;
     openSingleModal: () => void;
   };
 }
-
 export default function MainTemplate({
+  children,
   NavbarProps,
   DrawProps,
-  children,
 }: IMainTemplateProps) {
+  const { pathname, hash, search } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo?.({ top: 0 });
+  }, [pathname, hash, search]);
   return (
-    <>
-      <Container maxWidth="lg">
-        <Stack direction={"column"}>
-          <Box sx={{ position: "fixed", zIndex: 100, left: 0 }}>
-            <Navbar onMenuButtonClick={NavbarProps.onMenuButtonClick} />
-          </Box>
-          <Box sx={{ mt: 30 }}>{children}</Box>
-        </Stack>
-      </Container>
-      <div>
-        <Draw
-          open={DrawProps.open}
-          closeModal={DrawProps.closeModal}
-          openSingleModal={DrawProps.openSingleModal}
-        />
-      </div>
-    </>
+    <div className="campaign-shell">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <Navbar {...NavbarProps} />
+      <CampaignSidebar />
+      <main id="main-content" className={`campaign-main ${pathname === "/world/map" ? "atlas-main" : ""}`}>
+        {children}
+        <footer className="page-footer">
+          <span>Luxtria</span>
+          <span>A chapter of Teratin</span>
+        </footer>
+      </main>
+      <CampaignNavigation mobile />
+      <Draw {...DrawProps} />
+    </div>
   );
 }

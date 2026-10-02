@@ -56,7 +56,7 @@ export default function Draw({
       icon: <CurrencyExchangeIcon />,
     },
     {
-      displayText: "My Character",
+      displayText: "Earlier Character Pages",
       path: "/me",
       icon: <PersonIcon />,
     },

@@ -24,3 +24,10 @@ yarn-debug.log*
 yarn-error.log*
 
 *storybook.log
+
+# Private campaign data and local authoring credentials
+/.local/
+.env.campaign
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

@@ -1,0 +1,516 @@
+{
+  "mapId": "luxtria",
+  "title": "Luxtria",
+  "sourceMapId": "3Ou4xfIid0wF2MduAxzvie",
+  "sourceDate": "2026-10-02",
+  "imageSrc": "https://images.ctfassets.net/u9i8uh7i6idu/2yYux9zIm8zHvR5b26ccWS/039979eb43171b5179258eae0beb32ea/ChatGPT_Image_Jul_6__2026__08_34_04_AM.png",
+  "tileUrlTemplate": "https://d2ym56h75q57hl.cloudfront.net/maps/circular-city/{z}/{x}/{y}.png",
+  "imageWidth": 1254,
+  "imageHeight": 1254,
+  "minZoom": -3,
+  "maxZoom": 2,
+  "defaultZoom": -2,
+  "defaultCenter": [
+    627,
+    627
+  ],
+  "unitOfDistance": "Miles",
+  "distanceScale": 10,
+  "features": [
+    {
+      "key": "palace",
+      "name": "The Palace",
+      "type": "landmark",
+      "geometry": {
+        "type": "point",
+        "coordinates": [
+          624,
+          650
+        ]
+      },
+      "publicSummary": "# The Palace\n\nA vast hilltop palace-fortress of heavy stone, layered walls, commanding terraces, and austere civic grandeur, looming over Luxtria as both seat of rule and instrument of control.",
+      "minZoom": -2,
+      "maxZoom": 0
+    },
+    {
+      "key": "southgate",
+      "name": "South Gate",
+      "type": "landmark",
+      "geometry": {
+        "type": "point",
+        "coordinates": [
+          624,
+          90
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -2,
+      "maxZoom": 0
+    },
+    {
+      "key": "eastgate",
+      "name": "East Gate",
+      "type": "landmark",
+      "geometry": {
+        "type": "point",
+        "coordinates": [
+          1150,
+          634
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -2,
+      "maxZoom": 0
+    },
+    {
+      "key": "westgate",
+      "name": "West Gate",
+      "type": "landmark",
+      "geometry": {
+        "type": "point",
+        "coordinates": [
+          98,
+          636
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -2,
+      "maxZoom": 0
+    },
+    {
+      "key": "northgate",
+      "name": "North Gate",
+      "type": "landmark",
+      "geometry": {
+        "type": "point",
+        "coordinates": [
+          624,
+          1162
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -2,
+      "maxZoom": 0
+    },
+    {
+      "key": "tallowgate_district",
+      "name": "Tallowgate",
+      "type": "district",
+      "geometry": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            626,
+            234
+          ],
+          [
+            625,
+            90
+          ],
+          [
+            697,
+            99
+          ],
+          [
+            735,
+            103
+          ],
+          [
+            776,
+            115
+          ],
+          [
+            809,
+            125
+          ],
+          [
+            829,
+            139
+          ],
+          [
+            836,
+            142
+          ],
+          [
+            788,
+            269
+          ],
+          [
+            752,
+            256
+          ],
+          [
+            713,
+            245
+          ],
+          [
+            671,
+            238
+          ],
+          [
+            656,
+            232
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -1,
+      "maxZoom": 0
+    },
+    {
+      "key": "drovers-road",
+      "name": "Drovers Road",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            694,
+            169
+          ],
+          [
+            711,
+            172
+          ],
+          [
+            725,
+            175
+          ],
+          [
+            739,
+            179
+          ],
+          [
+            754,
+            183
+          ],
+          [
+            768,
+            188
+          ],
+          [
+            780,
+            192
+          ],
+          [
+            794,
+            197
+          ],
+          [
+            805,
+            202
+          ],
+          [
+            814,
+            206
+          ],
+          [
+            819,
+            208
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "market-avenue",
+      "name": "Market Avenue",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            736,
+            239
+          ],
+          [
+            767,
+            132
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "The-Meltway",
+      "name": "The Meltway",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            797,
+            259
+          ],
+          [
+            841,
+            162
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "Hidehouse-Row",
+      "name": "Hidehouse Row",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            744,
+            214
+          ],
+          [
+            805,
+            238
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "tallowgate-civic-complex",
+      "name": "Tallowgate Civic Complex",
+      "type": "landmark",
+      "geometry": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            716,
+            221
+          ],
+          [
+            719,
+            207
+          ],
+          [
+            733,
+            211
+          ],
+          [
+            729,
+            225
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "fleasing-lane",
+      "name": "Fleasing Lane",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            655,
+            226
+          ],
+          [
+            692,
+            230
+          ],
+          [
+            725,
+            238
+          ],
+          [
+            750,
+            245
+          ],
+          [
+            768,
+            252
+          ],
+          [
+            782,
+            259
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "Henstall-Lane",
+      "name": "Henstall Lane",
+      "type": "street",
+      "geometry": {
+        "type": "polyline",
+        "coordinates": [
+          [
+            641,
+            183
+          ],
+          [
+            670,
+            185
+          ],
+          [
+            697,
+            188
+          ],
+          [
+            721,
+            192
+          ],
+          [
+            747,
+            199
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": 1,
+      "maxZoom": 2
+    },
+    {
+      "key": "Limeyard-district",
+      "name": "Limeyard",
+      "type": "district",
+      "geometry": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            790,
+            270
+          ],
+          [
+            865,
+            316
+          ],
+          [
+            922,
+            368
+          ],
+          [
+            1016,
+            277
+          ],
+          [
+            940,
+            208
+          ],
+          [
+            838,
+            145
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -1,
+      "maxZoom": 0
+    },
+    {
+      "key": "stonegate-district",
+      "name": "Stonegate",
+      "type": "district",
+      "geometry": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            624,
+            231
+          ],
+          [
+            551,
+            242
+          ],
+          [
+            487,
+            261
+          ],
+          [
+            461,
+            271
+          ],
+          [
+            401,
+            152
+          ],
+          [
+            460,
+            125
+          ],
+          [
+            505,
+            112
+          ],
+          [
+            555,
+            104
+          ],
+          [
+            587,
+            99
+          ],
+          [
+            617,
+            92
+          ],
+          [
+            623,
+            92
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -1,
+      "maxZoom": 0
+    },
+    {
+      "key": "Saltcourt-district",
+      "name": "Saltcourt",
+      "type": "district",
+      "geometry": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            628,
+            374
+          ],
+          [
+            626,
+            236
+          ],
+          [
+            717,
+            248
+          ],
+          [
+            786,
+            274
+          ],
+          [
+            819,
+            289
+          ],
+          [
+            758,
+            417
+          ],
+          [
+            691,
+            385
+          ]
+        ]
+      },
+      "publicSummary": "",
+      "minZoom": -1,
+      "maxZoom": 0
+    }
+  ],
+  "fogFeatures": []
+}

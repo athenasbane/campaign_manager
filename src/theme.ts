@@ -1,30 +1,29 @@
 import { createTheme } from "@mui/material/styles";
-
-const theme: any = createTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: {
-      main: "#B8860B",
-    },
-    secondary: {
-      main: "#8B4513",
-    },
+    primary: { main: "#ceb18b" },
+    secondary: { main: "#a8afa6" },
+    background: { default: "#111413", paper: "#1b201e" },
+    text: { primary: "#ecece3", secondary: "#9fa69f" },
+    divider: "#303630",
   },
   spacing: 4,
   typography: {
-    fontFamily: "'Roboto Slab', serif",
-    h1: {
-      fontFamily: "'IM Fell English SC', serif",
+    fontFamily: "'Inter', system-ui, sans-serif",
+    h1: { fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 },
+    h2: { fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 },
+    h3: { fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 },
+    h4: { fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 },
+    body1: { lineHeight: 1.8 },
+    button: { textTransform: "none", fontWeight: 500 },
+  },
+  shape: { borderRadius: 8 },
+  components: {
+    MuiButton: {
+      styleOverrides: { root: { minHeight: 44, boxShadow: "none" } },
     },
-    h2: {
-      fontFamily: "'IM Fell English SC', serif",
-    },
-    h3: {
-      fontFamily: "'IM Fell English SC', serif",
-    },
-    h4: {
-      fontFamily: "'IM Fell English SC', serif",
-    },
+    MuiAccordion: { styleOverrides: { root: { boxShadow: "none" } } },
   },
 });
 export default theme;
