@@ -9,6 +9,7 @@ const clientEnvKeys = [
   "REACT_APP_PLAYER_API_URL",
   "REACT_APP_COGNITO_USER_POOL_ID",
   "REACT_APP_COGNITO_CLIENT_ID",
+  "REACT_APP_CAMPAIGN_API_URL",
 ];
 
 export default defineConfig(({ mode }) => {
@@ -16,10 +17,10 @@ export default defineConfig(({ mode }) => {
   const nodeEnv = mode === "production" ? "production" : "development";
   const clientEnv = clientEnvKeys.reduce<Record<string, string | undefined>>(
     (acc, key) => {
-      acc[key] = key === "NODE_ENV" ? nodeEnv : env[key] ?? process.env[key];
+      acc[key] = key === "NODE_ENV" ? nodeEnv : (env[key] ?? process.env[key]);
       return acc;
     },
-    {}
+    {},
   );
 
   return {
@@ -35,6 +36,12 @@ export default defineConfig(({ mode }) => {
     server: {
       host: "0.0.0.0",
       port: Number(env.PORT || process.env.PORT) || 3000,
+      proxy: {
+        "/api/campaigns": {
+          target: env.LUXTRIA_API_URL || "http://127.0.0.1:3001",
+          changeOrigin: true,
+        },
+      },
     },
   };
 });

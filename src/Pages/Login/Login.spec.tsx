@@ -20,14 +20,14 @@ describe("Page - Login", () => {
       <MemoryRouter initialEntries={["/login"]}>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/me" element={<div>Personal page</div>} />
+          <Route path="/character" element={<div>Personal page</div>} />
         </Routes>
       </MemoryRouter>
     );
 
     await user.type(screen.getByLabelText(/Email/), "laura@example.com");
     await user.type(screen.getByLabelText(/Password/), "secret-password");
-    await user.click(screen.getByRole("button", { name: "Login" }));
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
 
     expect(screen.getByText("Personal page")).toBeInTheDocument();
     expect(signInWithCognito).toHaveBeenCalledWith(
@@ -56,7 +56,7 @@ describe("Page - Login", () => {
 
     await user.type(screen.getByLabelText(/Email/), "laura@example.com");
     await user.type(screen.getByLabelText(/Password/), "wrong-password");
-    await user.click(screen.getByRole("button", { name: "Login" }));
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
 
     expect(
       await screen.findByText("Incorrect username or password.")

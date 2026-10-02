@@ -14,6 +14,13 @@ import { StyledSkeleton } from "./AppStyles";
 import ProtectedRoute from "./Components/Organism/ProtectedRoute/ProtectedRoute";
 
 const Welcome = lazy(() => import("./Pages/Welcome/Welcome"));
+const CampaignHome = lazy(() => import("./Pages/Campaign/Home"));
+const World = lazy(() => import("./Pages/Campaign/World"));
+const Atlas = lazy(() => import("./Pages/Campaign/Atlas"));
+const Journal = lazy(() => import("./Pages/Campaign/Journal"));
+const Character = lazy(() => import("./Pages/Campaign/Character"));
+const Reader = lazy(() => import("./Pages/Campaign/Reader"));
+const Archive = lazy(() => import("./Pages/Campaign/Archive"));
 const Map = lazy(() => import("./Pages/Map/Map"));
 const List = lazy(() => import("./Pages/List/List"));
 const Content = lazy(() => import("./Pages/Content/Content"));
@@ -55,7 +62,14 @@ function App() {
         >
           <Suspense fallback={<StyledSkeleton variant="rectangular" />}>
             <Routes>
-              <Route path="/" element={<Welcome />} />
+              <Route path="/" element={<CampaignHome />} />
+              <Route path="/world" element={<World />} />
+              <Route path="/world/map" element={<Atlas />} />
+              <Route path="/world/:entryId" element={<Reader />} />
+              <Route path="/journal" element={<Journal />} />
+              <Route path="/character" element={<Character />} />
+              <Route path="/archive" element={<Archive />} />
+              <Route path="/archive/home" element={<Welcome />} />
               <Route path="/map/:slug" element={<Map />} />
               <Route path="/list/:slug" element={<List />} />
               <Route path="/content/:slug" element={<Content />} />

@@ -1,84 +1,61 @@
-import TreeView from "@mui/lab/TreeView";
 import { Stack, Box, Skeleton, Typography } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useGetMissionsPageQuery } from "../../Store/slices/backend";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { buildSelection } from "./MissionsUtils";
-import { Mission } from "../../Types/Interfaces/missions.interface";
+import { useState } from "react";
 import MissionDetails from "../../Components/Molecule/MissionDetails/MissionDetails";
+import {
+  EmptyState,
+  UnavailableState,
+} from "../../Components/Campaign/Content";
 
 export default function Missions() {
-  const [selected, setSelected] = useState<Mission>();
-
-  const handleNodeSelect = (_: any, nodeIds: string) => {
-    if (data) {
-      const [selectedMission] = data.missionsCollection.items.filter(
-        (mission: any) => mission.sys.id === nodeIds
-      );
-      setSelected(selectedMission);
-    }
-  };
-  const navigate = useNavigate();
-  const { data, error, isLoading } = useGetMissionsPageQuery(undefined);
-
-  useEffect(() => {
-    if (error || (!data && !isLoading)) {
-      navigate("/404");
-    }
-  }, [error, navigate, data, isLoading]);
-
-  if (isLoading) {
-    return <Skeleton height={40} />;
-  }
-
-  const selection = buildSelection(data?.missionsCollection.items || []);
-
-  const mission = selected ? (
-    <MissionDetails {...selected} />
-  ) : (
-    <Typography sx={{ textAlign: "center" }} variant="h3">
-      Select a mission
-    </Typography>
-  );
+  const [selectedId, setSelectedId] = useState("");
+  const { data, error, isLoading, refetch } =
+    useGetMissionsPageQuery(undefined);
+  if (isLoading) return <Skeleton height={100} />;
+  if (error) return <UnavailableState retry={refetch} />;
+  const missions = data?.missionsCollection.items || [];
+  if (!missions.length)
+    return (
+      <EmptyState title="No archived missions.">
+        <p>There are no missions in this archive yet.</p>
+      </EmptyState>
+    );
+  const selected =
+    missions.find((mission) => mission.sys.id === selectedId) ||
+    missions.find((mission) => !mission.complete) ||
+    missions[0];
   return (
-    <Stack direction="column">
-      <Box sx={{ textAlign: "center" }}>
-        <Typography sx={{ textAlign: "center" }} variant="h2">
-          {data?.title}
-        </Typography>
-      </Box>
-      <Stack direction="row" sx={{ justifyContent: "center", gap: 6 }}>
+    <Stack sx={{ gap: 6 }}>
+      <Typography variant="h2">{data?.title || "Archived missions"}</Typography>
+      <Stack direction={{ xs: "column", md: "row" }} sx={{ gap: 6 }}>
         <Box
-          sx={{
-            border: "1px solid white",
-            padding: 3,
-            borderBottomRightRadius: 10,
-            width: { xs: "100%", sm: "33%" },
-          }}
+          component="nav"
+          aria-label="Archived missions"
+          sx={{ width: { xs: "100%", md: "33%" }, flexShrink: 0 }}
         >
-          <TreeView
-            onNodeSelect={handleNodeSelect}
-            aria-label="mission select"
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpandIcon={<ChevronRightIcon />}
-          >
-            {selection}
-          </TreeView>
+          {[false, true].map((complete) => (
+            <section key={String(complete)} className="archive-mission-group">
+              <h3>{complete ? "Complete" : "Active"}</h3>
+              {missions
+                .filter((mission) => mission.complete === complete)
+                .map((mission) => (
+                  <button
+                    type="button"
+                    key={mission.sys.id}
+                    aria-current={
+                      selected.sys.id === mission.sys.id ? "true" : undefined
+                    }
+                    onClick={() => setSelectedId(mission.sys.id)}
+                  >
+                    {mission.missionName}
+                  </button>
+                ))}
+            </section>
+          ))}
         </Box>
-        <Stack
-          direction="column"
-          sx={{
-            gap: 4,
-            border: "1px solid white",
-            padding: 3,
-            borderBottomRightRadius: 10,
-            width: { xs: "100%", sm: "58%" },
-          }}
-        >
-          {mission}
-        </Stack>
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <MissionDetails {...selected} />
+        </Box>
       </Stack>
     </Stack>
   );

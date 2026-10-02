@@ -1,4 +1,4 @@
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useGetMapPageQuery } from "../../../Store/slices/backend";
 import { useGetPlayerProfileQuery } from "../../../Store/slices/playerApi";
 import { renderWithProviders } from "../../../utils/test-utils";
@@ -21,7 +21,7 @@ jest.mock("../../../Store/slices/playerApi", () => {
 
 jest.mock(
   "../../../Components/Organism/InteractiveMap/InteractiveMap",
-  () => (props: unknown) => mockInteractiveMap(props)
+  () => (props: unknown) => mockInteractiveMap(props),
 );
 
 describe("Page - Map", () => {
@@ -40,7 +40,7 @@ describe("Page - Map", () => {
     const { getByText } = renderWithProviders(
       <MemoryRouter>
         <Map />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByText("Full Map")).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe("Page - Map", () => {
             playerName: "Fane",
           },
         },
-      }
+      },
     );
 
     expect(mockInteractiveMap).toHaveBeenCalledWith(
@@ -96,7 +96,30 @@ describe("Page - Map", () => {
             }),
           ],
         }),
-      })
+      }),
     );
   });
+});
+
+function AtlasDestination() {
+  const location = useLocation();
+  return (
+    <p>
+      {location.pathname}
+      {location.search}
+    </p>
+  );
+}
+test("archived Luxtria links open the new atlas without requesting the legacy Contentful map", () => {
+  jest.clearAllMocks();
+  const { getByText } = renderWithProviders(
+    <MemoryRouter initialEntries={["/map/3Ou4xfIid0wF2MduAxzvie?dmTools=true"]}>
+      <Routes>
+        <Route path="/map/:slug" element={<Map />} />
+        <Route path="/world/map" element={<AtlasDestination />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+  expect(getByText("/world/map?dmTools=true")).toBeInTheDocument();
+  expect(useGetMapPageQuery).not.toHaveBeenCalled();
 });

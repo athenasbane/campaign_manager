@@ -24,6 +24,7 @@ jobs:
       REACT_APP_COGNITO_USER_POOL_ID: ${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }}
       REACT_APP_COGNITO_CLIENT_ID: ${{ secrets.REACT_APP_COGNITO_CLIENT_ID }}
       REACT_APP_PLAYER_API_URL: ${{ secrets.REACT_APP_PLAYER_API_URL }}
+      REACT_APP_CAMPAIGN_API_URL: ${{ secrets.REACT_APP_CAMPAIGN_API_URL }}
 
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +34,8 @@ jobs:
           node-version: 24.x
           cache: "yarn"
       - run: yarn install --frozen-lockfile
+      - name: Require the Luxtria API before deploying the new player frontend
+        run: node -e 'if (!process.env.REACT_APP_CAMPAIGN_API_URL?.startsWith("https://")) { console.error("Configure REACT_APP_CAMPAIGN_API_URL with the deployed HTTPS Luxtria API before rollout."); process.exit(1); }'
       - run: yarn build
       - run: yarn sync
       - run: yarn invalidate

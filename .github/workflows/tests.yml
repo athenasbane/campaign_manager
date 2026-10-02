@@ -3,20 +3,21 @@
 
 name: Test
 
-on:
-  pull_request
+on: pull_request
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: 24.x
-        cache: 'yarn'
-    - run: yarn install --frozen-lockfile
-    - run: yarn build
-    - run: yarn test
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: "yarn"
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn typecheck
+      - run: yarn lint
+      - run: yarn test --watchAll=false --runInBand
+      - run: yarn test:campaign
