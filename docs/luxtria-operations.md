@@ -54,7 +54,11 @@ It adds new notes, skips deeply equal notes, and reports differing existing draf
 
 Use the existing Cognito pool/client, configured for both the frontend and API. The API verifies RS256 signatures, issuer, client audience, expiry, subject, and ID-token use. Frontend Cognito settings are public IDs; the GM key remains server-only. The optional `luxtria-gm` Cognito group authorizes GM API operations, with a configurable group name.
 
-Map each verified Cognito `sub` to one exact campaign character with `register_campaign_character`. Names are display text, not identity. Account reassignment is intentionally rejected. No real player mappings have been created. The owner must supply the actual account subjects before dossiers can be used by players; the signed-in site explains an unassigned account honestly.
+Map each verified Cognito `sub` to one exact campaign character with `register_campaign_character`. Names are display text, not identity. Account reassignment is intentionally rejected. Verify the account subject before linking a character; the signed-in site explains an unassigned account honestly.
+
+For invited players, use the existing pool's administrator invitation flow. The player signs in at `/login` with their invited email and temporary password, then chooses and confirms a permanent password. The site handles Cognito's `NEW_PASSWORD_REQUIRED` challenge using the same in-memory session and saves a token only after successful completion. Missing required profile attributes are collected; existing attributes are not resubmitted. The current pool requires at least 10 characters, uppercase and lowercase letters, and a number. Cognito remains the authority for password validation.
+
+Temporary passwords currently expire after seven days. An expired sign-in challenge can be restarted with “Return to sign-in”; an expired invitation requires a new administrator invitation. Creating or resending an invitation sends email and requires an explicit request. Never include temporary passwords, intake contact details, or challenge sessions in public campaign entries. After account creation, register its verified `sub` with the selected character before the player signs in.
 
 Audiences:
 
