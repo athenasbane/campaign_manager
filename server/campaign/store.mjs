@@ -37,6 +37,7 @@ export function createStore(path = ":memory:") {
     CREATE TABLE IF NOT EXISTS read_state (
       campaign TEXT NOT NULL, character_id TEXT NOT NULL, entry_id TEXT NOT NULL,
       version INTEGER NOT NULL, bookmarked INTEGER NOT NULL DEFAULT 0,
+      personal_notes TEXT NOT NULL DEFAULT '',
       PRIMARY KEY (campaign, character_id, entry_id)
     );
     CREATE VIRTUAL TABLE IF NOT EXISTS entry_search USING fts5(
@@ -44,6 +45,17 @@ export function createStore(path = ":memory:") {
       tokenize='unicode61 remove_diacritics 2'
     );
   `);
+  // Existing local databases gain notes without replacing reading history.
+  if (
+    !db
+      .prepare("PRAGMA table_info(read_state)")
+      .all()
+      .some((column) => column.name === "personal_notes")
+  ) {
+    db.exec(
+      "ALTER TABLE read_state ADD COLUMN personal_notes TEXT NOT NULL DEFAULT ''",
+    );
+  }
   db.prepare("INSERT OR IGNORE INTO campaigns (id, data) VALUES (?, ?)").run(
     "luxtria",
     JSON.stringify({

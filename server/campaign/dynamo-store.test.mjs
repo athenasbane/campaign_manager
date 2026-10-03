@@ -242,3 +242,46 @@ test("25-note private import fits one transaction without publication deletes", 
   assert.ok(transaction.every((action) => !action.Delete));
   assert.equal((await s.execute("search", "luxtria", null)).total, 0);
 });
+
+test("old durable reader states acquire private notes without losing bookmarks, and notes survive fresh services", async () => {
+  const m = mock();
+  let s = createDynamoService(m.client, "test");
+  await s.execute("saveCharacter", "luxtria", gm, {
+    characterId: "alice",
+    characterName: "Alice",
+    userSub: "alice",
+  });
+  await write(s, "note");
+  await publish(s, "note");
+  m.rows.set("luxtria|state#alice#note", {
+    pk: "luxtria",
+    sk: "state#alice#note",
+    payload: gzipSync(
+      Buffer.from(
+        JSON.stringify({
+          campaign: "luxtria",
+          character_id: "alice",
+          entry_id: "note",
+          version: 1,
+          bookmarked: 1,
+        }),
+      ),
+    ),
+  });
+  assert.equal(
+    (await s.execute("read", "luxtria", { sub: "alice" }, "note"))
+      .personalNotes,
+    "",
+  );
+  await s.execute("readerState", "luxtria", { sub: "alice" }, "note", {
+    personalNotes: "Persist this interpretation",
+  });
+  s = createDynamoService(m.client, "test");
+  const read = await s.execute("read", "luxtria", { sub: "alice" }, "note");
+  assert.equal(read.personalNotes, "Persist this interpretation");
+  assert.equal(read.bookmarked, true);
+  assert.equal(
+    (await s.execute("read", "luxtria", gm, "note")).personalNotes,
+    "",
+  );
+});

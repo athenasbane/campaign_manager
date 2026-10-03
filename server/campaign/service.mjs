@@ -44,6 +44,12 @@ const summary = (entry) => {
   return safe;
 };
 
+export const entrySearchBody = (entry) =>
+  [
+    entry.body.replace(/\[[^\]]*\]\(\/world\/[^)]+\)/g, ""),
+    ...Object.values(entry.intelligence || {}),
+  ].join(" ");
+
 const defaultMapMinZoom = { district: 0, route: 1, street: 2 };
 // Resolve every placement against stable artwork defaults, never another
 // entry's audience-dependent overrides. Null explicitly removes a limit.
@@ -255,6 +261,8 @@ export function createCampaignService(db) {
         limit: z.coerce.number().int().min(1).max(50).default(12),
         privateOnly: z.enum(["true", "false"]).default("false"),
         bookmarked: z.enum(["true", "false"]).default("false"),
+        unread: z.enum(["true", "false"]).default("false"),
+        dossier: z.enum(["true", "false"]).default("false"),
       }),
       query,
     );
@@ -301,8 +309,22 @@ export function createCampaignService(db) {
         (!parsed.type || parsed.type.split(",").includes(entry.type)) &&
         (parsed.privateOnly !== "true" ||
           entry.audience.visibility === "characters") &&
-        (parsed.bookmarked !== "true" || states.get(entry.id)?.bookmarked),
+        (parsed.bookmarked !== "true" || states.get(entry.id)?.bookmarked) &&
+        (parsed.unread !== "true" ||
+          (own && (states.get(entry.id)?.version || 0) < entry.version)) &&
+        (parsed.dossier !== "true" ||
+          entry.audience.visibility === "characters" ||
+          (entry.audience.visibility === "party" &&
+            ["rumour", "secret", "knowledge", "handout"].includes(entry.type))),
     );
+    if (parsed.dossier === "true" && own) {
+      // Bring new slips forward without inventing a last-session date.
+      filtered.sort(
+        (a, b) =>
+          Number((states.get(b.id)?.version || 0) < b.version) -
+          Number((states.get(a.id)?.version || 0) < a.version),
+      );
+    }
     const start = (parsed.page - 1) * parsed.limit;
     return {
       items: filtered.slice(start, start + parsed.limit).map((entry) => ({
@@ -391,7 +413,7 @@ export function createCampaignService(db) {
       const sessions = search(id, actor, { type: "session", limit: 1 });
       const missions = search(id, actor, { type: "mission", limit: 3 });
       const secrets = own
-        ? search(id, actor, { privateOnly: "true", limit: 1 })
+        ? search(id, actor, { dossier: "true", limit: 1 })
         : { unreadTotal: 0 };
       const safePrimer = data.primerId
         ? permittedRelations(id, [data.primerId], actor)[0]
@@ -446,6 +468,7 @@ export function createCampaignService(db) {
         related,
         backlinks,
         bookmarked: Boolean(state?.bookmarked),
+        personalNotes: own ? state?.personal_notes || "" : "",
       };
     },
     readerState(id, actor, entryId, input) {
@@ -457,6 +480,7 @@ export function createCampaignService(db) {
           .object({
             bookmarked: z.boolean().optional(),
             read: z.boolean().optional(),
+            personalNotes: z.string().max(10000).optional(),
           })
           .strict(),
         input,
@@ -467,8 +491,8 @@ export function createCampaignService(db) {
         )
         .get(id, own.characterId, entryId);
       db.prepare(
-        `INSERT INTO read_state VALUES (?, ?, ?, ?, ?) ON CONFLICT (campaign, character_id, entry_id)
-        DO UPDATE SET version = excluded.version, bookmarked = excluded.bookmarked`,
+        `INSERT INTO read_state (campaign, character_id, entry_id, version, bookmarked, personal_notes) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT (campaign, character_id, entry_id)
+        DO UPDATE SET version = excluded.version, bookmarked = excluded.bookmarked, personal_notes = excluded.personal_notes`,
       ).run(
         id,
         own.characterId,
@@ -477,6 +501,9 @@ export function createCampaignService(db) {
         value.bookmarked === undefined
           ? prior?.bookmarked || 0
           : Number(value.bookmarked),
+        value.personalNotes === undefined
+          ? prior?.personal_notes || ""
+          : value.personalNotes,
       );
       return { saved: true };
     },
@@ -662,10 +689,7 @@ export function createCampaignService(db) {
             "DELETE FROM entry_search WHERE campaign = ? AND id = ?",
           ).run(id, entryId);
           // Internal link labels may name a note visible only to a different character.
-          const searchableBody = entry.body.replace(
-            /\[[^\]]*\]\(\/world\/[^)]+\)/g,
-            "",
-          );
+          const searchableBody = entrySearchBody(entry);
           db.prepare(
             "INSERT INTO entry_search VALUES (?, ?, ?, ?, ?, ?, ?)",
           ).run(

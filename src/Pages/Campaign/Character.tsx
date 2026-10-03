@@ -1,3 +1,6 @@
+import { FormEvent } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -19,13 +22,39 @@ export default function Character() {
   const token = useAppSelector((state) => state.auth.token);
   const dispatch = useAppDispatch();
   const [params, setParams] = useSearchParams();
+  const q = params.get("q") || "";
+  const type = params.get("type") || "";
+  const bookmarked = params.get("bookmarked") === "true";
+  const unread = params.get("unread") === "true";
+  const change = (values: Record<string, string>) => {
+    const next = new URLSearchParams(params);
+    next.delete("page");
+    for (const [key, value] of Object.entries(values)) {
+      if (value) next.set(key, value);
+      else next.delete(key);
+    }
+    setParams(next);
+  };
+  const search = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    change({
+      q: String(new FormData(event.currentTarget).get("q") || "").trim(),
+    });
+  };
   const page = Math.max(1, Number(params.get("page")) || 1);
   const { data, isLoading, error, refetch } = useGetCampaignOverviewQuery(
     undefined,
     { skip: !token },
   );
   const knowledge = useSearchCampaignQuery(
-    { privateOnly: "true", page },
+    {
+      dossier: "true",
+      q,
+      type,
+      page,
+      bookmarked: String(bookmarked),
+      unread: String(unread),
+    },
     { skip: !token || !data?.member, refetchOnMountOrArgChange: true },
   );
   return (
@@ -81,7 +110,7 @@ export default function Character() {
               </h1>
               <p>
                 {data?.member
-                  ? `Your knowledge and personal revelations${data.member.displayName ? `, ${data.member.displayName}` : ""}.`
+                  ? `Your rumours, secrets, and personal revelations${data.member.displayName ? `, ${data.member.displayName}` : ""}.`
                   : "Your account hasn’t been assigned a Luxtria character yet. Your GM can connect your character to this account."}
               </p>
             </div>
@@ -96,10 +125,79 @@ export default function Character() {
           </header>
           {data?.member && (
             <>
+              <form
+                className="world-search dossier-search"
+                onSubmit={search}
+                role="search"
+              >
+                <SearchIcon />
+                <input
+                  key={q}
+                  defaultValue={q}
+                  name="q"
+                  type="search"
+                  maxLength={200}
+                  aria-label="Search your intelligence"
+                  placeholder="Find a name, source, or clue…"
+                />
+                <button className="button primary" type="submit">
+                  Search
+                </button>
+              </form>
+              <nav
+                className="category-filters"
+                aria-label="Filter your intelligence"
+              >
+                {[
+                  ["", "All"],
+                  ["rumour", "Rumours"],
+                  ["secret", "Secrets"],
+                  ["handout", "Handouts"],
+                  ["knowledge", "Knowledge"],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    className={type === value ? "active" : ""}
+                    aria-pressed={type === value}
+                    onClick={() => change({ type: value })}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </nav>
+              <div className="dossier-controls">
+                <button
+                  className={`text-link ${unread ? "selected" : ""}`}
+                  type="button"
+                  aria-pressed={unread}
+                  onClick={() => change({ unread: unread ? "" : "true" })}
+                >
+                  New to you
+                </button>
+                <button
+                  className={`text-link ${bookmarked ? "selected" : ""}`}
+                  type="button"
+                  aria-pressed={bookmarked}
+                  onClick={() =>
+                    change({ bookmarked: bookmarked ? "" : "true" })
+                  }
+                >
+                  <BookmarkBorderIcon fontSize="small" /> Saved
+                </button>
+              </div>
               <div className="section-heading">
                 <div>
                   <span className="eyebrow">Through your eyes</span>
-                  <h2>Your knowledge</h2>
+                  <h2>
+                    {q
+                      ? `Results for “${q}”`
+                      : unread
+                        ? "New to you"
+                        : bookmarked
+                          ? "Your saved intelligence"
+                          : "Your collection"}
+                  </h2>
                 </div>
                 {knowledge.data?.unreadTotal ? (
                   <span className="new-label">
@@ -124,7 +222,13 @@ export default function Character() {
                         className="button secondary"
                         type="button"
                         disabled={page <= 1}
-                        onClick={() => setParams({ page: String(page - 1) })}
+                        onClick={() =>
+                          setParams((current) => {
+                            const next = new URLSearchParams(current);
+                            next.set("page", String(page - 1));
+                            return next;
+                          })
+                        }
                       >
                         Previous
                       </button>
@@ -135,7 +239,13 @@ export default function Character() {
                         className="button secondary"
                         type="button"
                         disabled={page >= knowledge.data.pages}
-                        onClick={() => setParams({ page: String(page + 1) })}
+                        onClick={() =>
+                          setParams((current) => {
+                            const next = new URLSearchParams(current);
+                            next.set("page", String(page + 1));
+                            return next;
+                          })
+                        }
                       >
                         Next
                       </button>
@@ -144,12 +254,17 @@ export default function Character() {
                 </>
               ) : (
                 <EmptyState
-                  title="Every revelation has its moment."
+                  title={
+                    q || type || bookmarked || unread
+                      ? "No matching slips."
+                      : "Every revelation has its moment."
+                  }
                   icon={LockOutlinedIcon}
                 >
                   <p>
-                    Knowledge and private handouts will appear here when your GM
-                    shares them with your character.
+                    {q || type || bookmarked || unread
+                      ? "Try another search or clear your filters to explore your collection."
+                      : "Rumours, secrets, and private handouts will appear here when your GM shares them with your character."}
                   </p>
                 </EmptyState>
               )}

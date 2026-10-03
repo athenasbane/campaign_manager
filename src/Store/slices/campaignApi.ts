@@ -48,7 +48,12 @@ export const campaignApi = createApi({
     }),
     saveReaderState: builder.mutation<
       { saved: boolean },
-      { id: string; read?: boolean; bookmarked?: boolean }
+      {
+        id: string;
+        read?: boolean;
+        bookmarked?: boolean;
+        personalNotes?: string;
+      }
     >({
       query: ({ id, ...body }) => ({
         url: `/entries/${encodeURIComponent(id)}/state`,
