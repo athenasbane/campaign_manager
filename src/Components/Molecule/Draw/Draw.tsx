@@ -1,18 +1,18 @@
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import DownloadIcon from "@mui/icons-material/Download";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import MapIcon from "@mui/icons-material/Map";
-import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import PersonIcon from "@mui/icons-material/Person";
-import { EnumModalSlice } from "../../../Store/slices/modals";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import HistoryEduOutlinedIcon from "@mui/icons-material/HistoryEduOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
 import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
-import { IDrawListItem } from "../../../Types/Interfaces/DrawListItem";
-import DrawItem from "../DrawItem/DrawItem";
+import { EnumModalSlice } from "../../../Store/slices/modals";
+import { campaignNavigation } from "../../Campaign/Navigation";
 import { StyledBox, StyledSwipeableDrawer } from "./DrawStyled";
 
 export interface IDrawProps {
@@ -20,106 +20,104 @@ export interface IDrawProps {
   closeModal: () => void;
   openSingleModal: (modal: EnumModalSlice) => void;
 }
-
+const archiveShortcuts = [
+  { label: "Maps", to: "/list/4bOnoLNoNujSq6sWnG6BEt", icon: MapOutlinedIcon },
+  { label: "Session recaps", to: "/sessions", icon: VisibilityOutlinedIcon },
+  { label: "Missions", to: "/missions", icon: AssignmentOutlinedIcon },
+  { label: "Earlier character pages", to: "/me", icon: PersonOutlineIcon },
+  {
+    label: "Lore",
+    to: "/list/6FoUmw8ML88eBJ1fSHO0A8",
+    icon: MenuBookOutlinedIcon,
+  },
+  {
+    label: "Tales from Teratin",
+    to: "/list/1iLinkQTnQ1Q9qqzLGW37v",
+    icon: BookOutlinedIcon,
+  },
+  { label: "History", to: "/history", icon: HistoryEduOutlinedIcon },
+  { label: "Homebrew documents", to: "/documents", icon: DownloadOutlinedIcon },
+];
 export default function Draw({
   open,
   openSingleModal,
   closeModal,
 }: IDrawProps) {
-  const navigate = useNavigate();
-
-  /**
-   * [TODO]
-   * Move these to contentful
-   * Will need to create a icon component that has a
-   * Dropdown in contentful that uses the selected Icon
-   */
-  const topListItems: IDrawListItem[] = [
-    {
-      displayText: "Maps",
-      path: "/list/4bOnoLNoNujSq6sWnG6BEt",
-      icon: <MapIcon />,
-    },
-    {
-      displayText: "Session Recap",
-      path: "/sessions",
-      icon: <VisibilityIcon />,
-    },
-    {
-      displayText: "Missions",
-      path: "/missions",
-      icon: <AssignmentIcon />,
-    },
-    {
-      displayText: "Exchange Rates",
-      path: "/exchange",
-      icon: <CurrencyExchangeIcon />,
-    },
-    {
-      displayText: "Earlier Character Pages",
-      path: "/me",
-      icon: <PersonIcon />,
-    },
-  ];
-
-  const bottomListItems: IDrawListItem[] = [
-    {
-      displayText: "Lore",
-      path: "/list/6FoUmw8ML88eBJ1fSHO0A8",
-      icon: <MenuBookIcon />,
-    },
-    {
-      displayText: "Tales from Teratin",
-      path: "/list/1iLinkQTnQ1Q9qqzLGW37v",
-      icon: <BookOutlinedIcon />,
-    },
-    {
-      displayText: "History",
-      path: "/history",
-      icon: <HistoryEduIcon />,
-    },
-
-    {
-      displayText: "Homebrew Documents",
-      path: "/documents",
-      icon: <DownloadIcon />,
-    },
-  ];
-
   return (
-    <div>
-      <StyledSwipeableDrawer
-        anchor={"bottom"}
-        open={open}
-        onClose={closeModal}
-        onOpen={() => openSingleModal(EnumModalSlice.Menu)}
-      >
-        <StyledBox
-          role="presentation"
-          onClick={closeModal}
-          onKeyDown={closeModal}
-        >
-          <List>
-            {topListItems.map((item) => (
-              <DrawItem
-                key={item.displayText}
-                item={item}
-                onClick={() => navigate(item.path)}
-              />
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {bottomListItems.map((item) => (
-              <DrawItem
-                key={item.displayText}
-                item={item}
-                onClick={() => navigate(item.path)}
-              />
-            ))}
-          </List>
-        </StyledBox>
-      </StyledSwipeableDrawer>
-    </div>
+    <StyledSwipeableDrawer
+      anchor="bottom"
+      open={open}
+      onClose={closeModal}
+      onOpen={() => openSingleModal(EnumModalSlice.Menu)}
+      disableSwipeToOpen
+      slotProps={{
+        paper: {
+          role: "dialog",
+          "aria-modal": true,
+          "aria-labelledby": "campaign-menu-heading",
+        },
+      }}
+    >
+      <StyledBox>
+        <div className="menu-handle" aria-hidden="true" />
+        <header className="menu-heading">
+          <div>
+            <span className="eyebrow">Your campaign</span>
+            <h2 id="campaign-menu-heading">
+              Luxtria<span>Campaign menu</span>
+            </h2>
+          </div>
+          <button
+            type="button"
+            className="icon-button menu-close"
+            aria-label="Close campaign menu"
+            onClick={closeModal}
+          >
+            <CloseIcon />
+          </button>
+        </header>
+        <nav className="menu-primary" aria-label="Campaign pages">
+          {campaignNavigation.map(({ to, label, icon: Icon }) => (
+            <NavLink to={to} key={to} end={to === "/"} onClick={closeModal}>
+              <Icon />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+        </nav>
+        <NavLink to="/world/map" className="menu-feature" onClick={closeModal}>
+          <MapOutlinedIcon />
+          <span>
+            <strong>City atlas</strong>
+            <small>Find your way through Luxtria</small>
+          </span>
+          <ArrowForwardIcon />
+        </NavLink>
+        <section className="menu-archive" aria-label="Earlier chapters">
+          <span className="eyebrow">The Teratin chronicles</span>
+          <NavLink to="/archive" className="menu-feature" onClick={closeModal}>
+            <Inventory2OutlinedIcon />
+            <span>
+              <strong>Earlier chapters</strong>
+              <small>Stories, maps, and campaign references</small>
+            </span>
+            <ArrowForwardIcon />
+          </NavLink>
+          <details className="menu-shortcuts">
+            <summary>
+              Archive shortcuts
+              <ExpandMoreIcon />
+            </summary>
+            <nav aria-label="Earlier campaign links">
+              {archiveShortcuts.map(({ to, label, icon: Icon }) => (
+                <NavLink to={to} key={to} onClick={closeModal}>
+                  <Icon fontSize="small" />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </nav>
+          </details>
+        </section>
+      </StyledBox>
+    </StyledSwipeableDrawer>
   );
 }

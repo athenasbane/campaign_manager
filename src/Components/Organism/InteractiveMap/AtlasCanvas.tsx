@@ -17,7 +17,7 @@ import {
   addSelectedFeatureLayer,
   createSimpleImageTileLayer,
   getFeatureBounds,
-  isFeatureVisibleAtZoom,
+  isAtlasFeatureVisibleAtZoom,
   normaliseMapCoordinate,
   renderDraftGeometry,
   type DmGeometryMode,
@@ -247,7 +247,7 @@ export const AtlasCanvas = forwardRef<AtlasController, Props>(
         for (const feature of state.data.features)
           if (
             state.layers.includes(atlasFeatureType(feature)) &&
-            isFeatureVisibleAtZoom(feature, map.getZoom())
+            isAtlasFeatureVisibleAtZoom(feature, map.getZoom())
           ) {
             addFeatureLayer(
               group,

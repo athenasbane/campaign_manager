@@ -1,14 +1,160 @@
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
-
 import { styled } from "@mui/material/styles";
 
-export const StyledSwipeableDrawer = styled(SwipeableDrawer)(
-  ({ theme: _ }) => ({
-    zIndex: 1401,
-  })
-);
-
-export const StyledBox = styled(Box)(({ theme: _ }) => ({
-  width: "auto",
-}));
+export const StyledSwipeableDrawer = styled(SwipeableDrawer)({
+  zIndex: 1401,
+  "& .MuiBackdrop-root": { backgroundColor: "rgba(5, 8, 6, .72)" },
+  "& .MuiDrawer-paper": {
+    maxWidth: 640,
+    width: "100%",
+    marginInline: "auto",
+    maxHeight: "min(88dvh, 760px)",
+    background: "var(--panel)",
+    backgroundImage: "none",
+    color: "var(--text)",
+    border: "1px solid var(--border)",
+    borderBottom: 0,
+    borderRadius: "22px 22px 0 0",
+    boxShadow: "0 -16px 64px rgba(0, 0, 0, .35)",
+    overscrollBehavior: "contain",
+  },
+});
+export const StyledBox = styled(Box)({
+  padding: "12px 24px max(24px, env(safe-area-inset-bottom))",
+  "& .menu-handle": {
+    width: 36,
+    height: 3,
+    borderRadius: 3,
+    background: "var(--border)",
+    margin: "0 auto 20px",
+  },
+  "& .menu-heading": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 16,
+    marginBottom: 24,
+  },
+  "& .menu-heading h2": {
+    margin: "5px 0 0",
+    fontFamily: "var(--serif)",
+    fontSize: 36,
+    fontWeight: 400,
+    lineHeight: 1.1,
+  },
+  "& .menu-heading h2 span": {
+    display: "block",
+    fontFamily: "var(--sans)",
+    fontSize: 12,
+    color: "var(--muted)",
+    marginTop: 7,
+  },
+  "& .menu-close": {
+    color: "var(--muted)",
+    border: "1px solid var(--border)",
+    borderRadius: "50%",
+    flexShrink: 0,
+  },
+  "& .menu-primary": {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: 8,
+  },
+  "& .menu-primary a": {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    minHeight: 58,
+    padding: "14px 16px",
+    border: "1px solid var(--border)",
+    borderRadius: 8,
+    textDecoration: "none",
+    color: "var(--muted)",
+    fontSize: 14,
+  },
+  "& .menu-primary a.active": {
+    color: "var(--gold)",
+    background: "#282d25",
+    borderColor: "#5c5647",
+  },
+  "& a:hover": { background: "var(--panel-raised)", color: "var(--text)" },
+  "& .menu-feature": {
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
+    padding: "18px 0",
+    minHeight: 74,
+    textDecoration: "none",
+    borderRadius: 8,
+  },
+  "& .menu-feature > svg:first-of-type": {
+    color: "var(--gold)",
+    flexShrink: 0,
+  },
+  "& .menu-feature > svg:last-of-type": {
+    marginLeft: "auto",
+    color: "var(--muted)",
+    fontSize: 18,
+    flexShrink: 0,
+  },
+  "& .menu-feature strong": {
+    display: "block",
+    fontFamily: "var(--serif)",
+    fontSize: 24,
+    fontWeight: 400,
+    lineHeight: 1.2,
+  },
+  "& .menu-feature small": {
+    display: "block",
+    color: "var(--muted)",
+    fontSize: 11,
+    marginTop: 5,
+    lineHeight: 1.5,
+  },
+  "& .menu-feature.active strong": { color: "var(--gold)" },
+  "& .menu-archive": {
+    borderTop: "1px solid var(--border)",
+    paddingTop: 20,
+    marginTop: 4,
+  },
+  "& .menu-shortcuts summary": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    minHeight: 44,
+    fontSize: 12,
+    color: "var(--muted)",
+    cursor: "pointer",
+    listStyle: "none",
+  },
+  "& .menu-shortcuts summary::-webkit-details-marker": { display: "none" },
+  "& .menu-shortcuts summary svg": { fontSize: 18 },
+  "& .menu-shortcuts[open] summary svg": { transform: "rotate(180deg)" },
+  "& .menu-shortcuts nav": {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: "2px 12px",
+    paddingTop: 8,
+  },
+  "& .menu-shortcuts a": {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    minHeight: 46,
+    padding: "10px 8px",
+    textDecoration: "none",
+    color: "var(--muted)",
+    fontSize: 12,
+    borderRadius: 6,
+  },
+  "& .menu-shortcuts a svg": { color: "var(--faint)", flexShrink: 0 },
+  "& .menu-shortcuts a.active": {
+    color: "var(--gold)",
+    background: "var(--panel-raised)",
+  },
+  "@media (max-width: 400px)": {
+    paddingInline: 20,
+    "& .menu-shortcuts nav": { gridTemplateColumns: "1fr" },
+  },
+});

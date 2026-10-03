@@ -76,7 +76,7 @@ export default function Navbar({ onMenuButtonClick }: INavbarProps) {
         <button
           type="button"
           className="icon-button archive-menu-button"
-          aria-label="Open archive menu"
+          aria-label="Open campaign menu"
           data-testid="menu__button"
           onClick={onMenuButtonClick}
         >

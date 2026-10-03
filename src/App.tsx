@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MainTemplate from "./Templates/Main";
 import { useAppDispatch, useAppSelector } from "./hooks/store.hooks";
 import {
@@ -28,11 +28,6 @@ const Sessions = lazy(() => import("./Pages/Sessions/Sessions"));
 const Documents = lazy(() => import("./Pages/Documents/Documents"));
 const History = lazy(() => import("./Pages/History/History"));
 const Missions = lazy(() => import("./Pages/Missions/Missions"));
-const ExchangeRates = lazy(() =>
-  import("./Pages/ExchangeRates/ExchangeRates").then((module) => ({
-    default: module.ExchangeRates,
-  }))
-);
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Player = lazy(() => import("./Pages/Player/Player"));
 const PlayerList = lazy(() => import("./Pages/Player/PlayerList"));
@@ -77,7 +72,10 @@ function App() {
               <Route path="/documents" element={<Documents />} />
               <Route path="/history" element={<History />} />
               <Route path="/missions" element={<Missions />} />
-              <Route path="/exchange" element={<ExchangeRates />} />
+              <Route
+                path="/exchange"
+                element={<Navigate to="/archive" replace />}
+              />
               <Route path="/login" element={<Login />} />
               <Route
                 path="/me"

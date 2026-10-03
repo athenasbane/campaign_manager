@@ -506,3 +506,16 @@ export const isFeatureVisibleAtZoom = (feature: MapFeature, zoom: number) => {
     (feature.maxZoom == null || zoom <= feature.maxZoom)
   );
 };
+
+// The original map uses inclusive whole-number detail levels. Fractional
+// camera zooms belong to the lower level until the next level starts. Custom
+// fractional boundaries retain their exact meaning.
+export const isAtlasFeatureVisibleAtZoom = (
+  feature: MapFeature,
+  zoom: number,
+) => {
+  const wholeLevels = [feature.minZoom, feature.maxZoom].every(
+    (limit) => limit == null || Number.isInteger(limit),
+  );
+  return isFeatureVisibleAtZoom(feature, wholeLevels ? Math.floor(zoom) : zoom);
+};
