@@ -1,5 +1,5 @@
 import { atlasDistance, findAtlasPlaces, parseAtlasView } from "../atlasUtils";
-import { buildDraftGeometry } from "../mapLayers";
+import { buildDraftGeometry, isAtlasFeatureVisibleAtZoom } from "../mapLayers";
 import type {
   InteractiveMapData,
   MapFeature,
@@ -109,4 +109,29 @@ test("sketch exports only complete shapes and sorts reversed rectangle corners",
       [2, 1],
     ])?.type,
   ).toBe("polygon");
+});
+
+test("overview markers remain visible throughout fractional zooms until detailed streets take over", () => {
+  const landmark = { ...features[1], minZoom: -2, maxZoom: 0 };
+  const street = { ...features[0], minZoom: 1, maxZoom: 2 };
+  for (const zoom of [0, 0.25, 0.5, 0.75, 0.99]) {
+    expect(isAtlasFeatureVisibleAtZoom(landmark, zoom)).toBe(true);
+    expect(isAtlasFeatureVisibleAtZoom(street, zoom)).toBe(false);
+  }
+  expect(isAtlasFeatureVisibleAtZoom(landmark, 1)).toBe(false);
+  expect(isAtlasFeatureVisibleAtZoom(street, 1)).toBe(true);
+  expect(isAtlasFeatureVisibleAtZoom(landmark, -2.25)).toBe(false);
+  for (let zoom = -2; zoom <= 2; zoom += 0.25)
+    expect(
+      [landmark, street].some((feature) =>
+        isAtlasFeatureVisibleAtZoom(feature, zoom),
+      ),
+    ).toBe(true);
+});
+test("explicit fractional feature limits remain exact", () => {
+  const feature = { ...features[1], minZoom: 0.25, maxZoom: 0.5 };
+  expect(isAtlasFeatureVisibleAtZoom(feature, 0)).toBe(false);
+  expect(isAtlasFeatureVisibleAtZoom(feature, 0.25)).toBe(true);
+  expect(isAtlasFeatureVisibleAtZoom(feature, 0.5)).toBe(true);
+  expect(isAtlasFeatureVisibleAtZoom(feature, 0.75)).toBe(false);
 });

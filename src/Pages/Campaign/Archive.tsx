@@ -27,11 +27,6 @@ const archives = [
     to: "/history",
   },
   {
-    label: "Exchange rates",
-    description: "Currency references and calculations.",
-    to: "/exchange",
-  },
-  {
     label: "Earlier character pages",
     description: "Your private content from the existing campaigns.",
     to: "/me",

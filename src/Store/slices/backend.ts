@@ -15,10 +15,7 @@ import {
   buildMapPageQuery,
   buildDocumentPageQuery,
   FRONT_PAGE_QUERY,
-  GET_EXCHANGE_RATE_PAGE,
 } from "./backendQueries";
-
-import { ExchangeRateResponse } from "../../Types/Interfaces/exchangeRateResponse.interface";
 
 const graphqlBaseQuery =
   ({
@@ -119,16 +116,6 @@ export const contentfulApi = createApi({
         return response?.frontPage;
       },
     }),
-    getExhangeRatesPage: builder.query({
-      query: () => ({
-        body: GET_EXCHANGE_RATE_PAGE,
-      }),
-      transformResponse: (response: {
-        exchangeRatePage: ExchangeRateResponse;
-      }) => {
-        return response?.exchangeRatePage;
-      },
-    }),
   }),
 });
 
@@ -140,5 +127,4 @@ export const {
   useGetDocumentPageQuery,
   useGetFrontPageQuery,
   useGetMissionsPageQuery,
-  useGetExhangeRatesPageQuery,
 } = contentfulApi;
