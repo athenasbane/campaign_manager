@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
+import { entrySchema } from "../server/campaign/schemas.mjs";
 import { createStore } from "../server/campaign/store.mjs";
 import { createCampaignService } from "../server/campaign/service.mjs";
 import { prepareObsidianImport } from "../server/campaign/obsidian.mjs";
@@ -32,7 +33,7 @@ for (let offset = 0; offset < prepared.entries.length; offset += 20) {
           updatedAt: _updatedAt,
           ...existing
         } = prior.draft;
-        if (isDeepStrictEqual(existing, entry)) unchanged.push(entry.id);
+        if (isDeepStrictEqual(entrySchema.parse(existing), entrySchema.parse(entry))) unchanged.push(entry.id);
         else
           conflicts.push({
             id: entry.id,

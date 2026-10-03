@@ -108,3 +108,25 @@ yarn test:campaign
 ```
 
 Backend tests cover signature/claims validation, anonymous/unassigned/party/exact-character access, draft exclusion, private discovery and references, read-state isolation, stale edits, retries, rollback, restore, withdrawal, bounded search and Obsidian import. The SDK MCP client is tested through an actual localhost API and separately through stdio against the real draft database. Frontend tests include account-switch cache clearing. Phone browser checks cover navigation, empty states, search, populated pagination, reader headings, tables, references, and responsive widths. No real player password was used; real deployed sign-in remains a rollout check.
+
+## Rumours, secrets, and player annotations
+
+Use `type: "rumour"` for a claim and `type: "secret"` for a fact the character knows. Neither implies the whole mystery has been solved. Existing `knowledge` and `handout` entries continue to work. Rumours are never given a player-visible truth rating or automatically converted into secrets: publish a separate discovered fact and relate the two entries where useful.
+
+The optional `intelligence` object has three explicitly player-facing strings:
+
+```json
+{
+  "learnedFrom": "Sister Amelie",
+  "acquired": "Session 4",
+  "evidence": "A letter bearing the priest's genuine seal."
+}
+```
+
+Use the existing MCP draft tools to set these fields, select exact recipients, preview, then publish on instruction. These fields are shown to every permitted reader and can be searched. Keep hidden answers, rumour truth ratings, and vault paths in `sourceMetadata` or `source`, which are excluded from player responses and search. Do not copy private import metadata into provenance automatically. Obsidian imports remain GM-only drafts; this release does not reinterpret their lore as secrets.
+
+The dossier supports type, source/clue search, unread, and saved filters. It includes entries addressed to the character, plus rumours, secrets, knowledge, and handouts shared with the party. “New to you” means an unread published version, rather than an inferred session date. Links and related entries continue to respect the reader's audience.
+
+Players can save up to 10,000 characters of personal notes per entry. Notes are stored in their character's reading state, not the canonical entry, publication, audit text, or search index. Another player and GM content/character previews do not receive them. Saves are explicit; reading or bookmarking preserves them. Existing SQLite state is migrated in place, and legacy DynamoDB state hydrates with empty notes. The original AWS capacity and request limits remain unchanged.
+
+Player-to-player revealing/trading and the GM mystery board are subsequent releases. This release introduces no sharing controls or automatic transfers of information.

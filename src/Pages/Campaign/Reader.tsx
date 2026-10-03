@@ -1,3 +1,4 @@
+import PersonalNotes from "../../Components/Campaign/PersonalNotes";
 import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import Markdown from "react-markdown";
@@ -169,7 +170,9 @@ export default function Reader() {
             ? "Campaign journal"
             : "World library"}
       </Link>
-      <header className="article-header">
+      <header
+        className={`article-header ${data.type === "rumour" || data.type === "secret" ? `intelligence-article intelligence-${data.type}` : ""}`}
+      >
         <div className="article-meta">
           <span className="eyebrow">Luxtria / {typeLabel(data.type)}</span>
           {data.private && (
@@ -179,8 +182,39 @@ export default function Reader() {
             </span>
           )}
         </div>
+        {(data.type === "rumour" || data.type === "secret") && (
+          <span className="intelligence-certainty">
+            {data.type === "rumour" ? "You have heard…" : "You know…"}
+          </span>
+        )}
         <h1>{data.title}</h1>
+        {(data.type === "rumour" || data.type === "secret") && (
+          <p className="intelligence-guidance">
+            {data.type === "rumour"
+              ? "A claim to investigate. It may be incomplete, mistaken, or outdated."
+              : "Your character is certain of this fact. There may still be more to discover."}
+          </p>
+        )}
         {data.summary && <p className="article-summary">{data.summary}</p>}
+        {data.intelligence &&
+          (data.intelligence.learnedFrom || data.intelligence.acquired) && (
+            <dl className="intelligence-provenance">
+              {data.intelligence.learnedFrom && (
+                <div>
+                  <dt>
+                    {data.type === "rumour" ? "Heard from" : "Learned from"}
+                  </dt>
+                  <dd>{data.intelligence.learnedFrom}</dd>
+                </div>
+              )}
+              {data.intelligence.acquired && (
+                <div>
+                  <dt>Acquired</dt>
+                  <dd>{data.intelligence.acquired}</dd>
+                </div>
+              )}
+            </dl>
+          )}
         <div className="article-details">
           <span>
             {Math.max(1, Math.ceil(data.body.split(/\s+/).length / 200))} min
@@ -229,7 +263,20 @@ export default function Reader() {
       </header>
       <div className="reader-layout">
         <article className="article-body">
+          {data.intelligence?.evidence && (
+            <section className="intelligence-evidence">
+              <span className="eyebrow">Evidence you possess</span>
+              <p>{data.intelligence.evidence}</p>
+            </section>
+          )}
           <ArticleBody body={data.body} />
+          {campaign?.member && (
+            <PersonalNotes
+              key={`${token}:${data.id}`}
+              entryId={data.id}
+              initialNotes={data.personalNotes || ""}
+            />
+          )}
         </article>
         {headings.length > 2 && (
           <>

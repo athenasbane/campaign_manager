@@ -10,6 +10,8 @@ export const entryTypes = [
   "lore",
   "session",
   "mission",
+  "rumour",
+  "secret",
   "knowledge",
   "handout",
 ];
@@ -86,6 +88,15 @@ export const entrySchema = z
     aliases: z.array(z.string().trim().min(1).max(150)).max(30).default([]),
     tags: z.array(z.string().trim().min(1).max(80)).max(30).default([]),
     relatedIds: z.array(idSchema).max(100).default([]),
+    intelligence: z
+      .object({
+        learnedFrom: z.string().trim().max(500).default(""),
+        acquired: z.string().trim().max(200).default(""),
+        evidence: z.string().trim().max(5000).default(""),
+      })
+      .strict()
+      .nullable()
+      .default(null),
     source: z.string().max(1000).default(""),
     sourceMetadata: z
       .record(

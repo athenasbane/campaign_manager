@@ -38,6 +38,8 @@ export const typeLabel = (type: EntryType) =>
     lore: "Lore",
     session: "Session recap",
     mission: "Mission",
+    rumour: "Rumour",
+    secret: "Secret",
     knowledge: "Knowledge",
     handout: "Handout",
   })[type];
@@ -46,7 +48,10 @@ export function EntryCard({ entry }: { entry: CampaignEntry }) {
     entryCategories.find((category) => category.type === entry.type)?.icon ||
     AutoStoriesOutlinedIcon;
   return (
-    <Link to={`/world/${entry.id}`} className="entry-card">
+    <Link
+      to={`/world/${entry.id}`}
+      className={`entry-card ${entry.type === "rumour" || entry.type === "secret" ? `intelligence-card intelligence-${entry.type}` : ""}`}
+    >
       <div className="entry-card-top">
         <span className="entry-type">
           <Icon fontSize="small" />
@@ -58,8 +63,27 @@ export function EntryCard({ entry }: { entry: CampaignEntry }) {
           {entry.unread && <span className="new-label">New</span>}
         </span>
       </div>
+      {(entry.type === "rumour" || entry.type === "secret") && (
+        <span className="intelligence-certainty">
+          {entry.type === "rumour" ? "You have heard…" : "You know…"}
+        </span>
+      )}
       <h3>{entry.title}</h3>
       {entry.summary && <p>{entry.summary}</p>}
+      {entry.intelligence &&
+        (entry.intelligence.learnedFrom || entry.intelligence.acquired) && (
+          <div className="intelligence-origin">
+            {entry.intelligence.learnedFrom && (
+              <span>
+                {entry.type === "rumour" ? "Heard from" : "Learned from"}:{" "}
+                {entry.intelligence.learnedFrom}
+              </span>
+            )}
+            {entry.intelligence.acquired && (
+              <span>{entry.intelligence.acquired}</span>
+            )}
+          </div>
+        )}
       <div className="entry-card-bottom">
         <span>{entry.tags[0]?.replace(/^luxtria\//, "") || "Luxtria"}</span>
         <ArrowForwardIcon fontSize="small" />

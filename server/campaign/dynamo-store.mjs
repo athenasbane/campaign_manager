@@ -7,7 +7,11 @@ import {
   UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { createStore } from "./store.mjs";
-import { createCampaignService, CampaignError } from "./service.mjs";
+import {
+  createCampaignService,
+  CampaignError,
+  entrySearchBody,
+} from "./service.mjs";
 
 // DynamoDB owns durable rows. SQLite is a disposable, per-operation relational
 // view used by the existing permission rules and FTS search, never durable /tmp.
@@ -19,7 +23,14 @@ const columns = {
   entries: ["campaign", "id", "version", "draft", "published", "updated_at"],
   revisions: ["campaign", "id", "version", "data"],
   mutations: ["campaign", "id", "fingerprint", "result"],
-  read_state: ["campaign", "character_id", "entry_id", "version", "bookmarked"],
+  read_state: [
+    "campaign",
+    "character_id",
+    "entry_id",
+    "version",
+    "bookmarked",
+    "personal_notes",
+  ],
 };
 const encode = (row) => {
   const value = gzipSync(Buffer.from(JSON.stringify(row)));
@@ -219,7 +230,11 @@ export function createDynamoService(
           const names = columns[table];
           db.prepare(
             `INSERT OR REPLACE INTO ${table} (${names.join(",")}) VALUES (${names.map(() => "?").join(",")})`,
-          ).run(...names.map((name) => row[name] ?? null));
+          ).run(
+            ...names.map(
+              (name) => row[name] ?? (name === "personal_notes" ? "" : null),
+            ),
+          );
         }
         for (const item of await query(id, "publications#")) {
           const entry = hydrate(item);
@@ -243,7 +258,7 @@ export function createDynamoService(
             entry.title,
             entry.aliases.join(" "),
             entry.summary,
-            entry.body.replace(/\[[^\]]*\]\(\/world\/[^)]+\)/g, ""),
+            entrySearchBody(entry),
             entry.tags.join(" "),
           );
         }

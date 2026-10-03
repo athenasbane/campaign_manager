@@ -56,11 +56,16 @@ test("MCP and HTTP complete draft, exact audience, preview, publish, read, edit,
     });
   const entry = {
     id: "oath",
-    type: "knowledge",
+    type: "secret",
     title: "Secret oath",
     body: "Only Alice knows this.",
     aliases: ["Promise"],
-    sourceMetadata: { canon: "canon" },
+    sourceMetadata: { canon: "canon", hiddenTruth: "Do not show" },
+    intelligence: {
+      learnedFrom: "Your mentor",
+      acquired: "Before session one",
+      evidence: "A signed oath",
+    },
     mapFeature: {
       mapId: "luxtria",
       key: "oath-pin",
@@ -140,6 +145,8 @@ test("MCP and HTTP complete draft, exact audience, preview, publish, read, edit,
   );
   const safe = await alice.json();
   assert.equal(safe.body, entry.body);
+  assert.deepEqual(safe.intelligence, entry.intelligence);
+  assert.equal(safe.type, "secret");
   assert.ok(!("audience" in safe));
   assert.ok(!("sourceMetadata" in safe));
   for (const headers of [{}, { Authorization: "Bearer bob" }]) {
@@ -165,6 +172,7 @@ test("MCP and HTTP complete draft, exact audience, preview, publish, read, edit,
   });
   const current = await call("get_entry", { entryId: "oath" });
   assert.equal(current.draft.body, entry.body);
+  assert.deepEqual(current.draft.intelligence, entry.intelligence);
   assert.deepEqual(current.draft.aliases, ["Promise"]);
   assert.deepEqual(current.draft.audience.characterIds, ["alice"]);
   assert.equal(current.published.title, "Secret oath");

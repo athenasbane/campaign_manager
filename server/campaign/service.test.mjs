@@ -149,6 +149,7 @@ test("audience changes take effect only on publish and immediately remove a form
   forbidden(() => s.read("luxtria", bob, "knowledge"));
   assert.equal(s.overview("luxtria", bob).unreadKnowledge, 0);
   assert.equal(s.overview("luxtria", alice).unreadKnowledge, 1);
+
   forbidden(
     () =>
       draft("unknown-recipient", {
@@ -227,6 +228,7 @@ test("read status and saved entries belong to the character and publication vers
   );
   publish("knowledge", 2);
   assert.equal(s.overview("luxtria", alice).unreadKnowledge, 1);
+
   forbidden(
     () => s.readerState("luxtria", outsider, "knowledge", { read: true }),
     403,
@@ -463,4 +465,162 @@ test("map ranges validate inherited limits and type defaults, and null can clear
       .published,
     null,
   );
+});
+
+test("rumours and secrets expose only addressed provenance, with searchable sources and no truth metadata", (t) => {
+  const { s, draft, publish } = fixture(t);
+  draft(
+    "rumour",
+    { visibility: "characters", characterIds: ["alice"] },
+    {
+      type: "rumour",
+      title: "The missing priest",
+      body: "A claim, not a verdict.",
+      intelligence: {
+        learnedFrom: "Sister Amelie",
+        acquired: "Session 4",
+        evidence: "A torn letter",
+      },
+      source: "/private/vault/priest.md",
+      sourceMetadata: { truth: "false", actualTruth: "GM-only answer" },
+    },
+  );
+  publish("rumour");
+  draft(
+    "fact",
+    { visibility: "party" },
+    { type: "secret", body: "The seal is genuine." },
+  );
+  publish("fact");
+  const read = s.read("luxtria", alice, "rumour");
+  assert.equal(read.type, "rumour");
+  assert.equal(read.intelligence.learnedFrom, "Sister Amelie");
+  assert.ok(!JSON.stringify(read).includes("GM-only answer"));
+  assert.ok(!("sourceMetadata" in read));
+  assert.ok(!("source" in read));
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true", q: "Amelie" }).total,
+    1,
+  );
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true", q: "torn" }).total,
+    1,
+  );
+  assert.equal(
+    s.search("luxtria", bob, { dossier: "true", q: "Amelie" }).total,
+    0,
+  );
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true", type: "secret" }).total,
+    1,
+  );
+  assert.equal(s.search("luxtria", null, { dossier: "true" }).total, 0);
+  assert.equal(s.search("luxtria", alice, { q: "answer" }).total, 0);
+  assert.equal(
+    s.getDraft("luxtria", gm, "rumour").draft.sourceMetadata.truth,
+    "false",
+  );
+  s.readerState("luxtria", alice, "rumour", { read: true, bookmarked: true });
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true", unread: "true" }).total,
+    1,
+  );
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true", bookmarked: "true" }).total,
+    1,
+  );
+  assert.equal(s.overview("luxtria", alice).unreadKnowledge, 1);
+  assert.equal(
+    s.search("luxtria", alice, { dossier: "true" }).items[0].id,
+    "fact",
+  );
+});
+
+test("personal annotations belong only to their author and survive read, bookmark and content updates", (t) => {
+  const { s, draft, publish, db } = fixture(t);
+  const recipients = {
+    visibility: "characters",
+    characterIds: ["alice", "bob"],
+  };
+  draft("shared-slip", recipients, { type: "rumour" });
+  publish("shared-slip");
+  s.readerState("luxtria", alice, "shared-slip", {
+    personalNotes: "My private hypothesis",
+  });
+  s.readerState("luxtria", bob, "shared-slip", {
+    personalNotes: "Bob's theory",
+  });
+  assert.equal(
+    s.read("luxtria", alice, "shared-slip").personalNotes,
+    "My private hypothesis",
+  );
+  assert.equal(
+    s.read("luxtria", bob, "shared-slip").personalNotes,
+    "Bob's theory",
+  );
+  assert.equal(s.read("luxtria", gm, "shared-slip").personalNotes, "");
+  assert.ok(
+    !JSON.stringify(
+      s.previewCharacter("luxtria", gm, "alice", "shared-slip"),
+    ).includes("My private hypothesis"),
+  );
+  assert.ok(
+    !JSON.stringify(s.search("luxtria", alice)).includes(
+      "My private hypothesis",
+    ),
+  );
+  assert.equal(s.search("luxtria", alice, { q: "hypothesis" }).total, 0);
+  assert.ok(
+    !JSON.stringify(s.getDraft("luxtria", gm, "shared-slip")).includes(
+      "hypothesis",
+    ),
+  );
+  assert.ok(
+    !JSON.stringify(db.prepare("SELECT * FROM audit").all()).includes(
+      "hypothesis",
+    ),
+  );
+  s.readerState("luxtria", alice, "shared-slip", { read: true });
+  s.readerState("luxtria", alice, "shared-slip", { bookmarked: true });
+  assert.equal(
+    s.read("luxtria", alice, "shared-slip").personalNotes,
+    "My private hypothesis",
+  );
+  assert.equal(s.search("luxtria", alice, { unread: "true" }).total, 0);
+  draft("shared-slip", recipients, { type: "rumour", body: "More context" }, 1);
+  publish("shared-slip", 2);
+  assert.equal(s.search("luxtria", alice, { unread: "true" }).total, 1);
+  assert.equal(
+    s.read("luxtria", alice, "shared-slip").personalNotes,
+    "My private hypothesis",
+  );
+  forbidden(
+    () =>
+      s.readerState("luxtria", outsider, "shared-slip", {
+        personalNotes: "No",
+      }),
+    403,
+  );
+  forbidden(
+    () =>
+      s.readerState("luxtria", alice, "shared-slip", {
+        personalNotes: "x".repeat(10001),
+      }),
+    400,
+  );
+  s.readerState("luxtria", alice, "shared-slip", { personalNotes: "" });
+  assert.equal(s.read("luxtria", alice, "shared-slip").personalNotes, "");
+  draft(
+    "shared-slip",
+    { visibility: "characters", characterIds: ["bob"] },
+    { type: "rumour" },
+    2,
+  );
+  publish("shared-slip", 3);
+  forbidden(() =>
+    s.readerState("luxtria", alice, "shared-slip", {
+      personalNotes: "Access revoked",
+    }),
+  );
+  forbidden(() => s.read("luxtria", alice, "shared-slip"));
 });

@@ -1661,3 +1661,119 @@ button {
 .article-map-link {
   margin-top: 18px;
 }
+
+/* Information slips retain explicit labels alongside their colour accents. */
+.intelligence-card {
+  border-top: 3px solid var(--gold);
+}
+.intelligence-secret {
+  --slip-accent: #d3958c;
+}
+.intelligence-rumour {
+  --slip-accent: #ceb18b;
+}
+.intelligence-secret.intelligence-card {
+  border-top-color: var(--slip-accent);
+  background: #211d1c;
+}
+.intelligence-certainty {
+  display: block;
+  margin-top: 20px;
+  color: var(--slip-accent);
+  font-size: 12px;
+}
+.intelligence-card h3 {
+  margin-top: 8px;
+}
+.intelligence-origin {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+.dossier-controls {
+  display: flex;
+  gap: 24px;
+  margin: 22px 0 30px;
+}
+.dossier-controls .selected {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.dossier-search {
+  margin-top: 28px;
+}
+.intelligence-article {
+  border-left: 3px solid var(--slip-accent);
+  padding-left: 20px;
+}
+.intelligence-guidance {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.intelligence-provenance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  margin: 24px 0;
+}
+.intelligence-provenance dt {
+  color: var(--muted);
+  font-size: 11px;
+}
+.intelligence-provenance dd {
+  margin: 6px 0 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.intelligence-evidence {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 22px;
+  margin-bottom: 30px;
+}
+.intelligence-evidence p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.personal-notes {
+  border-top: 1px solid var(--border);
+  padding-top: 30px;
+  margin-top: 40px;
+}
+.personal-notes > p {
+  color: var(--muted);
+  font-size: 13px;
+}
+.personal-notes textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  font: 400 16px/1.7 var(--sans);
+  padding: 16px;
+}
+.personal-notes textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.personal-notes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin-top: 12px;
+}
+.personal-notes-actions span {
+  color: var(--muted);
+  font-size: 12px;
+}

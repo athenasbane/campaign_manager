@@ -9,8 +9,15 @@ export type EntryType =
   | "lore"
   | "session"
   | "mission"
+  | "rumour"
+  | "secret"
   | "knowledge"
   | "handout";
+export interface IntelligenceProvenance {
+  learnedFrom: string;
+  acquired: string;
+  evidence: string;
+}
 export interface CampaignEntry {
   id: string;
   type: EntryType;
@@ -24,9 +31,11 @@ export interface CampaignEntry {
   updatedAt: string;
   unread?: boolean;
   bookmarked?: boolean;
+  intelligence?: IntelligenceProvenance | null;
 }
 export interface CampaignArticle extends CampaignEntry {
   body: string;
+  personalNotes?: string;
   mapFeature?: {
     mapId: string;
     key: string;

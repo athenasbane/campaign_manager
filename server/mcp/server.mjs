@@ -160,7 +160,7 @@ export function createLuxtriaMcp({
   );
   tool(
     "create_entry_draft",
-    "Create a new canonical entry as a draft. Defaults to GM-only. This does not publish anything to players.",
+    "Create a canonical draft. Types rumour (a claim) and secret (a known fact) support intelligence.learnedFrom, acquired and evidence: all are player-facing. Keep hidden truth ratings and vault details in sourceMetadata. Defaults to GM-only; does not publish.",
     {
       ...scope,
       entry: entrySchema,
