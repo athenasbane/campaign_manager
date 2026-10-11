@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useMatch } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 export const campaignNavigation = [
   { to: "/", label: "Home", icon: HomeOutlinedIcon },
@@ -13,13 +14,23 @@ export const campaignNavigation = [
   { to: "/character", label: "Character", icon: PersonOutlineIcon },
 ];
 export function CampaignNavigation({ mobile = false }: { mobile?: boolean }) {
+  const onMap = useMatch("/world/map/*");
+  const links = [
+    ...campaignNavigation.slice(0, 3),
+    { to: "/world/map", label: "Map", icon: MapOutlinedIcon },
+    ...campaignNavigation.slice(3),
+  ];
   return (
     <nav
       className={mobile ? "mobile-navigation" : "campaign-navigation"}
       aria-label={mobile ? "Mobile navigation" : "Campaign navigation"}
     >
-      {campaignNavigation.map(({ to, label, icon: Icon }) => (
-        <NavLink key={to} to={to} end={to === "/"}>
+      {links.map(({ to, label, icon: Icon }) => (
+        <NavLink
+          key={to}
+          to={to}
+          end={to === "/" || (to === "/world" && !!onMap)}
+        >
           <Icon fontSize="small" />
           <span>{label}</span>
         </NavLink>

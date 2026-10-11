@@ -1246,7 +1246,7 @@ button {
     right: 0;
     z-index: 100;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     background: rgba(20, 24, 21, 0.97);
     backdrop-filter: blur(14px);
     border-top: 1px solid var(--border);
