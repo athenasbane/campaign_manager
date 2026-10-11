@@ -15,13 +15,11 @@ export const campaignNavigation = [
 ];
 export function CampaignNavigation({ mobile = false }: { mobile?: boolean }) {
   const onMap = useMatch("/world/map/*");
-  const links = mobile
-    ? campaignNavigation
-    : [
-        ...campaignNavigation.slice(0, 3),
-        { to: "/world/map", label: "Map", icon: MapOutlinedIcon },
-        ...campaignNavigation.slice(3),
-      ];
+  const links = [
+    ...campaignNavigation.slice(0, 3),
+    { to: "/world/map", label: "Map", icon: MapOutlinedIcon },
+    ...campaignNavigation.slice(3),
+  ];
   return (
     <nav
       className={mobile ? "mobile-navigation" : "campaign-navigation"}
@@ -31,7 +29,7 @@ export function CampaignNavigation({ mobile = false }: { mobile?: boolean }) {
         <NavLink
           key={to}
           to={to}
-          end={to === "/" || (!mobile && to === "/world" && !!onMap)}
+          end={to === "/" || (to === "/world" && !!onMap)}
         >
           <Icon fontSize="small" />
           <span>{label}</span>
